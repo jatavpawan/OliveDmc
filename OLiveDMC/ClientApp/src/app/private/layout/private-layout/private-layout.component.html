@@ -1,0 +1,21 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#f0acaf" type = "timer" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p>
+  </ngx-spinner>
+
+<div class="wrapper">
+    <div class="sidebar" data-color="red" data-image="">
+        <app-sidebar></app-sidebar>
+        <!-- <div class="sidebar-background" style="background-image: url(assets/img/sidebar-5.jpg)"></div> -->
+        <div class="sidebar-background" style="background-image: url(assets/img/full-screen-image-3.jpg)"></div>
+    </div>
+  
+    <div class="main-panel">
+        <app-header></app-header>
+        <router-outlet></router-outlet>
+        <div class="private-footer">
+            <app-footer></app-footer>
+        </div>
+    </div>
+  
+  </div>
+  

@@ -1,0 +1,94 @@
+<!-- <p>blog works!</p> -->
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="content">
+                        <form class="form-horizontal" [formGroup]="blogForm" (ngSubmit)="submitBlogData()">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2 input-label" for="title">Blog Title:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="title"  placeholder="Enter Blog Title" formControlName="title">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="Description">Description:</label>
+                                <div class="col-sm-10">
+                                  <editor apiKey="byg3blvrvimc75hw1cb3hwo9su10wod4ogt2oi6p3nmaukek" formControlName="description" [init]="tinymceConfig"></editor>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="pwd">Featured Image:</label>
+                                <div class="col-sm-10">
+                                    <div class="image-preview mb-3" *ngIf="fileUploaded == true || edit_blog == true">
+                                        <img [src]="previewUrl" height="100" width="105"  />                 
+                                    </div>
+                                    <label for="files"  *ngIf="edit_blog == true ||  (blogForm.get('featuredImage').value != '' && blogForm.get('featuredImage').value != null )" class="btn btn-primary">update File</label>
+                                    <input type="file" *ngIf="fileUploaded == false || edit_blog == true || blogForm.get('featuredImage').value != '' " [class.hidden]="edit_blog == true ||  (blogForm.get('featuredImage').value != '' && blogForm.get('FeaturedImage').value != null )" name="" id="files" #files (change)="preview(files)" formControlName="featuredImage">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2 status-lable">Approval Status:</label>
+                                <div class="col-sm-1">
+                                    <!-- <input type="checkbox" class="status-form-control" formControlName="approvalStatus"> -->
+                                    <ui-switch
+                                    labelOn="Yes"
+                                    labelOff="No"
+                                    checkedTextColor="red"
+                                    formControlName="approvalStatus"
+                                    
+                                    ></ui-switch>
+                                </div>
+                                <div class="col-sm-9" class="form-control status-border"></div>
+                            </div>
+                            <div class="form-group">
+                                <!-- <span class="tooltip-info col-sm-1"><label class="tooltip-content">i</label></span> -->
+                                <label class="control-label col-sm-2 status-lable"> <img src="../../../../assets/icon/more_info1.jpg" alt="" width="14" height="13"  [tooltip]="tooltipText" [options]="tooltipOptions"> Show:</label>
+                                <div class="col-sm-1">
+                                    <!-- <input type="checkbox" class="status-form-control" formControlName="status"> -->
+                                    <ui-switch
+                                    labelOn="Yes"
+                                    labelOff="No"
+                                    checkedTextColor="red"
+                                    formControlName="status"
+                                    ></ui-switch>
+                                </div>
+                                <div class="col-sm-7" class="form-control status-border"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-1 col-sm-10">
+                                    <button type="submit" *ngIf="edit_blog == false" [disabled]="blogForm.invalid" class="btn btn-default btn-primary" >Submit</button>
+                                    <button type="submit" *ngIf="edit_blog == true" [disabled]="blogForm.invalid" class="btn btn-default btn-primary" >Update</button>
+                                </div>
+                            </div>
+                        </form>
+
+
+                        <ul class="blog-list" *ngIf="blogs.length != 0">
+                            <li class="blog-body" *ngFor="let blog of blogs">
+                              <div class="blog-image" [routerLink]="['/private/blog-detail', blog.id]">
+                                <img width="256" height="142" [src]="apiendpoint+'Uploads/Blog/image/'+blog.featuredImage">
+                              </div>
+                              <div class="blog-content" >
+                                <div class="blog-title">
+                                  <a  [routerLink]="['/private/blog-detail', blog.id]">{{blog.title.length > 80 ? (blog.title|slice : 0 :75)+'...' : blog.title}}</a>
+                                </div>
+                                <div class="blog-details">
+                                  <a class="blog-approval" >Approval: {{blog.approvalStatus == true ? 'Yes' : 'No'}}</a>
+                                  <span class="blog-publish-date">{{blog.createdDate| date:'dd-MMM-yyyy' }}</span>
+                                </div>
+                                <div class="blog-actions">
+                                    <button class="btn btn-primary action-btn edit-blog" (click)="editBlog(blog)">edit</button>
+                                    <button class="btn btn-primary action-btn delete-blog" (click)=" openConfirmDialog(blog.id)">Delete</button>
+                                </div> 
+                              </div>
+                            </li>
+                          </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

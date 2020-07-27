@@ -1,34 +1,69 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { SidebarComponent } from './private/shared/sidebar/sidebar.component';
+import { FooterComponent } from './private/shared/footer/footer.component';
+import { HeaderComponent } from './private/shared/header/header.component';
+import { PublicLayoutComponent } from './public/layout/public-layout/public-layout.component';
+import { PrivateLayoutComponent } from './private/layout/private-layout/private-layout.component';
+import { AppRoutingModule } from './routing/app-routing/app-routing.module';
+import { DataService } from './providers/dataservice/data.service';
+import { AuthGuard } from './security/auth.guard';
+import { AuthenticationService } from './providers/authentication/authentication.service';
+import { AuthInterceptor } from './security/auth.interceptor';
+import { ThemeService } from './providers/theme.service';
+import { SharedModule } from './shared/shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NewsService } from './providers/NewsService/news.service';
+import { CurrentNewsService } from './providers/CurrentNewsService/current-news.service';
+import { EventService } from './providers/EventService/event.service';
+import { UpcommingNewsService } from './providers/UpcommingNewsService/upcomming-news.service';
+import { DestinationVideosService } from './providers/DestinationVideos/destination-videos.service';
+import { InterviewService } from './providers/Interview/interview.service';
+import { TrendingNewsService } from './providers/TrendingNews/trending-news.service';
+import { FaqService } from './providers/FAQ/faq.service';
+import { TopDestinationService } from './providers/TopDestination/top-destination.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent
+    SidebarComponent,
+    FooterComponent,
+    HeaderComponent,
+    PublicLayoutComponent,
+    PrivateLayoutComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
-    FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-    ])
+    RouterModule,
+    AppRoutingModule,
+    SharedModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    DataService,
+    AuthGuard,
+    AuthenticationService,
+    ThemeService,
+    NewsService,
+    CurrentNewsService,
+    UpcommingNewsService,
+    EventService,
+    DestinationVideosService,
+    InterviewService,
+    TrendingNewsService,
+    FaqService,
+    TopDestinationService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

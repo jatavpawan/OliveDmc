@@ -1,0 +1,33 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <span [routerLink]="['/private/blog']" class="glyphicon glyphicon-arrow-left back-icon"></span> 
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-md-12 col-content" >
+                                <div class="col-md-12 blog-image"><img [src]="apiendpoint+'Uploads/Blog/image/'+blog?.featuredImage" style="width: 100%;" height="350" alt=""> </div>
+                            </div>
+                            <div class="col-md-12 col-content" >
+                                <div class="col-md-12 blog-title ">{{blog?.title}}</div>
+                            </div>
+                            <div class="col-md-12  posted-detail" >
+                                <div class="col-md-12">
+                                    <span class="posted-date mr-35">Posted Date: {{blog?.createdDate| date:'dd-MMM-yyyy'}}</span> 
+                                    <span class="posted-by mr-35">Posted By: Shubham Gupta</span>
+                                    <span class="approval-status mr-35">Approval Status: {{blog?.approvalStatus== true ? 'Yes' : 'No'}} </span>
+                                    <span class="status mr-35">Show To User: {{blog?.status== true ? 'Yes' : 'No'}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-content" >
+                                <div class="col-md-12 blog-description" [innerHTML]="blog?.description | safeHtml"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

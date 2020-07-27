@@ -1,0 +1,173 @@
+
+<div class="sidebar-wrapper">
+    <div class="logo">
+        <a class="simple-text">
+            <div class="logo-img">
+                <img src="../../../../assets/img/angular2-logo-white.png"/>
+            </div>
+            OLIVE DMC
+        </a>
+    </div>
+    <ul class="nav responsive-nav">
+         <li *ngIf="isMobileMenu()">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-dashboard"></i>
+				<p class="hidden-lg hidden-md">Dashboard</p>
+            </a>
+        </li> 
+        <li class="dropdown" *ngIf="isMobileMenu()">
+              <a class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-globe"></i>
+                    <b class="caret hidden-sm hidden-xs"></b>
+                    <span class="notification hidden-sm hidden-xs">5</span>
+					<p class="hidden-lg hidden-md">
+						5 Notifications
+						<b class="caret"></b>
+					</p>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Notification 1</a></li>
+                <li><a href="#">Notification 2</a></li>
+                <li><a href="#">Notification 3</a></li>
+                <li><a href="#">Notification 4</a></li>
+                <li><a href="#">Another notification</a></li>
+              </ul>
+        </li>
+        <li *ngIf="isMobileMenu()">
+           <a>
+                <i class="fa fa-search"></i>
+				<p class="hidden-lg hidden-md">Search</p>
+            </a>
+        </li>
+        <li *ngIf="isMobileMenu()">
+           <a href="">
+               <p>Account</p>
+            </a>
+        </li>
+        <li class="dropdown" *ngIf="isMobileMenu()">
+              <a class="dropdown-toggle" data-toggle="dropdown">
+                    <p>
+    					Dropdown
+    					<b class="caret"></b>
+    				</p>
+
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+        </li>
+        <li *ngIf="isMobileMenu()">
+            <a>
+                <p>Log out</p>
+            </a>
+        </li>
+        <li class="separator hidden-lg hidden-md" *ngIf="isMobileMenu()"></li>
+        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
+            <a [routerLink]="[menuItem.path]" *ngIf="menuItem.path != '' ">
+                <i class="{{menuItem.icon}}"></i>
+                <p>{{menuItem.title}} <b class="caret" *ngIf="menuItem.child.length != 0"></b> </p>
+
+            </a>
+            <!-- <a  *ngIf="menuItem.path == '' " data-toggle="collapse" [data-target]="menuItem.datatarget">
+                <i class="{{menuItem.icon}}"></i>
+                <p>{{menuItem.title}} <b class="caret" *ngIf="menuItem.child.length != 0"></b> </p>
+
+            </a>
+            <div class="collapse" [id]="menuItem.id" *ngIf="menuItem.child.length != 0">
+                <ul class="nav">
+                    <li routerLinkActive="active" *ngFor="let menuItemChild of menuItem.child">
+                        <a [routerLink]="[menuItemChild.path]">
+                            <span class="sidebar-mini">{{menuItemChild.firstChar}}</span>
+                            <span class="sidebar-normal">{{menuItemChild.title}}</span>
+                        </a>
+                    </li>
+               </ul>
+            </div> -->
+        </li>
+        <li routerLinkActive="active"  class="">
+            <a data-toggle="collapse" data-target="#whatsNew">
+                <i class="pe-7s-note2"></i>
+                <p>WHAT'S NEW<b class="caret"></b></p>
+            </a>
+            <div class="collapse" id="whatsNew">
+                <ul class="nav">
+                    <li routerLinkActive="active">
+                        <a [routerLink]="['/private/current-news']">
+                            <span class="sidebar-mini">CN</span>
+                            <span class="sidebar-normal">CURRENT NEWS</span>
+                        </a>
+                    </li>
+                    <li routerLinkActive="active">
+                        <a [routerLink]="['/private/upcomming-news']">
+                            <span class="sidebar-mini">UN</span>
+                            <span class="sidebar-normal">UPCOMMING NEWS</span>
+                        </a>
+                    </li>
+               </ul>
+            </div>
+        </li>
+        <li routerLinkActive="active"  class="">
+            <a data-toggle="collapse" data-target="#newsAndEvent">
+                <i class="pe-7s-note2"></i>
+                <p>NEWS And EVENT<b class="caret"></b></p>
+            </a>
+            <div class="collapse" id="newsAndEvent">
+                <ul class="nav">
+                    <li routerLinkActive="active">
+                        <a [routerLink]="['/private/news']">
+                            <span class="sidebar-mini">N</span>
+                            <span class="sidebar-normal">NEWS</span>
+                        </a>
+                    </li>
+                    <li routerLinkActive="active">
+                        <a [routerLink]="['/private/event']">
+                            <span class="sidebar-mini">E</span>
+                            <span class="sidebar-normal">EVENT</span>
+                        </a>
+                    </li>
+               </ul>
+            </div>
+        </li>
+        <li routerLinkActive="active"  class="">
+            <a data-toggle="collapse" data-target="#Settings">
+                <!-- <i class="pe-7s-note2"></i> -->
+                <i class="fa fa-cog" aria-hidden="true"></i>
+                <p>SETTINGS <b class="caret"></b></p>
+            </a>
+            <div class="collapse" id="Settings">
+                <ul class="nav">
+                    <li routerLinkActive="active">
+                        <a [routerLink]="['/private/about-us']">
+                            <span class="sidebar-mini">AU</span>
+                            <span class="sidebar-normal">About Us</span>
+                        </a>
+                    </li>
+                    <li routerLinkActive="active">
+                        <a [routerLink]="['/private/banner']">
+                            <span class="sidebar-mini">B</span>
+                            <span class="sidebar-normal">BANNER</span>
+                        </a>
+                    </li>
+                    <li routerLinkActive="active">
+                        <a [routerLink]="['/private/offer-ads']">
+                            <span class="sidebar-mini">O</span>
+                            <span class="sidebar-normal">Offer or Ads</span>
+                        </a>
+                    </li>
+                    <li routerLinkActive="active">
+                        <a [routerLink]="['/private/location']">
+                            <span class="sidebar-mini">L</span>
+                            <span class="sidebar-normal">Location</span>
+                        </a>
+                    </li>
+               </ul>
+            </div>
+        </li>
+    </ul>
+</div>

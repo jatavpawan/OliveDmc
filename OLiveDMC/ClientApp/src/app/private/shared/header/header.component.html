@@ -1,0 +1,130 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" (click)="sidebarToggle()">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" >{{getTitle()}}</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <!-- <ul class="nav navbar-nav navbar-left">
+                <li>
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-dashboard"></i>
+                        <p class="hidden-lg hidden-md">{{getTitle()}}</p>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-globe"></i>
+                        <b class="caret"></b>
+                        <span class="notification hidden-sm hidden-xs">5</span>
+                        <p class="hidden-lg hidden-md">
+                            5 Notifications
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a>Notification 1</a></li>
+                        <li><a>Notification 2</a></li>
+                        <li><a>Notification 3</a></li>
+                        <li><a>Notification 4</a></li>
+                        <li><a>Another notification</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a>
+                        <i class="fa fa-search"></i>
+                        <p class="hidden-lg hidden-md" >Search</p>
+                    </a>
+                </li>
+            </ul> -->
+
+            <ul class="nav navbar-nav navbar-right">
+                <!-- <li>
+                    <a (click)="testing()">
+                        <p>Account</p>
+                    </a>
+                </li> -->
+                <!-- <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <p>
+                            Dropdown
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a>Action</a></li>
+                        <li><a>Another action</a></li>
+                        <li><a>Something</a></li>
+                        <li><a>Another action</a></li>
+                        <li><a>Something</a></li>
+                        <li class="divider"></li>
+                        <li><a>Separated link</a></li>
+                    </ul>
+                </li> -->
+                <!-- <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <p>
+                            Dropdown
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a>Action</a></li>
+                        <li><a>Another action</a></li>
+                        <li><a>Something</a></li>
+                        <li><a>Another action</a></li>
+                        <li><a>Something</a></li>
+                        <li class="divider"></li>
+                        <li><a>Separated link</a></li>
+                    </ul>
+                </li> -->
+                <li class="dropdown user user-menu">
+                    <a  class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                      <img src="../../../../assets/img/faces/face-1.jpg" class="user-image" alt="User Image">
+                      <span class="hidden-xs">{{userData.firstName+ ' '+ (userData.middleName.length > 0 ? (userData.middleName + ' ') : ''  )+ userData.lastName}}</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <!-- User image -->
+                      <li class="user-header">
+                        <img src="../../../../assets/img/faces/face-1.jpg" class="img-circle" alt="User Image">
+        
+                        <p>
+                            {{userData.firstName+ ' '+ (userData.middleName.length > 0 ? (userData.middleName + ' ') : ''  )+ userData.lastName}}
+                          <!-- <small>Member since Nov. 2012</small> -->
+                        </p>
+                      </li>
+                      <!-- Menu Body -->
+                      
+                      <!-- Menu Footer-->
+                      <li class="user-footer">
+                        <div class="pull-left">
+                          <a  class="btn btn-default btn-flat" [routerLink]="['/private/user-profile']" >Profile</a>
+                        </div>
+                        <div class="pull-right">
+                          <a  class="btn btn-default btn-flat" (click)="logout()">Sign out</a>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+
+
+
+
+
+
+
+                <!-- <li>
+                    <a>
+                        <p (click)="logout()">Log out</p>
+                    </a>
+                </li> -->
+                <li class="separator hidden-lg hidden-md"></li>
+            </ul>
+        </div>
+    </div>
+</nav>

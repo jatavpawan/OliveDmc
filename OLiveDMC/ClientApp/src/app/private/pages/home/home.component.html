@@ -1,0 +1,94 @@
+<!-- <div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card utility-card">
+          <div class="content">
+            <div id="smartwizard3" class="forms-wizard-vertical sw-main sw-theme-default">
+              <ul class="forms-wizard nav nav-tabs step-anchor">
+                <li class="nav-item" [routerLink]="['/private/home/destination-videos']" routerLinkActive="active">
+                  <a class="nav-link">
+                    <em>1</em><span>Destination Videos</span>
+                  </a>
+                </li>
+                <li class="nav-item" [routerLink]="['/private/home/interview']" routerLinkActive="active">
+                  <a class="nav-link">
+                    <em>2</em><span>Interview  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  </a>
+                </li>
+                <li class="nav-item" [routerLink]="['/private/home/trending news']" routerLinkActive="active">
+                  <a class="nav-link">
+                    <em>3</em><span>Trending News</span>
+                  </a>
+                </li>
+                <li class="nav-item" [routerLink]="['/private/home/top-destination']" routerLinkActive="active">
+                  <a class="nav-link">
+                    <em>4</em><span>Top Destination</span>
+                  </a>
+                </li>
+                <li class="nav-item" [routerLink]="['/private/home/theme']" routerLinkActive="active">
+                  <a class="nav-link">
+                    <em>5</em><span>Theme  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  </a>
+                </li>
+              </ul>
+
+              <div class="form-wizard-content sw-container tab-content" style="min-height: 0px;">
+                <div class="tab-pane step-content" style="display: block;">
+                  <div class="card-body">
+                    <router-outlet></router-outlet>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="utilityDetail != null && utilityDetail != undefined">
+      <div class="col-md-12">
+        <div class="card utility-detail-card">
+          <div class="content">
+            <h2 class="utility-detail-header"> {{utilityDetail?.utilityType}} Detail</h2>
+            <div class="row">
+              <div class="col-md-12 col-content">
+                <div class="col-md-12 blog-image"><img [src]="apiendpoint+'Uploads/Utility/image/'+utilityDetail?.image"
+                    style="width: 100%;" height="350" alt=""> </div>
+              </div>
+              <div class="col-md-12  posted-detail">
+                <div class="col-md-12">
+                  <span class="posted-date mr-35">Country Name: {{utilityDetail?.countryName}}</span>
+                  <span class="posted-by mr-35">State Name: {{utilityDetail?.stateName}}</span>
+                  <span class="status mr-35">City Name: {{utilityDetail?.cityName}}</span>
+                </div>
+                <div class="col-md-12">
+                  <span class="posted-date mr-35">Posted Date: {{utilityDetail?.createdDate| date:'dd-MMM-yyyy'}}</span>
+                  <span class="status mr-35">Show To User: {{utilityDetail?.status== true ? 'Yes' : 'No'}}</span>
+                </div>
+              </div>
+              <div class="col-md-12 col-content">
+                <div class="col-md-12 blog-description" [innerHTML]="utilityDetail?.description | safeHtml"></div>
+              </div>
+              <div class="col-md-12 col-content" *ngIf="utilityDetail?.video != '' &&  utilityDetail?.video != null ">
+                <div class="col-md-12 blog-video">
+                  <video width="320" height="240" [src]="apiendpoint+'Uploads/Utility/Video/'+utilityDetail?.video"
+                    controls>
+                  </video>
+                </div>
+              </div>
+              <div class="col-md-12 col-content">
+                <div class="col-md-12 action-btn">
+                  <button class="btn btn-default btn-primary" (click)="editUtility(utilityDetail)">Edit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div> -->
+
+
+<router-outlet></router-outlet>

@@ -1,0 +1,61 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">About Us</h4>
+          </div>
+          <div class="content">
+            <div class="about_story">
+              <div class="aboutus-container">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="row">
+                      <form role="form" #myForm="ngForm" accept-charset="UTF-8" novalidate>
+                        <div class="form-group has-feedback"
+                          [ngClass]="{ 'has-error': myckeditor.invalid && myckeditor.touched }">
+                          <editor apiKey="byg3blvrvimc75hw1cb3hwo9su10wod4ogt2oi6p3nmaukek" [(ngModel)]="mycontent" #myckeditor="ngModel" name="myckeditor" [init]="tinymceConfig"></editor>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-sm-1  status-lable" for="pwd" [tooltip]="tooltipText" [options]="tooltipOptions">Show:</label>
+                          <div class="col-sm-1">
+                            <!-- <input type="checkbox" class="status-form-control" [(ngModel)]="status" name="status"> -->
+                            <ui-switch
+                            labelOn="Yes"
+                            labelOff="No"
+                            checkedTextColor="red"
+                            [(ngModel)]="status"
+                            ></ui-switch>
+                          </div>
+                          <div class="col-sm-10" class="form-control status-border"></div>
+                        </div>
+                        <button [disabled]="myForm.invalid" *ngIf="editContent == false" class="btn btn-primary"
+                          (click)="SaveAboutUs()">Save</button>
+                        <button [disabled]="myForm.invalid" *ngIf="editContent == true" class="btn btn-primary"
+                          (click)="SaveAboutUs(aboutUsData)">Update</button>
+                      </form>
+                    </div>
+                    <div class="navigation">
+                      <ul class="nav navbar-nav navbar-right">
+                        <li><button class="btn btn-primary" *ngIf="aboutUsData != undefined"
+                            (click)="editCkeditorContent(aboutUsData)">Edit</button></li>
+                        <li><button class="btn btn-primary" *ngIf="aboutUsData != undefined"
+                            (click)="deleteCkeditorContent(aboutUsData)">Delete</button></li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div class="display-ckeditor-content">
+                        <div [innerHTML]="aboutUsDescription | safeHtml"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

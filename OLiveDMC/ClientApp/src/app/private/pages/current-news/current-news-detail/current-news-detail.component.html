@@ -1,0 +1,38 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <span [routerLink]="['/private/current-news']" class="glyphicon glyphicon-arrow-left back-icon"></span> 
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-md-12 col-content" >
+                                <div class="col-md-12 blog-image"><img [src]="apiendpoint+'Uploads/CurrentNews/image/'+currentNews?.featuredImage" style="width: 100%;" height="350" alt=""> </div>
+                            </div>
+                            <div class="col-md-12 col-content" >
+                                <div class="col-md-12 blog-title ">{{currentNews?.title}}</div>
+                            </div>
+                            <div class="col-md-12  posted-detail" >
+                                <div class="col-md-12">
+                                    <span class="posted-date mr-35">Posted Date: {{currentNews?.createdDate| date:'dd-MMM-yyyy'}}</span> 
+                                    <span class="posted-by mr-35">Posted By: Shubham Gupta</span>
+                                    <span class="status mr-35">Show To User: {{currentNews?.status== true ? 'Yes' : 'No'}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-content" >
+                                <div class="col-md-12 blog-description" [innerHTML]="currentNews?.description | safeHtml"></div>
+                            </div>
+                            <div class="col-md-12 col-content" *ngIf="currentNews?.video != '' &&  currentNews?.video != null ">
+                                <div class="col-md-12 blog-video"> 
+                                    <video  width="320" height="240" [src] = "apiendpoint+'Uploads/CurrentNews/Video/'+currentNews?.video" controls>
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

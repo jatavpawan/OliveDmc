@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+   apiendpoint: 'http://localhost:51306/'
+  // apiendpoint: 'http://rsmartservices.com/'
+
 };
 
 /*

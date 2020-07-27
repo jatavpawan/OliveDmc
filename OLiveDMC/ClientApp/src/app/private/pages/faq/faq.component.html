@@ -1,0 +1,68 @@
+<p>faq works!</p>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="content">
+                        <form class="form-horizontal" [formGroup]="faqForm" (ngSubmit)="submitFaqData()">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2 input-label" for="title">FAQ Title:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="title"  placeholder="Enter FAQ Title" formControlName="title">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="Description">Description:</label>
+                                <div class="col-sm-10">
+                                  <editor apiKey="byg3blvrvimc75hw1cb3hwo9su10wod4ogt2oi6p3nmaukek" formControlName="description" [init]="tinymceConfig"></editor>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2 status-lable"> <img src="../../../../assets/icon/more_info1.jpg" alt="" width="14" height="13"  [tooltip]="tooltipText" [options]="tooltipOptions"> Show In Front End:</label>
+                                <div class="col-sm-1">
+                                    <ui-switch
+                                    labelOn="Yes"
+                                    labelOff="No"
+                                    checkedTextColor="red"
+                                    formControlName="showInFrontEnd"
+                                    ></ui-switch>
+                                </div>
+                                <div class="col-sm-7" class="form-control status-border"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-1 col-sm-10">
+                                    <button type="submit" *ngIf="edit_faq == false" [disabled]="faqForm.invalid" class="btn btn-default btn-primary" >Submit</button>
+                                    <button type="submit" *ngIf="edit_faq == true" [disabled]="faqForm.invalid" class="btn btn-default btn-primary" >Update</button>
+                                </div>
+                            </div>
+                        </form>
+
+
+                        <ul class="blog-list" *ngIf="faqs.length != 0">
+                            <li class="blog-body" *ngFor="let faq of faqs">
+                              <div class="row">
+                                <div class="col-md-9">
+                                  <div class="blog-content">
+                                    <div class="blog-title">
+                                      <a  (click)="gotoDetailPage(faq)">{{faq.title.length > 80 ? (faq.title|slice : 0 :75)+'...' : faq.title}}</a>
+                                    </div>
+                                    <div class="blog-details">
+                                      <a class="blog-approval" >Show In Front End: {{faq.showInFrontEnd == true ? 'Yes' : 'No'}}</a>
+                                      <span class="blog-publish-date">{{faq.createdDate| date:'dd-MMM-yyyy' }}</span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="blog-actions col-md-12">
+                                  <button class="btn btn-primary action-btn edit-blog" (click)="editFaq(faq)">edit</button>
+                                  <button class="btn btn-primary action-btn delete-blog" (click)="openConfirmDialog(faq.id)">Delete</button>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

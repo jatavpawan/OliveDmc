@@ -1,0 +1,64 @@
+<!-- <div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="content">
+                        <div class="row">
+
+                            <div class="col-md-12 col-content" >
+                                <div class="col-md-1"><b>Image Path</b></div>
+                                <div class="col-md-9"><img [src]="apiendpoint+'Uploads/Banner/image/'+banner?.imagePath" width="800" alt=""> </div>
+                            </div>
+                            <div class="col-md-12 col-content" >
+                                <div class="col-md-1"><b>Title </b></div>
+                                <div class="col-md-9">{{banner?.title}}</div>
+                            </div>
+                            <div class="col-md-12 col-content" >
+                                <div class="col-md-1"><b>Description</b></div>
+                                <div class="col-md-9" [innerHTML]="banner?.description | safeHtml"></div>
+                            </div>
+                            <div class="col-md-12 col-content" >
+                                <div class="col-md-1"><b>Page ID</b></div>
+                                <div class="col-md-9">{{banner?.pageId}}</div>
+                            </div>
+                            <div class="col-md-12 col-content" >
+                                <div class="col-md-1"><b>Show</b></div>
+                                <div class="col-md-9">{{banner?.status}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <span [routerLink]="['/private/event']" class="glyphicon glyphicon-arrow-left back-icon"></span> 
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-md-12 col-content" >
+                                <div class="col-md-12 blog-image"><img [src]="apiendpoint+'Uploads/Banner/image/'+banner?.imagePath" style="width: 100%;" height="350" alt=""> </div>
+                            </div>
+                            <div class="col-md-12 col-content" >
+                                <div class="col-md-12 blog-title ">{{banner?.title}}</div>
+                            </div>
+                            <div class="col-md-12  posted-detail" >
+                                <div class="col-md-12">
+                                    <span class="status mr-35">Show To User: {{banner?.status== true ? 'Yes' : 'No'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

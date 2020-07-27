@@ -1,0 +1,29 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <span [routerLink]="['/private/offer-ads']" class="glyphicon glyphicon-arrow-left back-icon"></span> 
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-md-12 col-content" >
+                                <div class="col-md-12 blog-image"><img [src]="apiendpoint+'Uploads/offerAds/image/'+offerAds?.image" style="width: 100%;" height="350" alt=""> </div>
+                            </div>
+                            <div class="col-md-12 col-content" >
+                                <div class="col-md-12 blog-title ">{{offerAds?.title}}</div>
+                            </div>
+                            <div class="col-md-12  posted-detail" >
+                                <div class="col-md-12">
+                                    <span class="posted-date mr-35">Posted Date: {{offerAds?.createdDate| date:'dd-MMM-yyyy'}}</span> 
+                                    <span class="posted-by mr-35">Posted By: Shubham Gupta</span>
+                                    <span class="posted-by mr-35">Page Id: {{offerAds?.pageId}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,209 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card utility-card">
+          <div class="content">
+            <div id="smartwizard3" class="forms-wizard-vertical sw-main sw-theme-default">
+              <ul class="forms-wizard nav nav-tabs step-anchor">
+                <li class="nav-item" [class.active]="formWizardName == 'Visa'">
+                  <a class="nav-link" (click)="changeInFormWizard('Visa')">
+                    <em>1</em><span>Visa &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  </a>
+                </li>
+                <li class="nav-item" [class.active]="formWizardName == 'Travel Product'">
+                  <a class="nav-link" (click)="changeInFormWizard('Travel Product')">
+                    <em>2</em><span>Travel Product</span>
+                  </a>
+                </li>
+                <li class="nav-item" [class.active]="formWizardName == 'Personal Loan'">
+                  <a  class="nav-link" (click)="changeInFormWizard('Personal Loan')">
+                    <em>3</em><span>Personal Loan</span>
+                  </a>
+                </li>
+                <li class="nav-item" [class.active]="formWizardName == 'Forex'">
+                  <a  class="nav-link" (click)="changeInFormWizard('Forex')">
+                    <em>4</em><span>Forex</span>
+                  </a>
+                </li>
+                <li class="nav-item" [class.active]="formWizardName == 'Google Maps'">
+                  <a  class="nav-link" (click)="changeInFormWizard('Google Maps')">
+                    <em>5</em><span>Google Maps</span>
+                  </a>
+                </li>
+                <li class="nav-item" [class.active]="formWizardName == 'Travel Insurance'">
+                  <a  class="nav-link" (click)="changeInFormWizard('Travel Insurance')">
+                    <em>6</em><span>Travel Insurance</span>
+                  </a>
+                </li>
+                <li class="nav-item" [class.active]="formWizardName == 'International Sim'">
+                  <a  class="nav-link" (click)="changeInFormWizard('International Sim')">
+                    <em>7</em><span>International Sim</span>
+                  </a>
+                </li>
+                <li class="nav-item" [class.active]="formWizardName == 'VIP Lounge'">
+                  <a  class="nav-link" (click)="changeInFormWizard('VIP Lounge')">
+                    <em>8</em><span>VIP Lounge</span>
+                  </a>
+                </li>
+              </ul>
+
+              <div class="form-wizard-content sw-container tab-content" style="min-height: 0px;">
+                <div class="tab-pane step-content" style="display: block;">
+                  <div class="card-body">
+
+
+                    <form class="form-horizontal" [formGroup]="utilityForm" (ngSubmit)="submitUtilityData()">
+                      <div class="form-group">
+                        <label class="control-label col-sm-2 input-label" for="email">utility Type</label>
+                        <div class="col-sm-10">
+                            <input type="text" disabled class="form-control" id="email"  placeholder="Enter utility Type" formControlName="utilityType">
+                        </div>
+                    </div>
+                      <div class="form-group">
+                        <label class="control-label col-sm-2 input-label" for="title">Country Name:</label>
+                        <div class="col-sm-4">
+                          <select class="form-control" formControlName="countryId" (change)="changeCountry()">
+                            <option value="">Select Country Name</option>
+                            <option [value]="country.id" *ngFor="let country of countries;">
+                              {{country.countryName}}</option>
+                          </select>
+                        </div>
+                        <label class="control-label col-sm-2 input-label" for="title">State Name:</label>
+                        <div class="col-sm-4">
+                          <select class="form-control" formControlName="stateId" (change)="changeState()">
+                            <option value="">Select State Name</option>
+                            <option [value]="state.id" *ngFor="let state of statesLoad;">
+                              {{state.stateName }}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <!-- <div class="form-group">
+                        <label class="control-label col-sm-2 input-label" for="title">State Name:</label>
+                        <div class="col-sm-4">
+                          <select class="form-control" formControlName="stateId" (change)="changeState()">
+                            <option value="">Select State Name</option>
+                            <option [value]="state.id" *ngFor="let state of statesLoad;">
+                              {{state.stateName }}</option>
+                          </select>
+                        </div>
+                      </div> -->
+                      <div class="form-group">
+                        <label class="control-label col-sm-2 input-label" for="title">City Name:</label>
+                        <div class="col-sm-4">
+                          <select class="form-control" formControlName="cityId">
+                            <option value="">Select City Name</option>
+                            <option [value]="city.id" *ngFor="let city of cityLoad;">
+                              {{city.cityName}}</option>
+                          </select>
+                        </div>
+                        <label class="control-label col-sm-2 status-lable"><img src="../../../../assets/icon/more_info1.jpg" alt="" width="14" height="13"  [tooltip]="tooltipText" [options]="tooltipOptions"> Show</label>
+                        <div class="col-sm-1">
+                            <ui-switch
+                            labelOn="Yes"
+                            labelOff="No"
+                            checkedTextColor="red"
+                            formControlName="status"
+                            ></ui-switch>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-sm-2" for="pwd">Description</label>
+                        <div class="col-sm-10">
+                          <editor apiKey="byg3blvrvimc75hw1cb3hwo9su10wod4ogt2oi6p3nmaukek" formControlName="description" [init]="tinymceConfig"></editor>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="pwd">image</label>
+                        <div class="col-sm-10">
+                            <div class="image-preview mb-3" *ngIf="fileUploaded == true || edit_utility == true">
+                                <img [src]="previewUrl" height="100" width="105"  />                 
+                            </div>
+                            <label for="files"  *ngIf="edit_utility == true ||  (utilityForm.get('image').value != '' && utilityForm.get('image').value != null ) " class="btn btn-primary">update File</label>
+                            <input type="file" *ngIf="fileUploaded == false || edit_utility == true || utilityForm.get('image').value != '' " [class.hidden]="edit_utility == true || (utilityForm.get('image').value != '' && utilityForm.get('image').value != null ) " name="" id="files" #files (change)="preview(files)" formControlName="image">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-2" for="pwd"><img src="../../../../assets/icon/more_info1.jpg" alt="" width="14" height="13"  [tooltip]="tooltipVideoText" [options]="tooltipOptions">Video:</label>
+                      <div class="col-sm-10">
+                          <video  *ngIf="videoName == '' " width="320" height="240" [src] = "videoUrl" controls>
+                          </video>
+                          <video  *ngIf="videoName != '' " width="320" height="240" [src] = "apiendpoint+'Uploads/Utility/Video/'+videoName" controls>
+                          </video>
+                          <input type="file" name="" id="videofiles" #files1 (change)="changeVideo(files1)" formControlName="video">
+                      </div>
+                  </div>
+                  <!-- <div class="form-group">
+                    <label class="control-label col-sm-2 status-lable"><img src="../../../../assets/icon/more_info1.jpg" alt="" width="14" height="13"  [tooltip]="tooltipText" [options]="tooltipOptions"> Show</label>
+                    <div class="col-sm-1">
+                        <ui-switch
+                        labelOn="Yes"
+                        labelOff="No"
+                        checkedTextColor="red"
+                        formControlName="status"
+                        ></ui-switch>
+                    </div>
+                </div> -->
+
+
+                      <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-offset-1 col-sm-8">
+                          <button type="submit" *ngIf="edit_utility == false" [disabled]="utilityForm.invalid"
+                            class="btn btn-default btn-primary">Submit</button>
+                          <button type="submit" *ngIf="edit_utility == true" [disabled]="utilityForm.invalid"
+                            class="btn btn-default btn-primary">Update</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="utilityDetail != null && utilityDetail != undefined">
+      <div class="col-md-12">
+        <div class="card utility-detail-card">
+          <div class="content">
+            <h2 class="utility-detail-header"> {{utilityDetail?.utilityType}} Detail</h2>
+            <div class="row">
+              <div class="col-md-12 col-content" >
+                  <div class="col-md-12 blog-image"><img [src]="apiendpoint+'Uploads/Utility/image/'+utilityDetail?.image" style="width: 100%;" height="350" alt=""> </div>
+                  <!-- <div class="col-md-12 blog-image"><img src="http://localhost:51306/Uploads/News/image/202061043756_video.png" style="width: 100%;" height="350" alt=""> </div> -->
+              </div>
+              <div class="col-md-12  posted-detail" >
+                <div class="col-md-12">
+                    <span class="posted-date mr-35">Country Name:  {{utilityDetail?.countryName}}</span> 
+                    <span class="posted-by mr-35">State Name: {{utilityDetail?.stateName}}</span>
+                    <span class="status mr-35">City Name: {{utilityDetail?.cityName}}</span>
+                </div>
+                  <div class="col-md-12">
+                      <span class="posted-date mr-35">Posted Date:  {{utilityDetail?.createdDate| date:'dd-MMM-yyyy'}}</span> 
+                      <span class="status mr-35">Show To User: {{utilityDetail?.status== true ? 'Yes' : 'No'}}</span>
+                  </div>
+              </div>
+              <div class="col-md-12 col-content" >
+                  <div class="col-md-12 blog-description" [innerHTML]="utilityDetail?.description | safeHtml"></div>
+              </div>
+              <div class="col-md-12 col-content" *ngIf="utilityDetail?.video != '' &&  utilityDetail?.video != null ">
+                  <div class="col-md-12 blog-video"> 
+                      <video  width="320" height="240" [src] = "apiendpoint+'Uploads/Utility/Video/'+utilityDetail?.video" controls>
+                      </video>
+                  </div>
+              </div>
+              <div class="col-md-12 col-content">
+                  <div class="col-md-12 action-btn">
+                    <button class="btn btn-default btn-primary" (click)="editUtility(utilityDetail)">Edit</button>
+                  </div>
+              </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

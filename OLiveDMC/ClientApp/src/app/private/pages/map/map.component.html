@@ -1,0 +1,180 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">{{map_title}} map</h4>
+                    </div>
+                    <div class="content">
+                        <div id="chartdiv" style="width: 100%;height: 500px;"></div>
+  
+                        <div class="row" *ngIf="editshowinfo == true">
+                        <!-- <div class="row"> -->
+                            <!-- <div class="col-md-12 text-right" *ngIf="editCountryInfo == true"> -->
+                            <div class="col-md-12 text-right">
+                                <button class="btn btn-default btn-primary delete-btn" (click)="deleteCountryInfoByCountryCode()" *ngIf="dataNotfound == false">Delete</button> 
+                                <button class="btn btn-default btn-primary" (click)="changeShow()">View</button> 
+                            </div>
+  
+  
+                            <div class="col-md-12" *ngIf="showDestinationInfo == true">
+                                <form class="form-horizontal" [formGroup]="mapForm"
+                                    (ngSubmit)="submitDestinationInCountry()">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2 input-label" for="email">About
+                                            Country</label>
+                                        <div class="col-sm-10">
+                                            <editor apiKey="byg3blvrvimc75hw1cb3hwo9su10wod4ogt2oi6p3nmaukek"
+                                                formControlName="aboutCountry" [init]="tinymceConfig"></editor>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2 input-label" for="pwd">Video:</label>
+                                        <div class="col-sm-10">
+                                            <video *ngIf="videoName == '' " width="320" height="240" [src] = "videoUrl" controls>
+                                            </video>
+                                            <video  *ngIf="videoName != '' " width="320" height="240" [src] = "apiendpoint+'Uploads/Map/Video/'+videoName" controls>
+                                            </video>
+                                            <input type="file" name="" id="files" #files1 (change)="changeVideo(files1)">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2 input-label" for="email">Top
+                                            Attraction</label>
+                                        <div class="col-sm-10">
+                                            <editor apiKey="byg3blvrvimc75hw1cb3hwo9su10wod4ogt2oi6p3nmaukek"
+                                                formControlName="topAttraction" [init]="tinymceConfig"></editor>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2 input-label" for="email">Top
+                                            Destination</label>
+                                        <div class="col-sm-10">
+                                            <editor apiKey="byg3blvrvimc75hw1cb3hwo9su10wod4ogt2oi6p3nmaukek"
+                                                formControlName="topDestination" [init]="tinymceConfig"></editor>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2 input-label" for="email">Visa
+                                            detail</label>
+                                        <div class="col-sm-10">
+                                            <editor apiKey="byg3blvrvimc75hw1cb3hwo9su10wod4ogt2oi6p3nmaukek"
+                                                formControlName="visadetail" [init]="tinymceConfig"></editor>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2 input-label" for="email">How To
+                                            Reach</label>
+                                        <div class="col-sm-10">
+                                            <editor apiKey="byg3blvrvimc75hw1cb3hwo9su10wod4ogt2oi6p3nmaukek"
+                                                formControlName="howToReach" [init]="tinymceConfig"></editor>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2 input-label"
+                                            for="miscellaneous">Miscellaneous</label>
+                                        <div class="col-sm-10">
+                                            <editor apiKey="byg3blvrvimc75hw1cb3hwo9su10wod4ogt2oi6p3nmaukek"
+                                                formControlName="miscellaneous" [init]="tinymceConfig"></editor>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-1 col-sm-10">
+                                            <button type="submit" *ngIf="editCountryInfo == false"
+                                                [disabled]="!mapForm.valid"
+                                                class="btn btn-default btn-primary">Submit</button>
+                                            <button type="submit" *ngIf="editCountryInfo == true"
+                                                [disabled]="!mapForm.valid"
+                                                class="btn btn-default btn-primary">Update</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="editshowinfo == false && showDestinationInfo == true">
+                            <!-- <ng-container > -->
+                                <div class="col-md-12 text-right">
+                                    <button class="btn btn-default btn-primary delete-btn" *ngIf="dataNotfound == false" (click)="changeShow()">Edit</button> 
+                                    <button class="btn btn-default btn-primary delete-btn" *ngIf="dataNotfound == true" (click)="changeShow()">Add</button> 
+                                </div>
+                                <div class="col-md-12 col-content">
+                                    <div class="col-md-12 blog-title ">About Country</div>
+                                </div>
+                                <div class="col-md-12 col-content">
+                                    <div class="col-md-12 blog-description" *ngIf="(countryObj.video == null || countryObj.video == '') && dataNotfound == false " 
+                                    [innerHTML]="countryObj.aboutCountry| safeHtml">
+                                    </div>
+                                    <div class="col-md-12 blog-description" *ngIf="dataNotfound == true" 
+                                    >N/A
+                                    </div>
+                                    
+                                    <ng-container *ngIf="countryObj.video != null && countryObj.video != '' && dataNotfound == false">
+                                        <div class="col-md-6 blog-description"
+                                        [innerHTML]="countryObj.aboutCountry| safeHtml">
+                                        </div>
+                                        <div class="col-md-6 blog-description" >
+                                            <video  width="320" height="240" [src] ="apiendpoint+'Uploads/Map/Video/'+countryObj.video " controls>
+                                            </video>
+                                        </div>
+                                    </ng-container>
+  
+  
+                                    
+                                </div>
+                                <div class="col-md-12 col-content">
+                                    <div class="col-md-12 blog-title ">Top Attraction</div>
+                                </div>
+                                <div class="col-md-12 col-content">
+                                    <div *ngIf="dataNotfound == false" class="col-md-12 blog-description"
+                                        [innerHTML]="countryObj.topAttraction| safeHtml"></div>
+                                    <div *ngIf="dataNotfound == true" class="col-md-12 blog-description"
+                                        > N/A</div>
+                                </div>
+                                <div class="col-md-12 col-content">
+                                    <div class="col-md-12 blog-title ">Top Destination</div>
+                                </div>
+                                <div class="col-md-12 col-content">
+                                    <div *ngIf="dataNotfound == false" class="col-md-12 blog-description"
+                                        [innerHTML]="countryObj.topDestination| safeHtml"></div>
+                                    <div *ngIf="dataNotfound == true" class="col-md-12 blog-description"
+                                        >N/A</div>
+                                </div>
+                                <div class="col-md-12 col-content">
+                                    <div class="col-md-12 blog-title ">Visa detail</div>
+                                </div>
+                                <div class="col-md-12 col-content">
+                                    <div *ngIf="dataNotfound == false" class="col-md-12 blog-description"
+                                        [innerHTML]="countryObj.visadetail| safeHtml"></div>
+                                    <div *ngIf="dataNotfound == true" class="col-md-12 blog-description"
+                                        >N/A</div>
+                                </div>
+                                <div class="col-md-12 col-content">
+                                    <div class="col-md-12 blog-title ">How To Reach</div>
+                                </div>
+                                <div class="col-md-12 col-content">
+                                    <div *ngIf="dataNotfound == false" class="col-md-12 blog-description"
+                                        [innerHTML]="countryObj.howToReach| safeHtml"></div>
+                                    <div *ngIf="dataNotfound == true" class="col-md-12 blog-description"
+                                        >N/A</div>
+                                </div>
+                                <div class="col-md-12 col-content">
+                                    <div class="col-md-12 blog-title ">Miscellaneous</div>
+                                </div>
+                                <div class="col-md-12 col-content">
+                                    <div *ngIf="dataNotfound == false" class="col-md-12 blog-description"
+                                        [innerHTML]="countryObj.miscellaneous| safeHtml"></div>
+                                    <div *ngIf="dataNotfound == true" class="col-md-12 blog-description"
+                                        >N/A</div>
+                                </div>
+                            <!-- </ng-container> -->
+                        </div>
+                       
+  
+  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

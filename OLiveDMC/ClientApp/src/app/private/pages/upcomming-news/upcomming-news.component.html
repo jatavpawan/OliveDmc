@@ -1,0 +1,122 @@
+<!-- <p>blog works!</p> -->
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="content">
+                        <form class="form-horizontal" [formGroup]="upcommingNewsForm" (ngSubmit)="submitUpcommingNewsData()">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2 input-label" for="title">Upcomming News Title:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="title"  placeholder="Enter Upcomming News Title" formControlName="title">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="Description">Description:</label>
+                                <div class="col-sm-10">
+                                  <editor apiKey="byg3blvrvimc75hw1cb3hwo9su10wod4ogt2oi6p3nmaukek" formControlName="description" [init]="tinymceConfig"></editor>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="pwd">Featured Image:</label>
+                                <div class="col-sm-10">
+                                    <div class="image-preview mb-3" *ngIf="fileUploaded == true || edit_upcommingNews == true">
+                                        <img [src]="previewUrl" height="100" width="105"  />                 
+                                    </div>
+                                    <label for="files"  *ngIf="edit_upcommingNews == true ||  (upcommingNewsForm.get('featuredImage').value != '' && upcommingNewsForm.get('featuredImage').value != null )" class="btn btn-primary">update File</label>
+                                    <input type="file" *ngIf="fileUploaded == false || edit_upcommingNews == true || upcommingNewsForm.get('featuredImage').value != '' " [class.hidden]="edit_upcommingNews == true ||  (upcommingNewsForm.get('featuredImage').value != '' && upcommingNewsForm.get('featuredImage').value != null )" name="" id="files" #files (change)="preview(files)" formControlName="featuredImage">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-sm-2" for="pwd"><img src="../../../../assets/icon/more_info1.jpg" alt="" width="14" height="13"  [tooltip]="tooltipVideoText" [options]="tooltipOptions">Video:</label>
+                              <div class="col-sm-10">
+                                  <video *ngIf="videoName == '' " width="320" height="240" [src] = "videoUrl" controls>
+                                  </video>
+                                  <video  *ngIf="videoName != '' " width="320" height="240" [src] = "apiendpoint+'Uploads/UpcommingNews/Video/'+videoName" controls>
+                                  </video>
+                                  <input type="file" name="" id="videofiles" #files1 (change)="changeVideo(files1)" formControlName="video">
+                              </div>
+                          </div>
+                            <div class="form-group">
+                                <!-- <span class="tooltip-info col-sm-1"><label class="tooltip-content">i</label></span> -->
+                                <label class="control-label col-sm-2 status-lable"> <img src="../../../../assets/icon/more_info1.jpg" alt="" width="14" height="13"  [tooltip]="tooltipText" [options]="tooltipOptions"> Show:</label>
+                                <div class="col-sm-1">
+                                    <!-- <input type="checkbox" class="status-form-control" formControlName="status"> -->
+                                    <ui-switch
+                                    labelOn="Yes"
+                                    labelOff="No"
+                                    checkedTextColor="red"
+                                    formControlName="status"
+                                    ></ui-switch>
+                                </div>
+                                <div class="col-sm-7" class="form-control status-border"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-1 col-sm-10">
+                                    <button type="submit" *ngIf="edit_upcommingNews == false" [disabled]="upcommingNewsForm.invalid" class="btn btn-default btn-primary" >Submit</button>
+                                    <button type="submit" *ngIf="edit_upcommingNews == true" [disabled]="upcommingNewsForm.invalid" class="btn btn-default btn-primary" >Update</button>
+                                </div>
+                            </div>
+                        </form>
+
+
+                        <ul class="blog-list" *ngIf="upcommingNewses.length != 0">
+                            <li class="blog-body" *ngFor="let upcommingNews of upcommingNewses">
+                              <!-- <div class="row">
+                                <div class="col-md-6">
+                                  <div class="blog-image" [routerLink]="['/private/upcomming-news-detail', upcommingNews.id]">
+                                    <img [src]="apiendpoint+'Uploads/UpcommingNews/image/'+upcommingNews.featuredImage">
+                                  </div>    
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="blog-content">
+                                    <div class="blog-title">
+                                      <a  [routerLink]="['/private/upcomming-news-detail', upcommingNews.id]">{{upcommingNews.title.length > 80 ? (upcommingNews.title|slice : 0 :75)+'...' : upcommingNews.title}}</a>
+                                    </div>
+                                    <div class="blog-details">
+                                      <a class="blog-approval" >Show: {{upcommingNews.status == true ? 'Yes' : 'No'}}</a>
+                                      <span class="blog-publish-date">{{upcommingNews.createdDate| date:'dd-MMM-yyyy' }}</span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="blog-actions col-md-12">
+                                  <button class="btn btn-primary action-btn edit-blog" (click)="editUpcommingNews(upcommingNews)">edit</button>
+                                  <button class="btn btn-primary action-btn delete-blog" (click)="openConfirmDialog(upcommingNews.id)">Delete</button>
+                                </div>
+                              </div> -->
+
+
+                              <div class="row">
+                                <div class="col-md-3">
+                                  <div class="blog-image" (click)="gotoDetailPage(upcommingNews)">
+                                    <img [src]="apiendpoint+'Uploads/UpcommingNews/image/'+upcommingNews.featuredImage">
+                                  </div>    
+                                </div>
+                                <div class="col-md-9">
+                                  <div class="blog-content">
+                                    <div class="blog-title">
+                                      <a  (click)="gotoDetailPage(upcommingNews)">{{upcommingNews.title.length > 80 ? (upcommingNews.title|slice : 0 :75)+'...' : upcommingNews.title}}</a>
+                                    </div>
+                                    <div class="blog-details">
+                                      <a class="blog-approval" >Show: {{upcommingNews.status == true ? 'Yes' : 'No'}}</a>
+                                      <span class="blog-publish-date">{{upcommingNews.createdDate| date:'dd-MMM-yyyy' }}</span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="blog-actions col-md-12">
+                                  <button class="btn btn-primary action-btn edit-blog" (click)="editUpcommingNews(upcommingNews)">edit</button>
+                                  <button class="btn btn-primary action-btn delete-blog" (click)="openConfirmDialog(upcommingNews.id)">Delete</button>
+                                </div>
+                              </div>
+
+
+                            </li>
+                          </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

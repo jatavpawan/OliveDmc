@@ -1,0 +1,129 @@
+<!-- <p>contact-details works!</p> -->
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="content">
+
+                        <div class="dual-list" cdkDropListGroup>
+                            <div class="listbox" [ngStyle]="{ 'order' : 1 , 'margin-left' : 0 }">
+                                <button type="button" name="addBtn" class="btn btn-primary btn-block">Blog</button>
+
+                                <form class="filter1">
+                                    <input class="form-control" name="filterSource" [(ngModel)]="todofilterInput">
+                                </form>
+
+                                <div class="record-picker">
+                                    <ul [ngClass]="{over:false}" cdkDropList [cdkDropListData]="todo"
+                                        (cdkDropListDropped)="drop($event);multiSelect.dropListDropped($event)">
+                                        <li class="todolist" *ngFor="let item of todo|filter:todofilterInput " cdkDrag
+                                            (pointerdown)="multiSelect.mouseDown($event)"
+                                            (pointerup)="multiSelect.mouseUp($event)"
+                                            (cdkDragStarted)="multiSelect.dragStarted();multiDrag.dragStarted($event)"
+                                            (cdkDragEnded)="multiSelect.dragEnded()">
+                                            <!-- <div class="row">
+                                                <div class="col-md-3">
+                                                  <div class="blog-image"> -->
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <img [src]="apiendpoint+'Uploads/Blog/image/'+item.featuredImage">
+                                                </div>
+                                                <!-- </div>    
+                                                </div>
+                                                <div class="col-md-8"> -->
+                                                <div class="col-md-9">
+                                                    <label>{{item?.title?.length >=100 ? (item?.title|slice: 0:100)+'...' : item?.title  }}</label>
+                                                </div>
+                                            </div>
+                                            <!-- </div>
+                                                <div class="col-md-1"></div>
+                                                
+                                              </div> -->
+
+
+
+
+                                            <!-- <label>{{item?.title?.length >=55 ? (item?.title|slice: 0:50)+'...' : item?.title  }}</label> -->
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="button-bar">
+                                    <button type="button" class="btn btn-primary pull-left" [disabled]="false"
+                                        (click)="selectAllInTodoList()">ALL</button>
+                                    <button type="button" class="btn btn-default pull-right" [disabled]="false"
+                                        (click)="deSelectAllInTodoList()">NONE</button>
+                                </div>
+                            </div>
+
+                            <div class="listbox" [ngStyle]="{ 'order' : 2, 'margin-left' : '10px'}">
+                                <button type="button" name="removeBtn" class="btn btn-primary btn-block">Blog
+                                    Priority</button>
+
+                                <form class="filter1">
+                                    <input class="form-control" name="filterDestination" [(ngModel)]="donefilterInput">
+                                </form>
+
+                                <div class="record-picker">
+                                    <ul [ngClass]="{over:false}" cdkDropList [cdkDropListData]="done"
+                                        (cdkDropListDropped)="drop($event);multiSelect.dropListDropped($event)">
+                                        <li class="donelist" #itmConf *ngFor="let item of done|filter:donefilterInput"
+                                            cdkDrag (pointerdown)="multiSelect.mouseDown($event)"
+                                            (pointerup)="multiSelect.mouseUp($event)"
+                                            (cdkDragStarted)="multiSelect.dragStarted();multiDrag.dragStarted($event)"
+                                            (cdkDragEnded)="multiSelect.dragEnded()">
+                                            <!-- <label>{{item?.title?.length >=55 ? (item?.title|slice: 0:50)+'...' : item?.title  }}</label> -->
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <img [src]="apiendpoint+'Uploads/Blog/image/'+item.featuredImage">
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <label>{{item?.title?.length >=100 ? (item?.title|slice: 0:100)+'...' : item?.title  }}</label>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="button-bar">
+                                    <button type="button" class="btn btn-primary pull-left" [disabled]="false"
+                                        (click)="selectAllInDoneList()">All</button>
+                                    <button type="button" class="btn btn-default pull-right" [disabled]="false"
+                                        (click)="deSelectAllInDoneList()">None</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="button-bar">
+                                    <button type="button" class="btn btn-primary pull-right save-btn" [disabled]="false"
+                                        (click)="save()">Save</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-content">
+                            <div class="tab-pane" class="active">
+                                <div class="row">
+                                    <div class="col-sm-6" style="margin-top:32px;">
+                                        <h4>Source</h4>
+                                        <!-- <pre><small>{{newBlogs|json}}</small></pre> -->
+                                        <pre><small>{{todo|json}}</small></pre>
+                                    </div>
+                                    <div class="col-sm-6" style="margin-top:32px;">
+                                        <h4>Confirmed</h4>
+                                        <pre><small>{{done|json}}</small></pre>
+                                        <!-- <pre><small>{{newBlogsPriorityList|json}}</small></pre> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

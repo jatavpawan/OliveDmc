@@ -1,0 +1,253 @@
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="content">
+              <div id="smartwizard3" class="forms-wizard-vertical sw-main sw-theme-default">
+                <ul class="forms-wizard nav nav-tabs step-anchor">
+                  <li class="nav-item" [class.active]="formWizardName == 'Country'">
+                    <a class="nav-link" (click)="changeInFormWizard('Country')">
+                      <em>1</em><span>Country Information</span>
+                    </a>
+                  </li>
+                  <li class="nav-item" [class.active]="formWizardName == 'State'">
+                    <a class="nav-link" (click)="changeInFormWizard('State')">
+                      <em>2</em><span>State Information</span>
+                    </a>
+                  </li>
+                  <li class="nav-item" [class.active]="formWizardName == 'City'">
+                    <a  class="nav-link" (click)="changeInFormWizard('City')">
+                      <em>3</em><span>City Information</span>
+                    </a>
+                  </li>
+                </ul>
+
+                <div class="form-wizard-content sw-container tab-content" style="min-height: 0px;">
+                <!-- ------------------------------------------Country------------------------------------------------------ -->
+
+                  <div *ngIf="formWizardName == 'Country'" class="tab-pane step-content" style="display: block;">
+                    <div class="card-body">
+  
+  
+                      <form class="form-horizontal" [formGroup]="countryForm" (ngSubmit)="submitCountryData()">
+                        <div class="form-group">
+                          <label class="control-label col-sm-2 input-label" for="title">Country Name:</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="title" placeholder="Enter Country Name"
+                              formControlName="countryName">
+                          </div>
+                        </div>
+  
+  
+                        <div class="form-group">
+                          <label class="control-label col-sm-2 input-label" for="title">Continent Name:</label>
+                          <div class="col-sm-4">
+                            <select class="form-control" formControlName="continentCode">
+                              <option value="">Select Continent Name</option>
+                              <option [value]="continent.continentCode" *ngFor="let continent of continents;">
+                                {{continent.continentName}}</option>
+                            </select>
+                          </div>
+                        </div>
+  
+  
+  
+  
+                        <div class="form-group">
+                          <div class="col-sm-offset-1 col-sm-10">
+                            <button type="submit" *ngIf="edit_country == false" [disabled]="countryForm.invalid"
+                              class="btn btn-default btn-primary">Submit</button>
+                            <button type="submit" *ngIf="edit_country == true" [disabled]="countryForm.invalid"
+                              class="btn btn-default btn-primary">Update</button>
+                          </div>
+                        </div>
+                      </form>
+  
+  
+                      <table class="table table-hover table-bordered" *ngIf="countries.length != 0">
+                        <thead>
+                          <tr>
+                            <th>S.No.</th>
+                            <th>Country Name</th>
+                            <th>Continent Code</th>
+                            <th>Continent Name</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let country of countries; let i = index;">
+                            <td>{{i+1}}</td>
+                            <td>{{country.countryName}}</td>
+                            <td>{{country.continentCode}}</td>
+                            <td>{{country.continentName}}</td>
+                            <td>
+                              <span class="edit-category glyphicon glyphicon-pencil"
+                                (click)="editCountry(country)"></span>
+                              <span class="delete-category glyphicon glyphicon-trash"
+                                (click)="openConfirmDialogCountry(country.id)"></span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                <!-- ------------------------------------------State------------------------------------------------------ -->
+
+                  <div *ngIf="formWizardName == 'State'" class="tab-pane step-content" style="display: block;">
+                    <div class="card-body">
+                      <form class="form-horizontal" [formGroup]="stateForm" (ngSubmit)="submitStateData()">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2 input-label" for="title">State Name:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="title" placeholder="Enter state Name"
+                                    formControlName="stateName">
+                            </div>
+                        </div>
+  
+                        <div class="form-group">
+                            <label class="control-label col-sm-2 input-label" for="title">Country Name:</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" formControlName="countryId">
+                                    <option value=0 >Select Country Name</option>
+                                    <option [value]=country.id *ngFor="let country of countries;">{{country.countryName}}</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2 add-country" *ngIf="countries.length == 0">
+                              <a (click)="changeInFormWizard('Country')">
+                                 Add Country
+                              </a> 
+                            </div>
+  
+                        </div>
+  
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10">
+                                <button type="submit" *ngIf="edit_state == false" [disabled]="stateForm.invalid"
+                                    class="btn btn-default btn-primary">Submit</button>
+                                <button type="submit" *ngIf="edit_state == true" [disabled]="stateForm.invalid"
+                                    class="btn btn-default btn-primary">Update</button>
+                            </div>
+                        </div>
+                    </form>
+  
+  
+                    <table class="table table-hover table-bordered" *ngIf="states.length != 0">
+                        <thead>
+                            <tr>
+                                <th>S.No.</th>
+                                <th>State Name</th>
+                                <th>Country Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let state of states; let i = index;">
+                                <td>{{i+1}}</td>
+                                <td>{{state.stateName}}</td>
+                                <td>{{state.countryName}}</td>
+                                <td>
+                                    <span class="edit-category glyphicon glyphicon-pencil"
+                                        (click)="editState(state)"></span>
+                                    <span class="delete-category glyphicon glyphicon-trash"
+                                        (click)="openConfirmDialogState(state.id)"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                  </div>
+
+                <!-- ------------------------------------------City------------------------------------------------------ -->
+
+                  <div *ngIf="formWizardName == 'City'" class="tab-pane step-content" style="display: block;">
+                    <div class="card-body">
+                      <form class="form-horizontal" [formGroup]="cityForm" (ngSubmit)="submitCityData()">
+                        
+                        <div class="form-group">
+                            <label class="control-label col-sm-2 input-label" for="title">Country Name:</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" formControlName="countryId" (change) = "changeCountryInCity()">
+                                    <option value=0 >Select Country Name</option>
+                                    <option [value]=country.id *ngFor="let country of countries;">{{country.countryName}}</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-2 add-country" *ngIf="countries.length == 0">
+                              <a (click)="changeInFormWizard('Country')">
+                                 Add Country
+                              </a> 
+                            </div>
+                        </div>
+  
+                        <div class="form-group">
+                            <label class="control-label col-sm-2 input-label" for="title">State Name:</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" formControlName="stateId">
+                                    <option value=0 >Select State Name</option>
+                                    <option [value]=state.id *ngFor="let state of statesLoad;">{{state.stateName}}</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-2 add-state" *ngIf="statesLoad.length == 0">
+                                 <a (click)="changeInFormWizard('State')">
+                                    Add State
+                                 </a> 
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2 input-label" for="title">City Name:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="title" placeholder="Enter City Name"
+                                    formControlName="cityName">
+                            </div>
+                        </div>
+                        
+  
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10">
+                                <button type="submit" *ngIf="edit_city == false" [disabled]="cityForm.invalid"
+                                    class="btn btn-default btn-primary">Submit</button>
+                                <button type="submit" *ngIf="edit_city == true" [disabled]="cityForm.invalid"
+                                    class="btn btn-default btn-primary">Update</button>
+                            </div>
+                        </div>
+                    </form>
+  
+                    <table class="table table-hover table-bordered" *ngIf="cities.length != 0">
+                        <thead>
+                            <tr>
+                                <th>S.No.</th>
+                                <th>City Name</th>
+                                <th>State Name</th>
+                                <th>Country Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let city of cities; let i = index;">
+                                <td>{{i+1}}</td>
+                                <td>{{city.cityName}}</td>
+                                <td>{{city.stateName}}</td>
+                                <td>{{city.countryName}}</td>
+                                <td>
+                                    <span class="edit-category glyphicon glyphicon-pencil"
+                                        (click)="editCity(city)"></span>
+                                    <span class="delete-category glyphicon glyphicon-trash"
+                                        (click)="openConfirmDialogCity(city.id)"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,41 @@
+.col-content{
+   margin: 20px 10px;
+}
+
+.blog-title{
+  font-size: 26px;
+  font-weight: 700;
+  color: #353535;
+}
+
+.posted-detail{
+   color: #76767691;
+   margin: 0px 13px;
+}
+
+.blog-image img {
+   border-radius: 5px;
+}
+.mr-35{
+   margin-right: 35px;
+}
+
+.back-icon{
+   position: absolute;
+   font-size: 16px;
+   cursor: pointer;
+   top: 12px;
+   left: 21px;
+}
+
+.card{
+   position: relative;
+}
+
+.card .content {
+   padding: 15px 45px 10px 15px;
+}
+
+.blog-description{
+   overflow: hidden;
+}

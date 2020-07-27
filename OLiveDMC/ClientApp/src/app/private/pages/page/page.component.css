@@ -1,0 +1,200 @@
+div.record-picker {
+	overflow-x: hidden;
+	overflow-y: auto;
+	border: 1px solid #ddd;
+	border-radius:8px;
+	position: relative;
+	cursor: pointer;
+}
+
+/* http://www.ourtuts.com/how-to-customize-browser-scrollbars-using-css3/ */
+div.record-picker::-webkit-scrollbar {
+	width: 12px;
+}
+
+div.record-picker::-webkit-scrollbar-button {
+	width: 0px;
+	height: 0px;
+}
+
+div.record-picker {
+	scrollbar-base-color: #ff4655;
+	scrollbar-3dlight-color: #ff4655;
+	scrollbar-highlight-color: #ff4655;
+	scrollbar-track-color: #eee;
+	scrollbar-arrow-color: gray;
+	scrollbar-shadow-color: gray;
+	scrollbar-dark-shadow-color: gray;
+}
+
+div.record-picker::-webkit-scrollbar-track {
+	background:#eee;
+	box-shadow: 0px 0px 3px #dfdfdf inset;
+	border-top-right-radius: 8px;
+	border-bottom-right-radius: 8px;
+}
+
+div.record-picker::-webkit-scrollbar-thumb {
+	background: #ff4655;
+	border: thin solid gray;
+	border-top-right-radius: 8px;
+	border-bottom-right-radius: 8px;
+}
+
+div.record-picker::-webkit-scrollbar-thumb:hover {
+	background: #286090;
+}
+
+.record-picker ul {
+	margin: 0;
+	padding: 0 0 1px 0;
+	height: 300px;
+}
+
+.record-picker li {
+    border-radius: 19px;
+    background-color: #ffe2e4;
+    margin: 8px 2px;
+	display: block;
+	padding: 2px 2px 2px 10px;
+	font-size: 0.85em;
+	cursor: pointer;
+	/* white-space: nowrap; */
+	min-height:16px;
+}
+
+.record-picker li:hover {
+	background-color: #ff5662;
+}
+
+.record-picker li:hover label {
+	color: white;
+}
+
+.record-picker li.selected {
+    background-color: #ff5662;
+    color: white;
+}
+.record-picker li.selected label {
+    color: white;
+}
+
+.record-picker li.selected:hover {
+    background-color: #ff5662;
+    color: white;
+}
+
+
+.record-picker li.disabled {
+	opacity: 0.5;
+	cursor: default;
+	background-color: inherit;
+}
+
+.record-picker label {
+	cursor: pointer;
+	font-weight: inherit;
+	font-size: 14px;
+	padding: 4px;
+	margin-bottom: -1px;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	text-transform: capitalize;
+}
+
+.record-picker ul.over {
+	background-color:lightgray;
+}
+
+.dual-list  {
+	display: -webkit-box;
+	display: flex;
+	flex-direction: row;
+	align-content: flex-start;
+}
+
+.dual-list .listbox {
+	width: 50%;
+	margin: 0px;
+}
+
+.dual-list .button-bar {
+	margin-top: 8px;
+}
+
+.point-right::after {
+	content: "\25B6";
+	padding-left: 1em;
+}
+
+.point-left::before {
+	content: "\25C0";
+	padding-right: 1em;
+}
+
+.dual-list .button-bar button {
+	width: 47%;
+}
+
+button.btn-block {
+	display: block;
+	width: 100%;
+	margin-bottom: 8px;
+}
+
+.filter1 {
+	margin-bottom: -2.2em;
+}
+
+.filter1::after {
+	content:"o";
+	width:40px;
+	color:transparent;
+	font-size:2em;
+	background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M0 64l192 192v192l128-32V256L512 64H0z"/></svg>');
+	background-repeat:no-repeat;
+	background-position:center center;
+	opacity:.2;
+	top: -55px;
+	left: calc(100% - 21px);
+	position:relative;
+}
+
+.filter1 input{
+    margin-bottom: 16px;
+}
+
+.btn-primary{
+    color: white;
+    background-color: #ff182b;
+    border-color: #ff182b;
+}
+
+.save-btn{
+    margin-top: 40px;
+    width: 23%;
+}
+
+/* .blog-image{
+	margin: 0px 2px;
+	background-color:#8decff;
+} */
+	
+/* .blog-image img:hover{ */
+img:hover{
+	opacity:0.8;
+	cursor: pointer;
+	transition: 300ms all;
+}
+/* .blog-image img{ */
+ img{
+	/* max-width: 100%; */
+	width: 98px;
+	height: 68px;
+	border-radius: 5px;
+	
+}

@@ -1,0 +1,247 @@
+.input-label{
+  margin: 13px 0 10px;
+}
+
+.forms-wizard {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+  border-radius: 4px;
+  border: 0;
+}
+.forms-wizard li {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 16px 0;
+  color: #adb5bd;
+  position: relative;
+}
+.forms-wizard li .nav-link {
+  display: block;
+  padding: 0;
+  color: #adb5bd;
+}
+.forms-wizard li .nav-link:focus, .forms-wizard li .nav-link:active, .forms-wizard li .nav-link:hover {
+  border-color: transparent;
+  color: #495057 !important;
+}
+.forms-wizard li::after, .forms-wizard li::before {
+  position: absolute;
+  height: 4px;
+  top: 50%;
+  margin-top: -16px;
+  width: 50%;
+  content: '';
+  background: #dee2e6;
+  z-index: 5;
+  transition: all .2s;
+}
+.forms-wizard li::after {
+  left: 50%}
+.forms-wizard li::before {
+  left: 0;
+}
+.forms-wizard li:first-child::before {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+.forms-wizard li:last-child::after {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.forms-wizard li em {
+  font-style: normal;
+  font-size: 24px;
+  background: #ced4da;
+  color: #fff;
+  text-align: center;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50px;
+  display: block;
+  margin: 0 auto 8px;
+  position: relative;
+  z-index: 7;
+  transition: all .2s;
+}
+.forms-wizard li.active .nav-link {
+  color: #495057;
+}
+.forms-wizard li.active em {
+  background: #f5414d;
+  color: #fff;
+}
+.forms-wizard li.active::after, .forms-wizard li.active::before {
+  background: #f5414d;
+}
+.forms-wizard li.done em {
+  font-family: 'Linearicons-Free';
+  background: #3ac47d;
+  overflow: hidden;
+}
+.forms-wizard li.done em::before {
+  width: 42px;
+  height: 42px;
+  font-size: 20px;
+  line-height: 40px;
+  text-align: center;
+  display: block;
+}
+.forms-wizard li.done::after, .forms-wizard li.done::before {
+  background: #3ac47d;
+}
+.forms-wizard li.done:hover {
+  color: #495057 !important;
+}
+.forms-wizard li:hover {
+  color: #6c757d;
+}
+.forms-wizard-alt .forms-wizard li {
+  font-size: 14px;
+}
+.forms-wizard-alt .forms-wizard li em {
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+  text-indent: -999rem;
+  border: #fff solid 2px;
+}
+.forms-wizard-vertical .forms-wizard {
+  display: block;
+  width: 30%;
+  float: left;
+  padding: 0 24px 24px 0;
+}
+.forms-wizard-vertical .forms-wizard li {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+.forms-wizard-vertical .forms-wizard li::before, .forms-wizard-vertical .forms-wizard li::after {
+  display: none;
+}
+.forms-wizard-vertical .forms-wizard li a {
+  text-align: left;
+  display: flex;
+  align-items: center;
+  align-content: flex-start;
+  padding: 12px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  transition: all .2s;
+}
+.forms-wizard-vertical .forms-wizard li a em {
+  margin: 0 12px 0 0;
+}
+.forms-wizard-vertical .forms-wizard li a:active, .forms-wizard-vertical .forms-wizard li a:focus, .forms-wizard-vertical .forms-wizard li a:hover {
+  background: #e9ecef;
+  color: #495057 !important;
+}
+.forms-wizard-vertical .forms-wizard li.active a {
+  background: #f5414d;
+  color: #fff;
+}
+.forms-wizard-vertical .forms-wizard li.active a:active, .forms-wizard-vertical .forms-wizard li.active a:focus, .forms-wizard-vertical .forms-wizard li.active a:hover {
+  color: #fff !important;
+}
+.forms-wizard-vertical .forms-wizard li.active a em {
+  background: rgba(255, 255, 255, 0.2);
+}
+.forms-wizard-vertical .form-wizard-content {
+  width: 70%;
+  overflow: hidden;
+}
+
+.edit-category{
+  margin-right: 10px;
+  padding: 5px;
+  color: blue;
+}
+
+.edit-category:hover{
+  cursor: pointer;
+}
+
+.delete-category{
+  margin-left: 10px;
+  color: red;
+  padding: 5px;
+}
+
+.delete-category:hover{
+    cursor: pointer;
+}
+
+.add-country , .add-state{
+   padding-top: 18px;
+}
+.utility-card{
+  min-height: 650px;
+}
+
+.status-lable{
+  padding-top: 18px !important;
+}
+
+.utility-detail-card{
+  margin-top: 25px;
+}
+
+.col-content{
+  margin: 20px 10px;
+}
+
+.blog-title{
+ font-size: 26px;
+ font-weight: 700;
+ color: #353535;
+}
+
+.posted-detail{
+  color: #76767691;
+  margin: 0px 13px;
+}
+
+.blog-image img {
+  border-radius: 5px;
+}
+.mr-35{
+  margin-right: 35px;
+}
+
+.back-icon{
+  position: absolute;
+  font-size: 16px;
+  cursor: pointer;
+  top: 12px;
+  left: 21px;
+}
+
+.card{
+  position: relative;
+}
+
+.card .content {
+  padding: 15px 45px 10px 15px;
+}
+
+.blog-description{
+  overflow: hidden;
+}
+
+.utility-detail-header{
+  text-align: center;
+  font-weight: 500;
+}
+
+.action-btn{
+  float: right;
+}
