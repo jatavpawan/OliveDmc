@@ -18,7 +18,7 @@ import { SharedModule } from 'src/app/shared/shared/shared.module';
 import { PageComponent } from '../../pages/page/page.component';
 import { BannerComponent } from '../../pages/banner/banner.component';
 import { AboutUsComponent } from '../../pages/about-us/about-us.component';
-import { SafeHtmlPipe } from 'src/app/pipe/safe-html.pipe';
+// import { SafeHtmlPipe } from 'src/app/pipe/safe-html.pipe';
 import { BlogComponent } from '../../pages/blog/blog.component';
 import { BannerDetailComponent } from '../../pages/banner/banner-detail/banner-detail.component';
 import { BlogDetailComponent } from '../../pages/blog/blog-detail/blog-detail.component';
@@ -65,7 +65,7 @@ import { TemporaryPageComponent } from '../../pages/temporary-page/temporary-pag
     PageComponent,
     BannerComponent,
     AboutUsComponent,
-    SafeHtmlPipe,
+    // SafeHtmlPipe,
     FilterPipe,
     BannerDetailComponent,
     BlogDetailComponent,

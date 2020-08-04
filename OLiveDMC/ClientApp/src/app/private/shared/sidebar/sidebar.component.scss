@@ -1,0 +1,24 @@
+// @import "../../../../assets/sass/light-bootstrap-dashboard.scss";
+// @import "../../../../assets/css/demo.css";
+
+
+li>a .sidebar-mini{
+    text-transform: uppercase;
+    float: left;
+    width: 30px;
+    text-align: center;
+    margin-right: 15px;
+    letter-spacing: 1px;
+}
+
+a[data-toggle=collapse][aria-expanded=true] .caret {
+    /* filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2); */
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.sidebar[data-color=red]:after {
+    background: #ff101ff2 !important;
+    background: linear-gradient(to bottom,#fb404b 0,rgba(187,5,2,.7) 100%);
+    background-size: 150% 150%;
+  }

@@ -6,6 +6,9 @@ import { Router } from '@angular/router';
 // import  'jquery';
 import Swal from 'sweetalert2'
 import { NgxSpinnerService } from 'ngx-spinner';
+import * as $ from 'jquery';
+
+declare var $: any;
 
 @Component({
   selector: 'app-login',
@@ -33,7 +36,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
     if (JSON.parse (localStorage.getItem("keepMeLoggedIn"))){
       let keepMeLoggedInObj =JSON.parse (localStorage.getItem("keepMeLoggedIn"));
       this.loginForm.get('email').setValue(keepMeLoggedInObj.email);

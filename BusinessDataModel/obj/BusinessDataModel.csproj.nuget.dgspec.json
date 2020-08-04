@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Gulam_Project\\OLiveDMC\\BusinessDataModel\\BusinessDataModel.csproj": {}
+    "D:\\Projects\\Travel_Tourasim\\OliveDmc\\BusinessDataModel\\BusinessDataModel.csproj": {}
   },
   "projects": {
-    "D:\\Gulam_Project\\OLiveDMC\\BusinessDataModel\\BusinessDataModel.csproj": {
+    "D:\\Projects\\Travel_Tourasim\\OliveDmc\\BusinessDataModel\\BusinessDataModel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Gulam_Project\\OLiveDMC\\BusinessDataModel\\BusinessDataModel.csproj",
+        "projectUniqueName": "D:\\Projects\\Travel_Tourasim\\OliveDmc\\BusinessDataModel\\BusinessDataModel.csproj",
         "projectName": "BusinessDataModel",
-        "projectPath": "D:\\Gulam_Project\\OLiveDMC\\BusinessDataModel\\BusinessDataModel.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "D:\\Gulam_Project\\OLiveDMC\\BusinessDataModel\\obj\\",
+        "projectPath": "D:\\Projects\\Travel_Tourasim\\OliveDmc\\BusinessDataModel\\BusinessDataModel.csproj",
+        "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\Travel_Tourasim\\OliveDmc\\BusinessDataModel\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -41,6 +41,22 @@
       "frameworks": {
         "netcoreapp2.2": {
           "dependencies": {
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
             "Microsoft.NETCore.App": {
               "suppressParent": "All",
               "target": "Package",
@@ -49,10 +65,16 @@
             }
           },
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

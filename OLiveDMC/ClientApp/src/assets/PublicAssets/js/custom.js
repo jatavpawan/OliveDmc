@@ -95,7 +95,7 @@ var owl = $('.screenshot_slider').owlCarousel({
     margin: 0,    
     autoplayTimeout: 3000,
     smartSpeed: 400,
-    autoplay:false,
+    autoplay:true,
     center: true,
     navText: ['&#8592;', '&#8594;'],
     responsive: {
@@ -138,7 +138,7 @@ $('#theme-based').owlCarousel({
   margin: 20,
   dots:false,
   nav: true,
-  autoplay: false,
+  autoplay: true,
   autoplaySpeed:3000,
   navText: ['&#8592;', '&#8594;'],
   responsive: {
@@ -161,7 +161,7 @@ $('#owl-interview-video').owlCarousel({
   margin: 0,
   dots:false,
   nav: true,
-  autoplay: false,
+  autoplay: true,
   autoplaySpeed:2000,
   navText: ['&#8592;', '&#8594;'],
   responsive: {
@@ -169,7 +169,7 @@ $('#owl-interview-video').owlCarousel({
       items: 1
     },
     600: {
-      items: 3
+      items: 1
     },
     1000: {
       items: 1
@@ -183,7 +183,7 @@ $('#team-member').owlCarousel({
   margin: 20,
   dots:false,
   nav: true,
-  autoplay: false,
+  autoplay: true,
   autoplaySpeed:3000,
   navText: ['&#8592;', '&#8594;'],
   responsive: {
@@ -198,6 +198,77 @@ $('#team-member').owlCarousel({
     }
   }
 });
+
+//for theme Based Packages on destionation finder page START
+$('#theme-of-pacakge').owlCarousel({
+  loop: true,
+  margin: 20,
+  dots:false,
+  nav: true,
+  autoplay: true,
+  autoplaySpeed:3000,
+  navText: ['&#8592;', '&#8594;'],
+  responsive: {
+    0: {
+      items: 1
+    },
+    600: {
+      items: 2
+    },
+    1000: {
+      items: 4
+    }
+  }
+});
+//for theme Based Packages on destionation finder page END
+
+
+//for list of theme Based Packages on destionation finder page START
+$('#list-of-top-pacakge').owlCarousel({
+  loop: true,
+  margin: 20,
+  dots:false,
+  nav: true,
+  autoplay: true,
+  autoplaySpeed:3000,
+  navText: ['&#8592;', '&#8594;'],
+  responsive: {
+    0: {
+      items: 1
+    },
+    600: {
+      items: 2
+    },
+    1000: {
+      items: 4
+    }
+  }
+});
+//for list of theme Based Packages on destionation finder page END
+
+
+//for about us team mambers START
+$('#about-team-members').owlCarousel({
+  loop: true,
+  margin: 20,
+  dots:false,
+  nav: true,
+  autoplay: true,
+  autoplaySpeed:3000,
+  navText: ['&#8592;', '&#8594;'],
+  responsive: {
+    0: {
+      items: 1
+    },
+    600: {
+      items: 2
+    },
+    1000: {
+      items: 3
+    }
+  }
+});
+//for about us team mambers END
 
 
 //ACCORDION WITH TOGGLE ICONS//

@@ -7,11 +7,12 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { UiSwitchModule } from 'ngx-toggle-switch';
 import { TooltipModule } from 'ng2-tooltip-directive';
+import { SafeHtmlPipe } from 'src/app/pipe/safe-html.pipe';
 
 
 @NgModule({
   declarations: [
-    // SafeHtmlPipe
+    SafeHtmlPipe
 
   ],
   imports: [
@@ -32,7 +33,7 @@ import { TooltipModule } from 'ng2-tooltip-directive';
     EditorModule,
     UiSwitchModule,
     TooltipModule,
-
+    SafeHtmlPipe
   ]
 })
 export class SharedModule { }

@@ -6,19 +6,28 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
+  //  {
+  //    path: '',
+  //    redirectTo: 'public',
+  //    pathMatch: 'full'
+  //  },
    {
-     path: '',
-     redirectTo: 'public',
-     pathMatch: 'full'
-   },
-   {
-     path: 'public',
-     component: PublicLayoutComponent,
-     children: [ {
-       path: '',
-       loadChildren: ()=> PublicModule
-     }] 
-   },
+    path: '',
+    component: PublicLayoutComponent,
+    // pathMatch: 'full',
+    children: [{
+      path: '',
+      loadChildren: ()=> PublicModule
+    }] 
+  },
+  //  {
+  //    path: 'public',
+  //    component: PublicLayoutComponent,
+  //    children: [ {
+  //      path: '',
+  //      loadChildren: ()=> PublicModule
+  //    }] 
+  //  },
    {
      path: 'private',
      component: PrivateLayoutComponent,

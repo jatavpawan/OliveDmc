@@ -7,6 +7,7 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { environment } from 'src/environments/environment';
 import { allCountryData } from '../../shared/AllCountryData';
 import am4geodata_continentsLow from "@amcharts/amcharts4-geodata/continentsLow";
+import { debug } from 'util';
 
 
 am4core.useTheme(am4themes_animated);
@@ -34,12 +35,29 @@ export class TravelGuruExpertTravelersComponent implements OnInit {
     "SA": 6
   }
 
+  asiaCountries:any;
+
 
   constructor(
     private zone: NgZone,
     private ref: ChangeDetectorRef
   ) {
-    debugger;
+    // debugger;
+    // let countrylist:Array<any> = [];
+    // for (var id in this.countries) {
+    //   // debugger;
+    //   if (this.countries.hasOwnProperty(id)) {
+    //     var country = this.countries[id];
+        
+    //     if (country.continent == "Asia")
+    //       countrylist = [...countrylist, id];
+    //   }
+    // }
+
+    // let worldcountries = am4geodata_worldLow;
+    // this.asiaCountries =  worldcountries.features.filter(item =>  countrylist.includes(item.id) );
+
+
   }
 
   ngOnInit() {
@@ -65,8 +83,13 @@ export class TravelGuruExpertTravelersComponent implements OnInit {
 
       let homeButton = new am4core.Button();
       homeButton.events.on("hit", function () {
-        restoreContinents();
-        continentsSeries.include = ["africa", "asia", "oceania", "europe", "northAmerica", "southAmerica",];
+        // restoreContinents();
+        continentsSeries.show();
+        countriesSeries.hide();
+        stateSeries.hide();
+        chart.goHome();
+
+        // continentsSeries.include = ["africa", "asia", "oceania", "europe", "northAmerica", "southAmerica",];
         initializeContinentSeriesData();
       });
 
@@ -93,32 +116,32 @@ export class TravelGuruExpertTravelersComponent implements OnInit {
         // continentsSeries.include = ["africa","asia", "oceania","europe","northAmerica","southAmerica",];
         continentsSeries.data = [
           {
-          "id": "africa",
-          "color": chart.colors.getIndex(0)
-        }, 
-        {
-          "id": "asia",
-          "color": chart.colors.getIndex(1),
-          "zoomLevel": 2,
-          "zoomGeoPoint": {
-            "latitude": 46,
-            "longitude": 89
+            "id": "africa",
+            "color": chart.colors.getIndex(0)
+          },
+          {
+            "id": "asia",
+            "color": chart.colors.getIndex(1),
+            "zoomLevel": 2,
+            "zoomGeoPoint": {
+              "latitude": 46,
+              "longitude": 89
+            }
           }
-        }
-        , {
-          "id": "oceania",
-          "color": chart.colors.getIndex(2)
-        }, {
-          "id": "europe",
-          "color": chart.colors.getIndex(3)
-        }, {
-          "id": "northAmerica",
-          "color": chart.colors.getIndex(4)
-        }, {
-          "id": "southAmerica",
-          "color": chart.colors.getIndex(5)
-        }
-      ];
+          , {
+            "id": "oceania",
+            "color": chart.colors.getIndex(2)
+          }, {
+            "id": "europe",
+            "color": chart.colors.getIndex(3)
+          }, {
+            "id": "northAmerica",
+            "color": chart.colors.getIndex(4)
+          }, {
+            "id": "southAmerica",
+            "color": chart.colors.getIndex(5)
+          }
+        ];
       };
       debugger;
 
@@ -139,32 +162,33 @@ export class TravelGuruExpertTravelersComponent implements OnInit {
       continentTemplate.propertyFields.fill = "color";
       continentTemplate.nonScalingStroke = true;
       let temporary;
-      let continentNameList: Array<string>;
+      let temporary2;
+      // let continentNameList: Array<string>;
+      let continentNameList: Array<string> = ["africa", "asia", "oceania", "europe", "northAmerica", "southAmerica"];
       let temp: any;
       let newContinentNameList: Array<string>;
       continentTemplate.events.on("hit", function (event) {
         debugger;
-        continentNameList = ["africa", "asia", "oceania", "europe", "northAmerica", "southAmerica"]
+        // continentNameList = ["africa", "asia", "oceania", "europe", "northAmerica", "southAmerica"]
         temp = event.target.dataItem.dataContext;
         newContinentNameList = continentNameList.filter(continentName => continentName != temp.id);
         // continentsSeries.include = [...newContinentNameList];
         // continentsSeries.include.push(temp.id);
         var countrylist = [];
         var selectContinentCountrylist = [];
+        debugger;
         if (temporary === event.target) {
-          // if (!countriesSeries.visible) countriesSeries.visible = true;
+          debugger;
+          if (!countriesSeries.visible) countriesSeries.visible = true;
           chart.zoomToMapObject(event.target);
-          countrylist.forEach(item => {
-            countriesSeries.getPolygonById(item).hide();
-          })
-          // selectContinentCountrylist.forEach(item => {
-          //   countriesSeries.include.push(item);
-
+          
+          // countrylist.forEach(item => {
+          //   countriesSeries.getPolygonById(item).hide();
           // })
           countryTemplate.show();
-          newContinentNameList.forEach(item => {
-            continentsSeries.getPolygonById(item).hide();
-          })
+          countriesSeries.show();
+
+
 
         }
         else {
@@ -172,27 +196,32 @@ export class TravelGuruExpertTravelersComponent implements OnInit {
 
           newContinentNameList.forEach(item => {
             continentsSeries.getPolygonById(item).hide();
+            // continentsSeries.exclude.push(item);
+
           })
+          //  continentsSeries.exclude.push("africa");
+          //  continentsSeries.hide();
+
+
+
           temporary = event.target;
+          debugger;
           for (var id in self.countries) {
+            // debugger;
             if (self.countries.hasOwnProperty(id)) {
               var country = self.countries[id];
-              if (country.continent != "Asia")
+              if (country.continent != temp.id.charAt(0).toUpperCase()+temp.id.substring(1))
                 countrylist = [...countrylist, id];
-              // else
-              // selectContinentCountrylist = [...countrylist, id];
+              else
+              selectContinentCountrylist = [...countrylist, id];
 
             }
           }
+          
+
+
 
         }
-        // initializeContinentSeriesData();
-
-
-        // if (!countriesSeries.visible) countriesSeries.visible = true;
-        // chart.zoomToMapObject(event.target);
-        // // chart.zoomToMapObject(event.target.parent);
-        // countryTemplate.show();
       });
 
       let contintentHover = continentTemplate.states.create("hover");
@@ -202,40 +231,164 @@ export class TravelGuruExpertTravelersComponent implements OnInit {
       continentsSeries.dataFields.zoomLevel = "zoomLevel";
       continentsSeries.dataFields.zoomGeoPoint = "zoomGeoPoint";
 
-      // var countrySeries = chart.series.push(new am4maps.MapPolygonSeries());
-      // countrySeries.useGeodata = true;
-      // countrySeries.hide();
       // countrySeries.geodataSource.events.on("done", function (ev) {
       //   worldSeries.hide();
       //   countrySeries.show();
       // });
       // Countries
       let countriesSeries = chart.series.push(new am4maps.MapPolygonSeries());
-      let countries = countriesSeries.mapPolygons;
+      // let countries = countriesSeries.mapPolygons;
+      let countries = countriesSeries.mapPolygons.template;
       // countriesSeries.visible = false; // start off as hidden
-      countriesSeries.exclude = ["AQ"];
+      debugger;
       countriesSeries.geodata = am4geodata_worldLow;
+      // countriesSeries.geodata = this.asiaCountries;
       countriesSeries.useGeodata = true;
+      countriesSeries.exclude = ["AQ"];
 
-      // countriesSeries.geodataSource.events.on("done", function (ev) {
-      //   continentsSeries.hide();
-      //   countriesSeries.show();
-      // });
+      countriesSeries.geodataSource.events.on("done", function (ev) {
+        continentsSeries.hide();
+        countriesSeries.show();
+      });
 
       // Hide each country so we can fade them in
       countriesSeries.events.once("inited", function () {
         hideCountries();
+        // countriesSeries.hide();
       });
-      let countryTemplate = countries.template;
+      // let countryTemplate = countries.template;
+      debugger;
+      let countryTemplate = countriesSeries.mapPolygons.template;
       countryTemplate.applyOnClones = true;
       countryTemplate.fill = am4core.color("#a791b4");
       countryTemplate.fillOpacity = 0.3; // see continents underneath, however, country shapes are more detailed than continents.
       countryTemplate.strokeOpacity = 0.5;
       countryTemplate.nonScalingStroke = true;
-      countryTemplate.tooltipText = "{name} {valuess}";
+      // countryTemplate.tooltipText = "{name} {valuess}";
+      countryTemplate.tooltipText = "{name}";
+
+      // countryTemplate.fill = am4core.color("#eee");
+      countryTemplate.fill = am4core.color("#bfb0b0");
+      // countryTemplate.fill = am4core.color("#ffffff");
+      countryTemplate.propertyFields.fill = "color";
+      countryTemplate.propertyFields.id = "id";
+
+      // let lastSelected;
       countryTemplate.events.on("hit", function (event) {
         debugger;
-        chart.zoomToMapObject(event.target);
+        // chart.zoomToMapObject(event.target);
+
+
+        debugger;
+        // if (lastSelected === event.target) {
+
+          // This line serves multiple purposes:
+          // 1. Clicking a country twice actually de-activates, the line below
+          //    de-activates it in advance, so the toggle then re-activates, making it
+          //    appear as if it was never de-activated to begin with.
+          // 2. Previously activated countries should be de-activated.
+          // lastSelected.isActive = false;
+          // lastSelected = undefined;
+
+          // ev.target.series.chart.zoomToMapObject(ev.target);
+          let temp: any = event.target.dataItem.dataContext;
+
+          // if (temp.map != undefined) {
+          //   self.showDestinationInfo = true;
+          //   self.destinationCountryId = temp.id;
+          //   self.map_title = temp.name;
+          //   self.GetCountryInfoByCountryCode(self.destinationCountryId);
+          //   self.ref.detectChanges();
+          // }
+
+          var map = temp.map;
+          if (map) {
+            event.target.isHover = false;
+            stateSeries.geodataSource.url = "https://www.amcharts.com/lib/4/geodata/json/" + map + ".json";
+            stateSeries.geodataSource.load();
+            // button.show();
+          }
+
+          if (temp.id == "IN") {
+            stateTemplate.show();
+            stateSeries.show();
+
+            // stateSeries.include= ['IN-MP', 'IN-RJ', 'IN-PB']
+            let country_data = [
+              { "value": Math.round(Math.random() * 10000) },
+              { "name": "Andaman and Nicobar Islands", "id": "IN-AN", "TYPE": "Union Territory", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Port Blair", "value": Math.round(Math.random() * 10000) },
+              { "name": "Andhra Pradesh", "id": "IN-AP", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Amaravati", "value": Math.round(Math.random() * 10000) },
+              { "name": "Arunachal Pradesh", "id": "IN-AR", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "	Itanagar", "value": Math.round(Math.random() * 10000) },
+              { "name": "Assam", "id": "IN-AS", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Dispur", "value": Math.round(Math.random() * 10000) },
+              { "name": "Bihar", "id": "IN-BR", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "	Patna", "value": Math.round(Math.random() * 10000) },
+              { "name": "Chandigarh", "id": "IN-CH", "TYPE": "Union Territory", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Chandigarh", "value": Math.round(Math.random() * 10000) },
+              { "name": "Chhattisgarh", "id": "IN-CT", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Naya Raipur", "value": Math.round(Math.random() * 10000) },
+              { "name": "Daman and Diu", "id": "IN-DD", "TYPE": "Union Territory", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Daman", "value": Math.round(Math.random() * 10000) },
+              { "name": "Delhi", "id": "IN-DL", "TYPE": "Union Territory", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "New Delhi", "value": Math.round(Math.random() * 10000) },
+              { "name": "Dadra and Nagar Haveli", "id": "IN-DN", "TYPE": "Union Territory", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Daman", "value": Math.round(Math.random() * 10000) },
+              { "name": "Goa", "id": "IN-GA", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Panaji", "value": Math.round(Math.random() * 10000) },
+              { "name": "Gujarat", "id": "IN-GJ", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Gandhinagar", "value": Math.round(Math.random() * 10000) },
+              { "name": "Himachal Pradesh", "id": "IN-HP", "TYPE": "Union Territory", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Shimla", "value": Math.round(Math.random() * 10000) },
+              { "name": "Haryana", "id": "IN-HR", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Chandigarh", "value": Math.round(Math.random() * 10000) },
+              { "name": "Jharkhand", "id": "IN-JH", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "	Ranchi", "value": Math.round(Math.random() * 10000) },
+              { "name": "Jammu and Kashmir", "id": "IN-JK", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Srinagar", "value": Math.round(Math.random() * 10000) },
+              { "name": "Karnataka", "id": "IN-KA", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Bangalore", "value": Math.round(Math.random() * 10000) },
+              { "name": "Kerala", "id": "IN-KL", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Thiruvananthapuram", "value": Math.round(Math.random() * 10000) },
+              { "name": "Lakshadweep", "id": "IN-LD", "TYPE": "Union Territory", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Kavaratti", "value": Math.round(Math.random() * 10000) },
+              { "name": "Maharashtra", "id": "IN-MH", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Mumbai", "value": Math.round(Math.random() * 10000) },
+              { "name": "Meghalaya", "id": "IN-ML", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Shillong", "value": Math.round(Math.random() * 10000) },
+              { "name": "Manipur", "id": "IN-MN", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Imphal", "value": Math.round(Math.random() * 10000) },
+              { "name": "Madhya Pradesh", "id": "IN-MP", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Bhopal", "value": Math.round(Math.random() * 10000) },
+              { "name": "Mizoram", "id": "IN-MZ", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Aizawl", "value": Math.round(Math.random() * 10000) },
+              { "name": "Nagaland", "id": "IN-NL", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Kohima", "value": Math.round(Math.random() * 10000) },
+              { "name": "Odisha", "id": "IN-OR", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Bhubaneswar", "value": Math.round(Math.random() * 10000) },
+              { "name": "Punjab", "id": "IN-PB", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Chandigarh", "value": Math.round(Math.random() * 10000) },
+              { "name": "Puducherry", "id": "IN-PY", "TYPE": "Union Territory", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Puducherry", "value": Math.round(Math.random() * 10000) },
+              { "name": "Rajasthan", "id": "IN-RJ", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Jaipur", "value": Math.round(Math.random() * 10000) },
+              { "name": "Sikkim", "id": "IN-SK", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Gangtok", "value": Math.round(Math.random() * 10000) },
+              { "name": "Telangana", "id": "IN-TG", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Hyderabad", "value": Math.round(Math.random() * 10000) },
+              { "name": "Tamil Nadu", "id": "IN-TN", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Chennai", "value": Math.round(Math.random() * 10000) },
+              { "name": "Tripura", "id": "IN-TR", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Agartala", "value": Math.round(Math.random() * 10000) },
+              { "name": "Uttar Pradesh", "id": "IN-UP", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Lucknow", "value": Math.round(Math.random() * 10000) },
+              { "name": "Uttarakhand", "id": "IN-UT", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Dehradun", "value": Math.round(Math.random() * 10000) },
+              { "name": "West Bengal", "id": "IN-WB", "TYPE": "State", "CNTRY": "India", "packages": "available 10 packages", "capital_city": "Kolkata", "value": Math.round(Math.random() * 10000) },
+            ]
+
+            stateSeries.data = country_data;
+          }
+          else {
+          stateTemplate.show();
+          stateSeries.show();
+
+            stateSeries.data = [];
+            //  countrySeries = chart.series.push(new am4maps.MapPolygonSeries());
+            stateSeries.useGeodata = true;
+            stateSeries.geodataSource.url = "https://www.amcharts.com/lib/4/geodata/json/" + map + ".json";
+            stateSeries.geodataSource.load();
+          }
+
+          let continent_code_color: any = {
+            "EU": "#8067dc",
+            "AS": "#6771dc",
+            "OC": "#c767dc",
+            "AF": "#67b7dc",
+            "SA": "#dc67ce",
+            "NA": "#a367dc"
+          }
+
+          let continent_code: string = self.countries[temp.id].continent_code;
+          self.countryColor = continent_code_color[continent_code];
+          stateTemplate.fill = am4core.color(self.countryColor);
+
+
+
+        // }
+        chart.maxZoomLevel = 50;
+        event.target.series.chart.zoomToMapObject(event.target);
+        // if (lastSelected !== event.target) {
+        //   lastSelected = event.target;
+        // }
+
       });
 
       let countryHover = countryTemplate.states.create("hover");
@@ -244,31 +397,71 @@ export class TravelGuruExpertTravelersComponent implements OnInit {
       countryHover.properties.stroke = hoverColor;
       countryHover.properties.strokeOpacity = 1;
 
-   // Set up data for countries
-  //  var data = [];
-  //  for (var id in self.countries) {
-  //    if (self.countries.hasOwnProperty(id)) {
-  //      var country = self.countries[id];
-  //      if (country.maps.length) {
-  //        data.push({
-  //          id: id,
-  //          color: chart.colors.getIndex(self.continents[country.continent_code]),
-  //          map: country.maps[0],
-  //          valuess: "30 packages in ",
+      // Create State specific series (but hide it for now)
+      var stateSeries = chart.series.push(new am4maps.MapPolygonSeries());
+      stateSeries.useGeodata = true;
+      stateSeries.hide();
+      stateSeries.geodataSource.events.on("done", function (ev) {
+        continentsSeries.hide();
+        countriesSeries.hide();
+        stateSeries.show();
+      });
 
-  //        });
-  //      }
-  //      else {
-  //        data.push({
-  //          id: id,
-  //          color: chart.colors.getIndex(self.continents[country.continent_code]),
-  //          valuess: "30 packages in ",
-  //        });
-  //      }
-  //    }
-  //  }
-  //  countriesSeries.data = data;
+      var stateTemplate = stateSeries.mapPolygons.template;
+      stateTemplate.tooltipText = "{name} \n packages: {packages} \n capital city : {capital_city} \n value : {value}";
+      stateTemplate.nonScalingStroke = true;
+      stateTemplate.strokeOpacity = 0.5;
+      stateTemplate.fill = am4core.color("#6771dc");
 
+      var hs = stateTemplate.states.create("hover");
+      hs.properties.fill = am4core.color("#BC8F8F");   // comment
+
+      //Set min/max fill color for each area
+      stateSeries.heatRules.push({
+        property: "fill",
+        target: stateSeries.mapPolygons.template,
+        min: chart.colors.getIndex(1).brighten(1),
+        max: chart.colors.getIndex(1).brighten(-0.3)
+      });
+
+
+
+      // Set up click events 
+      // Country click events 
+      stateTemplate.events.on("hit", function (ev) {
+        console.log("hit state data of country", ev.target.dataItem.dataContext);
+      });
+
+
+
+      // Set up data for countries
+       var data:Array<any> = [];
+       for (var id in self.countries) {
+         if (self.countries.hasOwnProperty(id)) {
+           var country = self.countries[id];
+          //  if(country.continent == "Asia"){
+            if (country.maps.length) {
+              data.push({
+                id: id,
+                // color: chart.colors.getIndex(self.continents[country.continent_code]),
+                map: country.maps[0],
+                valuess: "30 packages in ",
+              });
+            }
+            else {
+              data.push({
+                id: id,
+                // color: chart.colors.getIndex(self.continents[country.continent_code]),
+                valuess: "30 packages in ",
+                zoomLevel: 20,
+
+              });
+            }
+          //  }
+
+         }
+       }
+       countriesSeries.data = data;
 
     });
   }

@@ -62,7 +62,8 @@ import { TopDestinationService } from './providers/TopDestination/top-destinatio
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    { provide: Window, useValue: window }
   ],
   bootstrap: [AppComponent]
 })

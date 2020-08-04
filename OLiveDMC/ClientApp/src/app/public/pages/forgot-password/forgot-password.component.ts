@@ -31,6 +31,12 @@ export class ForgotPasswordComponent implements OnInit {
   changePasswordMatchError: boolean = false;
   checkPasswordMatchInChangePassword: boolean = false;
 
+  // Images = ['../assets/images/Carousel1.jpeg', '../assets/images/Carousel2.jpeg', '../assets/images/Carousel3.jpeg'];  
+  Images = ["../../../../assets/img/sidebar-1.jpg","../../../../assets/img/sidebar-2.jpg","../../../../assets/img/sidebar-3.jpg","../../../../assets/img/sidebar-4.jpg"];  
+  
+  SlideOptions = { items: 1, dots: true, nav: true };  
+  CarouselOptions = { items: 3, dots: true, nav: true }; 
+
   constructor( private formBuilder : FormBuilder,
      private  authService: AuthenticationService,
      private router: Router,

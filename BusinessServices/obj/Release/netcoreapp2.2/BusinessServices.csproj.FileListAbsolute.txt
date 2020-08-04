@@ -1,0 +1,14 @@
+D:\Projects\Travel_Tourasim\OliveDmc\BusinessServices\bin\Release\netcoreapp2.2\BusinessServices.deps.json
+D:\Projects\Travel_Tourasim\OliveDmc\BusinessServices\bin\Release\netcoreapp2.2\BusinessServices.dll
+D:\Projects\Travel_Tourasim\OliveDmc\BusinessServices\bin\Release\netcoreapp2.2\BusinessServices.pdb
+D:\Projects\Travel_Tourasim\OliveDmc\BusinessServices\bin\Release\netcoreapp2.2\BusinessDataModel.dll
+D:\Projects\Travel_Tourasim\OliveDmc\BusinessServices\bin\Release\netcoreapp2.2\BusinessRespository.dll
+D:\Projects\Travel_Tourasim\OliveDmc\BusinessServices\bin\Release\netcoreapp2.2\BusinessDataModel.pdb
+D:\Projects\Travel_Tourasim\OliveDmc\BusinessServices\bin\Release\netcoreapp2.2\BusinessRespository.pdb
+D:\Projects\Travel_Tourasim\OliveDmc\BusinessServices\obj\Release\netcoreapp2.2\BusinessServices.csprojAssemblyReference.cache
+D:\Projects\Travel_Tourasim\OliveDmc\BusinessServices\obj\Release\netcoreapp2.2\BusinessServices.csproj.CoreCompileInputs.cache
+D:\Projects\Travel_Tourasim\OliveDmc\BusinessServices\obj\Release\netcoreapp2.2\BusinessServices.AssemblyInfoInputs.cache
+D:\Projects\Travel_Tourasim\OliveDmc\BusinessServices\obj\Release\netcoreapp2.2\BusinessServices.AssemblyInfo.cs
+D:\Projects\Travel_Tourasim\OliveDmc\BusinessServices\obj\Release\netcoreapp2.2\BusinessServices.csproj.CopyComplete
+D:\Projects\Travel_Tourasim\OliveDmc\BusinessServices\obj\Release\netcoreapp2.2\BusinessServices.dll
+D:\Projects\Travel_Tourasim\OliveDmc\BusinessServices\obj\Release\netcoreapp2.2\BusinessServices.pdb

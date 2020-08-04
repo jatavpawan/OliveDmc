@@ -26,17 +26,22 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css",
-              "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
-              "node_modules/animate.css/animate.min.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/assets/sass/light-bootstrap-dashboard.scss",
-              "src/assets/css/demo.css",
-              "node_modules/font-awesome/css/font-awesome.css"
+              "src/assets/PublicAssets/css/font-awesome.css",
+              "src/assets/PublicAssets/css/style.css",
+              "src/assets/PublicAssets/css/responsive.css",
+              "src/assets/PublicAssets/css/owl.carousel.min.css",  
+              "src/assets/PublicAssets/css/animate.min.css",
+              "node_modules/perfect-scrollbar/css/perfect-scrollbar.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.js",
+              "node_modules/jquery/dist/jquery.js", 
+              "src/assets/PublicAssets/js/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
-              "node_modules/bootstrap-notify/bootstrap-notify.js"
+              "node_modules/bootstrap-notify/bootstrap-notify.js",
+              "src/assets/PublicAssets/js/owl.carousel.min.js",
+              "src/assets/PublicAssets/js/wow.min.js",
+              "src/assets/PublicAssets/js/custom.js"
             ]
           },
           "configurations": {

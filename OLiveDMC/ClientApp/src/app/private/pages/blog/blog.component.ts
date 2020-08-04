@@ -43,8 +43,8 @@ export class BlogComponent implements OnInit {
       userId: [0],
       title: ['', Validators.required],
       description: ['', Validators.required],
-      approvalStatus: [false],
-      status: [false],
+      approvalStatus: [true],
+      status: [true],
       featuredImage: [''],
     })
     
@@ -131,8 +131,9 @@ export class BlogComponent implements OnInit {
           this.editfileUploaded = false;
           this.fileUploaded = false;
           this.file = undefined;
-          this.blogForm.reset();
-          this.blogForm.get('description').setValue('');
+          // this.blogForm.reset();
+          this.resetBlogForm();
+          // this.blogForm.get('description').setValue('');
           this.GetAllBlog();
         }
         else{
@@ -202,5 +203,16 @@ export class BlogComponent implements OnInit {
       }
 
     })
+  }
+
+  resetBlogForm(){
+    this.blogForm.setValue({
+      title: '', 
+      description: '', 
+      approvalStatus: true, 
+      status: true, 
+      featuredImage: '', 
+    })
+
   }
 }

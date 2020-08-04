@@ -1,0 +1,76 @@
+@import "../../../../assets/sass/light-bootstrap-dashboard.scss";
+@import "../../../../assets/css/demo.css";
+
+.sidebar[data-color=red]:after {
+  background: #ff101ff2 !important;
+  background: linear-gradient(to bottom,#fb404b 0,rgba(187,5,2,.7) 100%);
+  background-size: 150% 150%;
+}
+
+
+li>a .sidebar-mini{
+  text-transform: uppercase;
+  float: left;
+  width: 30px;
+  text-align: center;
+  margin-right: 15px;
+  letter-spacing: 1px;
+}
+
+a[data-toggle=collapse][aria-expanded=true] .caret {
+  /* filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2); */
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+
+
+.user-image {
+  float: left;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-right: 10px;
+  margin-top: -2px;
+}
+
+.user-menu>.dropdown-menu>li.user-header>img {
+  z-index: 5;
+  height: 90px;
+  width: 90px;
+  border: 3px solid;
+  /* border-color: transparent; */
+  border-color: rgba(255,255,255,0.2);
+}
+
+.dropdown-menu>li.user-header {
+  height: 150px;
+  padding: 10px;
+  text-align: center;
+  width: 280px;
+}
+
+.img-circle {
+  border-radius: 50%;
+}
+
+.user-menu>.dropdown-menu>li.user-header>p {
+  z-index: 5;
+  color: #fff;
+  color: rgba(255,255,255,0.8);
+  font-size: 17px;
+  margin-top: 10px;
+}
+
+.user-menu>.dropdown-menu>li.user-header>p>small {
+  display: block;
+  font-size: 12px;
+}
+
+li.user-header {
+  background-color: #e82430f2;
+}
+
+.navbar .btn {
+  margin: 15px 15px !important;
+}

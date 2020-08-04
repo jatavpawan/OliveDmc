@@ -126,6 +126,7 @@ export class DestinationVideosComponent implements OnInit {
           // this.destinationVideoForm.reset();
           this.resetDestinationVideoForm();
           this.videoName = "";
+          this.videoUrl = "";
           this.GetAllDestinationVideo();
         } 
         else{

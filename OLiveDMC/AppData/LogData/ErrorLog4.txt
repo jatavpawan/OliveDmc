@@ -1,0 +1,60 @@
+
+Log Entry : 4:15:29 PM Saturday, May 23, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IAboutUsService' while attempting to activate 'OLiveDMC.Controllers.AboutUsController'.
+-------------------------------
+
+Log Entry : 4:15:52 PM Saturday, May 23, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IAboutUsService' while attempting to activate 'OLiveDMC.Controllers.AboutUsController'.
+-------------------------------
+
+Log Entry : 4:21:49 PM Saturday, May 23, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IAboutUsService' while attempting to activate 'OLiveDMC.Controllers.AboutUsController'.
+-------------------------------
+
+Log Entry : 4:22:31 PM Saturday, May 23, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IAboutUsService' while attempting to activate 'OLiveDMC.Controllers.AboutUsController'.
+-------------------------------
+
+Log Entry : 4:22:43 PM Saturday, May 23, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IAboutUsService' while attempting to activate 'OLiveDMC.Controllers.AboutUsController'.
+-------------------------------
+
+Log Entry : 1:33:31 PM Tuesday, May 26, 2020
+  :
+  :Unable to translate bytes [FF] at index 141 from specified code page to Unicode.
+-------------------------------
+
+Log Entry : 1:35:27 PM Tuesday, May 26, 2020
+  :
+  :Multipart body length limit 16384 exceeded.
+-------------------------------
+
+Log Entry : 1:41:28 PM Tuesday, May 26, 2020
+  :
+  :Multipart body length limit 16384 exceeded.
+-------------------------------
+
+Log Entry : 2:06:11 PM Tuesday, May 26, 2020
+  :
+  :Unable to translate bytes [FF] at index 150 from specified code page to Unicode.
+-------------------------------
+
+Log Entry : 2:41:45 PM Tuesday, May 26, 2020
+  :
+  :Multipart body length limit 16384 exceeded.
+-------------------------------
+
+Log Entry : 2:46:07 PM Tuesday, May 26, 2020
+  :
+  :Form key or value length limit 2048 exceeded.
+-------------------------------
+
+Log Entry : 2:51:52 PM Tuesday, May 26, 2020
+  :
+  :Form key or value length limit 2048 exceeded.
+-------------------------------
