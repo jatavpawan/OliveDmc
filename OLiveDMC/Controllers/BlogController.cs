@@ -87,6 +87,13 @@ namespace OLiveDMC.Controllers
             return await System.Threading.Tasks.Task.FromResult(Data);
         }
         
+        [HttpGet]
+        [Route("AllBlogInUserPanel")]
+        public async Task<ResponseModel> AllBlogInUserPanel(int pageNo)
+        {
+            var Data = _BlogService.AllBlogInUserPanel(pageNo);
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
 
 
 

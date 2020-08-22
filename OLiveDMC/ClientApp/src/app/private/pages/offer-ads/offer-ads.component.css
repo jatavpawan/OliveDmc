@@ -43,7 +43,7 @@ li.blog-body{
 
 .blog-image img{
   max-width: 100%;
-  height: 68px;
+  /* height: 68px; */
   border-radius: 5px;
 
 }
@@ -118,5 +118,7 @@ margin: 5px 25px;
 
 }
 
-
-
+.example-additional-selection {
+  opacity: 0.75;
+  font-size: 0.75em;
+}

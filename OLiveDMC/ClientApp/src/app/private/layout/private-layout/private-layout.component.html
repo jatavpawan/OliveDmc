@@ -82,21 +82,6 @@
                         <p>{{menuItem.title}} <b class="caret" *ngIf="menuItem.child.length != 0"></b> </p>
         
                     </a>
-                    <!-- <a  *ngIf="menuItem.path == '' " data-toggle="collapse" [data-target]="menuItem.datatarget">
-                        <i class="{{menuItem.icon}}"></i>
-                        <p>{{menuItem.title}} <b class="caret" *ngIf="menuItem.child.length != 0"></b> </p>
-        
-                    </a>
-                    <div class="collapse" [id]="menuItem.id" *ngIf="menuItem.child.length != 0">
-                        <ul class="nav">
-                            <li routerLinkActive="active" *ngFor="let menuItemChild of menuItem.child">
-                                <a [routerLink]="[menuItemChild.path]">
-                                    <span class="sidebar-mini">{{menuItemChild.firstChar}}</span>
-                                    <span class="sidebar-normal">{{menuItemChild.title}}</span>
-                                </a>
-                            </li>
-                       </ul>
-                    </div> -->
                 </li>
                 <li routerLinkActive="active"  class="">
                     <a data-toggle="collapse" data-target="#whatsNew">
@@ -144,7 +129,6 @@
                 </li>
                 <li routerLinkActive="active"  class="">
                     <a data-toggle="collapse" data-target="#Settings">
-                        <!-- <i class="pe-7s-note2"></i> -->
                         <i class="fa fa-cog" aria-hidden="true"></i>
                         <p>SETTINGS <b class="caret"></b></p>
                     </a>
@@ -179,10 +163,11 @@
                 </li>
             </ul>
         </div>
-        
-
-        <!-- sidebar end -->
         <div class="sidebar-background" style="background-image: url(assets/img/full-screen-image-3.jpg)"></div>
+        
+        <!-- sidebar end -->
+<!-- <div class="sidebar-background" style="background-image: url(../../../../assets/img/full-screen-image-3.jpg)"></div> -->
+
     </div>
   
     <div class="main-panel">
@@ -205,21 +190,16 @@
                         <li class="dropdown user user-menu">
                             <a  class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                               <img src="../../../../assets/img/faces/face-1.jpg" class="user-image" alt="User Image">
-                              <span class="hidden-xs">{{userData.firstName+ ' '+ (userData.middleName.length > 0 ? (userData.middleName + ' ') : ''  )+ userData.lastName}}</span>
+                              <span class="hidden-xs">{{userData.firstName+ ' '+ userData.lastName}}</span>
                             </a>
                             <ul class="dropdown-menu">
-                              <!-- User image -->
                               <li class="user-header">
                                 <img src="../../../../assets/img/faces/face-1.jpg" class="img-circle" alt="User Image">
                 
                                 <p>
-                                    {{userData.firstName+ ' '+ (userData.middleName.length > 0 ? (userData.middleName + ' ') : ''  )+ userData.lastName}}
-                                  <!-- <small>Member since Nov. 2012</small> -->
+                                    {{userData.firstName+ ' '+ userData.lastName}}
                                 </p>
                               </li>
-                              <!-- Menu Body -->
-                              
-                              <!-- Menu Footer-->
                               <li class="user-footer">
                                 <div class="pull-left">
                                   <a  class="btn btn-default btn-flat" [routerLink]="['/private/user-profile']" >Profile</a>
@@ -239,6 +219,8 @@
         
         <!-- header end -->
         <router-outlet></router-outlet>
+
+         <!-- Footer Start  -->
         <div class="private-footer">
             <!-- <app-footer></app-footer> -->
             <!-- footer start  -->
@@ -277,6 +259,7 @@
         
         <!-- footer end -->
         </div>
+        <!-- footer end  -->
     </div>
   
   </div>

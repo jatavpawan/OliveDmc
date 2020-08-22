@@ -2,57 +2,64 @@
 
 
 <div class="main-content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="content">
-                        <form class="form-horizontal" [formGroup]="bannerForm" (ngSubmit)="submitBannerData()">
-                            <div class="form-group">
-                                <label class="control-label col-sm-2 input-label" for="title">Banner Title:</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="title"  placeholder="Enter Banner Title" formControlName="title">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2 input-label" for="pageID">Page ID:</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="pageID"  placeholder="Enter Page ID" formControlName="pageId">
-                                </div>
-                            </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="content">
+            <form class="form-horizontal" [formGroup]="bannerForm" (ngSubmit)="submitBannerData()">
+              <div class="form-group">
+                <label class="control-label col-sm-2 input-label" for="title">Banner Title:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="title" placeholder="Enter Banner Title"
+                    formControlName="title">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2 input-label" for="pageID">Page ID:</label>
+                <div class="col-sm-10">
+                  <!-- <input type="text" class="form-control" id="pageID"  placeholder="Enter Page ID" formControlName="pageId"> -->
+                  <select class="form-control select-category" formControlName="pageId">
+                    <option value="">Select Page</option>
+                    <option *ngFor="let page of pages" [value]="page.pageId">{{page.pageTitle}}</option>
+                  </select> </div>
+              </div>
 
 
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="pwd">Image Path:</label>
-                                <div class="col-sm-10">
-                                    <div class="image-preview mb-3" *ngIf="fileUploaded == true || edit_banner == true">
-                                        <img [src]="previewUrl" height="100" width="105"  />                 
-                                    </div>
-                                    <label for="files"  *ngIf="edit_banner == true ||  (bannerForm.get('imagePath').value != '' && bannerForm.get('imagePath').value != null )" class="btn btn-primary">update File</label>
-                                    <input type="file" *ngIf="fileUploaded == false || edit_banner == true || bannerForm.get('imagePath').value != ''" [class.hidden]="edit_banner == true ||  (bannerForm.get('imagePath').value != '' && bannerForm.get('imagePath').value != null )" name="" id="files" #files (change)="preview(files)" formControlName="imagePath">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2 status-lable"  [tooltip]="tooltipText" [options]="tooltipOptions">Show:</label>
-                                <div class="col-sm-1">
-                                    <ui-switch
-                                    labelOn="Yes"
-                                    labelOff="No"
-                                    checkedTextColor="red"
-                                    formControlName="status"
-                                    ></ui-switch>
-                                </div>
-                                <div class="col-sm-9" class="form-control status-border"></div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-1 col-sm-10">
-                                    <button type="submit" *ngIf="edit_banner == false" [disabled]="bannerForm.invalid" class="btn btn-default btn-primary" >Submit</button>
-                                    <button type="submit" *ngIf="edit_banner == true" [disabled]="bannerForm.invalid" class="btn btn-default btn-primary" >Update</button>
-                                </div>
-                            </div>
-                        </form>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="pwd">Image Path:</label>
+                <div class="col-sm-10">
+                  <div class="image-preview mb-3" *ngIf="fileUploaded == true || edit_banner == true">
+                    <img [src]="previewUrl" height="100" width="105" />
+                  </div>
+                  <label for="files"
+                    *ngIf="edit_banner == true ||  (bannerForm.get('imagePath').value != '' && bannerForm.get('imagePath').value != null )"
+                    class="btn btn-primary">update File</label>
+                  <input type="file"
+                    *ngIf="fileUploaded == false || edit_banner == true || bannerForm.get('imagePath').value != ''"
+                    [class.hidden]="edit_banner == true ||  (bannerForm.get('imagePath').value != '' && bannerForm.get('imagePath').value != null )"
+                    name="" id="files" #files (change)="preview(files)" formControlName="imagePath">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2 status-lable" [tooltip]="tooltipText"
+                  [options]="tooltipOptions">Show:</label>
+                <div class="col-sm-1">
+                  <ui-switch labelOn="Yes" labelOff="No" checkedTextColor="red" formControlName="status"></ui-switch>
+                </div>
+                <div class="col-sm-9" class="form-control status-border"></div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-1 col-sm-10">
+                  <button type="submit" *ngIf="edit_banner == false" [disabled]="bannerForm.invalid"
+                    class="btn btn-default btn-primary">Submit</button>
+                  <button type="submit" *ngIf="edit_banner == true" [disabled]="bannerForm.invalid"
+                    class="btn btn-default btn-primary">Update</button>
+                </div>
+              </div>
+            </form>
 
-                        <!-- <ul class="blog-list" *ngIf="banners.length != 0">
+            <!-- <ul class="blog-list" *ngIf="banners.length != 0">
                             <li class="blog-body" *ngFor="let banner of banners">
                                 <div class="row">
                                     <div class="col-md-3">
@@ -79,36 +86,39 @@
                             </li>
                           </ul> -->
 
-                          <ul class="blog-list" *ngIf="banners.length != 0">
-                                <ng-container *ngFor="let banner of banners">
-                                    <li class="blog-body" [style.backgroundImage]="'url('+apiendpoint+'Uploads/Banner/image/'+banner.imagePath +')'" >
-                                      <div class="action-icon">
-                                        <!-- <span class="edit-banner" (click)="editBanner(banner)" >Edit</span> 
+            <ul class="blog-list" *ngIf="banners.length != 0">
+              <ng-container *ngFor="let banner of banners">
+                <li class="blog-body"
+                  [style.backgroundImage]="'url('+apiendpoint+'Uploads/Banner/image/'+banner.imagePath +')'">
+                  <div class="action-icon">
+                    <!-- <span class="edit-banner" (click)="editBanner(banner)" >Edit</span> 
                                         <span class="delete-banner" (click)=" openConfirmDialog(banner.id)" >Delete</span>  -->
-                                        <span class="edit-banner fa fa-pencil-square-o" (click)="editBanner(banner)" ></span> 
-                                        <!-- <i class="fa fa-pencil-square-o" aria-hidden="true"></i> -->
-                                        <span class="delete-banner fa fa-trash" (click)=" openConfirmDialog(banner.id)" ></span> 
-                                      </div>
-                                      
-                                      <div class="row">
-                                              <div class="blog-content">
-                                                <div class="blog-title">
-                                                  <a>{{banner.title.length > 20 ? (banner.title|slice : 0 :15)+'...' : banner.title}}</a>
-                                                </div>
-                                                <div class="blog-description">
-                                                  <a>Home > About Us</a> 
-                                                </div>
-                                
-                                              </div>
-                                          </div>
-                                    </li>
-                                </ng-container>
-                          </ul>
+                    <span class="edit-banner fa fa-pencil-square-o" (click)="editBanner(banner)"></span>
+                    <!-- <i class="fa fa-pencil-square-o" aria-hidden="true"></i> -->
+                    <span class="delete-banner fa fa-trash" (click)=" openConfirmDialog(banner.id)"></span>
+                  </div>
 
+                  <div class="row">
+                    <div class="blog-content">
+                      <div class="blog-title">
+                        <a>{{banner.title.length > 20 ? (banner.title|slice : 0 :15)+'...' : banner.title}}</a>
+                      </div>
+                      <!-- <div class="blog-description">
+                        <a>Home > About Us</a>
+                      </div> -->
 
                     </div>
-                </div>
-            </div>
+                  </div>
+                </li>
+              </ng-container>
+            </ul>
+
+
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
+
+ 

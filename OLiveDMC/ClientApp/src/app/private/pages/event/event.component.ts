@@ -35,7 +35,8 @@ export class EventComponent implements OnInit {
   }
   videoUrl: string = "";
   videoName: string = "";
-
+  characterCount:number = 0;
+  
   constructor( 
     private formBuilder : FormBuilder,
     private  eventService: EventService, 
@@ -46,6 +47,7 @@ export class EventComponent implements OnInit {
 
     this.eventForm = this.formBuilder.group({
       title: ['', Validators.required],
+      shortDescription: ['', Validators.required],
       description: ['', Validators.required],
       status: [false],
       featuredImage: [''],
@@ -107,6 +109,7 @@ export class EventComponent implements OnInit {
         formData.append('FeaturedImage', null);
       }
       formData.append('Title', this.eventForm.get('title').value);
+      formData.append('shortDescription', this.eventForm.get('shortDescription').value);
       formData.append('Description', this.eventForm.get('description').value);
       formData.append('Status', this.eventForm.get('status').value);
       formData.append('Video', this.videoName);
@@ -137,6 +140,7 @@ export class EventComponent implements OnInit {
           // this.eventForm.reset();
           // this.eventForm.get('description').setValue('');
           this.videoName = "";
+          this.videoUrl = "";
           this.GetAllEvent();
         } 
         else{
@@ -164,6 +168,7 @@ export class EventComponent implements OnInit {
       this.deleteVideoFromPhysicalLocation(this.videoName);
     }
     this.eventForm.get('title').setValue(event.title);
+    this.eventForm.get('shortDescription').setValue(event.shortDescription);
     this.eventForm.get('description').setValue(event.description);
     this.eventForm.get('status').setValue(event.status);
    
@@ -267,11 +272,23 @@ export class EventComponent implements OnInit {
   resetEventForm(){
     this.eventForm.setValue({
       title: '', 
+      shortDescription: '', 
       description: '', 
       status: false, 
       featuredImage: '', 
       video: '', 
     })
+  }
+
+  shortDescriptionCharacterCount(event): boolean{
+    if(this.eventForm.get('shortDescription').value.length >=200  && event.keyCode != 8 ){
+      let shortDescription:string = this.eventForm.get('shortDescription').value;
+      this.eventForm.get('shortDescription').setValue(shortDescription.substring(0,200));
+      this.characterCount =  this.eventForm.get('shortDescription').value.length;
+      return false;
+    }
+    this.characterCount =  this.eventForm.get('shortDescription').value.length;
+    return true;
   }
 
 }

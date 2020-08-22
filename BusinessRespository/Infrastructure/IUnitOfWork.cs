@@ -30,6 +30,18 @@ namespace BusinessRespository.Infrastructure
         ITrendingNewsRepository TrendingNewsRepository { get; }
         IFAQRepository FAQRepository { get; }
         ITopDestinationRepository TopDestinationRepository { get; }
+        ILatestEventRepository LatestEventRepository { get; }
+        IInterviewsInWhatsNewRepository InterviewsInWhatsNewRepository { get; }
+        INewDestinationsInWhatsNewRepository NewDestinationsInWhatsNewRepository { get; }
+        IPrivacyPolicyRepository PrivacyPolicyRepository { get; }
+        ITeamMemberInAboutUsRepository TeamMemberInAboutUsRepository { get; }
+        IFestivalRepository FestivalRepository { get; }
+        IAboutUsIntroductionRepository AboutUsIntroductionRepository { get; }
+        IAboutUsStatementRepository AboutUsStatementRepository { get; }
+        ITravelUtilityQueryRepository TravelUtilityQueryRepository { get; }
+        IContactUsRepository ContactUsRepository { get; }
+        IUserCoverImageRepository UserCoverImageRepository { get; }
+        IUserPersonalInfoRepository UserPersonalInfoRepository { get; }
 
         void Commit();
         void Rollback();

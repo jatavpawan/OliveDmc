@@ -18,5 +18,7 @@ namespace BusinessServices.IServices
 
         ResponseModel AllBlogPriorityList();
         ResponseModel AllBlogPriorityListInUserPanel();
+
+        ResponseModel AllBlogInUserPanel(int pageNo);
     }
 }

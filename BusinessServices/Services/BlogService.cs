@@ -173,7 +173,7 @@ namespace BusinessServices.Services
             try
             {
                 ResponseModel result = new ResponseModel();
-                result = _unitOfWork.BlogRepository.AllBlogPriorityList();
+                result = _unitOfWork.BlogRepository.AllBlogPriorityListInUserPanel();
 
                 response.data = result.data;
                 response.status = result.status;
@@ -188,7 +188,27 @@ namespace BusinessServices.Services
             return response;
         }
 
-        
+        public ResponseModel AllBlogInUserPanel(int pageNo)
+        {
+            try
+            {
+                ResponseModel result = new ResponseModel();
+                result = _unitOfWork.BlogRepository.AllBlogInUserPanel(pageNo);
+
+                response.data = result.data;
+                response.status = result.status;
+                response.message = result.message;
+
+            }
+            catch (Exception ex)
+            {
+                response.message = ex.Message;
+                response.status = Status.Error;
+            }
+            return response;
+        }
+
+
 
 
     }

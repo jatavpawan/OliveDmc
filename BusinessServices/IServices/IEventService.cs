@@ -16,6 +16,7 @@ namespace BusinessServices.IServices
         ResponseModel GetEventDetailByEventId(int? Id);
         ResponseModel videoUploadInEvent(vmfileInfo obj);
         ResponseModel deleteVideoInEvent(string oldVideoName);
+        ResponseModel GetAllEventInFrontEnd();
 
 
     }

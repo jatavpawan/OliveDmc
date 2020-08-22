@@ -17,5 +17,6 @@ namespace BusinessDataModel.DB
         public int? CreatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public int? UpdatedBy { get; set; }
+        public string ShortDescription { get; set; }
     }
 }

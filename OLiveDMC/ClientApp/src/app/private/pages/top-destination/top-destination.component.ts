@@ -38,6 +38,7 @@ export class TopDestinationComponent implements OnInit {
     'placement': 'top',
     'show-delay': 500
   }
+  characterCount:number = 0;
 
   constructor( 
     private formBuilder : FormBuilder,
@@ -49,6 +50,7 @@ export class TopDestinationComponent implements OnInit {
 
     this.topDestinationForm = this.formBuilder.group({
       title: ['', Validators.required],
+      shortDescription: ['', Validators.required],
       description: ['', Validators.required],
       showInFrontEnd: [false],
       featuredImage: [''],
@@ -163,6 +165,7 @@ changeState(){
         formData.append('FeaturedImage', null);
       }
       formData.append('Title', this.topDestinationForm.get('title').value);
+      formData.append('ShortDescription', this.topDestinationForm.get('shortDescription').value);
       formData.append('Description', this.topDestinationForm.get('description').value);
       formData.append('ShowInFrontEnd', this.topDestinationForm.get('showInFrontEnd').value);
       formData.append('CountryId', this.topDestinationForm.get('countryId').value);
@@ -220,6 +223,7 @@ changeState(){
 
   editTopDestination(topDestination){
     this.topDestinationForm.get('title').setValue(topDestination.title);
+    this.topDestinationForm.get('shortDescription').setValue(topDestination.shortDescription);
     this.topDestinationForm.get('description').setValue(topDestination.description);
     this.topDestinationForm.get('showInFrontEnd').setValue(topDestination.showInFrontEnd);
     this.topDestinationForm.get('countryId').setValue(topDestination.countryId);
@@ -296,6 +300,7 @@ changeState(){
   resetTopDestinationForm(){
     this.topDestinationForm.setValue({
       title: '', 
+      shortDescription: '', 
       description: '', 
       showInFrontEnd: false, 
       featuredImage: '', 
@@ -303,6 +308,17 @@ changeState(){
       stateId: 0, 
       cityId: 0, 
     })
+  }
+
+  shortDescriptionCharacterCount(event): boolean{
+    if(this.topDestinationForm.get('shortDescription').value.length >=250  && event.keyCode != 8 ){
+      let shortDescription:string = this.topDestinationForm.get('shortDescription').value;
+      this.topDestinationForm.get('shortDescription').setValue(shortDescription.substring(0,250));
+      this.characterCount =  this.topDestinationForm.get('shortDescription').value.length;
+      return false;
+    }
+    this.characterCount =  this.topDestinationForm.get('shortDescription').value.length;
+    return true;
   }
 
 }

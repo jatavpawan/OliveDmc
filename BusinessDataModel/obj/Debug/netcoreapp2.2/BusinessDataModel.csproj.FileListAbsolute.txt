@@ -33,3 +33,4 @@ D:\Projects\Travel_Tourasim\OliveDmc\BusinessDataModel\obj\Debug\netcoreapp2.2\B
 D:\Projects\Travel_Tourasim\OliveDmc\BusinessDataModel\obj\Debug\netcoreapp2.2\BusinessDataModel.dll
 D:\Projects\Travel_Tourasim\OliveDmc\BusinessDataModel\obj\Debug\netcoreapp2.2\BusinessDataModel.pdb
 D:\Projects\Travel_Tourasim\OliveDmc\BusinessDataModel\obj\Debug\netcoreapp2.2\BusinessDataModel.genruntimeconfig.cache
+D:\Projects\Travel_Tourasim\OliveDmc\BusinessDataModel\obj\Debug\netcoreapp2.2\BusinessDataModel.csprojAssemblyReference.cache

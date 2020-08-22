@@ -38,6 +38,7 @@ namespace BusinessRespository.Repositories
                 {
                     var TopDestinationObj = Context.TopDestination.Where(z => z.Id == obj.Id).FirstOrDefault();
                     TopDestinationObj.Title = obj.Title;
+                    TopDestinationObj.ShortDescription = obj.ShortDescription;
                     TopDestinationObj.Description = obj.Description;
                     TopDestinationObj.CountryId = obj.CountryId;
                     TopDestinationObj.StateId = obj.StateId;
@@ -68,6 +69,7 @@ namespace BusinessRespository.Repositories
                         var TopDestinationDetail = new TopDestination
                         {
                             Title = obj.Title,
+                            ShortDescription = obj.ShortDescription,
                             Description = obj.Description,
                             CountryId = obj.CountryId,
                             StateId = obj.StateId,
@@ -107,7 +109,7 @@ namespace BusinessRespository.Repositories
             try
             {
                 List<TopDestination> resultValue = new List<TopDestination>();
-                resultValue = Context.TopDestination.Where(z => z.RecUpd != "D").ToList();
+                resultValue = Context.TopDestination.Where(z => z.RecUpd != "D").OrderByDescending(x => x.CreatedDate).ToList();
 
                 result.data = resultValue;
                 result.status = Status.Success;
@@ -229,7 +231,7 @@ namespace BusinessRespository.Repositories
             try
             {
                 List<TopDestination> resultValue = new List<TopDestination>();
-                resultValue = Context.TopDestination.Where(z => z.CountryId == CountryId && z.RecUpd != "D").ToList();
+                resultValue = Context.TopDestination.Where(z => z.CountryId == CountryId && z.RecUpd != "D").OrderByDescending(x => x.CreatedDate).ToList();
 
                 result.data = resultValue;
                 result.status = Status.Success;

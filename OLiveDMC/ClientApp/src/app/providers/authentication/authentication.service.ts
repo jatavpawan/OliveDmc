@@ -30,7 +30,7 @@ export class AuthenticationService {
    logout() {
      localStorage.removeItem("LoggedInUser");
      localStorage.removeItem("id_token");
-     this.router.navigate(["public"]);
+     this.router.navigate([""]);
    }
 
    loginUser(data){
@@ -75,7 +75,5 @@ export class AuthenticationService {
  UserChangePassword(data){
   return <Observable<ResponseModel>> this.dataService.postData('Login/ChangePassword', data);
  }
-
-
  
 }

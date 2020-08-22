@@ -39,6 +39,7 @@ namespace BusinessRespository.Repositories
                     var InterviewObj = Context.Interview.Where(z => z.Id == obj.Id).FirstOrDefault();
                     InterviewObj.Name = obj.Name;
                     InterviewObj.Designation = obj.Designation;
+                    InterviewObj.ShortDescription = obj.ShortDescription;
                     InterviewObj.Description = obj.Description;
                     InterviewObj.ShowInFrontEnd = obj.ShowInFrontEnd;
                     InterviewObj.RecUpd = "U";
@@ -68,6 +69,7 @@ namespace BusinessRespository.Repositories
                         {
                             Name = obj.Name,
                             Designation = obj.Designation,
+                            ShortDescription = obj.ShortDescription,
                             Description = obj.Description,
                             ShowInFrontEnd = obj.ShowInFrontEnd,
                             RecUpd = "C",
@@ -105,7 +107,7 @@ namespace BusinessRespository.Repositories
             try
             {
                 List<Interview> resultValue = new List<Interview>();
-                resultValue = Context.Interview.Where(z => z.RecUpd != "D").ToList();
+                resultValue = Context.Interview.Where(z => z.RecUpd != "D").OrderByDescending(x => x.CreatedDate).ToList();
 
                 result.data = resultValue;
                 result.status = Status.Success;

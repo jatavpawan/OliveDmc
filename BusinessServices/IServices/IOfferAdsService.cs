@@ -14,5 +14,8 @@ namespace BusinessServices.IServices
         ResponseModel deleteOfferAds(int? Id);
         ResponseModel fileUploadInOfferAds(vmfileInfo obj);
         ResponseModel GetOfferAdsDetailByOfferAdsId(int? Id);
+
+        ResponseModel GetAllOfferAdsInFrontEnd();
+        ResponseModel GetAllOfferAdsByPageId(int? Id);
     }
 }

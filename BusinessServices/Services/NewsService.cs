@@ -164,5 +164,25 @@ namespace BusinessServices.Services
             }
             return response;
         }
+        
+        public ResponseModel GetAllNewsinFrontEnd()
+        {
+            try
+            {
+                ResponseModel result = new ResponseModel();
+                result = _unitOfWork.NewsRepository.GetAllNewsinFrontEnd();
+
+                response.data = result.data;
+                response.status = result.status;
+                response.message = result.message;
+
+            }
+            catch (Exception ex)
+            {
+                response.message = ex.Message;
+                response.status = Status.Error;
+            }
+            return response;
+        }
     }
 }

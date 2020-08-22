@@ -14,7 +14,10 @@ namespace BusinessServices.IServices
         ResponseModel deleteBanner(int? Id);
         ResponseModel fileUploadInBanner(vmfileInfo obj);
 
+        ResponseModel GetBannerDetailByPageId(int? Id);
+        ResponseModel GetAllPage(); 
         ResponseModel GetBannerDetailByBannerId(int? Id);
+
 
     }
 }

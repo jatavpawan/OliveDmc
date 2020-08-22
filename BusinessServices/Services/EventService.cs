@@ -164,5 +164,25 @@ namespace BusinessServices.Services
             }
             return response;
         }
+        
+        public ResponseModel GetAllEventInFrontEnd()
+        {
+            try
+            {
+                ResponseModel result = new ResponseModel();
+                result = _unitOfWork.EventRepository.GetAllEventInFrontEnd();
+
+                response.data = result.data;
+                response.status = result.status;
+                response.message = result.message;
+
+            }
+            catch (Exception ex)
+            {
+                response.message = ex.Message;
+                response.status = Status.Error;
+            }
+            return response;
+        }
     }
 }

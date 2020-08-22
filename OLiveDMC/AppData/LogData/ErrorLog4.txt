@@ -58,3 +58,98 @@ Log Entry : 2:51:52 PM Tuesday, May 26, 2020
   :
   :Form key or value length limit 2048 exceeded.
 -------------------------------
+
+Log Entry : 5:35:42 PM Wednesday, August 12, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IFestivalService' while attempting to activate 'OLiveDMC.Controllers.FestivalController'.
+-------------------------------
+
+Log Entry : 5:37:27 PM Wednesday, August 12, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IFestivalService' while attempting to activate 'OLiveDMC.Controllers.FestivalController'.
+-------------------------------
+
+Log Entry : 5:41:38 PM Wednesday, August 12, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IFestivalService' while attempting to activate 'OLiveDMC.Controllers.FestivalController'.
+-------------------------------
+
+Log Entry : 5:42:11 PM Wednesday, August 12, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IFestivalService' while attempting to activate 'OLiveDMC.Controllers.FestivalController'.
+-------------------------------
+
+Log Entry : 5:46:29 PM Wednesday, August 12, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IFestivalService' while attempting to activate 'OLiveDMC.Controllers.FestivalController'.
+-------------------------------
+
+Log Entry : 5:47:34 PM Wednesday, August 12, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IFestivalService' while attempting to activate 'OLiveDMC.Controllers.FestivalController'.
+-------------------------------
+
+Log Entry : 5:48:46 PM Wednesday, August 12, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IFestivalService' while attempting to activate 'OLiveDMC.Controllers.FestivalController'.
+-------------------------------
+
+Log Entry : 5:49:05 PM Wednesday, August 12, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IFestivalService' while attempting to activate 'OLiveDMC.Controllers.FestivalController'.
+-------------------------------
+
+Log Entry : 5:49:26 PM Wednesday, August 12, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IFestivalService' while attempting to activate 'OLiveDMC.Controllers.FestivalController'.
+-------------------------------
+
+Log Entry : 5:49:57 PM Wednesday, August 12, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IFestivalService' while attempting to activate 'OLiveDMC.Controllers.FestivalController'.
+-------------------------------
+
+Log Entry : 6:44:54 PM Wednesday, August 12, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IFestivalService' while attempting to activate 'OLiveDMC.Controllers.FestivalController'.
+-------------------------------
+
+Log Entry : 6:46:56 PM Wednesday, August 12, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IFestivalService' while attempting to activate 'OLiveDMC.Controllers.FestivalController'.
+-------------------------------
+
+Log Entry : 6:47:46 PM Wednesday, August 12, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IFestivalService' while attempting to activate 'OLiveDMC.Controllers.FestivalController'.
+-------------------------------
+
+Log Entry : 6:49:12 PM Wednesday, August 12, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IFestivalService' while attempting to activate 'OLiveDMC.Controllers.FestivalController'.
+-------------------------------
+
+Log Entry : 6:51:14 PM Wednesday, August 12, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IFestivalService' while attempting to activate 'OLiveDMC.Controllers.FestivalController'.
+-------------------------------
+
+Log Entry : 9:00:30 PM Wednesday, August 12, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IFestivalService' while attempting to activate 'OLiveDMC.Controllers.FestivalController'.
+-------------------------------
+
+Log Entry : 9:02:56 PM Wednesday, August 12, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IFestivalService' while attempting to activate 'OLiveDMC.Controllers.FestivalController'.
+-------------------------------
+
+Log Entry : 9:04:32 PM Wednesday, August 12, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IFestivalService' while attempting to activate 'OLiveDMC.Controllers.FestivalController'.
+-------------------------------
+
+Log Entry : 9:05:13 PM Wednesday, August 12, 2020
+  :
+  :Unable to resolve service for type 'BusinessServices.IServices.IFestivalService' while attempting to activate 'OLiveDMC.Controllers.FestivalController'.
+-------------------------------

@@ -33,6 +33,7 @@ export class InterviewComponent implements OnInit {
   }
   videoUrl: string = "";
   videoName: string = "";
+characterCount:number = 0;
 
   constructor( 
     private formBuilder : FormBuilder,
@@ -44,6 +45,7 @@ export class InterviewComponent implements OnInit {
     this.interviewForm = this.formBuilder.group({
       name: ['', Validators.required],
       designation: ['', Validators.required],
+      shortDescription: ['', Validators.required],
       description: ['', Validators.required],
       showInFrontEnd: [false],
       featuredImage: [''],
@@ -109,6 +111,7 @@ export class InterviewComponent implements OnInit {
       }
       formData.append('Name', this.interviewForm.get('name').value);
       formData.append('Designation', this.interviewForm.get('designation').value);
+      formData.append('ShortDescription', this.interviewForm.get('shortDescription').value);
       formData.append('Description', this.interviewForm.get('description').value);
       formData.append('ShowInFrontEnd', this.interviewForm.get('showInFrontEnd').value);
       formData.append('Video', this.videoName);
@@ -172,6 +175,7 @@ export class InterviewComponent implements OnInit {
     }
     this.interviewForm.get('name').setValue(Interview.name);
     this.interviewForm.get('designation').setValue(Interview.designation);
+    this.interviewForm.get('shortDescription').setValue(Interview.shortDescription);
     this.interviewForm.get('description').setValue(Interview.description);
     this.interviewForm.get('showInFrontEnd').setValue(Interview.showInFrontEnd);
    
@@ -276,12 +280,24 @@ export class InterviewComponent implements OnInit {
     this.interviewForm.setValue({
       name: '', 
       designation: '', 
+      shortDescription: '', 
       description: '', 
       showInFrontEnd: false, 
       featuredImage: '', 
       video: '', 
     })
 
+  }
+
+  shortDescriptionCharacterCount(event): boolean{
+    if(this.interviewForm.get('shortDescription').value.length >=300  && event.keyCode != 8 ){
+      let shortDescription:string = this.interviewForm.get('shortDescription').value;
+      this.interviewForm.get('shortDescription').setValue(shortDescription.substring(0,300));
+      this.characterCount =  this.interviewForm.get('shortDescription').value.length;
+      return false;
+    }
+    this.characterCount =  this.interviewForm.get('shortDescription').value.length;
+    return true;
   }
 
 }

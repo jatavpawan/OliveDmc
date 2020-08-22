@@ -78,7 +78,14 @@ namespace OLiveDMC.Controllers
             var Data = _eventService.deleteVideoInEvent(oldVideoName);
             return await System.Threading.Tasks.Task.FromResult(Data);
         }
-
         
+        [HttpGet]
+        [Route("GetAllEventInFrontEnd")]
+        public async Task<ResponseModel> GetAllEventInFrontEnd()
+        {
+            var Data = _eventService.GetAllEventInFrontEnd();
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
+
     }
 }

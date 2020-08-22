@@ -26,11 +26,6 @@ export class OfferAdsService {
     return <Observable<ResponseModel>> this.dataService.getData('OfferAds/GetOfferAdsDetailByOfferAdsId?id='+OfferAdsId);
   }
  
-  editOfferAds(data)
-  {
-    return <Observable<ResponseModel>> this.dataService.postData('OfferAds/AddUpdateOfferAds', data);
-  }
- 
   deleteOfferAds(OfferAdsId)
   {
     return <Observable<ResponseModel>> this.dataService.getData('OfferAds/deleteOfferAds?Id='+OfferAdsId);

@@ -2,13 +2,15 @@
 <!-- main -->
 <div class="public-page">
     <div class="agileits-main"> 
-        <div class="w3top-nav">	
+        <div class="w3top-nav navigation-bg">	
                     <div class="w3top-nav-left">	
-                        <h1><a>Olive Dmc</a></h1>
+                        <!-- <h1><a>Olive Dmc</a></h1> -->
+                        <img class="logo-img" src="../../../../assets/PublicAssets/images/LiveTraveller-white.png" alt="">
                     </div>	
                     <div class="w3top-nav-right">	
                         <ul>
-                            <li><a class="active">Home</a></li>
+                            <!-- <li><a class="active" href="http://rsmartservices.com/">Home</a></li> -->
+                            <li><a class="active" (click)="openUserPanel()">Home</a></li>
                             <li (click)="navigation = 'SignUp'" *ngIf="navigation == 'login' || navigation == 'OTP' "><a>SignUp</a></li>
                             <li (click)="navigation = 'login'" *ngIf="navigation == 'SignUp' || navigation == 'OTP'"><a>Login</a></li>
                             <!-- <li [routerLink]="['/public/landing/signup']" routerLinkActive="router-link-active" ><a>SignUp</a></li>
@@ -58,10 +60,6 @@
                                 </div>
                                 <span class="text-danger " *ngIf="(signupForm.get('firstName').touched && signupForm.get('firstName').hasError('required')) || (signupForm.get('firstName').untouched && submitSignupForm == true) "> First Name is required</span>
 
-                                <div class="icon1">
-                                    <input type="text" placeholder="Middle Name"  formControlName="middleName"/>
-
-                                </div>
                                 <div class="icon1">
                                     <input type="text" placeholder="Last Name"  formControlName="lastName"/>
                                 </div>

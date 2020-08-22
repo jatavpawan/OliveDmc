@@ -16,5 +16,7 @@ namespace BusinessServices.IServices
         ResponseModel GetNewsDetailByNewsId(int? Id);
         ResponseModel videoUploadInNews(vmfileInfo obj);
         ResponseModel deleteVideoInNews(string oldVideoName);
+
+        ResponseModel GetAllNewsinFrontEnd();
     }
 }

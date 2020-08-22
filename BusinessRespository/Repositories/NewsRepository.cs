@@ -38,6 +38,7 @@ namespace BusinessRespository.Repositories
                 {
                     var NewsObj = Context.News.Where(z => z.Id == obj.Id).FirstOrDefault();
                     NewsObj.Title = obj.Title;
+                    NewsObj.ShortDescription = obj.ShortDescription;
                     NewsObj.Description = obj.Description;
                     NewsObj.Status = obj.Status;
                     NewsObj.RecUpd = "U";
@@ -66,6 +67,7 @@ namespace BusinessRespository.Repositories
                         var NewsDetail = new News
                         {
                             Title = obj.Title,
+                            ShortDescription = obj.ShortDescription,
                             Description = obj.Description,
                             Status = obj.Status,
                             RecUpd = "C",
@@ -216,6 +218,27 @@ namespace BusinessRespository.Repositories
                 uploadcls.fileDeleted(@"Uploads\News\Video", oldVideoName);
 
             }
+        }
+
+        public ResponseModel GetAllNewsinFrontEnd()
+        {
+            ResponseModel result = new ResponseModel();
+            try
+            {
+                List<News> resultValue = new List<News>();
+                resultValue = Context.News.Where(z => z.RecUpd != "D" && z.Status == true).ToList();
+
+                result.data = resultValue;
+                result.status = Status.Success;
+                result.message = "List for News";
+            }
+            catch (Exception ex)
+            {
+                result.status = Status.Error;
+                result.error = ex.Message;
+
+            }
+            return result;
         }
     }
 }

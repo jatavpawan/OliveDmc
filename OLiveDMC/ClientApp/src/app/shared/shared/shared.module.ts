@@ -8,7 +8,10 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 import { UiSwitchModule } from 'ngx-toggle-switch';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { SafeHtmlPipe } from 'src/app/pipe/safe-html.pipe';
-
+import { OwlModule } from 'ngx-owl-carousel'; 
+import {MatDialogModule} from '@angular/material/dialog';
+// import { SelectModule } from 'ng2-select';
+// import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,10 @@ import { SafeHtmlPipe } from 'src/app/pipe/safe-html.pipe';
     EditorModule,
     UiSwitchModule,
     TooltipModule,
+    OwlModule,
+    MatDialogModule,
+    // NgSelectModule
+    // SelectModule,
   ],
   exports:[
     ReactiveFormsModule,
@@ -33,7 +40,11 @@ import { SafeHtmlPipe } from 'src/app/pipe/safe-html.pipe';
     EditorModule,
     UiSwitchModule,
     TooltipModule,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    OwlModule,
+    MatDialogModule,
+    // NgSelectModule
+    // SelectModule,
   ]
 })
 export class SharedModule { }

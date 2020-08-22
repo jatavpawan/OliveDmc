@@ -29,7 +29,8 @@ img{max-width:100%;}
 /*-- end reset --*/
 .public-page {
     font-family: 'Muli', sans-serif;
-    background: url(../../../../assets/img/1.jpg)no-repeat center 0px;
+    /* background: url(../../../../assets/img/1.jpg)no-repeat center 0px; */
+    background: url(../../../../assets/PublicAssets/images/login-bg.jpg)no-repeat center 0px;
 	-webkit-background-size:cover;
 	-moz-background-size:cover; 
 	background-size:cover;
@@ -201,7 +202,8 @@ a:hover {
     border-radius: 25px;
 }
 .header-left-bottom input[type="submit"]:hover {
-    background: #ff4f81;
+    /* background: #ff4f81; */
+    background: #3dd0a0;
     transition: 0.5s all;
     -webkit-transition: 0.5s all;
     -moz-transition: 0.5s all;
@@ -219,7 +221,7 @@ a:hover {
 }
 .header-left-bottom p a {
     font-size: 15px;
-    color: #dd4b39;
+    color: #56ffc8;
 }
 .header-left-bottom p a:hover {
     color: #3be8b0;
@@ -543,5 +545,18 @@ input:-internal-autofill-selected {
     color: white !important;
 }
 
+.w3top-nav-left .logo-img{
+    width: 150px;
+}
+
+.header-main {
+    width: 29%;
+    background: #00000047;
+    padding: 28px;
+}
+
+.navigation-bg{
+        background: #00000047;
+}
 
 /*-- //responsive-design --*/

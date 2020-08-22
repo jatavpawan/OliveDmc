@@ -62,5 +62,21 @@ namespace OLiveDMC.Controllers
             var Data = _bannerService.GetBannerDetailByBannerId(Id);
             return await System.Threading.Tasks.Task.FromResult(Data);
         }
+
+        [HttpGet]
+        [Route("GetBannerDetailByPageId")]
+        public async Task<ResponseModel> GetBannerDetailByPageId(int? Id)
+        {
+            var Data = _bannerService.GetBannerDetailByPageId(Id);
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
+
+        [HttpGet]
+        [Route("GetAllPage")]
+        public async Task<ResponseModel> GetAllPage()
+        {
+            var Data = _bannerService.GetAllPage();
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
     }
 }

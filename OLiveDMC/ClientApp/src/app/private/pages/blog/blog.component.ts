@@ -26,6 +26,7 @@ export class BlogComponent implements OnInit {
   blogId: string;
   tinymceConfig: any;
   tooltipText:string ="this blog is show or hide to the user";
+  characterCount:number = 0;
 
   tooltipOptions = {
     'placement': 'top',
@@ -42,6 +43,7 @@ export class BlogComponent implements OnInit {
     this.blogForm = this.formBuilder.group({
       userId: [0],
       title: ['', Validators.required],
+      shortDescription: ['', Validators.required],
       description: ['', Validators.required],
       approvalStatus: [true],
       status: [true],
@@ -106,6 +108,7 @@ export class BlogComponent implements OnInit {
       formData.append('userId', this.blogForm.get('userId').value);
       formData.append('Title', this.blogForm.get('title').value);
       formData.append('Description', this.blogForm.get('description').value);
+      formData.append('ShortDescription', this.blogForm.get('shortDescription').value);
       formData.append('Status', this.blogForm.get('status').value);
       formData.append('ApprovalStatus', this.blogForm.get('approvalStatus').value);
 
@@ -133,8 +136,8 @@ export class BlogComponent implements OnInit {
           this.file = undefined;
           // this.blogForm.reset();
           this.resetBlogForm();
-          // this.blogForm.get('description').setValue('');
           this.GetAllBlog();
+          // this.blogForm.get('description').setValue('');
         }
         else{
           this.spinner.hide();
@@ -146,13 +149,13 @@ export class BlogComponent implements OnInit {
 
   GetAllBlog(){
     this.blogService.GetAllBlog().subscribe(resp=>{
+      this.spinner.hide();
       if(resp.status == Status.Success){
           this.blogs = resp.data;
       } 
       else{
         Swal.fire('Oops...', resp.message, 'error');
       }
-      this.spinner.hide();
     })    
   }
 
@@ -163,6 +166,7 @@ export class BlogComponent implements OnInit {
     this.blogForm.get('description').setValue(blog.description);
     this.blogForm.get('status').setValue(blog.status);
     this.blogForm.get('approvalStatus').setValue(blog.approvalStatus);
+    this.blogForm.get('shortDescription').setValue(blog.shortDescription);
    
     this.blogId = ''+blog.id; 
     this.previewUrl =  this.apiendpoint+'Uploads/Blog/image/'+blog.featuredImage;
@@ -205,14 +209,27 @@ export class BlogComponent implements OnInit {
     })
   }
 
-  resetBlogForm(){
+  resetBlogForm(){  
     this.blogForm.setValue({
+      userId: 0,
       title: '', 
+      shortDescription: '',
       description: '', 
       approvalStatus: true, 
       status: true, 
       featuredImage: '', 
     })
 
+  }
+
+  shortDescriptionCharacterCount(event): boolean{
+    if(this.blogForm.get('shortDescription').value.length >=200  && event.keyCode != 8 ){
+      let shortDescription:string = this.blogForm.get('shortDescription').value;
+      this.blogForm.get('shortDescription').setValue(shortDescription.substring(0,200));
+      this.characterCount =  this.blogForm.get('shortDescription').value.length;
+      return false;
+    }
+    this.characterCount =  this.blogForm.get('shortDescription').value.length;
+    return true;
   }
 }

@@ -167,6 +167,50 @@ namespace BusinessRespository.Repositories
 
        
        
+        public ResponseModel GetBannerDetailByPageId(int? Id)
+        {
+            ResponseModel result = new ResponseModel();
+            try
+            {
+                var BannerDetail = new Banner();
+                if (Id > 0)
+                {
+                    BannerDetail = Context.Banner.Where(z => z.PageId == Id).FirstOrDefault();
+                }
+
+                result.data = BannerDetail;
+                result.status = Status.Success;
+                result.message = "Banner Detail";
+            }
+            catch (Exception ex)
+            { 
+                result.status = Status.Error;
+                result.error = ex.Message;
+
+            }
+            return result;
+        }
+
+        public ResponseModel GetAllPage()
+        {
+            ResponseModel result = new ResponseModel();
+            try
+            {
+                List<Page> resultValue = new List<Page>();
+                resultValue = Context.Page.Where(z => z.RecUpd != "D").ToList();
+
+                result.data = resultValue;
+                result.status = Status.Success;
+                result.message = "List for Page";
+            }
+            catch (Exception ex)
+            {
+                result.status = Status.Error;
+                result.error = ex.Message;
+
+            }
+            return result;
+        }
         public ResponseModel GetBannerDetailByBannerId(int? Id)
         {
             ResponseModel result = new ResponseModel();
@@ -183,13 +227,14 @@ namespace BusinessRespository.Repositories
                 result.message = "Banner Detail";
             }
             catch (Exception ex)
-            { 
+            {
                 result.status = Status.Error;
                 result.error = ex.Message;
 
             }
             return result;
         }
+
 
     }
 }

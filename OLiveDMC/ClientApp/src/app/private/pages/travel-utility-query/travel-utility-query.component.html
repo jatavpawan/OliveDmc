@@ -1,0 +1,93 @@
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="content">
+                        <form class="form-horizontal" [formGroup]="queryForm" (ngSubmit)="submitQueryData()">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2 input-label" for="title">Travel Utility Type:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="title"  placeholder="Enter Travel Utility Type" formControlName="travelUtilityType">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2 input-label" for="title">Name:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="title"  placeholder="Enter Name" formControlName="name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2 input-label" for="title">Mobile:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="title"  placeholder="Enter Mobile" formControlName="mobile">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2 input-label" for="title">Email:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="title"  placeholder="Enter Email" formControlName="email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2 input-label" for="title">Message:</label>
+                                <div class="col-sm-10">
+                                    <textarea name="" class="form-control" id="" cols="30" rows="10" formControlName="message"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-1">
+                                </div>
+                                <div class="col-sm-offset-1 col-sm-10">
+                                    <button type="submit" *ngIf="edit_query == false" [disabled]="queryForm.invalid" class="btn btn-default btn-primary" >Submit</button>
+                                    <button type="submit" *ngIf="edit_query == true" [disabled]="queryForm.invalid" class="btn btn-default btn-primary" >Update</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <div class="col-sm-10 pl-5">
+                            <!-- <table class="table table-hover table-bordered" *ngIf="queries.length != 0"> -->
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                      <tr>
+                                        <th>S.No.</th>
+                                        <th>Utility Type</th>
+                                        <th>Name</th>
+                                        <th>Mobile</th>
+                                        <th>Email</th>
+                                        <th>Message</th>
+                                        <th>Action</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        <ng-container *ngFor="let query of queries; let i = index;">
+                                            <tr>
+                                                  <td>{{i+1}}</td>
+                                                  <td>{{query.travelUtilityType}}</td>
+                                                  <td>{{query.name}}</td>
+                                                  <td>{{query.mobile}}</td>
+                                                  <td>{{query.email}}</td>
+                                                  <td>{{query.message.length >20 ? (query.message|slice : 0:20) +'...' : query.message }}</td>
+                                                  <td>
+                                                      <span class="edit-category glyphicon glyphicon-pencil" (click)="editQuery(query)"></span>
+                                                      <span class="delete-category glyphicon glyphicon-trash" (click)="openConfirmDialog(query.id)"></span>
+                                                  </td>
+                                                </tr>
+                                        </ng-container>
+                                    </tbody>
+                                  </table>
+                            </div>
+                              
+                          </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

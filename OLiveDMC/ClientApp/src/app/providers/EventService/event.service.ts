@@ -11,43 +11,40 @@ export class EventService {
 
   constructor(private dataService: DataService, private router: Router) { }
 
-  AddUpdateEvent(data){
-    return <Observable<ResponseModel>> this.dataService.postFormData('Event/AddUpdateEvent', data);
+  AddUpdateEvent(data) {
+    return <Observable<ResponseModel>>this.dataService.postFormData('Event/AddUpdateEvent', data);
   }
 
 
-  GetAllEvent()
-  {
-    
-    return <Observable<ResponseModel>> this.dataService.getData('Event/GetAllEvent');
+  GetAllEvent() {
+
+    return <Observable<ResponseModel>>this.dataService.getData('Event/GetAllEvent');
   }
-  
-  GetEventDetailByEventId(EventId)
-  {
-    return <Observable<ResponseModel>> this.dataService.getData('Event/GetEventDetailByEventId?id='+EventId);
+
+  GetEventDetailByEventId(EventId) {
+    return <Observable<ResponseModel>>this.dataService.getData('Event/GetEventDetailByEventId?id=' + EventId);
   }
- 
-  editEvent(data)
-  {
-    return <Observable<ResponseModel>> this.dataService.postData('Event/AddUpdateEvent', data);
+
+  editEvent(data) {
+    return <Observable<ResponseModel>>this.dataService.postData('Event/AddUpdateEvent', data);
   }
- 
-  deleteEvent(EventId)
-  {
-    return <Observable<ResponseModel>> this.dataService.getData('Event/deleteEvent?Id='+EventId);
+
+  deleteEvent(EventId) {
+    return <Observable<ResponseModel>>this.dataService.getData('Event/deleteEvent?Id=' + EventId);
   }
- 
-  fileUploadInEvent(data)
-  {
-    return <Observable<ResponseModel>> this.dataService.postFormData('Event/fileUploadInEvent', data);
+
+  fileUploadInEvent(data) {
+    return <Observable<ResponseModel>>this.dataService.postFormData('Event/fileUploadInEvent', data);
   }
-  
-  videoUploadInEvent(data)
-  {
-    return <Observable<ResponseModel>> this.dataService.postFormData('Event/videoUploadInEvent', data);
+
+  videoUploadInEvent(data) {
+    return <Observable<ResponseModel>>this.dataService.postFormData('Event/videoUploadInEvent', data);
   }
-  deleteVideoInEvent(oldVideoName:string){
-    return <Observable<ResponseModel>> this.dataService.getData('TourTheme/deleteVideoInEvent?oldVideoName='+oldVideoName);
+  deleteVideoInEvent(oldVideoName: string) {
+    return <Observable<ResponseModel>>this.dataService.getData('TourTheme/deleteVideoInEvent?oldVideoName=' + oldVideoName);
+  }
+  GetAllEventInFrontEnd() {
+    return <Observable<ResponseModel>>this.dataService.getData('Event/GetAllEventInFrontEnd');
   }
 
 

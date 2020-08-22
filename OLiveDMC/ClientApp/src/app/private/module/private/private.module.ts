@@ -1,5 +1,5 @@
 import { PrivateRoutingModule } from './../../routing/private-routing/private-routing.module';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { MapComponent } from '../../pages/map/map.component';
@@ -45,6 +45,21 @@ import { FaqComponent } from '../../pages/faq/faq.component';
 import { TopDestinationComponent } from '../../pages/top-destination/top-destination.component';
 import { HomeComponent } from '../../pages/home/home.component';
 import { TemporaryPageComponent } from '../../pages/temporary-page/temporary-page.component';
+import { LatestEventComponent } from '../../pages/latest-event/latest-event.component';
+import { LatestEventDetailComponent } from '../../pages/latest-event/latest-event-detail/latest-event-detail.component';
+import { NewdestinationsInWhatsnewComponent } from '../../pages/newdestinations-in-whatsnew/newdestinations-in-whatsnew.component';
+import { InterviewInWhatsnewComponent } from '../../pages/interview-in-whatsnew/interview-in-whatsnew.component';
+import { FestivalComponent } from '../../pages/festival/festival.component';
+import { OurTeamMemberComponent } from '../../pages/our-team-member/our-team-member.component';
+import { PrivacyPolicyComponent } from '../../pages/privacy-policy/privacy-policy.component';
+import { AboutusStatementComponent } from '../../pages/aboutus-statement/aboutus-statement.component';
+import { AboutusIntroductionComponent } from '../../pages/aboutus-introduction/aboutus-introduction.component';
+import { TravelUtilityQueryComponent } from '../../pages/travel-utility-query/travel-utility-query.component';
+import { ContactUsComponent } from '../../pages/contact-us/contact-us.component';
+import {MatSelectModule} from '@angular/material/select';
+// import { SelectModule } from 'ng2-select';
+// import { NgSelectModule } from '@ng-select/ng-select';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -91,14 +106,29 @@ import { TemporaryPageComponent } from '../../pages/temporary-page/temporary-pag
     FaqComponent,
     TopDestinationComponent,
     TemporaryPageComponent,
-
+    LatestEventComponent,
+    LatestEventDetailComponent,
+    NewdestinationsInWhatsnewComponent,
+    InterviewInWhatsnewComponent,
+    FestivalComponent,
+    OurTeamMemberComponent,
+    PrivacyPolicyComponent,
+    AboutusIntroductionComponent,
+    AboutusStatementComponent,
+    TravelUtilityQueryComponent,
+    ContactUsComponent,
   ],
   imports: [
     CommonModule,
     PrivateRoutingModule,
     SharedModule,
     DragDropModule,
+    MatSelectModule,
+    NgMultiSelectDropDownModule.forRoot()
+    // NgSelectModule
+    // SelectModule,
     
-  ]
+  ],
+  
 })
 export class PrivateModule { }

@@ -126,5 +126,46 @@ namespace BusinessServices.Services
             }
             return response;
         }
+
+        public ResponseModel GetAllOfferAdsInFrontEnd()
+        {
+            try
+            {
+                ResponseModel result = new ResponseModel();
+                result = _unitOfWork.OfferAdsRepository.GetAllOfferAdsInFrontEnd();
+
+                response.data = result.data;
+                response.status = result.status;
+                response.message = result.message;
+
+            }
+            catch (Exception ex)
+            {
+                response.message = ex.Message;
+                response.status = Status.Error;
+            }
+            return response;
+        }
+
+
+        public ResponseModel GetAllOfferAdsByPageId(int? Id)
+        {
+            try
+            {
+                ResponseModel result = new ResponseModel();
+                result = _unitOfWork.OfferAdsRepository.GetAllOfferAdsByPageId(Id);
+
+                response.data = result.data;
+                response.status = result.status;
+                response.message = result.message;
+
+            }
+            catch (Exception ex)
+            {
+                response.message = ex.Message;
+                response.status = Status.Error;
+            }
+            return response;
+        }
     }
 }

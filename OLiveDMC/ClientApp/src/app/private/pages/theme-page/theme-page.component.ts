@@ -37,6 +37,8 @@ export class ThemePageComponent implements OnInit {
   }
   videoUrl: string="";
   videoName:string = "";
+  characterCount:number = 0;
+
 
   constructor( 
     private formBuilder : FormBuilder,
@@ -47,6 +49,7 @@ export class ThemePageComponent implements OnInit {
 
     this.themeForm = this.formBuilder.group({
       themeName: ['', Validators.required],
+      shortDescription: ['', Validators.required],
       description: ['', Validators.required],
       status: [false],
       FeaturedImage: [''],
@@ -107,6 +110,7 @@ export class ThemePageComponent implements OnInit {
         formData.append('FeaturedImage', null);
       }
       formData.append('ThemeName', this.themeForm.get('themeName').value);
+      formData.append('ShortDescription', this.themeForm.get('shortDescription').value);
       formData.append('Description', this.themeForm.get('description').value);
       formData.append('Status', this.themeForm.get('status').value);
       formData.append('Video', this.videoName);
@@ -166,6 +170,7 @@ export class ThemePageComponent implements OnInit {
       this.deleteVideoFromPhysicalLocation(this.videoName);
     }
     this.themeForm.get('themeName').setValue(theme.themeName);
+    this.themeForm.get('shortDescription').setValue(theme.shortDescription);
     this.themeForm.get('description').setValue(theme.description);
     this.themeForm.get('status').setValue(theme.status);
     this.themeId = ''+theme.id; 
@@ -261,11 +266,24 @@ export class ThemePageComponent implements OnInit {
   resetThemeForm(){
     this.themeForm.setValue({
       themeName: '', 
+      shortDescription: '', 
       description: '', 
       status: false, 
       FeaturedImage: '', 
       video: '', 
     })
   }
+
+  shortDescriptionCharacterCount(event): boolean{
+    if(this.themeForm.get('shortDescription').value.length >=200  && event.keyCode != 8 ){
+      let shortDescription:string = this.themeForm.get('shortDescription').value;
+      this.themeForm.get('shortDescription').setValue(shortDescription.substring(0,200));
+      this.characterCount =  this.themeForm.get('shortDescription').value.length;
+      return false;
+    }
+    this.characterCount =  this.themeForm.get('shortDescription').value.length;
+    return true;
+  }
+
 
 }

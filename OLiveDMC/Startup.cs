@@ -15,17 +15,26 @@ namespace OLiveDMC
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
-        public string MyAllowSpecificOrigins { get; private set; }
+        //public string MyAllowSpecificOrigins { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                    builder => builder.AllowAnyOrigin().WithOrigins("http://localhost", "http://rsmartservices.com", "http://localhost:51306", "http://localhost:4200", "http://administrator.gmservices.in")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
           //  services.AddSingleton<IFileProvider>(
           //new PhysicalFileProvider(
@@ -53,19 +62,25 @@ namespace OLiveDMC
             services.AddTransient<ITrendingNewsService, TrendingNewsService>();
             services.AddTransient<IFAQService, FAQService>();
             services.AddTransient<ITopDestinationService, TopDestinationService>();
+            services.AddTransient<ILatestEventService, LatestEventService>();
+            services.AddTransient<IInterviewsInWhatsNewService, InterviewsInWhatsNewService>();
+            services.AddTransient<INewDestinationsInWhatsNewService, NewDestinationsInWhatsNewService>();
+            services.AddTransient<IPrivacyPolicyService, PrivacyPolicyService>();
+            services.AddTransient<ITeamMemberInAboutUsService, TeamMemberInAboutUsService>();
+            services.AddTransient<IFestivalService, FestivalService>();
+            services.AddTransient<IAboutUsIntroductionService, AboutUsIntroductionService>();
+            services.AddTransient<IAboutUsStatementService, AboutUsStatementService>();
+            services.AddTransient<ITravelUtilityQueryService, TravelUtilityQueryService>();
+            services.AddTransient<IContactUsService, ContactUsService>();
+            services.AddTransient<IUserCoverImageService, UserCoverImageService>();
+            services.AddTransient<IUserPersonalInfoService, UserPersonalInfoService>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
-            services.AddCors(options => {
-                options.AddPolicy(MyAllowSpecificOrigins,
-                    builder => builder.AllowAnyOrigin().WithOrigins("http://localhost", "http://rsmartservices.com", "http://localhost:51306")
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials());
-            });
+         
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -102,14 +117,14 @@ namespace OLiveDMC
 
             //app.UseSession();
 
-
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
             });
-
+            
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
@@ -123,6 +138,9 @@ namespace OLiveDMC
                     spa.Options.StartupTimeout = System.TimeSpan.FromSeconds(200);
                 }
             });
+
+          
+
         }
     }
 }

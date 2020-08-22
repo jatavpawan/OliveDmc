@@ -13,6 +13,9 @@ namespace BusinessRespository.IRepositories
 
         ResponseModel deleteBanner(int? Id);
         string fileUploadInBanner(vmfileInfo obj);
+        ResponseModel GetBannerDetailByPageId(int? Id);
+        ResponseModel GetAllPage();
+
         ResponseModel GetBannerDetailByBannerId(int? Id);
 
 

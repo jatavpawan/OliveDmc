@@ -2,3 +2,26 @@
 
 /* html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+.video-dialog-container {
+   position: relative !important;
+   /* max-width: 800px; */
+   min-width: 800px;
+   width: 100%;
+}
+/* 
+.video-dialog-container .mat-dialog-container {
+   padding: 15px;
+   width: 100%;
+} */
+
+.video-dialog-container .mat-dialog-content {
+   max-height: inherit !important;
+}
+.character-count{
+   text-align: end;
+ }
+
+ ::ng-deep .mat-select-placeholder {
+   color: black;
+}
+ 

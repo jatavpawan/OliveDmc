@@ -78,5 +78,13 @@ namespace OLiveDMC.Controllers
             var Data = _newsService.deleteVideoInNews(oldVideoName);
             return await System.Threading.Tasks.Task.FromResult(Data);
         }
+
+        [HttpGet]
+        [Route("GetAllNewsinFrontEnd")]
+        public async Task<ResponseModel> GetAllNewsinFrontEnd()
+        {
+            var Data = _newsService.GetAllNewsinFrontEnd();
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
     }
 }

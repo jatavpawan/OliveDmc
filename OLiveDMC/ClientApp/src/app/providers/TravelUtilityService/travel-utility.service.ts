@@ -10,6 +10,8 @@ export class TravelUtilityService {
 
   constructor(private dataService: DataService) { }
 
+  // <-------------------------------Travel Utility------------------------------------>
+ 
   AddUpdateUtility(data){
     return <Observable<ResponseModel>> this.dataService.postFormData('Utility/AddUpdateUtility', data);
   }
@@ -50,4 +52,27 @@ export class TravelUtilityService {
   }
 
 
+
+  // <-------------------------------Travel Utility Query------------------------------------>
+
+  AddUpdateTravelUtilityQuery(data){
+    return <Observable<ResponseModel>> this.dataService.postData('TravelUtilityQuery/AddUpdateTravelUtilityQuery', data);
+  }
+
+
+  GetAllTravelUtilityQuery()
+  {
+    return <Observable<ResponseModel>> this.dataService.getData('TravelUtilityQuery/GetAllTravelUtilityQuery');
+  }
+  
+  deleteTravelUtilityQuery(queryId)
+  {
+    return <Observable<ResponseModel>> this.dataService.getData('TravelUtilityQuery/deleteTravelUtilityQuery?Id='+queryId);
+  }
+ 
+  GetTravelUtilityQueryDetailById(queryId)
+  {
+    return <Observable<ResponseModel>> this.dataService.getData('TravelUtilityQuery/GetTravelUtilityQueryDetailById?Id='+queryId);
+  }
+  
 }

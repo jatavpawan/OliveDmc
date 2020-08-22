@@ -16,5 +16,6 @@ namespace BusinessDataModel.DB
         public DateTime? UpdatedDate { get; set; }
         public string RecUpd { get; set; }
         public string Video { get; set; }
+        public string ShortDescription { get; set; }
     }
 }

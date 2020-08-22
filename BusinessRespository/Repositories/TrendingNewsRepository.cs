@@ -38,6 +38,7 @@ namespace BusinessRespository.Repositories
                 {
                     var TrendingNewsObj = Context.TrendingNews.Where(z => z.Id == obj.Id && z.RecUpd != "D").FirstOrDefault();
                     TrendingNewsObj.Title = obj.Title;
+                    TrendingNewsObj.ShortDescription = obj.ShortDescription;
                     TrendingNewsObj.Description = obj.Description;
                     TrendingNewsObj.ShowInFrontEnd = obj.ShowInFrontEnd;
                     TrendingNewsObj.RecUpd = "U";
@@ -65,6 +66,7 @@ namespace BusinessRespository.Repositories
                         var TrendingNewsDetail = new TrendingNews
                         {
                             Title = obj.Title,
+                            ShortDescription = obj.ShortDescription,
                             Description = obj.Description,
                             ShowInFrontEnd = obj.ShowInFrontEnd,
                             RecUpd = "C",
@@ -101,7 +103,7 @@ namespace BusinessRespository.Repositories
             try
             {
                 List<TrendingNews> resultValue = new List<TrendingNews>();
-                resultValue = Context.TrendingNews.Where(z => z.RecUpd != "D").ToList();
+                resultValue = Context.TrendingNews.Where(z => z.RecUpd != "D").OrderByDescending(x => x.CreatedDate).ToList();
 
                 result.data = resultValue;
                 result.status = Status.Success;

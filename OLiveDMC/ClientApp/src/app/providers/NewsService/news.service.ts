@@ -47,6 +47,11 @@ export class NewsService {
   }
 
   deleteVideoInNews(oldVideoName:string){
-    return <Observable<ResponseModel>> this.dataService.getData('TourTheme/deleteVideoInNews?oldVideoName='+oldVideoName);
+    return <Observable<ResponseModel>> this.dataService.getData('News/deleteVideoInNews?oldVideoName='+oldVideoName);
+  }
+
+  GetAllNewsinFrontEnd()
+  {
+    return <Observable<ResponseModel>> this.dataService.getData('News/GetAllNewsinFrontEnd');
   }
 }

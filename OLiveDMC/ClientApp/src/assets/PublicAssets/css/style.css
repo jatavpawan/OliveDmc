@@ -210,7 +210,7 @@ ul.top-nav-menu li.active a, ul.top-nav-menu li.active:hover a {
 }
 
 .btn-login {
-    color: #fff;
+    color: #fff ;
     font-size: 14px;
     font-weight: 500;
     padding: 5px 15px;
@@ -2033,6 +2033,17 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
     display: block;
     left: 0;
 }
+.form-wraper label.checkbox {
+    display: block;
+    width: 100%;
+}
+.form-wraper .form-group > button {
+    width: 100%;
+    padding: 15px 0;
+    font-size: 20px;
+    border-radius: 0;
+    cursor: pointer;
+}
 .form-left-wrap > img { position: absolute; bottom: -60px; right: -60px; }
 .form-wraper .card { -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, .16); box-shadow: 0 0 6px rgba(0, 0, 0, .16); border: none; padding: 40px 60px; border-radius: 10px; font-size: 14px; }
 .form-wraper .card h3 {
@@ -2050,7 +2061,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 .form-wraper .card p a { color: #21B5AE; margin: 0 0 0 15px; }
 .form-wraper .card .form-group { margin: 20px 0; }
 .compulsary-star { color: red; margin: 0 2px; }
-.form-wraper .card h2 { font-size: 16px; font-weight: 400; margin: 15px 0 20px; color: #B2B2B2; }
+.form-wraper .card h2 { font-size: 16px; font-weight: 400; margin: 15px 0 20px; color: #B2B2B2; text-align: center; }
 .form-wraper .card h2 span {
     color: #5758e0;
     text-transform: capitalize;

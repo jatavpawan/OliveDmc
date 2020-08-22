@@ -35,7 +35,8 @@ export class NewsComponent implements OnInit {
   }
   videoUrl: string = "";
   videoName: string = "";
-
+  
+  characterCount:number = 0;
   constructor( 
     private formBuilder : FormBuilder,
     private  newsService: NewsService, 
@@ -46,6 +47,7 @@ export class NewsComponent implements OnInit {
 
     this.newsForm = this.formBuilder.group({
       title: ['', Validators.required],
+      shortDescription: ['', Validators.required],
       description: ['', Validators.required],
       status: [false],
       featuredImage: [''],
@@ -108,6 +110,7 @@ export class NewsComponent implements OnInit {
         formData.append('FeaturedImage', null);
       }
       formData.append('Title', this.newsForm.get('title').value);
+      formData.append('ShortDescription', this.newsForm.get('shortDescription').value);
       formData.append('Description', this.newsForm.get('description').value);
       formData.append('Status', this.newsForm.get('status').value);
       formData.append('Video', this.videoName);
@@ -139,6 +142,7 @@ export class NewsComponent implements OnInit {
           // this.newsForm.reset();
           // this.newsForm.get('description').setValue('');
           this.videoName = "";
+          this.videoUrl = "";
           this.GetAllNews();
         } 
         else{
@@ -167,6 +171,7 @@ export class NewsComponent implements OnInit {
       this.deleteVideoFromPhysicalLocation(this.videoName);
     }
     this.newsForm.get('title').setValue(news.title);
+    this.newsForm.get('shortDescription').setValue(news.shortDescription);
     this.newsForm.get('description').setValue(news.description);
     this.newsForm.get('status').setValue(news.status);
    
@@ -266,6 +271,7 @@ export class NewsComponent implements OnInit {
   resetNewsForm(){
     this.newsForm.setValue({
       title: '', 
+      shortDescription: '', 
       description: '', 
       status: false, 
       featuredImage: '', 
@@ -273,5 +279,16 @@ export class NewsComponent implements OnInit {
     })
   }
 
+  shortDescriptionCharacterCount(event): boolean{
+    if(this.newsForm.get('shortDescription').value.length >=200  && event.keyCode != 8 ){
+      let shortDescription:string = this.newsForm.get('shortDescription').value;
+      this.newsForm.get('shortDescription').setValue(shortDescription.substring(0,200));
+      this.characterCount =  this.newsForm.get('shortDescription').value.length;
+      return false;
+    }
+    this.characterCount =  this.newsForm.get('shortDescription').value.length;
+    return true;
+  }
+
 }
- 
+

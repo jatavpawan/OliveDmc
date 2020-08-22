@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as $ from 'jquery';
+import { AuthenticationService } from 'src/app/providers/authentication/authentication.service';
 
 declare var $: any;
 
@@ -14,9 +15,14 @@ export class PublicLayoutComponent implements OnInit {
   showheader: boolean = true;
   href: string;
   showfooter: boolean = true;
+  userLogin: boolean =  false;
  
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private authService: AuthenticationService,
+    
+    ) {
 
     this.href = this.router.url;
     if (
@@ -32,6 +38,9 @@ export class PublicLayoutComponent implements OnInit {
        this.showfooter =  true;
     }
       console.log("header url", this.router.url);
+      debugger;
+
+      // this.authService.isLoggedIn() == true ? this.userLogin =  true : this.userLogin =  false;  
   }
 
 
@@ -71,5 +80,21 @@ export class PublicLayoutComponent implements OnInit {
      this.showheader =  false;
       
       $(".footer-bg").css("display", "none");
+  }
+
+  
+  goSocial(){
+    let userdata = this.authService.getUserdata();
+    if(userdata != null && userdata != undefined){
+      this.router.navigate(['/social-media']);
+    }
+    else{
+      // localStorage.setItem("previousAccessUrl", "/social-media"); 
+      this.router.navigate(['/login']);
+    }
+  }
+
+  logout(){
+    this.authService.logout();
   }
 }

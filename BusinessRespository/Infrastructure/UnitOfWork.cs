@@ -232,6 +232,136 @@ namespace BusinessRespository.Infrastructure
             }
         }
 
+        private ILatestEventRepository _latestEventRepository;
+
+        // Public Member ---------------------------------------------------------------------------------
+        public ILatestEventRepository LatestEventRepository
+        {
+            get
+            {
+                return _latestEventRepository = _latestEventRepository ?? new LatestEventRepository(db);
+            }
+        }
+
+        private IInterviewsInWhatsNewRepository _interviewsInWhatsNewRepository;
+
+        // Public Member ---------------------------------------------------------------------------------
+        public IInterviewsInWhatsNewRepository InterviewsInWhatsNewRepository
+        {
+            get
+            {
+                return _interviewsInWhatsNewRepository = _interviewsInWhatsNewRepository ?? new InterviewsInWhatsNewRepository(db);
+            }
+        }
+        private INewDestinationsInWhatsNewRepository _newDestinationsInWhatsNewRepository;
+
+        // Public Member ---------------------------------------------------------------------------------
+        public INewDestinationsInWhatsNewRepository NewDestinationsInWhatsNewRepository
+        {
+            get
+            {
+                return _newDestinationsInWhatsNewRepository = _newDestinationsInWhatsNewRepository ?? new NewDestinationsInWhatsNewRepository(db);
+            }
+        }
+
+        private IPrivacyPolicyRepository _privacyPolicyRepository;
+
+        // Public Member ---------------------------------------------------------------------------------
+        public IPrivacyPolicyRepository PrivacyPolicyRepository
+        {
+            get
+            {
+                return _privacyPolicyRepository = _privacyPolicyRepository ?? new PrivacyPolicyRepository(db);
+            }
+        }
+
+        private ITeamMemberInAboutUsRepository _teamMemberInAboutUsRepository;
+
+        // Public Member ---------------------------------------------------------------------------------
+        public ITeamMemberInAboutUsRepository TeamMemberInAboutUsRepository
+        {
+            get
+            {
+                return _teamMemberInAboutUsRepository = _teamMemberInAboutUsRepository ?? new TeamMemberInAboutUsRepository(db);
+            }
+        }
+
+        private IFestivalRepository _festivalRepository;
+
+        // Public Member ---------------------------------------------------------------------------------
+        public IFestivalRepository FestivalRepository
+        {
+            get
+            {
+                return _festivalRepository = _festivalRepository ?? new FestivalRepository(db);
+            }
+        }
+
+        private IAboutUsIntroductionRepository _aboutUsIntroductionRepository;
+
+        // Public Member ---------------------------------------------------------------------------------
+        public IAboutUsIntroductionRepository AboutUsIntroductionRepository
+        {
+            get
+            {
+                return _aboutUsIntroductionRepository = _aboutUsIntroductionRepository ?? new AboutUsIntroductionRepository(db);
+            }
+        }
+
+        private IAboutUsStatementRepository _aboutUsStatementRepository;
+
+        // Public Member ---------------------------------------------------------------------------------
+        public IAboutUsStatementRepository AboutUsStatementRepository
+        {
+            get
+            {
+                return _aboutUsStatementRepository = _aboutUsStatementRepository ?? new AboutUsStatementRepository(db);
+            }
+        }
+
+        private ITravelUtilityQueryRepository _travelUtilityQueryRepository;
+
+        // Public Member ---------------------------------------------------------------------------------
+        public ITravelUtilityQueryRepository TravelUtilityQueryRepository
+        {
+            get
+            {
+                return _travelUtilityQueryRepository = _travelUtilityQueryRepository ?? new TravelUtilityQueryRepository(db);
+            }
+        }
+
+        private IContactUsRepository _contactUsRepository;
+
+        // Public Member ---------------------------------------------------------------------------------
+        public IContactUsRepository ContactUsRepository
+        {
+            get
+            {
+                return _contactUsRepository = _contactUsRepository ?? new ContactUsRepository(db);
+            }
+        }
+
+        private IUserCoverImageRepository _userCoverImageRepository;
+
+        // Public Member ---------------------------------------------------------------------------------
+        public IUserCoverImageRepository UserCoverImageRepository
+        {
+            get
+            {
+                return _userCoverImageRepository = _userCoverImageRepository ?? new UserCoverImageRepository(db);
+            }
+        }
+
+        private IUserPersonalInfoRepository _userPersonalInfoRepository;
+
+        // Public Member ---------------------------------------------------------------------------------
+        public IUserPersonalInfoRepository UserPersonalInfoRepository
+        {
+            get
+            {
+                return _userPersonalInfoRepository = _userPersonalInfoRepository ?? new UserPersonalInfoRepository(db);
+            }
+        }
         public void Commit() {
             db.SaveChanges();
         }

@@ -38,6 +38,7 @@ namespace BusinessRespository.Repositories
                 {
                     var EventObj = Context.Event.Where(z => z.Id == obj.Id).FirstOrDefault();
                     EventObj.Title = obj.Title;
+                    EventObj.ShortDescription = obj.ShortDescription;
                     EventObj.Description = obj.Description;
                     EventObj.Status = obj.Status;
                     EventObj.RecUpd = "U";
@@ -66,6 +67,7 @@ namespace BusinessRespository.Repositories
                         var EventDetail = new Event
                         {
                             Title = obj.Title,
+                            ShortDescription = obj.ShortDescription,
                             Description = obj.Description,
                             Status = obj.Status,
                             RecUpd = "C",
@@ -216,6 +218,27 @@ namespace BusinessRespository.Repositories
                 uploadcls.fileDeleted(@"Uploads\Event\Video", oldVideoName);
 
             }
+        }
+
+        public ResponseModel GetAllEventInFrontEnd()
+        {
+            ResponseModel result = new ResponseModel();
+            try
+            {
+                List<Event> resultValue = new List<Event>();
+                resultValue = Context.Event.Where(z => z.RecUpd != "D" && z.Status == true).ToList();
+
+                result.data = resultValue;
+                result.status = Status.Success;
+                result.message = "List for Event";
+            }
+            catch (Exception ex)
+            {
+                result.status = Status.Error;
+                result.error = ex.Message;
+
+            }
+            return result;
         }
     }
 }

@@ -7,7 +7,6 @@ namespace BusinessDataModel.DB
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
-        public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string EmailId { get; set; }
         public string MobileNo { get; set; }
@@ -20,5 +19,6 @@ namespace BusinessDataModel.DB
         public DateTime? UpdatedDate { get; set; }
         public int? UpdatedBy { get; set; }
         public string ProfileImage { get; set; }
+        public int? RoleId { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace BusinessRespository.IRepositories
         ResponseModel setBlogPriority(List<BlogPriority> obj);
         ResponseModel AllBlogPriorityList();
         ResponseModel AllBlogPriorityListInUserPanel();
-
+        ResponseModel AllBlogInUserPanel(int pageNo);
         
 
     }

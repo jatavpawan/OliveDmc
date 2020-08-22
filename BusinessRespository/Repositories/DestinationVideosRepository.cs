@@ -101,7 +101,7 @@ namespace BusinessRespository.Repositories
             try
             {
                 List<DestinationVideos> resultValue = new List<DestinationVideos>();
-                resultValue = Context.DestinationVideos.Where(z => z.RecUpd != "D").ToList();
+                resultValue = Context.DestinationVideos.Where(z => z.RecUpd != "D").OrderByDescending(x => x.CreatedDate).ToList();
 
                 result.data = resultValue;
                 result.status = Status.Success;

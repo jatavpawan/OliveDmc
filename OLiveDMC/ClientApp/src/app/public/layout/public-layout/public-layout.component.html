@@ -4,7 +4,7 @@
 
 
     <!--Start of header-->
-<header [style.display]="showheader == false ? 'none' : '' ">
+<!-- <header [style.display]="showheader == false ? 'none' : '' ">
   <div class="container">
     <div class="row">
       <div class="col-12 d-flex justify-content-between align-items-center">
@@ -30,7 +30,7 @@
             <li class="d-md-inline"><a [routerLink]="['/travel-utility']" routerLinkActive="active" >Travel Utility</a></li>
           </ul>
         </nav>
-        <a class="btn-login" [routerLink]="['/social-media']" routerLinkActive="active" >Go Social<span><img src="../../../../assets/PublicAssets/images/sent.png"></span></a>
+        <a class="btn-login" (click)="goSocial()">Go Social<span><img src="../../../../assets/PublicAssets/images/sent.png"></span></a>
         <div class="site-search">
           <button class="btn-search" type="button" data-toggle="dropdown"><img src="../../../../assets/PublicAssets/images/search-icon.png" alt=""></button> 
           <div class="search-wrapper dropdown-menu">
@@ -46,9 +46,9 @@
             <img src="../../../../assets/PublicAssets/images/account.png" alt="">
           </div>
           <ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 21px, 0px);">
-            <li><a [routerLink]="['/social-media']">My Account</a></li>
-            <li><a [routerLink]="['/public/login']" (click)="hideHeader()">Login</a></li>
-            <li><a [routerLink]="['/public/signUp']" (click)="hideHeader()">Sign up</a></li>
+            <li><a  [routerLink]="['/social-media']" >My Account</a></li>
+            <li><a  [routerLink]="['/login']" (click)="hideHeader()">Login</a></li>
+            <li><a  [routerLink]="['/signUp']" (click)="hideHeader()">Sign up</a></li>
           </ul>
         </div>
 
@@ -60,13 +60,13 @@
     </nav>
   </div>
   </div>
-</header>
+</header> -->
 <!--End of header-->
 <router-outlet></router-outlet>
 
 
   <!-- footer section START -->
-  <footer class="footer-bg" [style.display]="showfooter == false ? 'none' : '' " style="background-image: url(../../../../assets/PublicAssets/images/footer-bg.jpg);">
+  <!-- <footer class="footer-bg" [style.display]="showfooter == false ? 'none' : '' " style="background-image: url(../../../../assets/PublicAssets/images/footer-bg.jpg);">
     <div class="container">
       <div class="d-flex flex-wrap">
         <div class="col-md-3">
@@ -93,7 +93,7 @@
                 <li><a [routerLink]="['/about']"  >Our team</a></li>
                 <li><a [routerLink]="['/privacy-policy']"  >Privacy Policy</a></li>
                 <li><a [routerLink]="['/faq']"  >FAQ</a></li>
-                <li><a [routerLink]="['/career']"  >Carrer</a></li>
+                <li><a [routerLink]="['/career']"  >Career</a></li>
               </ul>
             </div>
         </div>
@@ -124,6 +124,6 @@
     </div>
   </div>
   <div class="copyright">&copy; 2020 — by <a href="Rohitphotocrafts.com">livetrveller.in</a> All Right Reserved.</div>
-  </footer>
+  </footer> -->
   <!-- footer section END -->
   

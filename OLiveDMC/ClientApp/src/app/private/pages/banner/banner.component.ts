@@ -6,6 +6,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2'
 import { commonTinymceConfig } from '../../shared/tinymce-settings';
 import { BannerService } from 'src/app/providers/BannerService/banner.service';
+import { ShareService } from 'src/app/providers/ShareService/share.service';
 
 @Component({
   selector: 'app-banner',
@@ -19,6 +20,7 @@ export class BannerComponent implements OnInit {
   fileUploaded:boolean = false;
   file: any;
   banners:any =[];
+  pages:any =[];
   apiendpoint:string= environment.apiendpoint;
   editfileUploaded: boolean = false;
   edit_banner: boolean = false;
@@ -34,6 +36,7 @@ export class BannerComponent implements OnInit {
   constructor( 
     private formBuilder : FormBuilder,
     private  bannerService: BannerService, 
+    private  shareService: ShareService, 
     private spinner: NgxSpinnerService 
     ) {
 
@@ -59,6 +62,7 @@ export class BannerComponent implements OnInit {
 
     // this.apiendpoint = environment.apiendpoint;
     this.GetAllBanner();
+    this.GetAllPage();
   }
 
  
@@ -140,6 +144,19 @@ export class BannerComponent implements OnInit {
     this.bannerService.GetAllBanner().subscribe(resp=>{
       if(resp.status == Status.Success){
           this.banners = resp.data;
+      } 
+      else{
+        Swal.fire('Oops...', resp.message, 'error');
+      }
+      this.spinner.hide();
+    })    
+  }
+  
+  GetAllPage(){
+    debugger;
+    this.shareService.GetAllPage().subscribe(resp=>{
+      if(resp.status == Status.Success){
+          this.pages = resp.data;
       } 
       else{
         Swal.fire('Oops...', resp.message, 'error');

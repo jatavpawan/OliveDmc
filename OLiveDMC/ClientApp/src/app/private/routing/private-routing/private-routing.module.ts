@@ -42,6 +42,17 @@ import { InterviewComponent } from '../../pages/interview/interview.component';
 import { TrendingNewsComponent } from '../../pages/trending-news/trending-news.component';
 import { TopDestinationComponent } from '../../pages/top-destination/top-destination.component';
 import { TemporaryPageComponent } from '../../pages/temporary-page/temporary-page.component';
+import { LatestEventComponent } from '../../pages/latest-event/latest-event.component';
+import { LatestEventDetailComponent } from '../../pages/latest-event/latest-event-detail/latest-event-detail.component';
+import { InterviewInWhatsnewComponent } from '../../pages/interview-in-whatsnew/interview-in-whatsnew.component';
+import { NewdestinationsInWhatsnewComponent } from '../../pages/newdestinations-in-whatsnew/newdestinations-in-whatsnew.component';
+import { FestivalComponent } from '../../pages/festival/festival.component';
+import { OurTeamMemberComponent } from '../../pages/our-team-member/our-team-member.component';
+import { PrivacyPolicyComponent } from '../../pages/privacy-policy/privacy-policy.component';
+import { AboutusIntroductionComponent } from '../../pages/aboutus-introduction/aboutus-introduction.component';
+import { AboutusStatementComponent } from '../../pages/aboutus-statement/aboutus-statement.component';
+import { TravelUtilityQueryComponent } from '../../pages/travel-utility-query/travel-utility-query.component';
+import { ContactUsComponent } from '../../pages/contact-us/contact-us.component';
 
 const routes: Routes = [
   {
@@ -90,12 +101,12 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   
   },
-  {
-    path: 'whats-new',
-    component: WhatsNewComponent,
-    canActivate: [AuthGuard]
+  // {
+  //   path: 'whats-new',
+  //   component: WhatsNewComponent,
+  //   canActivate: [AuthGuard]
   
-  },
+  // },
   {
     path: 'travel-utility',
     component: TravelUtilityComponent,
@@ -289,6 +300,60 @@ const routes: Routes = [
   
   },
   {
+    path: 'latest-event',
+    component: LatestEventComponent,
+    canActivate: [AuthGuard]
+  
+  },
+  {
+    path: 'latest-event-detail/:eventId',
+    component: LatestEventDetailComponent,
+    canActivate: [AuthGuard]
+  
+  },
+  {
+    path: 'festival',
+    component: FestivalComponent,
+    canActivate: [AuthGuard]
+  
+  },
+  {
+    path: 'our-team-member',
+    component: OurTeamMemberComponent,
+    canActivate: [AuthGuard]
+  
+  },
+  {
+    path: 'privacy-policy',
+    component: PrivacyPolicyComponent,
+    canActivate: [AuthGuard]
+  
+  },
+  {
+    path: 'aboutus-introduction',
+    component: AboutusIntroductionComponent,
+    canActivate: [AuthGuard]
+  
+  },
+  {
+    path: 'aboutus-statement',
+    component: AboutusStatementComponent,
+    canActivate: [AuthGuard]
+  
+  },
+  {
+    path: 'travel-utility-query',
+    component: TravelUtilityQueryComponent,
+    canActivate: [AuthGuard]
+  
+  },
+  {
+    path: 'contact-us',
+    component: ContactUsComponent,
+    canActivate: [AuthGuard]
+  
+  },
+  {
     path: 'home',
     component: HomeComponent,
     children: [
@@ -327,6 +392,31 @@ const routes: Routes = [
         component: ThemePageComponent,
         canActivate: [AuthGuard]
       },
+    ]
+  
+  },
+  {
+    path: 'WhatsNew',
+    component: WhatsNewComponent,
+    children: [
+      {
+        path: '',
+        component: InterviewInWhatsnewComponent,
+        canActivate: [AuthGuard]
+
+      },
+      {
+        path: 'interview',
+        component: InterviewInWhatsnewComponent,
+        canActivate: [AuthGuard]
+      
+      },
+      {
+        path: 'newDestination',
+        component: NewdestinationsInWhatsnewComponent,
+        canActivate: [AuthGuard]
+      
+      }
     ]
   
   },

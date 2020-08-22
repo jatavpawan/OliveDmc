@@ -288,4 +288,7 @@
     border: none !important;
     outline: none !important;
   }
+  .character-count{
+    text-align: end;
+  }
   

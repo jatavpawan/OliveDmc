@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './private/shared/sidebar/sidebar.component';
 import { FooterComponent } from './private/shared/footer/footer.component';
@@ -26,6 +25,17 @@ import { InterviewService } from './providers/Interview/interview.service';
 import { TrendingNewsService } from './providers/TrendingNews/trending-news.service';
 import { FaqService } from './providers/FAQ/faq.service';
 import { TopDestinationService } from './providers/TopDestination/top-destination.service';
+import { OpenVideoComponent } from './public/shared/open-video/open-video.component';
+import { LatestEventService } from './providers/LatestEventService/latest-event.service';
+import { NewdestinationInWhatsnewService } from './providers/NewDestinationsInWhatsNew/newdestination-in-whatsnew.service';
+import { InterviewInWhatsnewService } from './providers/InterviewInWhatsNew/interview-in-whatsnew.service';
+import { FestivalService } from './providers/FestivalService/festival.service';
+import { TravelUtilityDetailComponent } from './private/pages/travel-utility-detail/travel-utility-detail.component';
+import { ShareService } from './providers/ShareService/share.service';
+import { TeamMemberService } from './providers/TeamMemberService/team-member.service';
+import { ContactUsService } from './providers/ContactUsService/contact-us.service';
+import { PrivacyPolicyService } from './providers/PrivacyPolicyService/privacy-policy.service';
+// import { NgSelectModule } from ' @ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -35,16 +45,23 @@ import { TopDestinationService } from './providers/TopDestination/top-destinatio
     HeaderComponent,
     PublicLayoutComponent,
     PrivateLayoutComponent,
+    OpenVideoComponent,
+    TravelUtilityDetailComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserAnimationsModule,
     HttpClientModule,
     RouterModule,
     AppRoutingModule,
     SharedModule,
-    BrowserAnimationsModule
+    // NgSelectModule
+
   ],
   providers: [
+    DataService,
+    NewdestinationInWhatsnewService,
+    InterviewInWhatsnewService,
     DataService,
     AuthGuard,
     AuthenticationService,
@@ -53,11 +70,17 @@ import { TopDestinationService } from './providers/TopDestination/top-destinatio
     CurrentNewsService,
     UpcommingNewsService,
     EventService,
+    LatestEventService,
     DestinationVideosService,
     InterviewService,
     TrendingNewsService,
     FaqService,
     TopDestinationService,
+    FestivalService,
+    ShareService,
+    TeamMemberService,
+    ContactUsService,
+    PrivacyPolicyService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
@@ -65,6 +88,10 @@ import { TopDestinationService } from './providers/TopDestination/top-destinatio
     },
     { provide: Window, useValue: window }
   ],
-  bootstrap: [AppComponent]
+  // schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  entryComponents: [
+    OpenVideoComponent
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

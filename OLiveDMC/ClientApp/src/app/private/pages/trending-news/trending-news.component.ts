@@ -32,6 +32,7 @@ export class TrendingNewsComponent implements OnInit {
     'placement': 'top',
     'show-delay': 500
   }
+  characterCount:number = 0;
 
   constructor( 
     private formBuilder : FormBuilder,
@@ -42,6 +43,7 @@ export class TrendingNewsComponent implements OnInit {
 
     this.trendingNewsForm = this.formBuilder.group({
       title: ['', Validators.required],
+      shortDescription: ['', Validators.required],
       description: ['', Validators.required],
       showInFrontEnd: [false],
       featuredImage: [''],
@@ -104,6 +106,7 @@ export class TrendingNewsComponent implements OnInit {
         formData.append('FeaturedImage', null);
       }
       formData.append('Title', this.trendingNewsForm.get('title').value);
+      formData.append('ShortDescription', this.trendingNewsForm.get('shortDescription').value);
       formData.append('Description', this.trendingNewsForm.get('description').value);
       formData.append('ShowInFrontEnd', this.trendingNewsForm.get('showInFrontEnd').value);
 
@@ -160,6 +163,7 @@ export class TrendingNewsComponent implements OnInit {
   editTrendingNews(trendingNews){
     debugger;
     this.trendingNewsForm.get('title').setValue(trendingNews.title);
+    this.trendingNewsForm.get('shortDescription').setValue(trendingNews.shortDescription);
     this.trendingNewsForm.get('description').setValue(trendingNews.description);
     this.trendingNewsForm.get('showInFrontEnd').setValue(trendingNews.showInFrontEnd);
    
@@ -215,11 +219,24 @@ export class TrendingNewsComponent implements OnInit {
   resetTrendingNewsForm(){
     this.trendingNewsForm.setValue({
       title: '', 
+      shortDescription: '', 
       description: '', 
       showInFrontEnd: false, 
       featuredImage: '', 
     })
   }
+
+  shortDescriptionCharacterCount(event): boolean{
+    if(this.trendingNewsForm.get('shortDescription').value.length >=200  && event.keyCode != 8 ){
+      let shortDescription:string = this.trendingNewsForm.get('shortDescription').value;
+      this.trendingNewsForm.get('shortDescription').setValue(shortDescription.substring(0,200));
+      this.characterCount =  this.trendingNewsForm.get('shortDescription').value.length;
+      return false;
+    }
+    this.characterCount =  this.trendingNewsForm.get('shortDescription').value.length;
+    return true;
+  }
+
 
 }
  

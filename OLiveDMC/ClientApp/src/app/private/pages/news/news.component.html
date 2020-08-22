@@ -12,6 +12,13 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                              <label class="control-label col-sm-2 input-label" for="title">Short Description:</label>
+                              <div class="col-sm-10">
+                                <textarea class="form-control" name="" id="" cols="115" rows="10" formControlName="shortDescription" (input)="shortDescriptionCharacterCount($event)"></textarea>
+                                <div class="character-count">count {{characterCount}}/200</div> 
+                              </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="control-label col-sm-2" for="Description">Description:</label>
                                 <div class="col-sm-10">
                                   <editor apiKey="byg3blvrvimc75hw1cb3hwo9su10wod4ogt2oi6p3nmaukek" formControlName="description" [init]="tinymceConfig"></editor>
@@ -32,7 +39,7 @@
                               <div class="col-sm-10">
                                   <video  *ngIf="videoName == '' " poster="../../../../assets/img/videoupload.png" width="320" height="240" [src] = "videoUrl" controls>
                                   </video>
-                                  <video  *ngIf="videoName != '' " poster="../../../../assets/img/VideoUpload2.jpg" width="320" height="240" [src] = "apiendpoint+'Uploads/News/Video/'+videoName" controls>
+                                  <video  *ngIf="videoName != '' "  width="320" height="240" [src] = "apiendpoint+'Uploads/News/Video/'+videoName" controls>
                                   </video>
                                   <input type="file" name="" id="videofiles" #files1 (change)="changeVideo(files1)" formControlName="video">
                               </div>

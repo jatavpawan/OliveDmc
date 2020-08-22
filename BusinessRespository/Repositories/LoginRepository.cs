@@ -59,6 +59,7 @@ namespace BusinessRespository.Repositories
             reg.EmailId = obj.EmailId; 
             reg.MobileNo= obj.MobileNo; 
             reg.Category= obj.Category;
+            reg.RoleId = 2;
             reg.TravelEnthuiast = obj.TravelEnthuiast;
             reg.CreatedDate = DateTime.Now;
             reg.CreatedBy = 1;
@@ -74,7 +75,7 @@ namespace BusinessRespository.Repositories
             usrLogin.RegistrationId = registredUser.Id;
             usrLogin.Username = obj.EmailId;
             usrLogin.Password = obj.Password;
-            usrLogin.RoleId = 1;
+            usrLogin.RoleId = 2;
             usrLogin.CreatedDate = DateTime.Now;
             usrLogin.CreatedBy = 1;
             usrLogin.UpdatedDate = DateTime.Now;
@@ -96,16 +97,31 @@ namespace BusinessRespository.Repositories
         }
         public Registration LoginUser(vmLoginUser obj)
         {
-            Registration resultValue = null;
+            Registration userRegInfo = null;
+            //vmUserInfo userInfo = null;
 
             if (!string.IsNullOrEmpty(obj.Email))
             {
-                UserRegLogin result = null;
-                result = Context.UserRegLogin.Where(z => (z.Username == obj.Email) && (z.Password == obj.Password) ).FirstOrDefault();
+                UserRegLogin userLoginInfo = null;
+                userLoginInfo = Context.UserRegLogin.Where(z => (z.Username == obj.Email) && (z.Password == obj.Password) ).FirstOrDefault();
                 
-                if(result != null)
+                if(userLoginInfo != null)
                 {
-                    resultValue = Context.Registration.Where(z => z.Id == result.RegistrationId).FirstOrDefault();
+                    userRegInfo = Context.Registration.Where(z => z.Id == userLoginInfo.RegistrationId).FirstOrDefault();
+                    //userInfo.Id = userRegInfo.Id;
+                    //userInfo.FirstName = userRegInfo.FirstName;
+                    //userInfo.LastName = userRegInfo.LastName;
+                    //userInfo.EmailId = userRegInfo.EmailId;
+                    //userInfo.MobileNo = userRegInfo.MobileNo;
+                    //userInfo.Category = userRegInfo.Category;
+                    //userInfo.RoleId = userLoginInfo.RoleId;
+                    //userInfo.TravelEnthuiast = userRegInfo.TravelEnthuiast;
+                    //userInfo.Gmcid = userRegInfo.Gmcid;
+                    //userInfo.CreatedDate = userRegInfo.CreatedDate;
+                    //userInfo.CreatedBy = userRegInfo.CreatedBy;
+                    //userInfo.UpdatedDate = userRegInfo.UpdatedDate;
+                    //userInfo.UpdatedBy = userRegInfo.UpdatedBy;
+                    //userInfo.ProfileImage = userRegInfo.ProfileImage;
                 }
             }
             //else if (!string.IsNullOrEmpty(obj.Email))
@@ -119,7 +135,7 @@ namespace BusinessRespository.Repositories
 
             //}
 
-            return resultValue;
+            return userRegInfo;
 
 
         }
@@ -251,7 +267,6 @@ namespace BusinessRespository.Repositories
             {
                 Id = x.Id,
                 FirstName = x.FirstName,
-                MiddleName = x.MiddleName,
                 LastName  = x.LastName,
                 EmailId = x.EmailId,
                 MobileNo = x.MobileNo,
@@ -281,7 +296,6 @@ namespace BusinessRespository.Repositories
             Registration reg = new Registration();
             reg = Context.Registration.Where(z => z.Id == obj.Id).FirstOrDefault();
             reg.FirstName = obj.FirstName;
-            reg.MiddleName = obj.MiddleName;
             reg.LastName = obj.LastName;
             reg.EmailId = obj.EmailId;
             reg.MobileNo = obj.MobileNo;

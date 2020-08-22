@@ -529,5 +529,9 @@ margin: 5px 25px;
     outline: none !important;
   }
   
+  .character-count{
+    text-align: end;
+  }
+  
   
 

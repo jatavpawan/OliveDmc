@@ -17,5 +17,7 @@ namespace BusinessRespository.IRepositories
 
         string videoUploadInEvent(vmfileInfo obj);
         void deleteVideoInEvent(string oldVideoName);
+        ResponseModel GetAllEventInFrontEnd();
+
     }
 }

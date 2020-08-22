@@ -109,6 +109,46 @@ namespace BusinessServices.Services
 
      
 
+        public ResponseModel GetBannerDetailByPageId(int? Id)
+        {
+            try
+            {
+                ResponseModel result = new ResponseModel();
+                result = _unitOfWork.BannerRepository.GetBannerDetailByPageId(Id);
+
+                response.data = result.data;
+                response.status = result.status;
+                response.message = result.message;
+
+            }
+            catch (Exception ex)
+            {
+                response.message = ex.Message;
+                response.status = Status.Error;
+            }
+            return response;
+        }
+
+        public ResponseModel GetAllPage()
+        {
+            try
+            {
+                ResponseModel result = new ResponseModel();
+                result = _unitOfWork.BannerRepository.GetAllPage();
+
+                response.data = result.data;
+                response.status = result.status;
+                response.message = result.message;
+
+            }
+            catch (Exception ex)
+            {
+                response.message = ex.Message;
+                response.status = Status.Error;
+            }
+            return response;
+        }
+
         public ResponseModel GetBannerDetailByBannerId(int? Id)
         {
             try
@@ -128,7 +168,6 @@ namespace BusinessServices.Services
             }
             return response;
         }
-
 
     }
 }

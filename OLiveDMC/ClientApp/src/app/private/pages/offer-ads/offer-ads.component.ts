@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Status } from 'src/app/model/ResponseModel';
 import { environment } from 'src/environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2'
 import { commonTinymceConfig } from '../../shared/tinymce-settings';
-import { AuthenticationService } from 'src/app/providers/authentication/authentication.service';
 import { OfferAdsService } from 'src/app/providers/OfferAdsService/offer-ads.service';
+import { ShareService } from 'src/app/providers/ShareService/share.service';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-offer-ads',
@@ -20,7 +21,8 @@ export class OfferAdsComponent implements OnInit {
   previewUrl:any = null;
   fileUploaded:boolean = false;
   file: any;
-  offerAds:any =[];
+  offerAds:Array<any> =[];
+  pages:Array<any> =[];
   apiendpoint:string = environment.apiendpoint;
   editfileUploaded: boolean = false;
   edit_offerAds: boolean = false;
@@ -33,19 +35,91 @@ export class OfferAdsComponent implements OnInit {
     'show-delay': 500
   }
 
+   value:any = ['Athens'];
+   _disabledV:string = '0';
+   disabled:boolean = false;
+   items:Array<string> = ['Amsterdam', 'Antwerp', 'Athens', 'Barcelona',
+    'Berlin', 'Birmingham', 'Bradford', 'Bremen', 'Brussels', 'Bucharest',
+    'Budapest', 'Cologne', 'Copenhagen', 'Dortmund', 'Dresden', 'Dublin', 'Düsseldorf',
+    'Essen', 'Frankfurt', 'Genoa', 'Glasgow', 'Gothenburg', 'Hamburg', 'Hannover',
+    'Helsinki', 'Leeds', 'Leipzig', 'Lisbon', 'Łódź', 'London', 'Kraków', 'Madrid',
+    'Málaga', 'Manchester', 'Marseille', 'Milan', 'Munich', 'Naples', 'Palermo',
+    'Paris', 'Poznań', 'Prague', 'Riga', 'Rome', 'Rotterdam', 'Seville', 'Sheffield',
+    'Sofia', 'Stockholm', 'Stuttgart', 'The Hague', 'Turin', 'Valencia', 'Vienna',
+    'Vilnius', 'Warsaw', 'Wrocław', 'Zagreb', 'Zaragoza'];
+    
+    cities2 = [
+      {id: 1, name: 'Vilnius'},
+      {id: 2, name: 'Kaunas'},
+      {id: 3, name: 'Pavilnys', disabled: true},
+      {id: 4, name: 'Pabradė'},
+      {id: 5, name: 'Klaipėda'}
+  ];
+
+  toppings = new FormControl();
+
+  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+  // dropdownList = [];
+  dropdownList = [
+    { item_id: 1, item_text: 'Mumbai' },
+    { item_id: 2, item_text: 'Bangaluru' },
+    { item_id: 3, item_text: 'Pune' },
+    { item_id: 4, item_text: 'Navsari' },
+    { item_id: 5, item_text: 'New Delhi' }
+  ];;
+  selectedItems = [];
+  // dropdownSettings:IDropdownSettings = {};
+  
+  dropdownSettings:IDropdownSettings = {
+    singleSelection: false,
+    idField: 'item_id',
+    textField: 'item_text',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 3,
+    allowSearchFilter: true
+  };;
+  
   constructor( 
     private formBuilder : FormBuilder,
     private  offerAdsService: OfferAdsService, 
+    private  shareService: ShareService, 
     private spinner: NgxSpinnerService,
-    private authService: AuthenticationService,
     ) {
+
+      // this.dropdownList = [
+      //   { item_id: 1, item_text: 'Mumbai' },
+      //   { item_id: 2, item_text: 'Bangaluru' },
+      //   { item_id: 3, item_text: 'Pune' },
+      //   { item_id: 4, item_text: 'Navsari' },
+      //   { item_id: 5, item_text: 'New Delhi' }
+      // ];
+      this.selectedItems = [
+        { item_id: 3, item_text: 'Pune' },
+        { item_id: 4, item_text: 'Navsari' }
+      ];
+      // this.dropdownSettings = {
+      //   singleSelection: false,
+      //   idField: 'item_id',
+      //   textField: 'item_text',
+      //   selectAllText: 'Select All',
+      //   unSelectAllText: 'UnSelect All',
+      //   itemsShowLimit: 3,
+      //   allowSearchFilter: true
+      // };
 
     this.offerAdsForm = this.formBuilder.group({
       title: ['', Validators.required],
-      pageId: ['', Validators.required],
+      // pageId: ['', Validators.required],
+      pageId: [ [1], Validators.required],
       image: [''],
+      showInFrontEnd: [''],
     })
+
     
+  }
+  expression(){
+    debugger;
   }
 
   ngOnInit(): void {
@@ -62,8 +136,24 @@ export class OfferAdsComponent implements OnInit {
 
     // this.apiendpoint = environment.apiendpoint;
     this.GetAllOfferAds();
+    this.GetAllPage();
+
+
+    
   }
 
+  GetAllPage(){
+    debugger;
+    this.shareService.GetAllPage().subscribe(resp=>{
+      if(resp.status == Status.Success){
+          this.pages = resp.data;
+      } 
+      else{
+        Swal.fire('Oops...', resp.message, 'error');
+      }
+      this.spinner.hide();
+    })    
+  }
  
   preview(file) {
     if(this.edit_offerAds == true){
@@ -87,6 +177,7 @@ export class OfferAdsComponent implements OnInit {
   }
 
   submitOfferAdsData(){
+    debugger;
     if(this.offerAdsForm.valid){
       this.spinner.show();
 
@@ -100,10 +191,12 @@ export class OfferAdsComponent implements OnInit {
         formData.append('image', null);
       }
       formData.append('Title', this.offerAdsForm.get('title').value);
-      formData.append('PageId', this.offerAdsForm.get('pageId').value);
+      // formData.append('PageId', this.offerAdsForm.get('pageId').value);
+      formData.append('PageId', this.offerAdsForm.value.pageId.toString());
+      formData.append('ShowInFrontEnd', this.offerAdsForm.get('showInFrontEnd').value);
 
       this.offerAdsService.AddUpdateOfferAds(formData).subscribe(resp=>{
-     
+        this.spinner.hide();
         if(resp.status == Status.Success){
          if(this.edit_offerAds == true){
           Swal.fire(
@@ -150,9 +243,15 @@ export class OfferAdsComponent implements OnInit {
   }
 
   editOfferAds(offerAds){
-
+    debugger;
     this.offerAdsForm.get('title').setValue(offerAds.title);
-    this.offerAdsForm.get('pageId').setValue(offerAds.pageId);
+    // this.offerAdsForm.get('pageId').setValue(offerAds.pageId);
+    let newpageId = offerAds.pageId.split(',').map(item =>{
+      return Number (item);
+   });
+
+    this.offerAdsForm.get('pageId').setValue(newpageId);
+    this.offerAdsForm.get('showInFrontEnd').setValue(offerAds.showInFrontEnd);
    
     this.offerAdsId = ''+offerAds.id; 
     this.previewUrl =  this.apiendpoint+'Uploads/OfferAds/image/'+offerAds.image;
@@ -199,8 +298,44 @@ export class OfferAdsComponent implements OnInit {
     this.offerAdsForm.setValue({
       title: '', 
       pageId: '', 
+      showInFrontEnd: '', 
       image: '', 
     })
   }
+
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
+  }
+ 
+  //  get disabledV():string {
+  //   return this._disabledV;
+  // }
+
+  //  set disabledV(value:string) {
+  //   this._disabledV = value;
+  //   this.disabled = this._disabledV === '1';
+  // }
+
+  //  selected(value:any) {
+  //   console.log('Selected value is: ', value);
+  // }
+
+  //  removed(value:any) {
+  //   console.log('Removed value is: ', value);
+  // }
+
+  //  refreshValue(value:any) {
+  //   this.value = value;
+  // }
+
+  //  itemsToString(value:Array<any> = []) {
+  //   return value
+  //     .map(item => {
+  //     return item.text;
+  //   }).join(',');
+  // }
 
 }

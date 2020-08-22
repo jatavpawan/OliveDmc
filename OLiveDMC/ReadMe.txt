@@ -7,3 +7,5 @@ Scaffold-DbContext "Data Source=DESKTOP-KRG2RAL\SQLEXPRESS;Initial Catalog=Trave
 
 Scaffold-DbContext "Data Source=34.93.129.68;Initial Catalog=TravelOlive;Trusted_Connection=false;User ID=OliveTravel;Password=Olive@786;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir DB -force
 
+
+Scaffold-DbContext "Data Source=GMCSCO-SERVER-8\SQLEXPRESS;Initial Catalog=TravelOlive;Persist Security Info=True;User ID=sa;Password=pawan@123;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir DB -force

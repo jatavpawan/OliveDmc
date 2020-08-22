@@ -29,7 +29,6 @@ export class UserProfileComponent implements OnInit {
     ){
     this.profileForm = this.formBuilder.group({
       firstName: ['',Validators.required],
-      middleName: [''],
       lastName: ['', Validators.required],
       emailId: ['', Validators.required],
       mobileNo: ['', Validators.required],
@@ -41,7 +40,6 @@ export class UserProfileComponent implements OnInit {
     this.ProfileImg = this.userData.profileImage;
     this.profileForm.setValue({
       firstName: this.userData.firstName,
-      middleName: this.userData.middleName,
       lastName: this.userData.lastName,
       emailId: this.userData.emailId,
       mobileNo: this.userData.mobileNo,
@@ -91,7 +89,6 @@ export class UserProfileComponent implements OnInit {
         formData.append('ProfileImage', null);
       }
       formData.append('FirstName', this.profileForm.get('firstName').value);
-      formData.append('MiddleName', this.profileForm.get('middleName').value);
       formData.append('LastName', this.profileForm.get('lastName').value);
       formData.append('EmailId', this.profileForm.get('emailId').value);
       formData.append('MobileNo', this.profileForm.get('mobileNo').value);

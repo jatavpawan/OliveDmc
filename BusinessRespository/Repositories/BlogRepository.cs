@@ -40,7 +40,8 @@ namespace BusinessRespository.Repositories
                         BlogObj.UserId = obj.UserId;
                         BlogObj.Title = obj.Title;
                         BlogObj.Description = obj.Description;
-                        BlogObj.Status = obj.Status;
+                        BlogObj.ShortDescription = obj.ShortDescription;
+                    BlogObj.Status = obj.Status;
                         BlogObj.ApprovalStatus = obj.ApprovalStatus;
                     BlogObj.RecUpd = "U";
                         
@@ -63,12 +64,13 @@ namespace BusinessRespository.Repositories
                         //var result1 = Context.Blog.Where(z => z.BlogName == obj.BlogName).Any();
 
 
-                        if (!Context.Blog.Where(z => z.Title == obj.Title && z.RecUpd != "D").Any())
-                        {
+                        //if (!Context.Blog.Where(z => z.Title == obj.Title && z.RecUpd != "D").Any())
+                        //{
                             var BlogDetail = new Blog
                             {
                                 UserId = obj.UserId,
                                 Title = obj.Title,
+                                ShortDescription = obj.ShortDescription,
                                 Description = obj.Description,
                                 Status = obj.Status,
                                 ApprovalStatus = obj.ApprovalStatus,
@@ -82,12 +84,12 @@ namespace BusinessRespository.Repositories
                             Context.SaveChanges();
                             result.message = "Successfully Saved";
                             result.status = Status.Success;
-                        }
-                        else
-                        {
-                            result.message = "Record already Exists";
-                            result.status = Status.Warning;
-                        }
+                        //}
+                        //else
+                        //{
+                        //    result.message = "Record already Exists";
+                        //    result.status = Status.Warning;
+                        //}
 
                     }
 
@@ -107,7 +109,7 @@ namespace BusinessRespository.Repositories
                 try
                 {
                     List<Blog> resultValue = new List<Blog>();
-                    resultValue = Context.Blog.Where(z => z.RecUpd != "D").ToList();
+                    resultValue = Context.Blog.Where(z => z.RecUpd != "D").OrderByDescending(x => x.CreatedDate).ToList();
 
                     result.data = resultValue;
                     result.status = Status.Success;
@@ -174,14 +176,43 @@ namespace BusinessRespository.Repositories
             ResponseModel result = new ResponseModel();
             try
             {
-                var BlogDetail = new Blog();
+                //var BlogDetail = new Blog();
+                //List<vmBlogDetail> resultValue = new List<vmBlogDetail>();
+                vmBlogDetail resultValue = new vmBlogDetail();
 
                 if (Id > 0)
                 {
-                    BlogDetail = Context.Blog.Where(z => z.Id == Id).FirstOrDefault();
+                    //BlogDetail = Context.Blog.Where(z => z.Id == Id).FirstOrDefault();
+
+
+
+                   var innerJoin = from blog in Context.Blog
+                                    join reg in Context.Registration
+                                    on blog.UserId equals reg.Id
+                                    select new vmBlogDetail
+                                    {
+                                        Id = blog.Id,
+                                        UserId = blog.UserId,
+                                        FirstName = reg.FirstName, 
+                                        LastName = reg.LastName,
+                                        Title = blog.Title,
+                                        FeaturedImage = blog.FeaturedImage,
+                                        ShortDescription = blog.ShortDescription,
+                                        Description = blog.Description,
+                                        Status = blog.Status,
+                                        ApprovalStatus = blog.ApprovalStatus,
+                                        CreatedBy = blog.CreatedBy,
+                                        CreatedDate = blog.CreatedDate,
+                                        UpdatedBy = blog.UpdatedBy,
+                                        UpdatedDate = blog.UpdatedDate,
+                                        
+                                    };
+
+                    //resultValue = innerJoin.ToList<vmBlogDetail>();
+                    resultValue = innerJoin.Where(x => x.Id == Id).FirstOrDefault();
                 }
 
-                result.data = BlogDetail;
+                result.data = resultValue;
                 result.status = Status.Success;
                 result.message = "Blog Detail";
             }
@@ -248,6 +279,7 @@ namespace BusinessRespository.Repositories
                                     UserId = blog.UserId,
                                     Title = blog.Title,
                                     FeaturedImage = blog.FeaturedImage,
+                                    ShortDescription = blog.ShortDescription,
                                     Description = blog.Description,
                                     Status = blog.Status,
                                     ApprovalStatus = blog.ApprovalStatus,
@@ -289,6 +321,7 @@ namespace BusinessRespository.Repositories
                                     UserId = blog.UserId,
                                     Title = blog.Title,
                                     FeaturedImage = blog.FeaturedImage,
+                                    ShortDescription = blog.ShortDescription,
                                     Description = blog.Description,
                                     Status = blog.Status,
                                     ApprovalStatus = blog.ApprovalStatus,
@@ -299,10 +332,34 @@ namespace BusinessRespository.Repositories
                                     RecUpd = blog.RecUpd,
                                 };
 
-                resultValue = innerJoin.Where(z =>  z.Status == true && z.ApprovalStatus == true).ToList<VmBlogPriority>();
+                resultValue = innerJoin.Where(z =>  z.Status == true && z.ApprovalStatus == true).OrderByDescending(x => x.CreatedDate).ToList<VmBlogPriority>();
                 result.data = resultValue;
                 result.status = Status.Success;
                 result.message = "List for Blog Priority";
+            }
+            catch (Exception ex)
+            {
+                result.status = Status.Error;
+                result.error = ex.Message;
+
+            }
+            return result;
+        }
+        public ResponseModel AllBlogInUserPanel(int pageNo)
+        {
+            ResponseModel result = new ResponseModel();
+            vmAllBlogInUserPanel blogResponse = new vmAllBlogInUserPanel();
+            try
+            {
+
+                List<Blog> resultValue = new List<Blog>();
+                resultValue = Context.Blog.Where(z => z.Status == true && z.ApprovalStatus == true && z.RecUpd != "D").OrderByDescending(x => x.CreatedDate).Skip(pageNo*4).Take(4).ToList();
+                blogResponse.totalPage = resultValue.Count / 10;
+                blogResponse.perPageRecord = 10;
+                blogResponse.blogList = resultValue;
+                result.data = blogResponse;
+                result.status = Status.Success;
+                result.message = "List for Blog";
             }
             catch (Exception ex)
             {

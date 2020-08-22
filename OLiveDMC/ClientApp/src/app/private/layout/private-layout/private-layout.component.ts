@@ -28,9 +28,10 @@ export class PrivateLayoutComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.listTitles =[
+    this.listTitles = [
       { path: '/private/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
       { path: '/private/temporary', title: 'Temporary',  icon: 'pe-7s-graph', class: '' },
+      { path: '/private/latest-event', title: 'Latest Event',  icon: 'pe-7s-graph', class: '' },
       { path: '/private/home', title: 'Home',  icon: 'pe-7s-graph', class: '' },
       { path: '/private/map', title: 'Destination',  icon:'pe-7s-map-marker', class: '' },
       { path: '/private/theme', title: 'Theme',  icon:'pe-7s-user', class: '' },
@@ -62,8 +63,7 @@ export class PrivateLayoutComponent implements OnInit {
       { path: '/private/location', title: 'Location',  icon:'pe-7s-note2', class: '' },
       { path: '/private/blog-priority', title: 'Blog Priority',  icon:'pe-7s-note2', class: '' },
       { path: '/private/faq', title: 'FAQ',  icon:'pe-7s-note2', class: '' },
-
-
+      { path: '/private/festival', title: 'Festival',  icon:'pe-7s-note2', class: '' },
       { path: '/private/destination-videos', title: 'Destination Videos',  icon:'pe-7s-note2', class: '' },
       { path: '/private/interview', title: 'Interview',  icon:'pe-7s-note2', class: '' },
       { path: '/private/trending news', title: 'Trending News',  icon:'pe-7s-note2', class: '' },
@@ -74,13 +74,30 @@ export class PrivateLayoutComponent implements OnInit {
       { path: '/private/home/trending-news', title: 'Trending News',  icon:'pe-7s-note2', class: '' },
       { path: '/private/home/top-destination', title: 'Top destination',  icon:'pe-7s-note2', class: '' },
       { path: '/private/home/theme', title: 'Theme',  icon:'pe-7s-note2', class: '' },
+      { path: '/private/WhatsNew/interview', title: 'Interview',  icon:'pe-7s-note2', class: '' },
+      { path: '/private/WhatsNew/newDestination', title: 'New Destinations',  icon:'pe-7s-note2', class: '' },
+      { path: '/private/our-team-member', title: 'Team Member',  icon:'pe-7s-note2', class: '' },
+      { path: '/private/aboutus-introduction', title: 'About Us Introduction',  icon:'pe-7s-note2', class: '' },
+      { path: '/private/aboutus-statement', title: 'About Us Statement',  icon:'pe-7s-note2', class: '' },
+      { path: '/private/travel-utility-query', title: 'Travel Utility Query',  icon:'pe-7s-note2', class: '' },
+      { path: '/private/contact-us', title: 'Contact Us',  icon:'pe-7s-note2', class: '' },
+      { path: '/private/privacy-policy', title: 'Privacy Policy',  icon:'pe-7s-note2', class: '' },
       
     ]
-
     this.menuItems = [
       { path: '/private/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
       // { path: '/private/temporary', title: 'Temporary',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
       { path: '/private/home/destination-videos', title: 'Home',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
+      { path: '/private/WhatsNew/interview', title: 'WhatsNew',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
+     
+      { path: '/private/latest-event', title: 'Latest Event',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
+      { path: '/private/festival', title: 'Festival',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
+      { path: '/private/our-team-member', title: 'Team Member',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
+      { path: '/private/aboutus-introduction', title: 'About Us Introduction',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
+      { path: '/private/aboutus-statement', title: 'About Us Statement',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
+      { path: '/private/travel-utility-query', title: 'Travel Utility Query',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
+      { path: '/private/contact-us', title: 'Contact Us',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
+      { path: '/private/privacy-policy', title: 'Privacy Policy',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
       // { path: '', title: 'Destination',  icon:'pe-7s-note2', class: '', id:"Destination", datatarget:"#Destination",
       //   child: [ 
       //     {path: '/private/map', title: 'Map',  icon:'pe-7s-map-marker', class: '', firstChar: 'M'},

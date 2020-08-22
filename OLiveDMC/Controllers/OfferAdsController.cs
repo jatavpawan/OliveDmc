@@ -61,5 +61,22 @@ namespace OLiveDMC.Controllers
             var Data = _OfferAdsService.GetOfferAdsDetailByOfferAdsId(Id);
             return await System.Threading.Tasks.Task.FromResult(Data);
         }
+
+        [HttpGet]
+        [Route("GetAllOfferAdsInFrontEnd")]
+        public async Task<ResponseModel> GetAllOfferAdsInFrontEnd()
+        {
+            var Data = _OfferAdsService.GetAllOfferAdsInFrontEnd();
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
+
+        [HttpGet]
+        [Route("GetAllOfferAdsByPageId")]
+        public async Task<ResponseModel> GetAllOfferAdsByPageId(int? Id)
+        {
+            var Data = _OfferAdsService.GetAllOfferAdsByPageId(Id);
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
+
     }
 }

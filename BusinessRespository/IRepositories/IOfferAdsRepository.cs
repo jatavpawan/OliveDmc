@@ -15,5 +15,7 @@ namespace BusinessRespository.IRepositories
         ResponseModel deleteOfferAds(int? Id);
         string fileUploadInOfferAds(vmfileInfo obj);
         ResponseModel GetOfferAdsDetailByOfferAdsId(int? Id);
+        ResponseModel GetAllOfferAdsInFrontEnd();
+        ResponseModel GetAllOfferAdsByPageId(int? Id);
     }
 }

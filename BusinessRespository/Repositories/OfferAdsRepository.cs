@@ -39,6 +39,7 @@ namespace BusinessRespository.Repositories
                     var OfferAdsObj = Context.OfferAds.Where(z => z.Id == obj.Id).FirstOrDefault();
                     OfferAdsObj.Title = obj.Title;
                     OfferAdsObj.PageId = obj.PageId;
+                    OfferAdsObj.ShowInFrontEnd = obj.ShowInFrontEnd;
                     OfferAdsObj.RecUpd = "U";
                     OfferAdsObj.UpdatedBy = obj.UpdatedBy;
                     OfferAdsObj.UpdatedDate = DateTime.Now;
@@ -66,6 +67,7 @@ namespace BusinessRespository.Repositories
                             Title = obj.Title,
                             PageId = obj.PageId,
                             RecUpd = "C",
+                            ShowInFrontEnd = obj.ShowInFrontEnd,
                             CreatedBy = obj.CreatedBy,
                             CreatedDate = DateTime.Now,
                             Image = Image
@@ -99,8 +101,29 @@ namespace BusinessRespository.Repositories
             ResponseModel result = new ResponseModel();
             try
             {
-                List<OfferAds> resultValue = new List<OfferAds>();
-                resultValue = Context.OfferAds.Where(z => z.RecUpd != "D").ToList();
+                //List<OfferAds> resultValue = new List<OfferAds>();
+                //resultValue = Context.OfferAds.Where(z => z.RecUpd != "D").ToList();
+
+                //string s1 = "1;2;3;4;5;6;7;8;9;10;11;12";
+                //int[] ints = s1.Split(';').Select(int.Parse).ToArray();
+                //Array.Exists(language, element => element == "Ruby"));
+
+                List<vmGetAllOfferAds> resultValue = new List<vmGetAllOfferAds>();
+
+                resultValue = Context.OfferAds.Where(z => z.RecUpd != "D" && z.ShowInFrontEnd == true).Select(x => new vmGetAllOfferAds
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Image = x.Image,
+                    PageId = x.PageId,
+                    Pages = Context.Page.Where(z => x.PageId.Contains(z.PageId.ToString())).Select(y => new vmPageNameList { pageName = y.PageTitle }).ToList(),
+                    //Pages = Context.Page.Where( z => Array.Exists(  (x.PageId.Split(',').Select(int.Parse).ToArray() ), element => element == z.PageId) ).Select(y => new vmPageNameList { pageName = y.PageTitle } ).ToList(),
+                    //Pages = Context.Page.Where(z => Array.Exists( x.PageId.Split(','), element => element.Contains(z.PageId.ToString()))).Select(y => new vmPageNameList { pageName = y.PageTitle }).ToList(),
+                    //Pages = Context.Page.Where(z => Array.IndexOf(x.PageId.Split(','), z.PageId.ToString()) > -1).Select(y => new vmPageNameList { pageName = y.PageTitle }).ToList(),
+
+                }).ToList();
+
+
 
                 result.data = resultValue;
                 result.status = Status.Success;
@@ -175,6 +198,53 @@ namespace BusinessRespository.Repositories
                 }
 
                 result.data = OfferAdsDetail;
+                result.status = Status.Success;
+                result.message = "OfferAds Detail";
+            }
+            catch (Exception ex)
+            {
+                result.status = Status.Error;
+                result.error = ex.Message;
+
+            }
+            return result;
+        }
+
+        public ResponseModel GetAllOfferAdsInFrontEnd()
+        {
+            ResponseModel result = new ResponseModel();
+            try
+            {
+                List<OfferAds> resultValue = new List<OfferAds>();
+                resultValue = Context.OfferAds.Where(z => z.RecUpd != "D" && z.ShowInFrontEnd ==  true).ToList();
+
+                result.data = resultValue;
+                result.status = Status.Success;
+                result.message = "List for Offer And Ads";
+            }
+            catch (Exception ex)
+            {
+                result.status = Status.Error;
+                result.error = ex.Message;
+
+            }
+            return result;
+        }
+
+        
+         public ResponseModel GetAllOfferAdsByPageId(int? Id)
+        {
+            string pageid = Id.ToString();
+            ResponseModel result = new ResponseModel();
+            try
+            {
+                List<OfferAds> OfferAdsList = new List<OfferAds>();
+
+
+                OfferAdsList = Context.OfferAds.Where(z => z.PageId.Contains(pageid)).ToList();
+                
+
+                result.data = OfferAdsList;
                 result.status = Status.Success;
                 result.message = "OfferAds Detail";
             }

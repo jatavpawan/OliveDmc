@@ -117,3 +117,6 @@ li.blog-body{
 .delete-blog{
   right: 40px;
 }
+.character-count{
+  text-align: end;
+}

@@ -2,71 +2,150 @@
 
 <div class="main-content">
   <div class="container-fluid">
-      <div class="row">
-          <div class="col-md-12">
-              <div class="card">
-                  <div class="content">
-                      <form class="form-horizontal" [formGroup]="offerAdsForm" (ngSubmit)="submitOfferAdsData()">
-                          <div class="form-group">
-                              <label class="control-label col-sm-2 input-label" for="title">Offer Ads Title:</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="title"  placeholder="Enter Offer Ads Title" formControlName="title">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="control-label col-sm-2" for="pageId">Page Id:</label>
-                              <div class="col-sm-10">
-                                <input type="text" class="form-control" id="title"  placeholder="Enter Page Id" formControlName="pageId">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="control-label col-sm-2" for="pwd">Image:</label>
-                              <div class="col-sm-10">
-                                  <div class="image-preview mb-3" *ngIf="fileUploaded == true || edit_offerAds == true">
-                                      <img [src]="previewUrl" height="100" width="105"  />                 
-                                  </div>
-                                  <label for="files"  *ngIf="edit_offerAds == true ||  (offerAdsForm.get('image').value != '' && offerAdsForm.get('image').value != null )" class="btn btn-primary">update File</label>
-                                  <input type="file" *ngIf="fileUploaded == false || edit_offerAds == true  || offerAdsForm.get('image').value != '' " [class.hidden]="edit_offerAds == true ||  (offerAdsForm.get('image').value != '' && offerAdsForm.get('featuredImage').value != null )" name="" id="files" #files (change)="preview(files)" formControlName="image">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <div class="col-sm-offset-1 col-sm-10">
-                                  <button type="submit" *ngIf="edit_offerAds == false" [disabled]="offerAdsForm.invalid" class="btn btn-default btn-primary" >Submit</button>
-                                  <button type="submit" *ngIf="edit_offerAds == true" [disabled]="offerAdsForm.invalid" class="btn btn-default btn-primary" >Update</button>
-                              </div>
-                          </div>
-                      </form>
-
-
-                      <ul class="blog-list" *ngIf="offerAds.length != 0">
-                          <li class="blog-body" *ngFor="let offerAd of offerAds">
-                              <div class="row">
-                                  <div class="col-md-3">
-                                    <div class="blog-image" [routerLink]="['/private/offerAds-detail', offerAd.id]">
-                                      <img [src]="apiendpoint+'Uploads/OfferAds/image/'+offerAd.image">
-                                    </div>    
-                                  </div>
-                                  <div class="col-md-9">
-                                    <div class="blog-content">
-                                      <div class="blog-title">
-                                        <a  [routerLink]="['/private/offerAds-detail', offerAd.id]">{{offerAd.title.length > 80 ? (offerAd.title|slice : 0 :75)+'...' : offerAd.title}}</a>
-                                      </div>
-                                      <div class="blog-details">
-                                        <a class="blog-approval" >Page Id:{{offerAd.pageId}}</a>
-                                        <span class="blog-publish-date">{{offerAd.createdDate| date:'dd-MMM-yyyy' }}</span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="blog-actions col-md-12">
-                                    <button class="btn btn-primary action-btn edit-blog" (click)="editOfferAds(offerAd)">edit</button>
-                                    <button class="btn btn-primary action-btn delete-blog" (click)="openConfirmDialog(offerAd.id)">Delete</button>
-                                  </div>
-                                </div>
-                          </li>
-                        </ul>
-                  </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="content">
+            <form class="form-horizontal" [formGroup]="offerAdsForm" (ngSubmit)="submitOfferAdsData()">
+              <div class="form-group">
+                <label class="control-label col-sm-2 input-label" for="title">Offer Ads Title:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="title" placeholder="Enter Offer Ads Title"
+                    formControlName="title">
+                </div>
               </div>
+              <!-- <div class="form-group">
+                <label class="control-label col-sm-2" for="pageId">Page Id:</label>
+                <div class="col-sm-10">
+                  <select class="form-control select-category" formControlName="pageId">
+                    <option value="">Select Page</option>
+                    <option *ngFor="let page of pages" [value]="page.pageId">{{page.pageTitle}}</option>
+                  </select>
+                </div>
+              </div> -->
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="pageId" (click)="expression()">Page Id:</label>
+                <div class="col-sm-4">
+                  <!-- <mat-label>Choose an option</mat-label> -->
+                  <mat-select formControlName="pageId" multiple class="form-control">
+                    <!-- <mat-select-trigger>
+                      {{offerAdsForm.get('pageId').value.length > 0 ? offerAdsForm.get('pageId').value[0].pageTitle : ''}}
+                      <span *ngIf=" offerAdsForm.get('pageId').value != 1 && offerAdsForm.get('pageId').value?.length > 1" class="example-additional-selection">
+                        (+{{offerAdsForm.get('pageId').value.length - 1}}
+                        {{offerAdsForm.get('pageId').value?.length === 2 ? 'other' : 'others'}})
+                      </span>
+                    </mat-select-trigger> -->
+                    <mat-option *ngFor="let page of pages" [value]="page.pageId">{{page.pageTitle}}</mat-option>
+                  </mat-select>
+                </div>
+              </div>
+              <!-- <div class="form-group">
+                <label class="control-label col-sm-2" for="pageId">Page Id:</label>
+                <div class="col-sm-10">
+                  <ng-multiselect-dropdown [placeholder]="'custom placeholder'" [data]="dropdownList"
+                     [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
+                    (onSelectAll)="onSelectAll($event)">
+                  </ng-multiselect-dropdown>
+                </div>
+              </div> -->
+              <!-- <div class="form-group">
+                <label class="control-label col-sm-2" for="pageId">Page Id:</label>
+                <div class="col-sm-10">
+                  <mat-select [formControl]="toppings" multiple class="form-control">
+                    <mat-select-trigger>
+                      {{toppings.value ? toppings.value[0] : ''}}
+                      <span *ngIf="toppings.value?.length > 1" class="example-additional-selection">
+                        (+{{toppings.value.length - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
+                      </span>
+                    </mat-select-trigger>
+                    <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                  </mat-select>
+                </div>
+              </div> -->
+              <!-- <div class="form-group">
+                <label class="control-label col-sm-2" for="pageId">Select multiple cities:</label>
+                <div class="col-sm-10">
+                  <ng-select [data]="value" [multiple]="true" [items]="items" [disabled]="disabled"
+                    (data)="refreshValue($event)" (selected)="selected($event)" (removed)="removed($event)"
+                    placeholder="No city selected" formControlName="pageId"></ng-select>
+                </div>
+              </div> -->
+              <!-- <div class="form-group">
+                <label class="control-label col-sm-2" for="pageId">Select multiple cities:</label>
+                <div class="col-sm-10">
+                  <ng-select [items]="cities2" bindLabel="name" bindValue="id" [multiple]="true"
+                    placeholder="Select cities">
+                  </ng-select>
+                </div>
+              </div> -->
+
+
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="pwd">Image:</label>
+                <div class="col-sm-10">
+                  <div class="image-preview mb-3" *ngIf="fileUploaded == true || edit_offerAds == true">
+                    <img [src]="previewUrl" height="100" width="105" />
+                  </div>
+                  <label for="files"
+                    *ngIf="edit_offerAds == true ||  (offerAdsForm.get('image').value != '' && offerAdsForm.get('image').value != null )"
+                    class="btn btn-primary">update File</label>
+                  <input type="file"
+                    *ngIf="fileUploaded == false || edit_offerAds == true  || offerAdsForm.get('image').value != '' "
+                    [class.hidden]="edit_offerAds == true ||  (offerAdsForm.get('image').value != '' && offerAdsForm.get('image').value != null )"
+                    name="" id="files" #files (change)="preview(files)" formControlName="image">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2 status-lable" [tooltip]="tooltipText"
+                  [options]="tooltipOptions">Show In Front End:</label>
+                <div class="col-sm-1">
+                  <ui-switch labelOn="Yes" labelOff="No" checkedTextColor="red" formControlName="showInFrontEnd">
+                  </ui-switch>
+                </div>
+                <div class="col-sm-9" class="form-control status-border"></div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-1 col-sm-10">
+                  <button type="submit" *ngIf="edit_offerAds == false" [disabled]="offerAdsForm.invalid"
+                    class="btn btn-default btn-primary">Submit</button>
+                  <button type="submit" *ngIf="edit_offerAds == true" [disabled]="offerAdsForm.invalid"
+                    class="btn btn-default btn-primary">Update</button>
+                </div>
+              </div>
+            </form>
+
+
+            <ul class="blog-list" *ngIf="offerAds.length != 0">
+              <li class="blog-body" *ngFor="let offerAd of offerAds">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="blog-image" [routerLink]="['/private/offerAds-detail', offerAd.id]">
+                      <img [src]="apiendpoint+'Uploads/OfferAds/image/'+offerAd.image">
+                    </div>
+                  </div>
+                  <div class="col-md-9">
+                    <div class="blog-content">
+                      <div class="blog-title">
+                        <a
+                          [routerLink]="['/private/offerAds-detail', offerAd.id]">{{offerAd.title.length > 80 ? (offerAd.title|slice : 0 :75)+'...' : offerAd.title}}</a>
+                      </div>
+                      <div class="blog-details">
+                        <a class="blog-approval">Page Id:{{offerAd.pageId}}</a>
+                        <span class="blog-publish-date">{{offerAd.createdDate| date:'dd-MMM-yyyy' }}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="blog-actions col-md-12">
+                    <button class="btn btn-primary action-btn edit-blog" (click)="editOfferAds(offerAd)">edit</button>
+                    <button class="btn btn-primary action-btn delete-blog"
+                      (click)="openConfirmDialog(offerAd.id)">Delete</button>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
+        </div>
       </div>
+    </div>
   </div>
 </div>

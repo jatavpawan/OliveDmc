@@ -18,6 +18,7 @@ namespace BusinessDataModel.ViewModel
         public int? UserId { get; set; }
         public string Title { get; set; }
         public string FeaturedImage { get; set; }
+        public string ShortDescription { get; set; }
         public string Description { get; set; }
         public bool? Status { get; set; }
         public bool? ApprovalStatus { get; set; }

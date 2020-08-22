@@ -46,7 +46,6 @@ export class LandingComponent implements OnInit {
 
       this.signupForm = this.formBuilder.group({
         firstName: ['',Validators.required],
-        middleName: [''],
         lastName: ['', Validators.required],
         emailId: ['', Validators.required],
         mobileNo: ['', Validators.required],
@@ -284,6 +283,8 @@ export class LandingComponent implements OnInit {
     // }
   }
 
-  
-
+  openUserPanel(){
+    window.open( 
+      "http://rsmartservices.com/", "_blank"); 
+  }
 }

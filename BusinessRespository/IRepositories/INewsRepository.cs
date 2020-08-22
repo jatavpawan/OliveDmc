@@ -16,5 +16,7 @@ namespace BusinessRespository.IRepositories
         ResponseModel GetNewsDetailByNewsId(int? Id);
         string videoUploadInNews(vmfileInfo obj);
         void deleteVideoInNews(string oldVideoName);
+        ResponseModel GetAllNewsinFrontEnd();
+
     }
 }

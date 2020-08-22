@@ -9,6 +9,7 @@ namespace BusinessDataModel.ViewModel
     {
         public int Id { get; set; }
         public string Title { get; set; }
+        public string ShortDescription { get; set; }
         public string Description { get; set; }
         public IFormFile FeaturedImage { get; set; }
         public bool? ShowInFrontEnd { get; set; }

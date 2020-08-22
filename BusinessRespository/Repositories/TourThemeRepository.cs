@@ -40,6 +40,7 @@ namespace BusinessRespository.Repositories
                     TourThemeObj.Status = obj.Status;
                     TourThemeObj.Description = obj.Description;
                     TourThemeObj.ThemeName = obj.ThemeName;
+                    TourThemeObj.ShortDescription = obj.ShortDescription;
                     TourThemeObj.RecUpd = "U";
                     TourThemeObj.Video = obj.Video;
                     TourThemeObj.UpdatedBy = obj.UpdatedBy;
@@ -66,6 +67,7 @@ namespace BusinessRespository.Repositories
                         var TourThemeDetail = new TourTheme
                         {
                             ThemeName = obj.ThemeName,
+                            ShortDescription = obj.ShortDescription,
                             Description = obj.Description,
                             Status = obj.Status,
                             RecUpd = "C",
@@ -103,7 +105,7 @@ namespace BusinessRespository.Repositories
             try
             {
                 List<TourTheme> resultValue = new List<TourTheme>();
-                resultValue = Context.TourTheme.Where(z => z.RecUpd != "D").ToList();
+                resultValue = Context.TourTheme.Where(z => z.RecUpd != "D").OrderByDescending(x => x.CreatedDate).ToList();
 
                 result.data = resultValue;
                 result.status = Status.Success;
