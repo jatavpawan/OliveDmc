@@ -13,6 +13,8 @@ namespace BusinessDataModel.ViewModel
         public string ShortDescription { get; set; }
         public string Description { get; set; }
         public bool? Status { get; set; }
+        public bool? ImageShowInFront { get; set; }
+        public bool? VideoShowInFront { get; set; }
         public string Video { get; set; }
         public int? CreatedBy { get; set; }
         public DateTime? CreatedDate { get; set; }

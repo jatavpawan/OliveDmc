@@ -27,6 +27,8 @@ export class FestivalComponent implements OnInit {
   tinymceConfig: any;
   tooltipText:string ="this Festival is show or hide to the user";
   tooltipVideoText:string ="only MP4 Video is supported and Video maximum size can be 10MB";
+  tooltipImagetext:string ="this Image  is show or hide In User Panel ";
+  tooltipVideotext:string ="this Video  is show or hide In User Panel ";
 
   tooltipOptions = {
     'placement': 'top',
@@ -48,6 +50,8 @@ export class FestivalComponent implements OnInit {
       shortDescription: ['', Validators.required],
       description: ['', Validators.required],
       showInFrontEnd: [false],
+      imageShowInFront: [false],
+      videoShowInFront: [false],
       featuredImage: [''],
       video: [''],
 
@@ -111,6 +115,8 @@ export class FestivalComponent implements OnInit {
       formData.append('ShortDescription', this.festivalForm.get('shortDescription').value);
       formData.append('Description', this.festivalForm.get('description').value);
       formData.append('ShowInFrontEnd', this.festivalForm.get('showInFrontEnd').value);
+      formData.append('imageShowInFront', this.festivalForm.get('imageShowInFront').value);
+      formData.append('videoShowInFront', this.festivalForm.get('videoShowInFront').value);
       formData.append('Video', this.videoName);
 
       this.festivalService.AddUpdateFestival(formData).subscribe(resp=>{
@@ -172,6 +178,8 @@ export class FestivalComponent implements OnInit {
     this.festivalForm.get('shortDescription').setValue(festival.shortDescription);
     this.festivalForm.get('description').setValue(festival.description);
     this.festivalForm.get('showInFrontEnd').setValue(festival.showInFrontEnd);
+    this.festivalForm.get('imageShowInFront').setValue(festival.imageShowInFront);
+    this.festivalForm.get('videoShowInFront').setValue(festival.videoShowInFront);
    
     this.festivalId = ''+festival.id; 
     this.videoName = festival.video;
@@ -282,6 +290,8 @@ export class FestivalComponent implements OnInit {
       shortDescription: '', 
       description: '', 
       showInFrontEnd: false, 
+      imageShowInFront: false, 
+      videoShowInFront: false, 
       featuredImage: '', 
       video: '', 
     })
@@ -297,5 +307,30 @@ export class FestivalComponent implements OnInit {
     this.characterCount =  this.festivalForm.get('shortDescription').value.length;
     return true;
   }
+
+  
+  festivalShowInFrontAction(event){
+  debugger;
+  if(this.festivalForm.get('featuredImage').value == '' && event == true ){
+    Swal.fire('Festival Show ',"Feature Image is required To Festival Show In Front",'warning');
+    this.festivalForm.get('showInFrontEnd').setValue(false);
+  }
+}
+
+imageShowInFrontAction(event){
+  debugger;
+  if(this.festivalForm.get('featuredImage').value == '' && event == true ){
+    Swal.fire('Festival Image Show ',"Feature Image is required To Festival Image Show In Front",'warning');
+    this.festivalForm.get('imageShowInFront').setValue(false);
+  }
+}
+
+videoShowInFrontAction(event){
+  debugger;
+  if( this.videoName == '' && event == true ){
+    Swal.fire('Festival Video Show ',"Video is required To Festival Video  Show In Front",'warning');
+    this.festivalForm.get('videoShowInFront').setValue(false);
+  }
+}
 
 }

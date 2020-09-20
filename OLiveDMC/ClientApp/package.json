@@ -39,6 +39,7 @@
     "build": "^0.1.4",
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",
+    "gulp-sass": "^4.1.0",
     "jquery": "^3.5.1",
     "ng-multiselect-dropdown": "^0.2.10",
     "ng2-ckeditor": "^1.2.7",

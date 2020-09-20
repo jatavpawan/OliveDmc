@@ -41,6 +41,8 @@ namespace BusinessRespository.Repositories
                     FestivalObj.ShortDescription = obj.ShortDescription;
                     FestivalObj.Description = obj.Description;
                     FestivalObj.ShowInFrontEnd = obj.ShowInFrontEnd;
+                    FestivalObj.ImageShowInFront = obj.ImageShowInFront;
+                    FestivalObj.VideoShowInFront = obj.VideoShowInFront;
                     FestivalObj.RecUpd = "U";
                     FestivalObj.Video = obj.Video;
                     FestivalObj.UpdatedBy = obj.UpdatedBy;
@@ -70,6 +72,8 @@ namespace BusinessRespository.Repositories
                             ShortDescription = obj.ShortDescription,
                             Description = obj.Description,
                             ShowInFrontEnd = obj.ShowInFrontEnd,
+                            ImageShowInFront = obj.ImageShowInFront,
+                            VideoShowInFront = obj.VideoShowInFront,
                             RecUpd = "C",
                             Video = obj.Video,
                             CreatedBy = obj.CreatedBy,

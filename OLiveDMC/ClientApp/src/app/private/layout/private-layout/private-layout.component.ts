@@ -37,6 +37,7 @@ export class PrivateLayoutComponent implements OnInit {
       { path: '/private/theme', title: 'Theme',  icon:'pe-7s-user', class: '' },
       { path: '/private/offer-ads', title: 'Offer or Ads',  icon:'pe-7s-note2', class: '' },
       { path: '/private/travel-category-subcategory', title: 'Profile Category',  icon:'pe-7s-news-paper', class: '' },
+      { path: '/private/blog-category', title: 'Blog Category',  icon:'pe-7s-news-paper', class: '' },
       { path: '/private/whats-new', title: 'What’s New',  icon:'pe-7s-science', class: '' },
       { path: '/private/travel-utility', title: 'Travel Utility',  icon:'pe-7s-note2', class: '' },
       { path: '/private/news-events', title: 'New’s and events',  icon:'pe-7s-news-paper', class: '' },
@@ -88,37 +89,44 @@ export class PrivateLayoutComponent implements OnInit {
       { path: '/private/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
       // { path: '/private/temporary', title: 'Temporary',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
       { path: '/private/home/destination-videos', title: 'Home',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
+      { path: '/private/map', title: 'Destination',  icon:'pe-7s-map-marker', class: '',child: [], id: "", datatarget: "" },
       { path: '/private/WhatsNew/interview', title: 'WhatsNew',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
      
-      { path: '/private/latest-event', title: 'Latest Event',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
-      { path: '/private/festival', title: 'Festival',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
-      { path: '/private/our-team-member', title: 'Team Member',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
-      { path: '/private/aboutus-introduction', title: 'About Us Introduction',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
-      { path: '/private/aboutus-statement', title: 'About Us Statement',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
-      { path: '/private/travel-utility-query', title: 'Travel Utility Query',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
-      { path: '/private/contact-us', title: 'Contact Us',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
-      { path: '/private/privacy-policy', title: 'Privacy Policy',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
+      // { path: '/private/latest-event', title: 'Latest Event',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
+      // { path: '/private/festival', title: 'Festival',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
+      // { path: '/private/our-team-member', title: 'Team Member',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
+      // { path: '/private/aboutus-introduction', title: 'About Us Introduction',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
+      // { path: '/private/aboutus-statement', title: 'About Us Statement',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
+      // { path: '/private/travel-utility-query', title: 'Travel Utility Query',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
+      // { path: '/private/contact-us', title: 'Contact Us',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
+      // { path: '/private/privacy-policy', title: 'Privacy Policy',  icon: 'pe-7s-graph', class: '', child: [], id: "", datatarget: "" },
       // { path: '', title: 'Destination',  icon:'pe-7s-note2', class: '', id:"Destination", datatarget:"#Destination",
       //   child: [ 
       //     {path: '/private/map', title: 'Map',  icon:'pe-7s-map-marker', class: '', firstChar: 'M'},
       //   ] 
       // },
-      { path: '/private/map', title: 'Destination',  icon:'pe-7s-map-marker', class: '',child: [], id: "", datatarget: "" },
       // { path: '/private/theme', title: 'Theme',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
       // { path: '/private/offer-ads', title: 'Offer or Ads',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
-      { path: '/private/travel-category-subcategory', title: 'Profile Category',  icon:'pe-7s-news-paper', class: '',child: [], id: "", datatarget: "" },
+      // { path: '/private/blog-category', title: 'Blog Category',  icon:'pe-7s-news-paper', class: '',child: [], id: "", datatarget: "" },
       // { path: '/private/whats-new', title: 'What’s New',  icon:'pe-7s-science', class: '',child: [], id: "", datatarget: "" },
-      { path: '/private/travel-utility', title: 'Travel Utility',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
+      // { path: '/private/travel-utility', title: 'Travel Utility',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
       // { path: '/private/news-events', title: 'New’s and events',  icon:'pe-7s-news-paper', class: '',child: [], id: "", datatarget: "" },
       // { path: '/private/destination', title: 'Destination',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
-      { path: '/private/travel-guru-expert-travelers', title: 'Travel Guru and Expert Travelers',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
-      { path: '/private/user', title: 'User',  icon:'pe-7s-user', class: '',child: [], id: "", datatarget: "" },
-      { path: '/private/post', title: 'Post',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
-      { path: '/private/contact-details', title: 'Contact details',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
-      { path: '/private/page', title: 'Page',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
-      { path: '/private/blog', title: 'Blog',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
-      { path: '/private/blog-priority', title: 'Blog Priority',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
-      { path: '/private/faq', title: 'FAQ',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
+      
+      // <------------------------------------------developer pages Start------------------------------------> 
+      // { path: '/private/travel-category-subcategory', title: 'Profile Category',  icon:'pe-7s-news-paper', class: '',child: [], id: "", datatarget: "" },
+      // { path: '/private/travel-guru-expert-travelers', title: 'Travel Guru and Expert Travelers',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
+      // { path: '/private/user', title: 'User',  icon:'pe-7s-user', class: '',child: [], id: "", datatarget: "" },
+      // { path: '/private/post', title: 'Post',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
+      // { path: '/private/contact-details', title: 'Contact details',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
+      // { path: '/private/page', title: 'Page',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
+      
+      // <------------------------------------------developer Pages End------------------------------------> 
+      
+      
+      // { path: '/private/blog', title: 'Blog',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
+      // { path: '/private/blog-priority', title: 'Blog Priority',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
+      // { path: '/private/faq', title: 'FAQ',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
       // { path: '/private/destination-videos', title: 'Destination Videos',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
       // { path: '/private/interview', title: 'Interview',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
       // { path: '/private/trending news', title: 'Trending News',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
@@ -179,7 +187,7 @@ export class PrivateLayoutComponent implements OnInit {
   logout(){
     localStorage.removeItem("LoggedInUser");
     localStorage.removeItem("id_token");
-    this.router.navigate(['public/landing'])
+    this.router.navigate(['landing'])
   }
 
   testing(){

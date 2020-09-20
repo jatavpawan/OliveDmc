@@ -41,6 +41,8 @@ namespace BusinessRespository.Repositories
                     NewsObj.ShortDescription = obj.ShortDescription;
                     NewsObj.Description = obj.Description;
                     NewsObj.Status = obj.Status;
+                    NewsObj.ImageShowInFront = obj.ImageShowInFront;
+                    NewsObj.VideoShowInFront = obj.VideoShowInFront;
                     NewsObj.RecUpd = "U";
                     NewsObj.Video = obj.Video;
                     NewsObj.UpdatedBy = obj.UpdatedBy;
@@ -70,6 +72,8 @@ namespace BusinessRespository.Repositories
                             ShortDescription = obj.ShortDescription,
                             Description = obj.Description,
                             Status = obj.Status,
+                            ImageShowInFront = obj.ImageShowInFront,
+                            VideoShowInFront = obj.VideoShowInFront,
                             RecUpd = "C",
                             Video = obj.Video,
                             CreatedBy = obj.CreatedBy,

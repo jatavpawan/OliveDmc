@@ -18,7 +18,16 @@ namespace BusinessDataModel.DB
         public int? CreatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public int? UpdatedBy { get; set; }
-        public string ProfileImage { get; set; }
         public int? RoleId { get; set; }
+        public DateTime? Birthday { get; set; }
+        public string Occupation { get; set; }
+        public string Country { get; set; }
+        public string State { get; set; }
+        public string City { get; set; }
+        public string AboutDescription { get; set; }
+        public string ProfileImg { get; set; }
+        public string CoverImage { get; set; }
+        public string RecUpd { get; set; }
+        public int? ProfileVisit { get; set; }
     }
 }

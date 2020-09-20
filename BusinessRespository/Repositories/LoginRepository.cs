@@ -65,7 +65,7 @@ namespace BusinessRespository.Repositories
             reg.CreatedBy = 1;
             reg.UpdatedDate = DateTime.Now;
             reg.UpdatedBy = 1;
-            reg.Otp = ""+AuthUtilities.GenerateOTPNo();
+            reg.Otp = AuthUtilities.GenerateOTPNo();
             Context.Registration.Add(reg);
             Context.SaveChanges();
 
@@ -95,8 +95,9 @@ namespace BusinessRespository.Repositories
 
 
         }
-        public Registration LoginUser(vmLoginUser obj)
+        public ResponseModel LoginUser(vmLoginUser obj)
         {
+            ResponseModel response = new ResponseModel();
             Registration userRegInfo = null;
             //vmUserInfo userInfo = null;
 
@@ -107,35 +108,62 @@ namespace BusinessRespository.Repositories
                 
                 if(userLoginInfo != null)
                 {
-                    userRegInfo = Context.Registration.Where(z => z.Id == userLoginInfo.RegistrationId).FirstOrDefault();
-                    //userInfo.Id = userRegInfo.Id;
-                    //userInfo.FirstName = userRegInfo.FirstName;
-                    //userInfo.LastName = userRegInfo.LastName;
-                    //userInfo.EmailId = userRegInfo.EmailId;
-                    //userInfo.MobileNo = userRegInfo.MobileNo;
-                    //userInfo.Category = userRegInfo.Category;
-                    //userInfo.RoleId = userLoginInfo.RoleId;
-                    //userInfo.TravelEnthuiast = userRegInfo.TravelEnthuiast;
-                    //userInfo.Gmcid = userRegInfo.Gmcid;
-                    //userInfo.CreatedDate = userRegInfo.CreatedDate;
-                    //userInfo.CreatedBy = userRegInfo.CreatedBy;
-                    //userInfo.UpdatedDate = userRegInfo.UpdatedDate;
-                    //userInfo.UpdatedBy = userRegInfo.UpdatedBy;
-                    //userInfo.ProfileImage = userRegInfo.ProfileImage;
+                    userRegInfo = Context.Registration.Where(z => z.Id == userLoginInfo.RegistrationId).Select(x => new Registration
+                    {
+
+                        Id = x.Id,
+                        FirstName = x.FirstName,
+                        LastName = x.LastName,
+                        EmailId = x.EmailId,
+                        MobileNo = x.MobileNo,
+                        Category = x.Category,
+                        TravelEnthuiast = x.TravelEnthuiast,
+                        Gmcid = x.Gmcid,
+                        CreatedDate = x.CreatedDate,
+                        CreatedBy = x.CreatedBy,
+                        UpdatedDate = x.UpdatedDate,
+                        UpdatedBy = x.UpdatedBy,
+                        RoleId = x.RoleId,
+                        Birthday = x.Birthday,
+                        Occupation = x.Occupation,
+                        Country = x.Country,
+                        State = x.State,
+                        City = x.City,
+                        AboutDescription = x.AboutDescription,
+                        ProfileImg = x.ProfileImg,
+                        CoverImage = x.CoverImage,
+                        RecUpd = x.RecUpd,
+
+                    }).FirstOrDefault();
+
+                    if(userLoginInfo.IsOtpVerify == true)
+                    {
+                        response.data = userRegInfo;
+                        response.status = Status.Success;
+                    }
+                    else
+                    {
+                        response.data = userRegInfo;
+                        response.status = Status.Warning;
+                        response.message = "please verify your email by Otp";
+                    }
+
+                  
                 }
+              
+
             }
-            //else if (!string.IsNullOrEmpty(obj.Email))
-            //{
-            //    // resultValue = Context.Registration.Where(z => z.Email == obj.Email.Trim()).FirstOrDefault();
-            //}
-            //if (resultValue != null && obj.GCMID != string.Empty)
-            //{
-            //    // resultValue.Gcmid = obj.GCMID;
-            //    //  Context.SaveChanges();
+            else
+            {
+                response.data = null;
+                response.status = Status.Error;
+                response.message = "You are not registered Please Sign Up";
+            }
+         
 
-            //}
+          
 
-            return userRegInfo;
+            return response;
 
 
         }
@@ -144,7 +172,7 @@ namespace BusinessRespository.Repositories
         {
             ResponseModel response;
 
-            var registration = Context.Registration.Where(z => z.Otp == obj.Otp && z.MobileNo == obj.MobileNo).FirstOrDefault();
+            var registration = Context.Registration.Where(z => z.Otp == obj.Otp && z.EmailId == obj.Email).FirstOrDefault();
             if (registration != null)
             {
                 var userlogin = Context.UserRegLogin.Where(z => z.Username == registration.EmailId).FirstOrDefault();
@@ -170,31 +198,67 @@ namespace BusinessRespository.Repositories
 
         }
 
+        public ResponseModel UserEmailOTPVerificationBySendMail(int? userId)
+        {
+              ResponseModel result = new ResponseModel();
+                try
+                {
+                    sendemailRepository sendmail = new sendemailRepository();
+                    var userInfo = Context.Registration.Where(z => z.Id == userId).FirstOrDefault();
+                    bool status = sendmail.contentBody(userInfo, "EmailOTPVerification");
+
+                    if (status == true)
+                    {
+                        result.data = status;
+                        result.status = Status.Success;
+                        result.message = "Email Send Successfully";
+                    }
+                    
+                    
+                }
+                catch (Exception ex)
+                {
+                    result.status = Status.Error;
+                    result.error = ex.Message;
+
+                }
+                return result;
+          
+
+        }
+
         public ResponseModel UserResendOtp(vmResendOtp obj)
         {
-            ResponseModel response;
+            ResponseModel response = new ResponseModel(); ;
             Registration result = null;
 
-            result = Context.Registration.Where(z => z.MobileNo == obj.MobileNo).FirstOrDefault();
+            result = Context.Registration.Where(z => z.EmailId == obj.Email).FirstOrDefault();
             if (result != null)
             {
                 result.Otp = "" + AuthUtilities.GenerateOTPNo();
                 Context.SaveChanges();
-                response = new ResponseModel
+
+
+                sendemailRepository sendmail = new sendemailRepository();
+                bool status = sendmail.contentBody(result, "EmailOTPVerification");
+
+                if (status == true)
                 {
-                    data = result,
-                    status = Status.Success,
-                    message = "Otp resend successfully"
-                };
+                    response.data = status;
+                    response.status = Status.Success;
+                    response.message = "Otp resend successfully";
+                }
+               
                 return response;
             }
-         
-            response = new ResponseModel
+            else
             {
-                status = Status.Warning,
-                message = "Mobile No not matched.please Try Again"
-            };
-
+                response.data = result;
+                response.status = Status.Warning;
+                response.message = "Mobile No not matched.please Try Again";
+            }
+         
+          
             return response;
 
 
@@ -305,12 +369,12 @@ namespace BusinessRespository.Repositories
             reg.UpdatedBy = 1;
             if (obj.ProfileImage != null)
             {
-                if(reg.ProfileImage != null)
+                if(reg.ProfileImg != null)
                 {
                     FileUploadcls uploadcls = new FileUploadcls();
-                    uploadcls.fileDeleted(@"Uploads\User\image", reg.ProfileImage);
+                    uploadcls.fileDeleted(@"Uploads\User\image", reg.ProfileImg);
                 }
-                reg.ProfileImage = ProfileImage;
+                reg.ProfileImg = ProfileImage;
             }
             Context.SaveChanges();
             reg = Context.Registration.Where(z => z.Id == obj.Id).FirstOrDefault();

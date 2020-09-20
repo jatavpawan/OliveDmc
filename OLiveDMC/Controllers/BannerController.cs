@@ -78,5 +78,14 @@ namespace OLiveDMC.Controllers
             var Data = _bannerService.GetAllPage();
             return await System.Threading.Tasks.Task.FromResult(Data);
         }
+
+        [HttpGet]
+        [Route("GetBannerAtHome")]
+        public async Task<ResponseModel> GetBannerAtHome()
+        {
+            var Data = _bannerService.GetBannerAtHome();
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
+        
     }
 }

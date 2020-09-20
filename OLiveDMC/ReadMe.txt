@@ -9,3 +9,6 @@ Scaffold-DbContext "Data Source=34.93.129.68;Initial Catalog=TravelOlive;Trusted
 
 
 Scaffold-DbContext "Data Source=GMCSCO-SERVER-8\SQLEXPRESS;Initial Catalog=TravelOlive;Persist Security Info=True;User ID=sa;Password=pawan@123;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir DB -force
+
+
+Scaffold-DbContext "Data Source=34.82.40.21;Initial Catalog=TravelOlive;Persist Security Info=True;User ID=sa;Password=pawan@123;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir DB -force

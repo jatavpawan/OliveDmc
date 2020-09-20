@@ -9,7 +9,7 @@ namespace BusinessRespository.IRepositories {
     public interface ILoginRepository
     {
         ResponseModel RegisterUser(vmRegistration obj);
-        Registration LoginUser(vmLoginUser obj);
+        ResponseModel LoginUser(vmLoginUser obj);
         ResponseModel UserOtpVerify(vmOtpVerify obj);
         ResponseModel UserResendOtp(vmResendOtp obj);
 
@@ -21,6 +21,7 @@ namespace BusinessRespository.IRepositories {
         ResponseModel UpdateRegisterUser(vmUserRegistration obj);
 
         ResponseModel ChangePassword(vmUserChangePassword obj);
+        ResponseModel UserEmailOTPVerificationBySendMail(int? userId);
         //void SaveAboutUsDetail(vmAboutUsDetail obj);
         //List<vmGetAboutUsDetail> GetAboutUsDetail();
 

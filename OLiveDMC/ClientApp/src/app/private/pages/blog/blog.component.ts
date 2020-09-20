@@ -7,6 +7,7 @@ import Swal from 'sweetalert2'
 import { commonTinymceConfig } from '../../shared/tinymce-settings';
 import { BlogService } from 'src/app/providers/BlogService/blog.service';
 import { AuthenticationService } from 'src/app/providers/authentication/authentication.service';
+import { BlogCategoryService } from 'src/app/providers/BlogCategoryService/blog-category.service';
 
 @Component({
   selector: 'app-blog',
@@ -27,6 +28,7 @@ export class BlogComponent implements OnInit {
   tinymceConfig: any;
   tooltipText:string ="this blog is show or hide to the user";
   characterCount:number = 0;
+  categories:Array<any> = [];
 
   tooltipOptions = {
     'placement': 'top',
@@ -37,6 +39,7 @@ export class BlogComponent implements OnInit {
     private formBuilder : FormBuilder,
     private  blogService: BlogService, 
     private spinner: NgxSpinnerService,
+    private categoryService: BlogCategoryService,
     private authService: AuthenticationService,
     ) {
 
@@ -45,6 +48,7 @@ export class BlogComponent implements OnInit {
       title: ['', Validators.required],
       shortDescription: ['', Validators.required],
       description: ['', Validators.required],
+      category: ['0', Validators.required],
       approvalStatus: [true],
       status: [true],
       featuredImage: [''],
@@ -52,6 +56,7 @@ export class BlogComponent implements OnInit {
     
     var loginUserData = JSON.parse (authService.getUserdata());
     this.blogForm.get('userId').setValue(loginUserData.id);
+    this.GetAllCategory();
   }
 
   ngOnInit(): void {
@@ -93,6 +98,7 @@ export class BlogComponent implements OnInit {
   }
 
   submitBlogData(){
+    debugger
     if(this.blogForm.valid){
       this.spinner.show();
 
@@ -107,12 +113,14 @@ export class BlogComponent implements OnInit {
       }
       formData.append('userId', this.blogForm.get('userId').value);
       formData.append('Title', this.blogForm.get('title').value);
+      formData.append('Category', this.blogForm.get('category').value);
       formData.append('Description', this.blogForm.get('description').value);
       formData.append('ShortDescription', this.blogForm.get('shortDescription').value);
       formData.append('Status', this.blogForm.get('status').value);
       formData.append('ApprovalStatus', this.blogForm.get('approvalStatus').value);
 
       this.blogService.AddUpdateBlog(formData).subscribe(resp=>{
+        this.spinner.hide();
      
         if(resp.status == Status.Success){
          if(this.edit_blog == true){
@@ -134,10 +142,8 @@ export class BlogComponent implements OnInit {
           this.editfileUploaded = false;
           this.fileUploaded = false;
           this.file = undefined;
-          // this.blogForm.reset();
           this.resetBlogForm();
           this.GetAllBlog();
-          // this.blogForm.get('description').setValue('');
         }
         else{
           this.spinner.hide();
@@ -148,13 +154,17 @@ export class BlogComponent implements OnInit {
   }
 
   GetAllBlog(){
+    this.spinner.show();
+
     this.blogService.GetAllBlog().subscribe(resp=>{
       this.spinner.hide();
       if(resp.status == Status.Success){
           this.blogs = resp.data;
       } 
       else{
-        Swal.fire('Oops...', resp.message, 'error');
+      this.spinner.hide();
+
+        // Swal.fire('Oops...', resp.message, 'error');
       }
     })    
   }
@@ -163,6 +173,7 @@ export class BlogComponent implements OnInit {
 
     this.blogForm.get('userId').setValue(blog.userId);
     this.blogForm.get('title').setValue(blog.title);
+    this.blogForm.get('category').setValue(blog.category);
     this.blogForm.get('description').setValue(blog.description);
     this.blogForm.get('status').setValue(blog.status);
     this.blogForm.get('approvalStatus').setValue(blog.approvalStatus);
@@ -210,9 +221,11 @@ export class BlogComponent implements OnInit {
   }
 
   resetBlogForm(){  
+
     this.blogForm.setValue({
-      userId: 0,
+      userId: '0',
       title: '', 
+      category: '0', 
       shortDescription: '',
       description: '', 
       approvalStatus: true, 
@@ -232,4 +245,20 @@ export class BlogComponent implements OnInit {
     this.characterCount =  this.blogForm.get('shortDescription').value.length;
     return true;
   }
+
+  GetAllCategory(){
+    this.categoryService.GetAllBlogCategory().subscribe(resp=>{
+      if(resp.status == Status.Success){
+          this.categories = resp.data;
+      } 
+      else{
+        Swal.fire('Oops...', resp.message, 'error');
+      }
+      this.spinner.hide();
+    })    
+  }
 }
+
+
+
+

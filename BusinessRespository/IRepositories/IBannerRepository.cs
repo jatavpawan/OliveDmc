@@ -17,6 +17,7 @@ namespace BusinessRespository.IRepositories
         ResponseModel GetAllPage();
 
         ResponseModel GetBannerDetailByBannerId(int? Id);
+        ResponseModel GetBannerAtHome();
 
 
     }

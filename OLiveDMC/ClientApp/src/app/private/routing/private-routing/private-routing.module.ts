@@ -53,6 +53,7 @@ import { AboutusIntroductionComponent } from '../../pages/aboutus-introduction/a
 import { AboutusStatementComponent } from '../../pages/aboutus-statement/aboutus-statement.component';
 import { TravelUtilityQueryComponent } from '../../pages/travel-utility-query/travel-utility-query.component';
 import { ContactUsComponent } from '../../pages/contact-us/contact-us.component';
+import { BlogCategoryComponent } from '../../pages/blog-category/blog-category.component';
 
 const routes: Routes = [
   {
@@ -73,6 +74,11 @@ const routes: Routes = [
   {
     path: 'theme',
     component: ThemePageComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'blog-category',
+    component: BlogCategoryComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -299,18 +305,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   
   },
-  {
-    path: 'latest-event',
-    component: LatestEventComponent,
-    canActivate: [AuthGuard]
   
-  },
-  {
-    path: 'latest-event-detail/:eventId',
-    component: LatestEventDetailComponent,
-    canActivate: [AuthGuard]
-  
-  },
   {
     path: 'festival',
     component: FestivalComponent,
@@ -392,7 +387,26 @@ const routes: Routes = [
         component: ThemePageComponent,
         canActivate: [AuthGuard]
       },
+      {
+        path: 'latest-event',
+        component: LatestEventComponent,
+        canActivate: [AuthGuard]
+      
+      },
     ]
+  
+  },
+
+  // {
+  //   path: 'latest-event',
+  //   component: LatestEventComponent,
+  //   canActivate: [AuthGuard]
+  
+  // },
+  {
+    path: 'latest-event-detail/:eventId',
+    component: LatestEventDetailComponent,
+    canActivate: [AuthGuard]
   
   },
   {

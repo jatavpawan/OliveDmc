@@ -27,7 +27,7 @@ namespace BusinessDataModel.ViewModel
         public string Image { get; set; }
         public string PageId { get; set; }
 
-        public List<vmPageNameList> Pages { get; set; }
+        public List<Page> Pages { get; set; }
         public bool? ShowInFrontEnd { get; set; }
         public int? CreatedBy { get; set; }
         public DateTime? CreatedDate { get; set; }

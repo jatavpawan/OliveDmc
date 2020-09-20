@@ -16,125 +16,131 @@ import { InterviewInWhatsnewService } from 'src/app/providers/InterviewInWhatsNe
 export class InterviewInWhatsnewComponent implements OnInit {
 
   interviewForm: FormGroup;
-  previewUrl:any = null;
-  fileUploaded:boolean = false;
+  previewUrl: any = null;
+  fileUploaded: boolean = false;
   file: any;
-  interviews:any =[];
-  apiendpoint:string = environment.apiendpoint;
+  interviews: any = [];
+  apiendpoint: string = environment.apiendpoint;
   editfileUploaded: boolean = false;
   edit_interview: boolean = false;
   interviewId: string;
   tinymceConfig: any;
-  tooltipText:string ="this Interview is show or hide to the user";
-  tooltipVideoText:string ="only MP4 Video is supported and Video maximum size can be 10MB";
+  tooltipText: string = "this Interview is show or hide to the user";
+  tooltipVideoText: string = "only MP4 Video is supported and Video maximum size can be 10MB";
   tooltipOptions = {
     'placement': 'top',
     'show-delay': 500
   }
+  tooltipImagetext: string = "this Image  is show or hide In User Panel ";
+  tooltipVideotext: string = "this Video  is show or hide In User Panel ";
   videoUrl: string = "";
   videoName: string = "";
 
-  characterCount:number = 0;
-  
+  characterCount: number = 0;
 
-  constructor( 
-    private formBuilder : FormBuilder,
-    private  interviewService: InterviewInWhatsnewService, 
-    private  router: Router, 
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private interviewService: InterviewInWhatsnewService,
+    private router: Router,
     private spinner: NgxSpinnerService,
-    ) {
+  ) {
 
     this.interviewForm = this.formBuilder.group({
       title: ['', Validators.required],
       shortDescription: ['', Validators.required],
       description: ['', Validators.required],
       showInFrontEnd: [false],
+      imageShowInFront: [false],
+      videoShowInFront: [false],
       featuredImage: [''],
       video: [''],
 
     })
-    
+
   }
 
   ngOnInit(): void {
     debugger;
-    var self = this; 
+    var self = this;
     this.tinymceConfig = commonTinymceConfig;
     this.tinymceConfig.images_upload_handler = function (blobInfo, success, failure) {
-      const  formdata = new FormData();
-      formdata.append("fileInfo", blobInfo.blob()); 
-      self.interviewService.fileUploadInInterviewsInWhatsNew(formdata).subscribe(resp=>{
-        let url = self.apiendpoint+"Uploads/InterviewsInWhatsNew/image/"+resp.data; 
-          success(url);
+      const formdata = new FormData();
+      formdata.append("fileInfo", blobInfo.blob());
+      self.interviewService.fileUploadInInterviewsInWhatsNew(formdata).subscribe(resp => {
+        let url = self.apiendpoint + "Uploads/InterviewsInWhatsNew/image/" + resp.data;
+        success(url);
       })
     }
 
     this.GetAllInterview();
   }
 
- 
+
   preview(file) {
     debugger;
 
-    if(this.edit_interview == true){
-       this.editfileUploaded = true;
+    if (this.edit_interview == true) {
+      this.editfileUploaded = true;
     }
 
-    let files = file.files[0] 
+    let files = file.files[0]
     var mimeType = files.type;
     if (mimeType.match(/image\/*/) == null) {
       return;
     }
- 
-    var reader = new FileReader();      
-    reader.readAsDataURL(files); 
-    reader.onload = (_event) => { 
-      this.previewUrl = reader.result; 
+
+    var reader = new FileReader();
+    reader.readAsDataURL(files);
+    reader.onload = (_event) => {
+      this.previewUrl = reader.result;
     }
 
-    this.file = files;  
+    this.file = files;
     this.fileUploaded = true;
   }
 
-  submitInterviewData(){
+  submitInterviewData() {
     debugger;
-    if(this.interviewForm.valid){
+    if (this.interviewForm.valid) {
       this.spinner.show();
 
       let formData = new FormData();
-      this.edit_interview == true ? formData.append('Id', this.interviewId) : formData.append('Id', '0'); 
+      this.edit_interview == true ? formData.append('Id', this.interviewId) : formData.append('Id', '0');
       this.interviewId = '0';
-      if( (this.edit_interview == false) || (this.edit_interview == true && this.editfileUploaded == true)){
+      if ((this.edit_interview == false) || (this.edit_interview == true && this.editfileUploaded == true)) {
         formData.append('FeaturedImage', this.file);
       }
-      else{
+      else {
         formData.append('FeaturedImage', null);
       }
       formData.append('Title', this.interviewForm.get('title').value);
       formData.append('ShortDescription', this.interviewForm.get('shortDescription').value);
       formData.append('Description', this.interviewForm.get('description').value);
       formData.append('ShowInFrontEnd', this.interviewForm.get('showInFrontEnd').value);
+      formData.append('ImageShowInFront', this.interviewForm.get('imageShowInFront').value);
+      formData.append('VideoShowInFront', this.interviewForm.get('videoShowInFront').value);
       formData.append('Video', this.videoName);
 
 
-      this.interviewService.AddUpdateInterviewsInWhatsNew(formData).subscribe(resp=>{
-     
-        if(resp.status == Status.Success){
-         if(this.edit_interview == true){
-          Swal.fire(
-            'Updated!',
-            'Your Interview has been Updated.',
-            'success'
-          )
-         }
-         else{
-          Swal.fire(
-            'Added!',
-            'Your Interview has been Added.',
-            'success'
-          )
-         }
-          
+      this.interviewService.AddUpdateInterviewsInWhatsNew(formData).subscribe(resp => {
+
+        if (resp.status == Status.Success) {
+          if (this.edit_interview == true) {
+            Swal.fire(
+              'Updated!',
+              'Your Interview has been Updated.',
+              'success'
+            )
+          }
+          else {
+            Swal.fire(
+              'Added!',
+              'Your Interview has been Added.',
+              'success'
+            )
+          }
+
           this.edit_interview = false;
           this.editfileUploaded = false;
           this.fileUploaded = false;
@@ -145,65 +151,67 @@ export class InterviewInWhatsnewComponent implements OnInit {
           this.videoName = "";
           this.videoUrl = "";
           this.GetAllInterview();
-        } 
-        else{
+        }
+        else {
           this.spinner.hide();
-          Swal.fire('Oops...' ,resp.message,'warning');
-        } 
-      })    
+          Swal.fire('Oops...', resp.message, 'warning');
+        }
+      })
     }
   }
 
-  GetAllInterview(){
+  GetAllInterview() {
     debugger;
 
-    this.interviewService.GetAllInterviewsInWhatsNew().subscribe(resp=>{
-      if(resp.status == Status.Success){
-          this.interviews = resp.data;
-      } 
-      else{
+    this.interviewService.GetAllInterviewsInWhatsNew().subscribe(resp => {
+      if (resp.status == Status.Success) {
+        this.interviews = resp.data;
+      }
+      else {
         Swal.fire('Oops...', resp.message, 'error');
       }
       this.spinner.hide();
-    })    
+    })
   }
 
-  editInterview(Interview){
+  editInterview(Interview) {
     debugger;
-    if(this.videoName != ""){
+    if (this.videoName != "") {
       this.deleteVideoFromPhysicalLocation(this.videoName);
     }
     this.interviewForm.get('title').setValue(Interview.title);
     this.interviewForm.get('shortDescription').setValue(Interview.shortDescription);
     this.interviewForm.get('description').setValue(Interview.description);
     this.interviewForm.get('showInFrontEnd').setValue(Interview.showInFrontEnd);
-   
-    this.interviewId = ''+Interview.id; 
+    this.interviewForm.get('imageShowInFront').setValue(Interview.imageShowInFront);
+    this.interviewForm.get('videoShowInFront').setValue(Interview.videoShowInFront);
+
+    this.interviewId = '' + Interview.id;
     this.videoName = Interview.video;
-    this.previewUrl =  this.apiendpoint+'Uploads/InterviewsInWhatsNew/image/'+Interview.featuredImage;
+    this.previewUrl = this.apiendpoint + 'Uploads/InterviewsInWhatsNew/image/' + Interview.featuredImage;
     this.edit_interview = true;
   }
 
-  deleteInterview(id){
+  deleteInterview(id) {
     debugger;
 
     this.spinner.show()
-    this.interviewService.deleteInterviewsInWhatsNew(id).subscribe(resp=>{
-      if(resp.status == Status.Success){
-        this.GetAllInterview();  
+    this.interviewService.deleteInterviewsInWhatsNew(id).subscribe(resp => {
+      if (resp.status == Status.Success) {
+        this.GetAllInterview();
         Swal.fire(
           'Deleted!',
           'Your Interview has been deleted.',
           'success'
         )
-      } 
-      else{
+      }
+      else {
         Swal.fire('Oops...', resp.message, 'error');
       }
-    })    
+    })
   }
 
-  openConfirmDialog(interviewId){
+  openConfirmDialog(interviewId) {
     debugger;
 
     Swal.fire({
@@ -222,81 +230,106 @@ export class InterviewInWhatsnewComponent implements OnInit {
     })
   }
 
-  changeVideo(file){
+  changeVideo(file) {
     debugger;
     let oldVideoName: string = this.videoName;
     let files = file.files[0];
-    if(files.size <= 10485760 && files.type == "video/mp4"){
-      console.log(`video size is : ${files.size/1048576}MB`)
-      const  formdata = new FormData();
+    if (files.size <= 10485760 && files.type == "video/mp4") {
+      console.log(`video size is : ${files.size / 1048576}MB`)
+      const formdata = new FormData();
       formdata.append("fileInfo", files);
       this.spinner.show();
-      this.interviewService.videoUploadInInterviewsInWhatsNew(formdata).subscribe(resp=>{
+      this.interviewService.videoUploadInInterviewsInWhatsNew(formdata).subscribe(resp => {
         this.spinner.hide();
-        if(resp.status == Status.Success){
-          this.videoUrl = this.apiendpoint+"Uploads/InterviewsInWhatsNew/Video/"+resp.data; 
+        if (resp.status == Status.Success) {
+          this.videoUrl = this.apiendpoint + "Uploads/InterviewsInWhatsNew/Video/" + resp.data;
           this.videoName = resp.data;
-          if(oldVideoName != ""){
+          if (oldVideoName != "") {
             this.deleteVideoFromPhysicalLocation(oldVideoName)
           }
         }
 
       })
     }
-    else{
+    else {
       this.interviewForm.get('video').setValue(null);
-    files.size > 10485760 &&  Swal.fire('Upload Failed',"Video Size Exceed To 10MB",'warning');
-    files.type != "video/mp4" &&  Swal.fire('Upload Failed',"Only MP4 video is supported",'warning');
+      files.size > 10485760 && Swal.fire('Upload Failed', "Video Size Exceed To 10MB", 'warning');
+      files.type != "video/mp4" && Swal.fire('Upload Failed', "Only MP4 video is supported", 'warning');
     }
-    
+
   }
 
-  deleteVideoFromPhysicalLocation(oldVideoName:string){
+  deleteVideoFromPhysicalLocation(oldVideoName: string) {
     debugger;
-    this.interviewService.deleteVideoInInterviewsInWhatsNew(oldVideoName).subscribe(resp=>{
-      if(resp.status == Status.Success){
-         console.log("previous Video Delete Successfully ");
+    this.interviewService.deleteVideoInInterviewsInWhatsNew(oldVideoName).subscribe(resp => {
+      if (resp.status == Status.Success) {
+        console.log("previous Video Delete Successfully ");
       }
-    })  
+    })
   }
 
-  gotoDetailPage(interview){
+  gotoDetailPage(interview) {
     debugger;
-    if(this.videoName != ""){
+    if (this.videoName != "") {
       this.deleteVideoFromPhysicalLocation(this.videoName);
     }
     this.router.navigate(['/private/interview-detail', interview.id]);
   }
 
   ngOnDestroy() {
-    if(this.videoName != "" && this.edit_interview == false){
+    if (this.videoName != "" && this.edit_interview == false) {
       this.deleteVideoFromPhysicalLocation(this.videoName);
     }
   }
 
 
-  resetInterviewForm(){
+  resetInterviewForm() {
     this.interviewForm.setValue({
-      title: '', 
-      shortDescription: '', 
-      description: '', 
-      showInFrontEnd: false, 
-      featuredImage: '', 
-      video: '', 
+      title: '',
+      shortDescription: '',
+      description: '',
+      showInFrontEnd: false,
+      imageShowInFront: false,
+      videoShowInFront: false,
+      featuredImage: '',
+      video: '',
     })
 
   }
 
-  shortDescriptionCharacterCount(event): boolean{
-    if(this.interviewForm.get('shortDescription').value.length >=200  && event.keyCode != 8 ){
-      let shortDescription:string = this.interviewForm.get('shortDescription').value;
-      this.interviewForm.get('shortDescription').setValue(shortDescription.substring(0,200));
-      this.characterCount =  this.interviewForm.get('shortDescription').value.length;
+  shortDescriptionCharacterCount(event): boolean {
+    if (this.interviewForm.get('shortDescription').value.length >= 200 && event.keyCode != 8) {
+      let shortDescription: string = this.interviewForm.get('shortDescription').value;
+      this.interviewForm.get('shortDescription').setValue(shortDescription.substring(0, 200));
+      this.characterCount = this.interviewForm.get('shortDescription').value.length;
       return false;
     }
-    this.characterCount =  this.interviewForm.get('shortDescription').value.length;
+    this.characterCount = this.interviewForm.get('shortDescription').value.length;
     return true;
   }
 
+  interviewShowInFrontAction(event){
+    debugger;
+    if(this.interviewForm.get('featuredImage').value == '' && event == true ){
+      Swal.fire('Interview Show ',"Feature Image is required To Interview Show In Front",'warning');
+      this.interviewForm.get('showInFrontEnd').setValue(false);
+    }
+  }
+  
+  imageShowInFrontAction(event){
+    debugger;
+    if(this.interviewForm.get('featuredImage').value == '' && event == true ){
+      Swal.fire('Interview Image Show ',"Feature Image is required To Interview Image Show In Front",'warning');
+      this.interviewForm.get('imageShowInFront').setValue(false);
+    }
+  }
+  
+  videoShowInFrontAction(event){
+    debugger;
+    if( this.videoName == '' && event == true ){
+      Swal.fire('Interview Video Show ',"Video is required To Interview Video  Show In Front",'warning');
+      this.interviewForm.get('videoShowInFront').setValue(false);
+    }
+  }
+
 }
- 

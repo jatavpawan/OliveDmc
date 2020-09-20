@@ -23,6 +23,8 @@ namespace BusinessServices.IServices {
 
         ResponseModel ChangePassword(vmUserChangePassword obj);
 
+        ResponseModel UserEmailOTPVerificationBySendMail(int? userId);
+
         //ResponseModel SaveAboutUsDetail(vmAboutUsDetail obj);
 
         //ResponseModel GetAboutUsDetail();

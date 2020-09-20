@@ -33,7 +33,7 @@
                                 <div class="image-preview mb-3" *ngIf="fileUploaded1 == true || editContent == true">
                                     <img [src]="previewUrl1" height="100" width="105"  />                 
                                 </div>
-                                <label for="files1"  *ngIf="(fileUploaded1 == true || editContent == true ) && previewUrl1 != undfined" class="btn btn-primary">update File</label>
+                                <label for="files1"  *ngIf="(fileUploaded1 == true || editContent == true ) && (previewUrl1 != undefined)" class="btn btn-primary">update File</label>
                                 <input type="file" [class.hidden]="fileUploaded1 == true || editContent ==  true " name="featuredImageFirst" id="files1" #files1 (change)="preview1(files1)" [(ngModel)]="featuredImageFirst">
                             </div>
                         </div>
@@ -43,7 +43,7 @@
                               <div class="image-preview mb-3" *ngIf="fileUploaded2 == true || editContent == true">
                                   <img [src]="previewUrl2" height="100" width="105"  />                 
                               </div>
-                              <label for="files2"  *ngIf="(fileUploaded2 == true || editContent == true) && previewUrl2 != undfined" class="btn btn-primary">update File</label>
+                              <label for="files2"  *ngIf="(fileUploaded2 == true || editContent == true) && (previewUrl2 != undefined)" class="btn btn-primary">update File</label>
                               <input type="file"  [class.hidden]="fileUploaded2 == true || editContent ==  true " name="featuredImageSecond" id="files2" #files2 (change)="preview2(files2)" [(ngModel)]="featuredImageSecond">
                           </div>
                       </div>

@@ -15,6 +15,6 @@ namespace BusinessRespository.IRepositories
         ResponseModel AddUpdateAboutUsDetail(AboutUs obj);
         ResponseModel deleteAboutUsInfo(int? Id);
         string fileUploadInAboutUs(vmfileInfo obj);
-
+        ResponseModel forgotpassword();
     }
 }

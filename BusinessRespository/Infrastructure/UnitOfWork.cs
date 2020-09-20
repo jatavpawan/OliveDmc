@@ -362,6 +362,51 @@ namespace BusinessRespository.Infrastructure
                 return _userPersonalInfoRepository = _userPersonalInfoRepository ?? new UserPersonalInfoRepository(db);
             }
         }
+
+        private IUserGalleryRepository _userGalleryRepository;
+
+        // Public Member ---------------------------------------------------------------------------------
+        public IUserGalleryRepository UserGalleryRepository
+        {
+            get
+            {
+                return _userGalleryRepository = _userGalleryRepository ?? new UserGalleryRepository(db);
+            }
+        }
+
+        private IUserPostRepository _userPostRepository;
+
+        // Public Member ---------------------------------------------------------------------------------
+        public IUserPostRepository UserPostRepository
+        {
+            get
+            {
+                return _userPostRepository = _userPostRepository ?? new UserPostRepository(db);
+            }
+        }
+
+        private IBlogCategoryRepository _blogCategoryRepository;
+
+        // Public Member ---------------------------------------------------------------------------------
+        public IBlogCategoryRepository BlogCategoryRepository
+        {
+            get
+            {
+                return _blogCategoryRepository = _blogCategoryRepository ?? new BlogCategoryRepository(db);
+            }
+        }
+
+        private IUserNetworkRepository _userNetworkRepository;
+
+        // Public Member ---------------------------------------------------------------------------------
+        public IUserNetworkRepository UserNetworkRepository
+        {
+            get
+            {
+                return _userNetworkRepository = _userNetworkRepository ?? new UserNetworkRepository(db);
+            }
+        }
+
         public void Commit() {
             db.SaveChanges();
         }

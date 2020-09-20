@@ -101,31 +101,50 @@ namespace BusinessRespository.Repositories
             ResponseModel result = new ResponseModel();
             try
             {
-                //List<OfferAds> resultValue = new List<OfferAds>();
-                //resultValue = Context.OfferAds.Where(z => z.RecUpd != "D").ToList();
+                List<OfferAds> offerAdsList = new List<OfferAds>();
+                offerAdsList = Context.OfferAds.Where(z => z.RecUpd != "D" && z.ShowInFrontEnd == true).ToList();
 
-                //string s1 = "1;2;3;4;5;6;7;8;9;10;11;12";
-                //int[] ints = s1.Split(';').Select(int.Parse).ToArray();
-                //Array.Exists(language, element => element == "Ruby"));
+                List<Page> pageList = new List<Page>();
+                pageList = Context.Page.ToList();
 
-                List<vmGetAllOfferAds> resultValue = new List<vmGetAllOfferAds>();
 
-                resultValue = Context.OfferAds.Where(z => z.RecUpd != "D" && z.ShowInFrontEnd == true).Select(x => new vmGetAllOfferAds
+                var newOfferAdsList = offerAdsList.Select(x => new
                 {
                     Id = x.Id,
                     Title = x.Title,
                     Image = x.Image,
                     PageId = x.PageId,
-                    Pages = Context.Page.Where(z => x.PageId.Contains(z.PageId.ToString())).Select(y => new vmPageNameList { pageName = y.PageTitle }).ToList(),
-                    //Pages = Context.Page.Where( z => Array.Exists(  (x.PageId.Split(',').Select(int.Parse).ToArray() ), element => element == z.PageId) ).Select(y => new vmPageNameList { pageName = y.PageTitle } ).ToList(),
-                    //Pages = Context.Page.Where(z => Array.Exists( x.PageId.Split(','), element => element.Contains(z.PageId.ToString()))).Select(y => new vmPageNameList { pageName = y.PageTitle }).ToList(),
-                    //Pages = Context.Page.Where(z => Array.IndexOf(x.PageId.Split(','), z.PageId.ToString()) > -1).Select(y => new vmPageNameList { pageName = y.PageTitle }).ToList(),
+                    ShowInFrontEnd = x.ShowInFrontEnd,
+                    pageList = pageList.Where(t => x.PageId.Split(',').Contains(t.PageId.ToString()))
+                });
 
-                }).ToList();
+                //foreach (var offerAds in offerAdsList)
+                //{
+                //    offerAds.PageId 
 
 
+                //}
 
-                result.data = resultValue;
+
+                //List<vmGetAllOfferAds> resultValue = new List<vmGetAllOfferAds>();
+
+                //resultValue = Context.OfferAds.Where(z => z.RecUpd != "D" && z.ShowInFrontEnd == true).Select(x => new vmGetAllOfferAds
+                //{
+                //    Id = x.Id,
+                //    Title = x.Title,
+                //    Image = x.Image,
+                //    PageId = x.PageId,
+                //    //Pages = Context.Page.Where(z => x.PageId.Contains(z.PageId.ToString())).Select(y => new vmPageNameList { pageName = y.PageTitle }).ToList(),
+                //    //Pages = Context.Page.Where(z => x.PageId.Split(',').Contains(z.PageId.ToString())).ToList(),
+                //    //Pages = Context.Page..ToList(),
+                //    //Pages = Context.Page.Where( z => Array.Exists(  (x.PageId.Split(',').Select(int.Parse).ToArray() ), element => element == z.PageId) ).Select(y => new vmPageNameList { pageName = y.PageTitle } ).ToList(),
+                //    //Pages = Context.Page.Where(z => Array.Exists( x.PageId.Split(','), element => element.Contains(z.PageId.ToString()))).Select(y => new vmPageNameList { pageName = y.PageTitle }).ToList(),
+                //    //Pages = Context.Page.Where(z => Array.IndexOf(x.PageId.Split(','), z.PageId.ToString()) > -1).Select(y => new vmPageNameList { pageName = y.PageTitle }).ToList(),
+
+                //}).ToList();
+
+                result.data = newOfferAdsList;
+                //result.data = resultValue;
                 result.status = Status.Success;
                 result.message = "List for Offer And  Ads";
             }
@@ -239,12 +258,13 @@ namespace BusinessRespository.Repositories
             try
             {
                 List<OfferAds> OfferAdsList = new List<OfferAds>();
-
-
-                OfferAdsList = Context.OfferAds.Where(z => z.PageId.Contains(pageid)).ToList();
                 
 
-                result.data = OfferAdsList;
+                OfferAdsList = Context.OfferAds.Where(z => z.RecUpd != "D" && z.ShowInFrontEnd == true).ToList();
+                var newOfferAdsList = OfferAdsList.Where(x => x.PageId.Split(',').Contains(Id.ToString()));
+
+
+                result.data = newOfferAdsList;
                 result.status = Status.Success;
                 result.message = "OfferAds Detail";
             }

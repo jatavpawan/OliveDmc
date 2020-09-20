@@ -61,6 +61,14 @@ namespace OLiveDMC.Controllers
         }
 
         [HttpGet]
+        [Route("getUtilityDetailById")]
+        public async Task<ResponseModel> getUtilityDetailById(int? UtilityId)
+        {
+            var Data = _UtilityService.getUtilityDetailById(UtilityId);
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
+
+        [HttpGet]
         [Route("deleteVideoInUtility")]
         public async Task<ResponseModel> deleteVideoInUtility(string oldVideoName)
         {
@@ -75,7 +83,8 @@ namespace OLiveDMC.Controllers
             var Data = _UtilityService.videoUploadInUtility(obj);
             return await System.Threading.Tasks.Task.FromResult(Data);
         }
+     
 
-        
+
     }
 }

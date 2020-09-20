@@ -96,7 +96,7 @@ namespace CookApp.Filters {
                         //}
                         //   _unitOfWork = _connectionService.GetDynamicConnection(Userrecords.DistrictID.ToString());
                         var loginParam = new BusinessDataModel.ViewModel.vmLoginUser { Email=Userrecords.Username, Password=Userrecords.Password};
-                        var data =  _unitOfWork.LoginRepository.LoginUser(loginParam);
+                        var data =  _unitOfWork.LoginRepository.LoginUser(loginParam).data;
                         if (data != null) {
                             //Setting Userid in Session
                             //this.httpContextAccessor.HttpContext.Session.SetString("UserId", data.Id.ToString());

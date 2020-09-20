@@ -13,13 +13,13 @@ namespace BusinessDataModel.ViewModel {
 
     public partial class vmOtpVerify
     {
-        public string MobileNo { get; set; }
+        public string Email { get; set; }
         public string Otp { get; set; }
     }
 
     public partial class vmResendOtp
     {
-        public string MobileNo { get; set; }
+        public string Email { get; set; }
     }
 
     public partial class vmForgotPassword

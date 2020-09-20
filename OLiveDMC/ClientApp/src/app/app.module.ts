@@ -35,6 +35,8 @@ import { ShareService } from './providers/ShareService/share.service';
 import { TeamMemberService } from './providers/TeamMemberService/team-member.service';
 import { ContactUsService } from './providers/ContactUsService/contact-us.service';
 import { PrivacyPolicyService } from './providers/PrivacyPolicyService/privacy-policy.service';
+import { BlogCategoryService } from './providers/BlogCategoryService/blog-category.service';
+import { DatePipe } from '@angular/common';
 // import { NgSelectModule } from ' @ng-select/ng-select';
 
 @NgModule({
@@ -81,12 +83,14 @@ import { PrivacyPolicyService } from './providers/PrivacyPolicyService/privacy-p
     TeamMemberService,
     ContactUsService,
     PrivacyPolicyService,
+    BlogCategoryService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
     },
-    { provide: Window, useValue: window }
+    { provide: Window, useValue: window },
+    DatePipe
   ],
   // schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [

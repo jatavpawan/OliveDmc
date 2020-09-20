@@ -150,7 +150,28 @@ namespace BusinessRespository.Repositories
 
            return imageFile;
         }
+        
+        public ResponseModel forgotpassword()
+        {
+            ResponseModel result = new ResponseModel();
+            try
+            {
+                sendemailRepository sendmail = new sendemailRepository();
+                var userInfo = Context.Registration.Where(z => z.Id == 24).FirstOrDefault();
+               var status =  sendmail.contentBody(userInfo, "EmailOTPVerification");
 
+                result.data = status;
+                result.status = Status.Success;
+                result.message = "delete successfully";
+            }
+            catch (Exception ex)
+            {
+                result.status = Status.Error;
+                result.error = ex.Message;
+
+            }
+            return result;
+        }
 
 
     }

@@ -97,5 +97,13 @@ namespace CookApp.Controllers
             return await System.Threading.Tasks.Task.FromResult(Data);
         }
 
+        [HttpGet]
+        [Route("UserEmailOTPVerificationBySendMail")]
+        public async Task<ResponseModel> UserEmailOTPVerificationBySendMail(int? userId)
+        {
+            var Data = _loginService.UserEmailOTPVerificationBySendMail(userId);
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
+
     }
 }

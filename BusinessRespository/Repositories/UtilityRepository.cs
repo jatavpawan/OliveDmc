@@ -64,6 +64,7 @@ namespace BusinessRespository.Repositories
                 else
                 {
                     var UtilityObj = Context.TravelUtility.Where(z => z.UtilityType == obj.UtilityType).FirstOrDefault();
+                    //var UtilityObj = Context.TravelUtility.Where(z => z.UtilityType == obj.Id).FirstOrDefault();
 
                     if (UtilityObj == null)
                     {
@@ -225,6 +226,61 @@ namespace BusinessRespository.Repositories
                                     };
                                       
                     UtilityDetail = innerJoin.Where(z => z.RecUpd != "D" && z.UtilityType == UtilityType).FirstOrDefault();
+                    //UtilityDetail = innerJoin.Where(z => z.RecUpd != "D").ToList();
+                }
+
+                result.data = UtilityDetail;
+                result.status = Status.Success;
+                result.message = "Utility Detail";
+            }
+            catch (Exception ex)
+            {
+                result.status = Status.Error;
+                result.error = ex.Message;
+
+            }
+            return result;
+        }
+
+        public ResponseModel getUtilityDetailById(int? UtilityId)
+        {
+            ResponseModel result = new ResponseModel();
+            try
+            {
+
+                //List<vmUtilityDetail> UtilityDetail = new List<vmUtilityDetail>();
+                vmUtilityDetail UtilityDetail = new vmUtilityDetail();
+                if (UtilityId != 0)
+                {
+                    var innerJoin = from city in Context.City
+                                    join travelUtility in Context.TravelUtility
+                                    on city.Id equals travelUtility.CityId
+                                    join state in Context.State
+                                    on travelUtility.StateId equals state.Id
+                                    join country in Context.Country
+                                    on travelUtility.CountryId equals country.Id
+                                    select new vmUtilityDetail
+                                    {
+                                        Id = travelUtility.Id,
+                                        Description = travelUtility.Description,
+                                        Status = travelUtility.Status,
+                                        Image = travelUtility.Image,
+                                        CountryId = travelUtility.CountryId,
+                                        CountryName = country.CountryName,
+                                        StateId = travelUtility.StateId,
+                                        StateName = state.StateName,
+                                        CityId = travelUtility.CityId,
+                                        CityName = city.CityName,
+                                        RecUpd = travelUtility.RecUpd,
+                                        CreatedDate = travelUtility.CreatedDate,
+                                        CreatedBy = travelUtility.CreatedBy,
+                                        UpdatedDate = travelUtility.UpdatedDate,
+                                        UpdatedBy = travelUtility.UpdatedBy,
+                                        UtilityType = travelUtility.UtilityType,
+                                        Video = travelUtility.Video
+                                    };
+
+                    UtilityDetail = innerJoin.Where(z => z.RecUpd != "D" && z.Id == UtilityId).FirstOrDefault();
                     //UtilityDetail = innerJoin.Where(z => z.RecUpd != "D").ToList();
                 }
 

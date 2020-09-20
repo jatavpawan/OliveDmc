@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessDataModel.DB;
 using BusinessDataModel.ViewModel;
 using BusinessServices.IServices;
 using CookApp.Filters;
@@ -23,7 +24,7 @@ namespace OLiveDMC.Controllers
 
         [HttpPost]
         [Route("AddUpdateUserPersonalInfo")]
-        public async Task<ResponseModel> AddUpdateUserPersonalInfo([FromForm]vmUserPersonalInfo obj)
+        public async Task<ResponseModel> AddUpdateUserPersonalInfo(Registration obj)
         {
             var Data = _UserPersonalInfoService.AddUpdateUserPersonalInfo(obj);
             return await System.Threading.Tasks.Task.FromResult(Data);
@@ -82,6 +83,15 @@ namespace OLiveDMC.Controllers
             return await System.Threading.Tasks.Task.FromResult(Data);
         }
 
+        [HttpGet]
+        [Route("increamentInVisitCount")]
+        public async Task<ResponseModel> increamentInVisitCount(int? profleUserId)
+        {
+            var Data = _UserPersonalInfoService.increamentInVisitCount(profleUserId);
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
 
+
+      
     }
 }

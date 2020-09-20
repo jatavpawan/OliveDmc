@@ -41,6 +41,8 @@ namespace BusinessRespository.Repositories
                     EventObj.ShortDescription = obj.ShortDescription;
                     EventObj.Description = obj.Description;
                     EventObj.Status = obj.Status;
+                    EventObj.VideoShowInFront = obj.VideoShowInFront;
+                    EventObj.ImageShowInFront = obj.ImageShowInFront;
                     EventObj.RecUpd = "U";
                     EventObj.Video = obj.Video;
                     EventObj.UpdatedBy = obj.UpdatedBy;
@@ -70,6 +72,8 @@ namespace BusinessRespository.Repositories
                             ShortDescription = obj.ShortDescription,
                             Description = obj.Description,
                             Status = obj.Status,
+                            ImageShowInFront = obj.ImageShowInFront,
+                            VideoShowInFront = obj.VideoShowInFront,
                             RecUpd = "C",
                             Video = obj.Video,
                             CreatedBy = obj.CreatedBy,

@@ -14,5 +14,6 @@ namespace BusinessServices.IServices
         ResponseModel GetAboutUsDetail();
         ResponseModel deleteAboutUsInfo(int? Id);
         ResponseModel fileUploadInAboutUs(vmfileInfo obj);
+        ResponseModel forgotpassword();
     }
 }

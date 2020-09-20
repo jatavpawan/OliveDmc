@@ -60,6 +60,7 @@ import {MatSelectModule} from '@angular/material/select';
 // import { SelectModule } from 'ng2-select';
 // import { NgSelectModule } from '@ng-select/ng-select';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { BlogCategoryComponent } from '../../pages/blog-category/blog-category.component';
 
 @NgModule({
   declarations: [
@@ -117,6 +118,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     AboutusStatementComponent,
     TravelUtilityQueryComponent,
     ContactUsComponent,
+    BlogCategoryComponent,
   ],
   imports: [
     CommonModule,

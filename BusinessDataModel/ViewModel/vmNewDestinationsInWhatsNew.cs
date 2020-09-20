@@ -14,6 +14,8 @@ namespace BusinessDataModel.ViewModel
         public string Description { get; set; }
         public string Location { get; set; }
         public bool? ShowInFrontEnd { get; set; }
+        public bool? ImageShowInFront { get; set; }
+        public bool? VideoShowInFront { get; set; }
         public string RecUpd { get; set; }
         public string Video { get; set; }
         public int? CreatedBy { get; set; }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/providers/authentication/authentication.service';
 import { Status } from 'src/app/model/ResponseModel';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import  'jquery';
 import Swal from 'sweetalert2'
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -37,6 +37,7 @@ export class LandingComponent implements OnInit {
      private spinner: NgxSpinnerService,
 
   ) {
+
       
       this.loginForm = this.formBuilder.group({
         email: ['', Validators.required],

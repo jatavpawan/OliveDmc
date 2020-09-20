@@ -17,5 +17,7 @@ namespace BusinessDataModel.DB
         public string RecUpd { get; set; }
         public string Video { get; set; }
         public string ShortDescription { get; set; }
+        public bool? ImageShowInFront { get; set; }
+        public bool? VideoShowInFront { get; set; }
     }
 }

@@ -4,6 +4,7 @@ import { Status } from 'src/app/model/ResponseModel';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2'
 import { TravelUtilityService } from 'src/app/providers/TravelUtilityService/travel-utility.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-travel-utility-query',
@@ -16,26 +17,31 @@ export class TravelUtilityQueryComponent implements OnInit {
   queries:any =[];
   edit_query: boolean = false;
   queryId: string;
+  utilities: Array<any> = [];
 
   constructor( 
     private formBuilder : FormBuilder,
     private  travelUtilityService: TravelUtilityService, 
     private spinner: NgxSpinnerService,
+    private datePipe: DatePipe,
     ) {
 
     this.queryForm = this.formBuilder.group({
       id: [0],
-      travelUtilityType: ['', Validators.required],
       name: ['', Validators.required],
       mobile: ['', Validators.required],
       email: ['', Validators.required],
-      message: ['', Validators.required],
+      travelUtilityTypeId: ['0', Validators.required],
+      startCountry: ['', Validators.required],
+      destinationCountry: ['', Validators.required],
+      dateOfTravel: [''],
     })
     
   }
 
   ngOnInit(){
     this.GetAllQuery();
+    this.GetAllTravelUtility();
   }
 
 
@@ -75,12 +81,28 @@ export class TravelUtilityQueryComponent implements OnInit {
   resetQuery(){
     this.queryForm.setValue({
       id: 0,
-      travelUtilityType: '',
+      travelUtilityTypeId: '',
       name: '',
       mobile: '',
       email: '',
-      message: '',
+      startCountry: '',
+      destinationCountry: '',
+      dateOfTravel: '',
     })
+  }
+
+  GetAllTravelUtility(){
+    this.travelUtilityService.GetAllUtility().subscribe(resp=>{
+      debugger;
+      if(resp.status == Status.Success){
+          this.utilities = resp.data;
+          console.log("this.queries: ", this.queries);
+      } 
+      else{
+        Swal.fire('Oops...', resp.message, 'error');
+      }
+      this.spinner.hide();
+    })    
   }
 
   GetAllQuery(){
@@ -100,11 +122,14 @@ export class TravelUtilityQueryComponent implements OnInit {
   editQuery(query){
 
     this.queryForm.get('id').setValue(query.id);
-    this.queryForm.get('travelUtilityType').setValue(query.travelUtilityType);
+    this.queryForm.get('travelUtilityTypeId').setValue(query.travelUtilityTypeId);
     this.queryForm.get('name').setValue(query.name);
     this.queryForm.get('mobile').setValue(query.mobile);
     this.queryForm.get('email').setValue(query.email);
-    this.queryForm.get('message').setValue(query.message);
+    this.queryForm.get('startCountry').setValue(query.startCountry);
+    this.queryForm.get('destinationCountry').setValue(query.destinationCountry);
+    this.queryForm.get('dateOfTravel').setValue(this.datePipe.transform(query.dateOfTravel, 'yyyy-MM-dd'));
+
     this.edit_query = true;
   }
 

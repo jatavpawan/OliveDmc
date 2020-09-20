@@ -33,6 +33,7 @@ export class HeaderComponent implements OnInit {
       { path: '/private/theme', title: 'Theme',  icon:'pe-7s-user', class: '' },
       { path: '/private/offer-ads', title: 'Offer or Ads',  icon:'pe-7s-note2', class: '' },
       { path: '/private/travel-category-subcategory', title: 'Profile Category',  icon:'pe-7s-news-paper', class: '' },
+      { path: '/private/blog-category', title: 'Blog Category',  icon:'pe-7s-news-paper', class: '' },
       { path: '/private/whats-new', title: 'What’s New',  icon:'pe-7s-science', class: '' },
       { path: '/private/travel-utility', title: 'Travel Utility',  icon:'pe-7s-note2', class: '' },
       { path: '/private/news-events', title: 'New’s and events',  icon:'pe-7s-news-paper', class: '' },
@@ -120,7 +121,7 @@ export class HeaderComponent implements OnInit {
   logout(){
     localStorage.removeItem("LoggedInUser");
     localStorage.removeItem("id_token");
-    this.router.navigate(['public/landing'])
+    this.router.navigate(['landing'])
   }
 
   testing(){

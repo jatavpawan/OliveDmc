@@ -42,6 +42,8 @@ namespace BusinessRespository.Repositories
                     NewDestinationsInWhatsNewObj.ShortDescription = obj.ShortDescription;
                     NewDestinationsInWhatsNewObj.Description = obj.Description;
                     NewDestinationsInWhatsNewObj.ShowInFrontEnd = obj.ShowInFrontEnd;
+                    NewDestinationsInWhatsNewObj.ImageShowInFront = obj.ImageShowInFront;
+                    NewDestinationsInWhatsNewObj.VideoShowInFront = obj.VideoShowInFront;
                     NewDestinationsInWhatsNewObj.RecUpd = "U";
                     NewDestinationsInWhatsNewObj.Video = obj.Video;
                     NewDestinationsInWhatsNewObj.UpdatedBy = obj.UpdatedBy;

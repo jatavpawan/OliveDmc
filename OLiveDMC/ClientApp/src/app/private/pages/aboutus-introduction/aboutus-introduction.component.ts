@@ -33,7 +33,7 @@ export class AboutusIntroductionComponent implements OnInit {
   fileUploaded2:boolean = false;
   file2: any;
   editfileUploaded2: boolean = false;
-  previewUrl1:any = null;
+  previewUrl1:any;
   fileUploaded1:boolean = false;
   file1: any;
   editfileUploaded1: boolean = false;

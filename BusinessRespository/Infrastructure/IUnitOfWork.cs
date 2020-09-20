@@ -42,6 +42,10 @@ namespace BusinessRespository.Infrastructure
         IContactUsRepository ContactUsRepository { get; }
         IUserCoverImageRepository UserCoverImageRepository { get; }
         IUserPersonalInfoRepository UserPersonalInfoRepository { get; }
+        IUserGalleryRepository UserGalleryRepository { get; }
+        IUserPostRepository UserPostRepository { get; }
+        IBlogCategoryRepository BlogCategoryRepository { get; }
+        IUserNetworkRepository UserNetworkRepository { get; }
 
         void Commit();
         void Rollback();

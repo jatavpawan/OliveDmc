@@ -32,6 +32,8 @@ export class NewdestinationsInWhatsnewComponent implements OnInit {
     'placement': 'top',
     'show-delay': 500
   }
+  tooltipImagetext:string ="this Image  is show or hide In User Panel ";
+  tooltipVideotext:string ="this Video  is show or hide In User Panel ";
   videoUrl: string = "";
   videoName: string = "";
   characterCount:number = 0;
@@ -48,7 +50,9 @@ export class NewdestinationsInWhatsnewComponent implements OnInit {
       location: ['', Validators.required],
       shortDescription: ['', Validators.required],
       description: ['', Validators.required],
-      showInFrontEnd: [true],
+      showInFrontEnd: [false],
+      imageShowInFront: [false],
+      videoShowInFront: [false],
       featuredImage: [''],
       video: [''],
 
@@ -115,6 +119,8 @@ export class NewdestinationsInWhatsnewComponent implements OnInit {
       formData.append('ShortDescription', this.destinationForm.get('shortDescription').value);
       formData.append('Description', this.destinationForm.get('description').value);
       formData.append('ShowInFrontEnd', this.destinationForm.get('showInFrontEnd').value);
+      formData.append('ImageShowInFront', this.destinationForm.get('imageShowInFront').value);
+      formData.append('VideoShowInFront', this.destinationForm.get('videoShowInFront').value);
       formData.append('Video', this.videoName);
 
 
@@ -179,6 +185,8 @@ export class NewdestinationsInWhatsnewComponent implements OnInit {
     this.destinationForm.get('shortDescription').setValue(destination.shortDescription);
     this.destinationForm.get('description').setValue(destination.description);
     this.destinationForm.get('showInFrontEnd').setValue(destination.showInFrontEnd);
+    this.destinationForm.get('imageShowInFront').setValue(destination.imageShowInFront);
+    this.destinationForm.get('videoShowInFront').setValue(destination.videoShowInFront);
    
     this.destinationId = ''+destination.id; 
     this.videoName = destination.video;
@@ -284,6 +292,8 @@ export class NewdestinationsInWhatsnewComponent implements OnInit {
       shortDescription: '', 
       description: '', 
       showInFrontEnd: true, 
+      imageShowInFront: true, 
+      videoShowInFront: true, 
       featuredImage: '', 
       video: '', 
     })
@@ -298,6 +308,30 @@ export class NewdestinationsInWhatsnewComponent implements OnInit {
     }
     this.characterCount =  this.destinationForm.get('shortDescription').value.length;
     return true;
+  }
+
+  destinationShowInFrontAction(event){
+    debugger;
+    if(this.destinationForm.get('featuredImage').value == '' && event == true ){
+      Swal.fire('Destination Show ',"Feature Image is required To Destination Show In Front",'warning');
+      this.destinationForm.get('showInFrontEnd').setValue(false);
+    }
+  }
+  
+  imageShowInFrontAction(event){
+    debugger;
+    if(this.destinationForm.get('featuredImage').value == '' && event == true ){
+      Swal.fire('Destination Image Show ',"Feature Image is required To Destination Image Show In Front",'warning');
+      this.destinationForm.get('imageShowInFront').setValue(false);
+    }
+  }
+  
+  videoShowInFrontAction(event){
+    debugger;
+    if( this.videoName == '' && event == true ){
+      Swal.fire('Destination Video Show ',"Video is required To Destination Video  Show In Front",'warning');
+      this.destinationForm.get('videoShowInFront').setValue(false);
+    }
   }
 
 }

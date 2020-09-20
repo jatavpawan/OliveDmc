@@ -84,6 +84,34 @@
                     </a>
                 </li>
                 <li routerLinkActive="active"  class="">
+                    <a data-toggle="collapse" data-target="#blogpage">
+                        <i class="pe-7s-note2"></i>
+                        <p>Blog Page<b class="caret"></b></p>
+                    </a>
+                    <div class="collapse" id="blogpage">
+                        <ul class="nav">
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['/private/blog-category']">
+                                    <span class="sidebar-mini">BC</span>
+                                    <span class="sidebar-normal">Blog Category</span>
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['/private/blog']">
+                                    <span class="sidebar-mini">CB</span>
+                                    <span class="sidebar-normal">Create Blog </span>
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['/private/blog-priority']">
+                                    <span class="sidebar-mini">BP</span>
+                                    <span class="sidebar-normal">Blog Priority</span>
+                                </a>
+                            </li>
+                       </ul>
+                    </div>
+                </li>
+                <!-- <li routerLinkActive="active"  class="">
                     <a data-toggle="collapse" data-target="#whatsNew">
                         <i class="pe-7s-note2"></i>
                         <p>WHAT'S NEW<b class="caret"></b></p>
@@ -104,7 +132,7 @@
                             </li>
                        </ul>
                     </div>
-                </li>
+                </li> -->
                 <li routerLinkActive="active"  class="">
                     <a data-toggle="collapse" data-target="#newsAndEvent">
                         <i class="pe-7s-note2"></i>
@@ -124,6 +152,126 @@
                                     <span class="sidebar-normal">EVENT</span>
                                 </a>
                             </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['/private/festival']">
+                                    <span class="sidebar-mini">F</span>
+                                    <span class="sidebar-normal">Festival</span>
+                                </a>
+                            </li>
+                       </ul>
+                    </div>
+                </li>
+                <li routerLinkActive="active"  class="">
+                    <a data-toggle="collapse" data-target="#travelUtilityPage">
+                        <i class="pe-7s-note2"></i>
+                        <p>Travel Utility<b class="caret"></b></p>
+                    </a>
+                    <div class="collapse" id="travelUtilityPage">
+                        <ul class="nav">
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['/private/travel-utility']">
+                                    <span class="sidebar-mini">TU</span>
+                                    <span class="sidebar-normal">Travel Utility</span>
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['/private/travel-utility-query']">
+                                    <span class="sidebar-mini">TQ</span>
+                                    <span class="sidebar-normal">Travel Utility Query</span>
+                                </a>
+                            </li>
+                       </ul>
+                    </div>
+                </li>
+                <li routerLinkActive="active"  class="">
+                    <a data-toggle="collapse" data-target="#OtherPage">
+                        <i class="pe-7s-note2" aria-hidden="true"></i>
+                        <p>Other Page <b class="caret"></b></p>
+                    </a>
+                    <div class="collapse" id="OtherPage">
+                        <ul class="nav">
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['/private/aboutus-introduction']">
+                                    <span class="sidebar-mini">AI</span>
+                                    <span class="sidebar-normal">About Us Introduction</span>
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['/private/aboutus-statement']">
+                                    <span class="sidebar-mini">AS</span>
+                                    <span class="sidebar-normal">About Us Statement</span>
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['/private/our-team-member']">
+                                    <span class="sidebar-mini">TM</span>
+                                    <span class="sidebar-normal">Team Member</span>
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['/private/contact-us']">
+                                    <span class="sidebar-mini">CU</span>
+                                    <span class="sidebar-normal">Contact Us</span>
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['/private/privacy-policy']">
+                                    <span class="sidebar-mini">PP</span>
+                                    <span class="sidebar-normal">Privacy Policy</span>
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['/private/faq']">
+                                    <span class="sidebar-mini">F</span>
+                                    <span class="sidebar-normal">FAQ</span>
+                                </a>
+                            </li>
+                       </ul>
+                    </div>
+                </li>
+                <li routerLinkActive="active"  class="">
+                    <a data-toggle="collapse" data-target="#developerPages">
+                        <i class="pe-7s-note2" aria-hidden="true"></i>
+                        <p>Developer Pages <b class="caret"></b></p>
+                    </a>
+                    <div class="collapse" id="developerPages">
+                        <ul class="nav">
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['/private/travel-category-subcategory']">
+                                    <span class="sidebar-mini">PC</span>
+                                    <span class="sidebar-normal">Profile Category</span>
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['/private/travel-guru-expert-travelers']">
+                                    <span class="sidebar-mini">TT</span>
+                                    <span class="sidebar-normal">Travel Guru and Expert Travelers</span>
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['/private/user']">
+                                    <span class="sidebar-mini">U</span>
+                                    <span class="sidebar-normal">User</span>
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['/private/post']">
+                                    <span class="sidebar-mini">P</span>
+                                    <span class="sidebar-normal">Post</span>
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['/private/contact-details']">
+                                    <span class="sidebar-mini">CD</span>
+                                    <span class="sidebar-normal">Contact details</span>
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['/private/page']">
+                                    <span class="sidebar-mini">P</span>
+                                    <span class="sidebar-normal">Page</span>
+                                </a>
+                            </li>
                        </ul>
                     </div>
                 </li>
@@ -134,12 +282,12 @@
                     </a>
                     <div class="collapse" id="Settings">
                         <ul class="nav">
-                            <li routerLinkActive="active">
+                            <!-- <li routerLinkActive="active">
                                 <a [routerLink]="['/private/about-us']">
                                     <span class="sidebar-mini">AU</span>
                                     <span class="sidebar-normal">About Us</span>
                                 </a>
-                            </li>
+                            </li> -->
                             <li routerLinkActive="active">
                                 <a [routerLink]="['/private/banner']">
                                     <span class="sidebar-mini">B</span>
@@ -161,6 +309,8 @@
                        </ul>
                     </div>
                 </li>
+              
+
             </ul>
         </div>
         <div class="sidebar-background" style="background-image: url(assets/img/full-screen-image-3.jpg)"></div>
@@ -251,7 +401,7 @@
                         </ul>
                     </nav>
                     <p class="copyright pull-right">
-                        &copy; {{test | date: 'yyyy'}}  All right reserved by the OLIVE DMC
+                        All right reserved by the OLIVE DMC
                     </p>
                 </div>
             </footer>

@@ -66,6 +66,14 @@ namespace OLiveDMC.Controllers
             return await System.Threading.Tasks.Task.FromResult(Data);
         }
 
+        [HttpGet]
+        [Route("forgotpassword")]
+        public async Task<ResponseModel> forgotpassword()
+        {
+            var Data = _aboutUsService.forgotpassword();
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
+
 
     }
 }

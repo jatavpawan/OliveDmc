@@ -130,7 +130,8 @@
                           [routerLink]="['/private/offerAds-detail', offerAd.id]">{{offerAd.title.length > 80 ? (offerAd.title|slice : 0 :75)+'...' : offerAd.title}}</a>
                       </div>
                       <div class="blog-details">
-                        <a class="blog-approval">Page Id:{{offerAd.pageId}}</a>
+                        <!-- <a class="blog-approval">Page Id:{{offerAd.pageId}}</a> -->
+                        <a class="blog-approval">Page: <span *ngFor="let page of offerAd?.pageList"> {{page.pageTitle}},</span> </a>
                         <span class="blog-publish-date">{{offerAd.createdDate| date:'dd-MMM-yyyy' }}</span>
                       </div>
                     </div>

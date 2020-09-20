@@ -16,7 +16,9 @@ namespace BusinessRespository.IRepositories
         ResponseModel getUtilityDetailByUtilityType(string UtilityType);
         string videoUploadInUtility(vmfileInfo obj);
         void deleteVideoInUtility(string oldVideoName);
+        ResponseModel getUtilityDetailById(int? UtilityId);
 
-        
+
+
     }
 }

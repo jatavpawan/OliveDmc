@@ -207,8 +207,108 @@ namespace BusinessServices.Services
             }
             return response;
         }
+        
+        public ResponseModel RandomBlogList()
+        {
+            try
+            {
+                ResponseModel result = new ResponseModel();
+                result = _unitOfWork.BlogRepository.RandomBlogList();
+
+                response.data = result.data;
+                response.status = result.status;
+                response.message = result.message;
+
+            }
+            catch (Exception ex)
+            {
+                response.message = ex.Message;
+                response.status = Status.Error;
+            }
+            return response;
+        }
 
 
+
+        public ResponseModel BlogListByCategoryId(vmCategoriesBlog obj)
+        {
+            try
+            {
+                ResponseModel result = new ResponseModel();
+                result = _unitOfWork.BlogRepository.BlogListByCategoryId(obj);
+
+                response.data = result.data;
+                response.status = result.status;
+                response.message = result.message;
+
+            }
+            catch (Exception ex)
+            {
+                response.message = ex.Message;
+                response.status = Status.Error;
+            }
+            return response;
+        }
+
+        public ResponseModel userPostBlog(vmUserPostBlog obj)
+        {
+            try
+            {
+                ResponseModel result = new ResponseModel();
+                result = _unitOfWork.BlogRepository.userPostBlog(obj);
+
+                response.data = result.data;
+                response.status = result.status;
+                response.message = result.message;
+
+            }
+            catch (Exception ex)
+            {
+                response.message = ex.Message;
+                response.status = Status.Error;
+            }
+            return response;
+        }
+
+        public ResponseModel userReactOnBlog(BlogReaction obj)
+        {
+            try
+            {
+                ResponseModel result = new ResponseModel();
+                result = _unitOfWork.BlogRepository.userReactOnBlog(obj);
+
+                response.data = result.data;
+                response.status = result.status;
+                response.message = result.message;
+
+            }
+            catch (Exception ex)
+            {
+                response.message = ex.Message;
+                response.status = Status.Error;
+            }
+            return response;
+        }
+
+        public ResponseModel getPopularTag()
+        {
+            try
+            {
+                ResponseModel result = new ResponseModel();
+                result = _unitOfWork.BlogRepository.getPopularTag();
+
+                response.data = result.data;
+                response.status = result.status;
+                response.message = result.message;
+
+            }
+            catch (Exception ex)
+            {
+                response.message = ex.Message;
+                response.status = Status.Error;
+            }
+            return response;
+        }
 
 
     }

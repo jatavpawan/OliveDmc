@@ -1,4 +1,5 @@
-﻿using BusinessDataModel.ViewModel;
+﻿using BusinessDataModel.DB;
+using BusinessDataModel.ViewModel;
 using BusinessRespository.Infrastructure;
 using BusinessServices.IServices;
 using Microsoft.AspNetCore.Http;
@@ -25,7 +26,7 @@ namespace BusinessServices.Services
             //    //}
         }
 
-        public ResponseModel AddUpdateUserPersonalInfo(vmUserPersonalInfo obj)
+        public ResponseModel AddUpdateUserPersonalInfo(Registration obj)
         {
             try
             {
@@ -165,6 +166,26 @@ namespace BusinessServices.Services
             }
             return response;
         }
+
+        public ResponseModel increamentInVisitCount(int? profleUserId)
+        {
+            try
+            {
+                ResponseModel result = new ResponseModel();
+                result = _unitOfWork.UserPersonalInfoRepository.increamentInVisitCount(profleUserId);
+
+                response.status = result.status;
+                response.message = result.message;
+
+            }
+            catch (Exception ex)
+            {
+                response.message = ex.Message;
+                response.status = Status.Error;
+            }
+            return response;
+        }
+        
 
     }
 }

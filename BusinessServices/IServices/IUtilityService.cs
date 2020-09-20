@@ -16,7 +16,8 @@ namespace BusinessServices.IServices
         ResponseModel getUtilityDetailByUtilityType(string UtilityType);
         ResponseModel videoUploadInUtility(vmfileInfo obj);
         ResponseModel deleteVideoInUtility(string oldVideoName);
-        
+        ResponseModel getUtilityDetailById(int? UtilityId);
+
 
     }
 }

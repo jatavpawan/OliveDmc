@@ -52,6 +52,33 @@
                                     labelOff="No"
                                     checkedTextColor="red"
                                     formControlName="status"
+                                    (change)= "newsShowInFrontAction($event)"
+                                    ></ui-switch>
+                                </div>
+                                <div class="col-sm-7" class="form-control status-border"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2 status-lable"> <img src="../../../../assets/icon/more_info1.jpg" alt="" width="14" height="13"  [tooltip]="tooltipImagetext" [options]="tooltipImagetext"> Image Show :</label>
+                                <div class="col-sm-1">
+                                    <ui-switch
+                                    labelOn="Yes"
+                                    labelOff="No"
+                                    checkedTextColor="red"
+                                    formControlName="imageShowInFront"
+                                    (change)= "imageShowInFrontAction($event)"
+                                    ></ui-switch>
+                                </div>
+                                <div class="col-sm-7" class="form-control status-border"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2 status-lable"> <img src="../../../../assets/icon/more_info1.jpg" alt="" width="14" height="13"  [tooltip]="tooltipVideotext" [options]="tooltipVideotext"> Video Show:</label>
+                                <div class="col-sm-1">
+                                    <ui-switch
+                                    labelOn="Yes"
+                                    labelOff="No"
+                                    checkedTextColor="red"
+                                    formControlName="videoShowInFront"
+                                    (change)= "videoShowInFrontAction($event)"
                                     ></ui-switch>
                                 </div>
                                 <div class="col-sm-7" class="form-control status-border"></div>

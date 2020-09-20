@@ -41,6 +41,8 @@ namespace BusinessRespository.Repositories
                     InterviewsInWhatsNewObj.ShortDescription  = obj.ShortDescription;
                     InterviewsInWhatsNewObj.Description = obj.Description;
                     InterviewsInWhatsNewObj.ShowInFrontEnd = obj.ShowInFrontEnd;
+                    InterviewsInWhatsNewObj.ImageShowInFront = obj.ImageShowInFront;
+                    InterviewsInWhatsNewObj.VideoShowInFront = obj.VideoShowInFront;
                     InterviewsInWhatsNewObj.RecUpd = "U";
                     InterviewsInWhatsNewObj.Video = obj.Video;
                     InterviewsInWhatsNewObj.UpdatedBy = obj.UpdatedBy;
@@ -70,6 +72,8 @@ namespace BusinessRespository.Repositories
                             ShortDescription = obj.ShortDescription,
                             Description = obj.Description,
                             ShowInFrontEnd = obj.ShowInFrontEnd,
+                            ImageShowInFront = obj.ImageShowInFront,
+                            VideoShowInFront = obj.VideoShowInFront,
                             RecUpd = "C",
                             Video = obj.Video,
                             CreatedBy = obj.CreatedBy,

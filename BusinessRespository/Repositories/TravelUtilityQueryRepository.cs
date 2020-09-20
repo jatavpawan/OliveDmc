@@ -26,12 +26,14 @@ namespace BusinessRespository.Repositories
                 if (obj.Id > 0)
                 {
                     var TravelUtilityQueryObj = Context.TravelUtilityQuery.Where(z => z.Id == obj.Id).FirstOrDefault();
+                    TravelUtilityQueryObj.TravelUtilityTypeId = obj.TravelUtilityTypeId;
                     TravelUtilityQueryObj.Name = obj.Name;
                     TravelUtilityQueryObj.Mobile = obj.Mobile;
-                    TravelUtilityQueryObj.Message = obj.Message;
                     TravelUtilityQueryObj.Email = obj.Email;
-                    TravelUtilityQueryObj.TravelUtilityType = obj.TravelUtilityType;
-TravelUtilityQueryObj.RecUpd = "U";
+                    TravelUtilityQueryObj.StartCountry = obj.StartCountry;
+                    TravelUtilityQueryObj.DestinationCountry = obj.DestinationCountry;
+                    TravelUtilityQueryObj.DateOfTravel = obj.DateOfTravel;
+                    TravelUtilityQueryObj.RecUpd = "U";
                     TravelUtilityQueryObj.UpdatedBy = obj.UpdatedBy;
                     TravelUtilityQueryObj.UpdatedDate = DateTime.Now;
                     Context.SaveChanges();
@@ -43,11 +45,13 @@ TravelUtilityQueryObj.RecUpd = "U";
                 {
                     var TravelUtilityQueryDetail = new TravelUtilityQuery
                     {
+                        TravelUtilityTypeId = obj.TravelUtilityTypeId,
                         Name = obj.Name,
                         Email = obj.Email,
                         Mobile = obj.Mobile,
-                        Message = obj.Message,
-                        TravelUtilityType = obj.TravelUtilityType,
+                        StartCountry = obj.StartCountry,
+                        DestinationCountry = obj.DestinationCountry,
+                        DateOfTravel = obj.DateOfTravel,
                         RecUpd = "C",
                         CreatedBy = obj.CreatedBy,
                         CreatedDate = DateTime.Now,
@@ -75,8 +79,33 @@ TravelUtilityQueryObj.RecUpd = "U";
             ResponseModel result = new ResponseModel();
             try
             {
-                List<TravelUtilityQuery> resultValue = new List<TravelUtilityQuery>();
-                resultValue = Context.TravelUtilityQuery.Where(z => z.RecUpd != "D").ToList();
+                //List<TravelUtilityQuery> resultValue = new List<TravelUtilityQuery>();
+              
+
+
+                var innerjoin  = from tu in Context.TravelUtility
+                                      join tq in Context.TravelUtilityQuery
+                                      on tu.Id equals tq.TravelUtilityTypeId
+                                      select new vmTravelUtilityQuery
+                                      {
+
+                                          Id = tq.Id,
+                                          TravelUtilityTypeId = tq.TravelUtilityTypeId,
+                                          UtilityName = tu.UtilityType,
+                                          Name = tq.Name,
+                                          Mobile = tq.Mobile,
+                                          Email = tq.Email,
+                                          StartCountry = tq.StartCountry,
+                                          DestinationCountry = tq.DestinationCountry,
+                                          DateOfTravel = tq.DateOfTravel,
+                                          RecUpd = tq.RecUpd,
+                                          CreatedBy = tq.CreatedBy,
+                                          CreatedDate = tq.CreatedDate,
+                                          UpdatedBy = tq.UpdatedBy,
+                                          UpdatedDate = tq.UpdatedDate
+                                      };
+
+                var resultValue = innerjoin.Where(z => z.RecUpd != "D").ToList();
 
                 result.data = resultValue;
                 result.status = Status.Success;

@@ -17,5 +17,7 @@ namespace BusinessDataModel.DB
         public DateTime? CreatedDate { get; set; }
         public int? UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
+        public bool? ImageShowInFront { get; set; }
+        public bool? VideoShowInFront { get; set; }
     }
 }

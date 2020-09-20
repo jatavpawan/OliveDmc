@@ -14,8 +14,10 @@ namespace BusinessDataModel.ViewModel
         public string FeaturedImage { get; set; }
         public string ShortDescription { get; set; }
         public string Description { get; set; }
+        public int? Category { get; set; }
         public bool? Status { get; set; }
         public bool? ApprovalStatus { get; set; }
+        public string RecUpd { get; set; }
         public int? CreatedBy { get; set; }
         public DateTime? CreatedDate { get; set; }
         public int? UpdatedBy { get; set; }

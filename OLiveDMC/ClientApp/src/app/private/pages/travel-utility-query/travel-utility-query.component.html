@@ -9,7 +9,16 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-2 input-label" for="title">Travel Utility Type:</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="title"  placeholder="Enter Travel Utility Type" formControlName="travelUtilityType">
+                                    <!-- <input type="text" class="form-control" id="title"  placeholder="Enter Travel Utility Type" formControlName="travelUtilityTypeId"> -->
+                                   <select class="form-control" formControlName="travelUtilityTypeId">
+                                       <option value="0">Select Utility type</option>
+                                       <ng-container *ngFor="let utility of utilities">
+                                            <option *ngIf="utility?.id != 3 && utility?.id != 4 && utility?.id != 5 && utility?.id != 6" [value]="utility?.id">{{utility?.utilityType}}</option>
+                                       </ng-container>
+                                       
+                                   </select>
+                                
+                                
                                 </div>
                             </div>
                             <div class="form-group">
@@ -31,9 +40,21 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-2 input-label" for="title">Message:</label>
+                                <label class="control-label col-sm-2 input-label" for="title">Start Country:</label>
                                 <div class="col-sm-10">
-                                    <textarea name="" class="form-control" id="" cols="30" rows="10" formControlName="message"></textarea>
+                                    <input type="text" class="form-control" id="title"  placeholder="Enter Start Country" formControlName="startCountry">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2 input-label" for="title">Destination Country:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="title"  placeholder="Enter Destination Country" formControlName="destinationCountry">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2 input-label" for="title">Date Of Travel:</label>
+                                <div class="col-sm-10">
+                                    <input type="date" class="form-control" id="title"  placeholder="Enter Date Of Travel" formControlName="dateOfTravel">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -55,11 +76,13 @@
                                     <thead>
                                       <tr>
                                         <th>S.No.</th>
-                                        <th>Utility Type</th>
+                                        <th>Utility Name</th>
                                         <th>Name</th>
                                         <th>Mobile</th>
                                         <th>Email</th>
-                                        <th>Message</th>
+                                        <th>Start Country</th>
+                                        <th>Destination Country</th>
+                                        <th>Date Of Travel</th>
                                         <th>Action</th>
                                       </tr>
                                     </thead>
@@ -67,11 +90,13 @@
                                         <ng-container *ngFor="let query of queries; let i = index;">
                                             <tr>
                                                   <td>{{i+1}}</td>
-                                                  <td>{{query.travelUtilityType}}</td>
-                                                  <td>{{query.name}}</td>
-                                                  <td>{{query.mobile}}</td>
-                                                  <td>{{query.email}}</td>
-                                                  <td>{{query.message.length >20 ? (query.message|slice : 0:20) +'...' : query.message }}</td>
+                                                  <td>{{query?.utilityName}}</td>
+                                                  <td>{{query?.name}}</td>
+                                                  <td>{{query?.mobile}}</td>
+                                                  <td>{{query?.email}}</td>
+                                                  <td>{{query?.startCountry}}</td>
+                                                  <td>{{query?.destinationCountry}}</td>
+                                                  <td>{{query?.dateOfTravel != undefined ? (query?.dateOfTravel|date:'dd-MMM-yyyy') : '----'}}</td>
                                                   <td>
                                                       <span class="edit-category glyphicon glyphicon-pencil" (click)="editQuery(query)"></span>
                                                       <span class="delete-category glyphicon glyphicon-trash" (click)="openConfirmDialog(query.id)"></span>

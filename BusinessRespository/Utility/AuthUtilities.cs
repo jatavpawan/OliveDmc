@@ -23,12 +23,28 @@ namespace BusinessRespository.Utility {
             JwtSecurityToken token = new JwtSecurityToken(header: header, payload: payload);
             return tokenHandler.WriteToken(token);
         }
-        public static int GenerateOTPNo()
+        public static string GenerateOTPNo()
         {
-            int _min = 1000;
-            int _max = 9999;
-            Random _rdm = new Random();
-            return _rdm.Next(_min, _max);
+            //int _min = 0;
+            //int _max = 35;
+            //Random _rdm = new Random();
+            //return _rdm.Next(_min, _max);
+
+
+            string str = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            string OTP = "";
+            
+            for (int i = 0; i < 5; i++)
+            {
+                int _min = 0;
+                int _max = 35;
+                Random _rdm = new Random();
+                int randomNum =  _rdm.Next(_min, _max);
+
+                OTP += str[randomNum];
+
+            }
+            return OTP;
         }
 
     }

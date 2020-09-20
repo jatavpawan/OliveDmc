@@ -28,6 +28,8 @@ export class NewsComponent implements OnInit {
   newsId: string;
   tinymceConfig: any;
   tooltipText:string ="this News is show or hide to the user";
+  tooltipImagetext:string ="this Image  is show or hide In User Panel ";
+  tooltipVideotext:string ="this Video  is show or hide In User Panel ";
   tooltipVideoText:string ="only MP4 Video is supported and Video maximum size can be 10MB";
   tooltipOptions = {
     'placement': 'top',
@@ -50,6 +52,8 @@ export class NewsComponent implements OnInit {
       shortDescription: ['', Validators.required],
       description: ['', Validators.required],
       status: [false],
+      imageShowInFront: [false],
+      videoShowInFront: [false],
       featuredImage: [''],
       video: [''],
 
@@ -113,6 +117,8 @@ export class NewsComponent implements OnInit {
       formData.append('ShortDescription', this.newsForm.get('shortDescription').value);
       formData.append('Description', this.newsForm.get('description').value);
       formData.append('Status', this.newsForm.get('status').value);
+      formData.append('ImageShowInFront', this.newsForm.get('imageShowInFront').value);
+      formData.append('VideoShowInFront', this.newsForm.get('videoShowInFront').value);
       formData.append('Video', this.videoName);
 
 
@@ -167,13 +173,16 @@ export class NewsComponent implements OnInit {
   }
 
   editNews(news){
+    debugger;
     if(this.videoName != ""){
       this.deleteVideoFromPhysicalLocation(this.videoName);
     }
     this.newsForm.get('title').setValue(news.title);
     this.newsForm.get('shortDescription').setValue(news.shortDescription);
     this.newsForm.get('description').setValue(news.description);
-    this.newsForm.get('status').setValue(news.status);
+    this.newsForm.get('status').setValue(news.status != null ? news.status :  false);
+    this.newsForm.get('imageShowInFront').setValue(news.imageShowInFront != null ? news.imageShowInFront :  false );
+    this.newsForm.get('videoShowInFront').setValue(news.videoShowInFront!= null ? news.videoShowInFront :  false);
    
     this.newsId = ''+news.id; 
     this.videoName = news.video;
@@ -274,6 +283,8 @@ export class NewsComponent implements OnInit {
       shortDescription: '', 
       description: '', 
       status: false, 
+      imageShowInFront: false, 
+      videoShowInFront: false, 
       featuredImage: '', 
       video: '', 
     })
@@ -290,5 +301,33 @@ export class NewsComponent implements OnInit {
     return true;
   }
 
+
+  newsShowInFrontAction(event){
+    debugger;
+    if(this.newsForm.get('featuredImage').value == '' && event == true ){
+      Swal.fire('News Show ',"Feature Image is required To News Show In Front",'warning');
+      this.newsForm.get('status').setValue(false);
+    }
+  }
+  
+  imageShowInFrontAction(event){
+    debugger;
+    if(this.newsForm.get('featuredImage').value == '' && event == true ){
+      Swal.fire('News Image Show ',"Feature Image is required To News Image Show In Front",'warning');
+      this.newsForm.get('imageShowInFront').setValue(false);
+    }
+  }
+  
+  videoShowInFrontAction(event){
+    debugger;
+    if( this.videoName == '' && event == true ){
+      Swal.fire('News Video Show ',"Video is required To News Video  Show In Front",'warning');
+      this.newsForm.get('videoShowInFront').setValue(false);
+    }
+  }
+  
+
 }
+
+
 

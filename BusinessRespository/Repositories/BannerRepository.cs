@@ -62,7 +62,7 @@ namespace BusinessRespository.Repositories
                     //var result1 = Context.Banner.Where(z => z.BannerName == obj.BannerName).Any();
 
 
-                    if (!Context.Banner.Where(z => z.Title == obj.Title && z.RecUpd != "D").Any())
+                    if ( (!Context.Banner.Where(z => z.Title == obj.Title && z.RecUpd != "D").Any() )|| obj.PageId == 1)
                     {
                         var BannerDetail = new Banner
                         {
@@ -184,6 +184,28 @@ namespace BusinessRespository.Repositories
             }
             catch (Exception ex)
             { 
+                result.status = Status.Error;
+                result.error = ex.Message;
+
+            }
+            return result;
+        }
+
+        public ResponseModel GetBannerAtHome()
+        {
+            ResponseModel result = new ResponseModel();
+            try
+            {
+                List<Banner> BannerList = new List<Banner>();
+
+                BannerList = Context.Banner.Where(z => z.PageId == 1).ToList();
+                
+                result.data = BannerList;
+                result.status = Status.Success;
+                result.message = "Banner Detail";
+            }
+            catch (Exception ex)
+            {
                 result.status = Status.Error;
                 result.error = ex.Message;
 

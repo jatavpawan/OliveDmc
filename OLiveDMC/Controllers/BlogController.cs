@@ -95,7 +95,46 @@ namespace OLiveDMC.Controllers
             return await System.Threading.Tasks.Task.FromResult(Data);
         }
 
+        [HttpGet]
+        [Route("RandomBlogList")]
+        public async Task<ResponseModel> RandomBlogList()
+        {
+            var Data = _BlogService.RandomBlogList();
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
 
+        [HttpPost]
+        [Route("BlogListByCategoryId")]
+        public async Task<ResponseModel> BlogListByCategoryId(vmCategoriesBlog obj)
+        {
+            var Data = _BlogService.BlogListByCategoryId(obj);
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
+
+
+        [HttpPost]
+        [Route("userPostBlog")]
+        public async Task<ResponseModel> userPostBlog(vmUserPostBlog obj)
+        {
+            var Data = _BlogService.userPostBlog(obj);
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
+
+        [HttpPost]
+        [Route("userReactOnBlog")]
+        public async Task<ResponseModel> userReactOnBlog(BlogReaction obj)
+        {
+            var Data = _BlogService.userReactOnBlog(obj);
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
+
+        [HttpGet]
+        [Route("getPopularTag")]
+        public async Task<ResponseModel> getPopularTag()
+        {
+            var Data = _BlogService.getPopularTag();
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
 
     }
 }

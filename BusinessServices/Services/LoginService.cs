@@ -117,19 +117,20 @@ namespace BusinessServices.Services
            
             try
             {
-                var resultValue = _unitOfWork.LoginRepository.LoginUser(obj);
-                if (resultValue != null)
+                ResponseModel resultValue = _unitOfWork.LoginRepository.LoginUser(obj);
+                if (resultValue.status == Status.Success)
                 {
-                    response.status = Status.Success;
-                    response.data = resultValue;
+                    response.status = resultValue.status;
+                    response.data = resultValue.data;
                     response.message = BusinessRespository.Utility.AuthUtilities.GenerateToken(resultValue, obj.Email);
 
 
                 }
                 else
                 {
-                    response.status = Status.Warning;
-                    response.message = "Id and Password not matched, please try again.";
+                    response.data = resultValue.data;
+                    response.status = resultValue.status;
+                    response.message = resultValue.message;
                 }
             }
             catch (Exception ex)
@@ -231,6 +232,23 @@ namespace BusinessServices.Services
             return response;
         }
 
+        public ResponseModel UserEmailOTPVerificationBySendMail(int? userId)
+        {
+            try
+            {
+                var resultValue = new ResponseModel();
+                resultValue = _unitOfWork.LoginRepository.UserEmailOTPVerificationBySendMail(userId);
+                response = resultValue;
+
+            }
+            catch (Exception ex)
+            {
+                response.message = ex.Message;
+                response.status = Status.Error;
+            }
+            return response;
+        }
+        
 
         //public ResponseModel SaveAboutUsDetail(vmAboutUsDetail obj )
         //{

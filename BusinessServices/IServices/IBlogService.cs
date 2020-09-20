@@ -20,5 +20,14 @@ namespace BusinessServices.IServices
         ResponseModel AllBlogPriorityListInUserPanel();
 
         ResponseModel AllBlogInUserPanel(int pageNo);
+        ResponseModel RandomBlogList();
+
+        ResponseModel BlogListByCategoryId(vmCategoriesBlog obj);
+        ResponseModel userPostBlog(vmUserPostBlog obj);
+        ResponseModel userReactOnBlog(BlogReaction obj);
+        ResponseModel getPopularTag();
+        
+
+
     }
 }

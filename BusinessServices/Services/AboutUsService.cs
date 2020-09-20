@@ -106,8 +106,28 @@ namespace BusinessServices.Services
             }
             return response;
         }
+        
 
-
+        public ResponseModel forgotpassword()
+        {
+            try
+            {
+                var resultValue = _unitOfWork.AboutUsRepository.forgotpassword();
+                if (resultValue != null)
+                {
+                    response.status = Status.Success;
+                    response.data = resultValue;
+                    response.message = "About Us Information Deleted Successfully";
+                }
+            }
+            catch (Exception ex)
+            {
+                response.data = ex.Message;
+                response.status = Status.Error;
+                response.message = "Execption Occured.";
+            }
+            return response;
+        }
 
 
     }

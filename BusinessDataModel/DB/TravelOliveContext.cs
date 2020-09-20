@@ -20,7 +20,9 @@ namespace BusinessDataModel.DB
         public virtual DbSet<AboutUsStatement> AboutUsStatement { get; set; }
         public virtual DbSet<Banner> Banner { get; set; }
         public virtual DbSet<Blog> Blog { get; set; }
+        public virtual DbSet<BlogCategory> BlogCategory { get; set; }
         public virtual DbSet<BlogPriority> BlogPriority { get; set; }
+        public virtual DbSet<BlogReaction> BlogReaction { get; set; }
         public virtual DbSet<City> City { get; set; }
         public virtual DbSet<ContactUs> ContactUs { get; set; }
         public virtual DbSet<Country> Country { get; set; }
@@ -30,6 +32,9 @@ namespace BusinessDataModel.DB
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<Faq> Faq { get; set; }
         public virtual DbSet<Festival> Festival { get; set; }
+        public virtual DbSet<GalleryComment> GalleryComment { get; set; }
+        public virtual DbSet<GalleryCommentReaction> GalleryCommentReaction { get; set; }
+        public virtual DbSet<GalleryReaction> GalleryReaction { get; set; }
         public virtual DbSet<Interview> Interview { get; set; }
         public virtual DbSet<InterviewsInWhatsNew> InterviewsInWhatsNew { get; set; }
         public virtual DbSet<LatestEvent> LatestEvent { get; set; }
@@ -37,8 +42,12 @@ namespace BusinessDataModel.DB
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<OfferAds> OfferAds { get; set; }
         public virtual DbSet<Page> Page { get; set; }
+        public virtual DbSet<PostComment> PostComment { get; set; }
+        public virtual DbSet<PostCommentReaction> PostCommentReaction { get; set; }
+        public virtual DbSet<PostReaction> PostReaction { get; set; }
         public virtual DbSet<PrivacyPolicy> PrivacyPolicy { get; set; }
         public virtual DbSet<ProfileCategory> ProfileCategory { get; set; }
+        public virtual DbSet<Reaction> Reaction { get; set; }
         public virtual DbSet<Registration> Registration { get; set; }
         public virtual DbSet<State> State { get; set; }
         public virtual DbSet<TeamMemberInAboutUs> TeamMemberInAboutUs { get; set; }
@@ -49,7 +58,11 @@ namespace BusinessDataModel.DB
         public virtual DbSet<TrendingNews> TrendingNews { get; set; }
         public virtual DbSet<UpcommingNews> UpcommingNews { get; set; }
         public virtual DbSet<UserCoverImage> UserCoverImage { get; set; }
+        public virtual DbSet<UserFriends> UserFriends { get; set; }
+        public virtual DbSet<UserFriendsRequest> UserFriendsRequest { get; set; }
+        public virtual DbSet<UserGallery> UserGallery { get; set; }
         public virtual DbSet<UserPersonalInfo> UserPersonalInfo { get; set; }
+        public virtual DbSet<UserPost> UserPost { get; set; }
         public virtual DbSet<UserRegLogin> UserRegLogin { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -57,7 +70,7 @@ namespace BusinessDataModel.DB
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-KRG2RAL\\SQLEXPRESS;Initial Catalog=TravelOlive;Persist Security Info=True;User ID=sa;Password=1234;");
+                optionsBuilder.UseSqlServer("Data Source=34.82.40.21;Initial Catalog=TravelOlive;Persist Security Info=True;User ID=sa;Password=pawan@123;");
             }
         }
 
@@ -143,6 +156,8 @@ namespace BusinessDataModel.DB
 
             modelBuilder.Entity<Blog>(entity =>
             {
+                entity.Property(e => e.Category).HasColumnName("category");
+
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Description).IsUnicode(false);
@@ -166,9 +181,39 @@ namespace BusinessDataModel.DB
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
 
+            modelBuilder.Entity<BlogCategory>(entity =>
+            {
+                entity.Property(e => e.CategoryName)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.RecUpd)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
             modelBuilder.Entity<BlogPriority>(entity =>
             {
+                entity.Property(e => e.Category).HasColumnName("category");
+
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<BlogReaction>(entity =>
+            {
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.RecUpd)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedBy).HasColumnType("datetime");
 
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
@@ -376,6 +421,47 @@ namespace BusinessDataModel.DB
                 entity.Property(e => e.Video).IsUnicode(false);
             });
 
+            modelBuilder.Entity<GalleryComment>(entity =>
+            {
+                entity.Property(e => e.Comment).IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.RecUpd)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedBy).HasColumnType("datetime");
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<GalleryCommentReaction>(entity =>
+            {
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.RecUpd)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedBy).HasColumnType("datetime");
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<GalleryReaction>(entity =>
+            {
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.RecUpd)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedBy).HasColumnType("datetime");
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
             modelBuilder.Entity<Interview>(entity =>
             {
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
@@ -547,6 +633,47 @@ namespace BusinessDataModel.DB
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<PostComment>(entity =>
+            {
+                entity.Property(e => e.Comment).IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.RecUpd)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedBy).HasColumnType("datetime");
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<PostCommentReaction>(entity =>
+            {
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.RecUpd)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedBy).HasColumnType("datetime");
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<PostReaction>(entity =>
+            {
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.RecUpd)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedBy).HasColumnType("datetime");
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
             modelBuilder.Entity<PrivacyPolicy>(entity =>
             {
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
@@ -575,9 +702,31 @@ namespace BusinessDataModel.DB
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
 
+            modelBuilder.Entity<Reaction>(entity =>
+            {
+                entity.Property(e => e.Type)
+                    .HasColumnName("type")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<Registration>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.AboutDescription).IsUnicode(false);
+
+                entity.Property(e => e.Birthday).HasColumnType("date");
+
+                entity.Property(e => e.City)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Country)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CoverImage).IsUnicode(false);
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
@@ -602,14 +751,26 @@ namespace BusinessDataModel.DB
                     .HasMaxLength(12)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Occupation)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Otp)
                     .HasColumnName("OTP")
                     .HasMaxLength(5)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ProfileImage).IsUnicode(false);
+                entity.Property(e => e.ProfileImg).IsUnicode(false);
+
+                entity.Property(e => e.RecUpd)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.RoleId).HasColumnName("RoleID");
+
+                entity.Property(e => e.State)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
@@ -725,11 +886,15 @@ namespace BusinessDataModel.DB
             {
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
+                entity.Property(e => e.DateOfTravel).HasColumnType("date");
+
+                entity.Property(e => e.DestinationCountry)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Email)
                     .HasMaxLength(50)
                     .IsUnicode(false);
-
-                entity.Property(e => e.Message).IsUnicode(false);
 
                 entity.Property(e => e.Mobile)
                     .HasMaxLength(20)
@@ -743,7 +908,7 @@ namespace BusinessDataModel.DB
                     .HasMaxLength(1)
                     .IsUnicode(false);
 
-                entity.Property(e => e.TravelUtilityType)
+                entity.Property(e => e.StartCountry)
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -807,6 +972,53 @@ namespace BusinessDataModel.DB
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
 
+            modelBuilder.Entity<UserFriends>(entity =>
+            {
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.RecUpd)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<UserFriendsRequest>(entity =>
+            {
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.RecUpd)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Status)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<UserGallery>(entity =>
+            {
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Gallery).IsUnicode(false);
+
+                entity.Property(e => e.Image).IsUnicode(false);
+
+                entity.Property(e => e.RecUpd)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Title)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Video).IsUnicode(false);
+            });
+
             modelBuilder.Entity<UserPersonalInfo>(entity =>
             {
                 entity.Property(e => e.AboutDescription).IsUnicode(false);
@@ -854,6 +1066,23 @@ namespace BusinessDataModel.DB
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
 
+            modelBuilder.Entity<UserPost>(entity =>
+            {
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Description).IsUnicode(false);
+
+                entity.Property(e => e.Image).IsUnicode(false);
+
+                entity.Property(e => e.RecUpd)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Video).IsUnicode(false);
+            });
+
             modelBuilder.Entity<UserRegLogin>(entity =>
             {
                 entity.HasKey(e => e.UserId)
@@ -878,6 +1107,9 @@ namespace BusinessDataModel.DB
                     .HasMaxLength(50)
                     .IsUnicode(false);
             });
+
+            OnModelCreating_1(modelBuilder);
+
         }
     }
 }

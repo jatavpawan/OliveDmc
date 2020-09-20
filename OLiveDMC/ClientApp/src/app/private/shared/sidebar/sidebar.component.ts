@@ -25,6 +25,7 @@ export class SidebarComponent implements OnInit {
       { path: '/private/theme', title: 'Theme',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
       // { path: '/private/offer-ads', title: 'Offer or Ads',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
       { path: '/private/travel-category-subcategory', title: 'Profile Category',  icon:'pe-7s-news-paper', class: '',child: [], id: "", datatarget: "" },
+      { path: '/private/blog-category', title: 'Blog Category',  icon:'pe-7s-news-paper', class: '',child: [], id: "", datatarget: "" },
       // { path: '/private/whats-new', title: 'What’s New',  icon:'pe-7s-science', class: '',child: [], id: "", datatarget: "" },
       { path: '/private/travel-utility', title: 'Travel Utility',  icon:'pe-7s-note2', class: '',child: [], id: "", datatarget: "" },
       // { path: '/private/news-events', title: 'New’s and events',  icon:'pe-7s-news-paper', class: '',child: [], id: "", datatarget: "" },

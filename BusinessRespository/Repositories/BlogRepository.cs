@@ -41,6 +41,7 @@ namespace BusinessRespository.Repositories
                         BlogObj.Title = obj.Title;
                         BlogObj.Description = obj.Description;
                         BlogObj.ShortDescription = obj.ShortDescription;
+                        BlogObj.Category = obj.Category;
                     BlogObj.Status = obj.Status;
                         BlogObj.ApprovalStatus = obj.ApprovalStatus;
                     BlogObj.RecUpd = "U";
@@ -72,6 +73,7 @@ namespace BusinessRespository.Repositories
                                 Title = obj.Title,
                                 ShortDescription = obj.ShortDescription,
                                 Description = obj.Description,
+                                Category = obj.Category,
                                 Status = obj.Status,
                                 ApprovalStatus = obj.ApprovalStatus,
                                 RecUpd = "C",
@@ -199,6 +201,7 @@ namespace BusinessRespository.Repositories
                                         FeaturedImage = blog.FeaturedImage,
                                         ShortDescription = blog.ShortDescription,
                                         Description = blog.Description,
+                                        Category = blog.Category,
                                         Status = blog.Status,
                                         ApprovalStatus = blog.ApprovalStatus,
                                         CreatedBy = blog.CreatedBy,
@@ -281,6 +284,7 @@ namespace BusinessRespository.Repositories
                                     FeaturedImage = blog.FeaturedImage,
                                     ShortDescription = blog.ShortDescription,
                                     Description = blog.Description,
+                                    Category = blog.Category,
                                     Status = blog.Status,
                                     ApprovalStatus = blog.ApprovalStatus,
                                     CreatedBy = blog.CreatedBy,
@@ -323,6 +327,7 @@ namespace BusinessRespository.Repositories
                                     FeaturedImage = blog.FeaturedImage,
                                     ShortDescription = blog.ShortDescription,
                                     Description = blog.Description,
+                                    Category = blog.Category,
                                     Status = blog.Status,
                                     ApprovalStatus = blog.ApprovalStatus,
                                     CreatedBy = blog.CreatedBy,
@@ -352,11 +357,23 @@ namespace BusinessRespository.Repositories
             try
             {
 
-                List<Blog> resultValue = new List<Blog>();
-                resultValue = Context.Blog.Where(z => z.Status == true && z.ApprovalStatus == true && z.RecUpd != "D").OrderByDescending(x => x.CreatedDate).Skip(pageNo*4).Take(4).ToList();
-                blogResponse.totalPage = resultValue.Count / 10;
-                blogResponse.perPageRecord = 10;
-                blogResponse.blogList = resultValue;
+                List<Blog> AllBlog = new List<Blog>();
+                AllBlog = Context.Blog.Where(z => z.Status == true && z.ApprovalStatus == true && z.RecUpd != "D").ToList();
+               
+                var blogList = AllBlog.OrderByDescending(x => x.CreatedDate).Skip(pageNo*4).Take(4);
+                if(AllBlog.Count % 4 == 0)
+                {
+                    blogResponse.totalPage = AllBlog.Count / 4;
+
+                }
+                else
+                {
+                    blogResponse.totalPage = (AllBlog.Count / 4) + 1;
+
+                }
+                blogResponse.perPageRecord = 4;
+                blogResponse.blogList = blogList;
+                blogResponse.totalRecord = AllBlog.Count;
                 result.data = blogResponse;
                 result.status = Status.Success;
                 result.message = "List for Blog";
@@ -369,6 +386,258 @@ namespace BusinessRespository.Repositories
             }
             return result;
         }
+
+        
+        public ResponseModel RandomBlogList()
+        {
+            ResponseModel result = new ResponseModel();
+
+            try
+            {
+                var innerJoin = from blog in Context.Blog
+                                join reg in Context.Registration
+                                on blog.UserId equals reg.Id
+                                select new vmBlogDetail
+                                {
+                                    Id = blog.Id,
+                                    UserId = blog.UserId,
+                                    FirstName = reg.FirstName,
+                                    LastName = reg.LastName,
+                                    Title = blog.Title,
+                                    FeaturedImage = blog.FeaturedImage,
+                                    ShortDescription = blog.ShortDescription,
+                                    Description = blog.Description,
+                                    Category = blog.Category,
+                                    Status = blog.Status,
+                                    ApprovalStatus = blog.ApprovalStatus,
+                                    RecUpd = blog.RecUpd,
+                                    CreatedBy = blog.CreatedBy,
+                                    CreatedDate = blog.CreatedDate,
+                                    UpdatedBy = blog.UpdatedBy,
+                                    UpdatedDate = blog.UpdatedDate,
+
+                                };
+
+                var randomBlogList = innerJoin.Where(z => z.Status == true && z.ApprovalStatus == true && z.RecUpd != "D").OrderBy(x => Guid.NewGuid()).Take(4).ToList();
+                //var randomBlogList = Context.Blog.Where(z => z.Status == true && z.ApprovalStatus == true && z.RecUpd != "D").Take(4).ToList();
+
+                result.data = randomBlogList;
+                result.status = Status.Success;
+                result.message = "List for Blog";
+            }
+            catch (Exception ex)
+            {
+                result.status = Status.Error;
+                result.error = ex.Message;
+
+            }
+            return result;
+        }
+     
+        public ResponseModel BlogListByCategoryId(vmCategoriesBlog obj)
+        {
+            ResponseModel result = new ResponseModel();
+            vmAllBlogInUserPanel blogResponse = new vmAllBlogInUserPanel();
+            try
+            {
+
+                List<Blog> AllBlog = new List<Blog>();
+                AllBlog = Context.Blog.Where(z => z.Status == true && z.ApprovalStatus == true && z.RecUpd != "D" && z.Category == obj.CategoryId).ToList();
+
+                var blogList = AllBlog.OrderByDescending(x => x.CreatedDate).Skip(obj.PageNo * 4).Take(4);
+                //if (AllBlog.Count % 4 == 0)
+                //{
+                    blogResponse.totalPage = AllBlog.Count % 4 == 0 ?  AllBlog.Count / 4 : (AllBlog.Count / 4) + 1;
+
+                //}
+                //else
+                //{
+                //    blogResponse.totalPage = (AllBlog.Count / 4) + 1;
+
+                //}
+                blogResponse.perPageRecord = 4;
+                blogResponse.blogList = blogList;
+                blogResponse.totalRecord = AllBlog.Count;
+                result.data = blogResponse;
+                result.status = Status.Success;
+                result.message = "List for Blog";
+            }
+            catch (Exception ex)
+            {
+                result.status = Status.Error;
+                result.error = ex.Message;
+
+            }
+            return result;
+        }
+
+        public ResponseModel userPostBlog(vmUserPostBlog obj)
+        {
+            ResponseModel result = new ResponseModel();
+            vmUserPostBlogResponse blogResponse = new vmUserPostBlogResponse();
+            try
+            {
+
+                //vmUserPostBlogList AllBlog = new vmUserPostBlogList();
+                var AllBlog = Context.Blog.Where(z => z.UserId == obj.UserId && z.RecUpd != "D").Select(x => new vmUserPostBlogList
+                {
+
+                    Id = x.Id,
+                    UserId = x.UserId,
+                    Title = x.Title,
+                    FeaturedImage = x.FeaturedImage,
+                    Description = x.Description,
+                    Status = x.Status,
+                    ApprovalStatus = x.ApprovalStatus,
+                    ShortDescription = x.ShortDescription,
+                    Category = x.Category,
+                    Likecount = Context.BlogReaction.Where(y => y.BlogId == x.Id && y.ReactionStatus == true).Count(),
+                    ReactionId = Context.BlogReaction.Where(y => y.BlogId == x.Id && y.UserId == obj.UserId).FirstOrDefault().ReactionId,
+                    ReactionStatus = Context.BlogReaction.Where(y => y.BlogId == x.Id && y.UserId == obj.UserId).FirstOrDefault().ReactionStatus,
+                    RecUpd = x.RecUpd,
+                    CreatedBy = x.CreatedBy,
+                    CreatedDate = x.CreatedDate,
+                    UpdatedBy = x.UpdatedBy,
+                    UpdatedDate = x.UpdatedDate,
+
+                });
+
+                var innerJoin = from blog in AllBlog
+                                join reaction in Context.Reaction
+                                on blog.ReactionId equals reaction.Id
+                                into zG
+                                from y2 in zG.DefaultIfEmpty()
+                                select new vmUserPostBlogList
+                                {
+                                    Id = blog.Id,
+                                    UserId = blog.UserId,
+                                    Title = blog.Title,
+                                    FeaturedImage = blog.FeaturedImage,
+                                    Description = blog.Description,
+                                    Status = blog.Status,
+                                    ApprovalStatus = blog.ApprovalStatus,
+                                    ShortDescription = blog.ShortDescription,
+                                    Category = blog.Category,
+                                    Likecount = blog.Likecount,
+                                    ReactionId = blog.ReactionId,
+                                    ReactionStatus = blog.ReactionStatus,
+                                    ReactionType = y2.Type,
+                                    RecUpd = blog.RecUpd,
+                                    CreatedBy = blog.CreatedBy,
+                                    CreatedDate = blog.CreatedDate,
+                                    UpdatedBy = blog.UpdatedBy,
+                                    UpdatedDate = blog.UpdatedDate,
+                                   
+                                };
+
+                var blogList = innerJoin.OrderByDescending(x => x.CreatedDate).Skip(obj.PageNo * 6).Take(6).ToList<vmUserPostBlogList>();
+              
+                blogResponse.totalPage = AllBlog.ToList().Count % 6 == 0 ? AllBlog.ToList().Count / 6 : (AllBlog.ToList().Count / 6) + 1;
+
+                blogResponse.perPageRecord = 6;
+                blogResponse.blogList = blogList;
+                blogResponse.totalRecord = AllBlog.ToList().Count;
+                result.data = blogResponse;
+                result.status = Status.Success;
+                result.message = "List for Blog";
+            }
+            catch (Exception ex)
+            {
+                result.status = Status.Error;
+                result.error = ex.Message;
+
+            }
+            return result;
+        }
+
+
+        public ResponseModel userReactOnBlog(BlogReaction obj)
+        {
+            ResponseModel result = new ResponseModel();
+            try
+            {
+                var BlogReactionObj = Context.BlogReaction.Where(z => z.UserId == obj.UserId && z.BlogId == obj.BlogId).FirstOrDefault();
+
+                if (BlogReactionObj != null)
+                {
+
+                    BlogReactionObj.ReactionId = obj.ReactionId;
+                    BlogReactionObj.ReactionStatus = obj.ReactionStatus;
+                    BlogReactionObj.RecUpd = "U";
+                    BlogReactionObj.UpdatedDate = DateTime.Now;
+                    Context.SaveChanges();
+                    result.message = "Successfully Updated";
+                    result.status = Status.Success;
+
+                }
+                else
+                {
+
+                    var UserBlogReaction = new BlogReaction
+                    {
+                        UserId = obj.UserId,
+                        BlogId = obj.BlogId,
+                        ReactionId = obj.ReactionId,
+                        ReactionStatus = obj.ReactionStatus,
+                        RecUpd = "C",
+                        CreatedBy = obj.CreatedBy,
+                        CreatedDate = DateTime.Now,
+                    };
+                    Context.BlogReaction.Add(UserBlogReaction);
+                    Context.SaveChanges();
+                    result.message = "Successfully Saved";
+                    result.status = Status.Success;
+
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                result.status = Status.Error;
+                result.error = ex.Message;
+            }
+            return result;
+        }
+
+        public ResponseModel getPopularTag()
+        {
+            ResponseModel result = new ResponseModel();
+            try
+            {
+                var innerJoin = from b in Context.Blog
+                                join bc in Context.BlogCategory
+                                on b.Category equals bc.Id
+                                select new vmPopularTag
+                                {
+                                    Category = b.Category,
+                                    CategoryId = bc.Id,
+                                    CategoryName = bc.CategoryName,
+                                };
+
+                var PopularTagList = innerJoin.GroupBy(x => new { x.CategoryId, x.CategoryName }, (key, group) => new
+                {
+                    CategoryId = key.CategoryId,
+                    CategoryName = key.CategoryName,
+                    PopularCategory = group.Count(),
+                    Result = group.ToList()
+                }).OrderByDescending(x => x.PopularCategory);
+
+                result.data = PopularTagList;
+                result.message = "List For Popular Category Tag";
+                result.status = Status.Success;
+
+
+            }
+            catch (Exception ex)
+            {
+                result.status = Status.Error;
+                result.error = ex.Message;
+            }
+            return result;
+        }
+
+        
 
     }
 }

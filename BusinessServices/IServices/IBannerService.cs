@@ -17,6 +17,7 @@ namespace BusinessServices.IServices
         ResponseModel GetBannerDetailByPageId(int? Id);
         ResponseModel GetAllPage(); 
         ResponseModel GetBannerDetailByBannerId(int? Id);
+        ResponseModel GetBannerAtHome();
 
 
     }
