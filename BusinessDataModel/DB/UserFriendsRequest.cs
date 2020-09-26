@@ -15,18 +15,4 @@ namespace BusinessDataModel.DB
         public int? UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
     }
-
-
-    public partial class vmcancelSendFriendRequest
-    {
-        public int? UserId { get; set; }
-        public int? SendRequestFriendId { get; set; }
-    }
-
-    public partial class vmUnFriend
-    {
-        public int? UserId { get; set; }
-        public int? FriendId { get; set; }
-    }
-
 }

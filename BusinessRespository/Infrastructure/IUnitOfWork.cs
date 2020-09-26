@@ -46,6 +46,11 @@ namespace BusinessRespository.Infrastructure
         IUserPostRepository UserPostRepository { get; }
         IBlogCategoryRepository BlogCategoryRepository { get; }
         IUserNetworkRepository UserNetworkRepository { get; }
+        ISkillsRepository SkillsRepository { get; }
+        IAreaOfExpertiseRepository AreaOfExpertiseRepository { get; }
+        IStudentCareerRepository StudentCareerRepository { get; }
+        IFresherCareerRepository FresherCareerRepository { get; }
+        IProfessionalCareerRepository ProfessionalCareerRepository { get; }
 
         void Commit();
         void Rollback();

@@ -407,6 +407,63 @@ namespace BusinessRespository.Infrastructure
             }
         }
 
+        private ISkillsRepository _skillsRepository;
+
+        // Public Member ---------------------------------------------------------------------------------
+        public ISkillsRepository SkillsRepository
+        {
+            get
+            {
+                return _skillsRepository = _skillsRepository ?? new SkillsRepository(db);
+            }
+        }
+
+
+        private IAreaOfExpertiseRepository _areaOfExpertiseRepository;
+
+        // Public Member ---------------------------------------------------------------------------------
+        public IAreaOfExpertiseRepository AreaOfExpertiseRepository
+        {
+            get
+            {
+                return _areaOfExpertiseRepository = _areaOfExpertiseRepository ?? new AreaOfExpertiseRepository(db);
+            }
+        }
+
+        private IStudentCareerRepository _studentCareerRepository;
+
+        // Public Member ---------------------------------------------------------------------------------
+        public IStudentCareerRepository StudentCareerRepository
+        {
+            get
+            {
+                return _studentCareerRepository = _studentCareerRepository ?? new StudentCareerRepository(db);
+            }
+        }
+
+        private IProfessionalCareerRepository _professionalCareerRepository;
+
+        // Public Member ---------------------------------------------------------------------------------
+        public IProfessionalCareerRepository ProfessionalCareerRepository
+        {
+            get
+            {
+                return _professionalCareerRepository = _professionalCareerRepository ?? new ProfessionalCareerRepository(db);
+            }
+        }
+
+        private IFresherCareerRepository _fresherCareerRepository;
+
+        // Public Member ---------------------------------------------------------------------------------
+        public IFresherCareerRepository FresherCareerRepository
+        {
+            get
+            {
+                return _fresherCareerRepository = _fresherCareerRepository ?? new FresherCareerRepository(db);
+            }
+        }
+
+
         public void Commit() {
             db.SaveChanges();
         }

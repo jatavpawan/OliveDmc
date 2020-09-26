@@ -1,0 +1,62 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="content">
+                        <form class="form-horizontal" [formGroup]="skillForm" (ngSubmit)="submitSkillData()">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2 input-label" for="title">Skill Name:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="title"  placeholder="Enter Skill Name" formControlName="skillName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-1">
+                                </div>
+                                <div class="col-sm-offset-1 col-sm-10">
+                                    <button type="submit" *ngIf="edit_skill == false" [disabled]="skillForm.invalid" class="btn btn-default btn-primary" >Submit</button>
+                                    <button type="submit" *ngIf="edit_skill == true" [disabled]="skillForm.invalid" class="btn btn-default btn-primary" >Update</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <div class="col-sm-10 pl-5">
+                            <table class="table table-hover table-bordered" *ngIf="skills.length != 0">
+                              <thead>
+                                <tr>
+                                  <th>S.No.</th>
+                                  <th>Skill Name</th>
+                                  <th>Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let skill of skills; let i = index;">
+                                  <td>{{i+1}}</td>
+                                  <td>{{skill.skillName}}</td>
+                                  <td>
+                                      <span class="edit-category glyphicon glyphicon-pencil" (click)="editSkill(skill)"></span>
+                                      <span class="delete-category glyphicon glyphicon-trash" (click)="openConfirmDialog(skill.id)"></span>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+

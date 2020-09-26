@@ -54,6 +54,11 @@ import { AboutusStatementComponent } from '../../pages/aboutus-statement/aboutus
 import { TravelUtilityQueryComponent } from '../../pages/travel-utility-query/travel-utility-query.component';
 import { ContactUsComponent } from '../../pages/contact-us/contact-us.component';
 import { BlogCategoryComponent } from '../../pages/blog-category/blog-category.component';
+import { SkillComponent } from '../../pages/skill/skill.component';
+import { AreaOfExpertiseComponent } from '../../pages/area-of-expertise/area-of-expertise.component';
+import { ProfessionalCareerComponent } from '../../pages/professional-career/professional-career.component';
+import { StudentCareerComponent } from '../../pages/student-career/student-career.component';
+import { FresherCareerService } from 'src/app/providers/FresherCareerService/fresher-career.service';
 
 const routes: Routes = [
   {
@@ -434,7 +439,33 @@ const routes: Routes = [
     ]
   
   },
-
+  {
+    path: 'skills',
+    component: SkillComponent,
+    canActivate: [AuthGuard]
+  
+  },
+  {
+    path: 'areaOfExpertise',
+    component: AreaOfExpertiseComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'student-career',
+    component: StudentCareerComponent,
+    canActivate: [AuthGuard]
+  
+  },
+  {
+    path: 'fresher-career',
+    component: FresherCareerService,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'professional-career',
+    component: ProfessionalCareerComponent,
+    canActivate: [AuthGuard]
+  },
 
 
 ]
