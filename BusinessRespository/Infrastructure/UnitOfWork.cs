@@ -72,7 +72,16 @@ namespace BusinessRespository.Infrastructure
                 return _blogRepository = _blogRepository ?? new BlogRepository(db);
             }
         }
+private IBookingRepository _BookingRepository;
 
+        // Public Member ---------------------------------------------------------------------------------
+        public IBookingRepository BookingRepository
+        {
+            get
+            {
+                return _BookingRepository = _BookingRepository ?? new BookingRepository(db);
+            }
+        }
         private IBannerRepository _bannerRepository;
 
         // Public Member ---------------------------------------------------------------------------------
