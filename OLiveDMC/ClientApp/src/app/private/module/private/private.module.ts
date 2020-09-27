@@ -61,6 +61,12 @@ import {MatSelectModule} from '@angular/material/select';
 // import { NgSelectModule } from '@ng-select/ng-select';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { BlogCategoryComponent } from '../../pages/blog-category/blog-category.component';
+import { AreaOfExpertiseComponent } from '../../pages/area-of-expertise/area-of-expertise.component';
+import { SkillComponent } from '../../pages/skill/skill.component';
+import { TravelUtilityDetailComponent } from '../../pages/travel-utility-detail/travel-utility-detail.component';
+import { StudentCareerComponent } from '../../pages/student-career/student-career.component';
+import { FresherCareerComponent } from '../../pages/fresher-career/fresher-career.component';
+import { ProfessionalCareerComponent } from '../../pages/professional-career/professional-career.component';
 
 @NgModule({
   declarations: [
@@ -119,6 +125,12 @@ import { BlogCategoryComponent } from '../../pages/blog-category/blog-category.c
     TravelUtilityQueryComponent,
     ContactUsComponent,
     BlogCategoryComponent,
+    TravelUtilityDetailComponent,
+    SkillComponent,
+    AreaOfExpertiseComponent,
+    StudentCareerComponent,
+    FresherCareerComponent,
+    ProfessionalCareerComponent
   ],
   imports: [
     CommonModule,

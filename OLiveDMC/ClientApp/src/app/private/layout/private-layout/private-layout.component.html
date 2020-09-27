@@ -111,6 +111,34 @@
                        </ul>
                     </div>
                 </li>
+                <li routerLinkActive="active"  class="">
+                    <a data-toggle="collapse" data-target="#careerpage">
+                        <i class="pe-7s-note2"></i>
+                        <p>Career<b class="caret"></b></p>
+                    </a>
+                    <div class="collapse" id="careerpage">
+                        <ul class="nav">
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['/private/skills']">
+                                    <span class="sidebar-mini">S</span>
+                                    <span class="sidebar-normal">Skills</span>
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['/private/areaOfExpertise']">
+                                    <span class="sidebar-mini">AE</span>
+                                    <span class="sidebar-normal">Area Of Expertise</span>
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['/private/student-career']">
+                                    <span class="sidebar-mini">C</span>
+                                    <span class="sidebar-normal">Career</span>
+                                </a>
+                            </li>
+                       </ul>
+                    </div>
+                </li>
                 <!-- <li routerLinkActive="active"  class="">
                     <a data-toggle="collapse" data-target="#whatsNew">
                         <i class="pe-7s-note2"></i>

@@ -37,6 +37,13 @@ import { ContactUsService } from './providers/ContactUsService/contact-us.servic
 import { PrivacyPolicyService } from './providers/PrivacyPolicyService/privacy-policy.service';
 import { BlogCategoryService } from './providers/BlogCategoryService/blog-category.service';
 import { DatePipe } from '@angular/common';
+import { AreaofexpertiseService } from './providers/AreaOfExpertiseService/areaofexpertise.service';
+import { SkillService } from './providers/SkillService/skill.service';
+import { SkillComponent } from './private/pages/skill/skill.component';
+import { AreaOfExpertiseComponent } from './private/pages/area-of-expertise/area-of-expertise.component';
+import { ProfessionalCareerComponent } from './private/pages/professional-career/professional-career.component';
+import { StudentCareerService } from './providers/StudentCareerService/student-career.service';
+import { FresherCareerService } from './providers/FresherCareerService/fresher-career.service';
 // import { NgSelectModule } from ' @ng-select/ng-select';
 
 @NgModule({
@@ -48,7 +55,7 @@ import { DatePipe } from '@angular/common';
     PublicLayoutComponent,
     PrivateLayoutComponent,
     OpenVideoComponent,
-    TravelUtilityDetailComponent
+    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -84,6 +91,11 @@ import { DatePipe } from '@angular/common';
     ContactUsService,
     PrivacyPolicyService,
     BlogCategoryService,
+    AreaofexpertiseService,
+    SkillService,
+    FresherCareerService,
+    ProfessionalCareerComponent,
+    StudentCareerService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

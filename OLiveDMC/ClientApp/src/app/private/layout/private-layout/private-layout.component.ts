@@ -83,6 +83,11 @@ export class PrivateLayoutComponent implements OnInit {
       { path: '/private/travel-utility-query', title: 'Travel Utility Query',  icon:'pe-7s-note2', class: '' },
       { path: '/private/contact-us', title: 'Contact Us',  icon:'pe-7s-note2', class: '' },
       { path: '/private/privacy-policy', title: 'Privacy Policy',  icon:'pe-7s-note2', class: '' },
+      { path: '/private/skills', title: 'Skills',  icon:'pe-7s-note2', class: '' },
+      { path: '/private/areaOfExpertise', title: 'Area Of Expertise',  icon:'pe-7s-note2', class: '' },
+      { path: '/private/student-career', title: 'Student Career',  icon:'pe-7s-note2', class: '' },
+      { path: '/private/fresher-career', title: 'Fresher Career',  icon:'pe-7s-note2', class: '' },
+      { path: '/private/professional-career', title: 'Professional Career',  icon:'pe-7s-note2', class: '' },
       
     ]
     this.menuItems = [
