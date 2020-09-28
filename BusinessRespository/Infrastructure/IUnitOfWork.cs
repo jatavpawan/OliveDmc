@@ -13,6 +13,7 @@ namespace BusinessRespository.Infrastructure
        IDestinationRepository DestinationRepository { get; }
        ITourThemeRepository TourThemeRepository { get; }
        IBlogRepository BlogRepository { get; }
+        IBookingRepository BookingRepository { get; }
        IBannerRepository BannerRepository { get; }
 
        ICurrentNewsRepository CurrentNewsRepository { get; }

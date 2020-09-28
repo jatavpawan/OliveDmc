@@ -1,1 +1,11 @@
-OLiveDMC\ClientApp\node_modules
+.vs/*
+OLiveDMC/ClientApp/node_modules
+BusinessDataModel/bin/*
+BusinessDataModel/obj/*
+BusinessRespository/bin/*
+BusinessRespository/obj/*
+BusinessServices/bin/*
+BusinessServices/obj/*
+OLiveDMC/bin/*
+OLiveDMC/obj/*
+OLiveDMC.sln
