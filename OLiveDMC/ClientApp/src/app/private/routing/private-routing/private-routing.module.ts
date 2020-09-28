@@ -59,6 +59,7 @@ import { AreaOfExpertiseComponent } from '../../pages/area-of-expertise/area-of-
 import { ProfessionalCareerComponent } from '../../pages/professional-career/professional-career.component';
 import { StudentCareerComponent } from '../../pages/student-career/student-career.component';
 import { FresherCareerService } from 'src/app/providers/FresherCareerService/fresher-career.service';
+import { FresherCareerComponent } from '../../pages/fresher-career/fresher-career.component';
 
 const routes: Routes = [
   {
@@ -458,7 +459,7 @@ const routes: Routes = [
   },
   {
     path: 'fresher-career',
-    component: FresherCareerService,
+    component: FresherCareerComponent,
     canActivate: [AuthGuard]
   },
   {
