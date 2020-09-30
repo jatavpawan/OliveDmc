@@ -52,6 +52,7 @@ namespace BusinessRespository.Infrastructure
         IStudentCareerRepository StudentCareerRepository { get; }
         IFresherCareerRepository FresherCareerRepository { get; }
         IProfessionalCareerRepository ProfessionalCareerRepository { get; }
+        IBlogCommentRepository BlogCommentRepository { get; }
 
         void Commit();
         void Rollback();

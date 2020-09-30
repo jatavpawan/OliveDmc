@@ -1,114 +1,192 @@
-
 <!----------------------------------------------new Design----------------------------------------------------------->
 
 <div class="main-content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card utility-card">
-            <div class="content">
-              <div id="smartwizard3" class="forms-wizard-vertical sw-main sw-theme-default">
-                <ul class="forms-wizard nav nav-tabs step-anchor">
-                    <li class="nav-item" [routerLink]="['/private/fresher-career']" routerLinkActive="active">
-                        <a class="nav-link">
-                          <em>1</em><span>Fresher career</span>
-                        </a>
-                      </li>
-                      <li class="nav-item" [routerLink]="['/private/professional-career']" routerLinkActive="active">
-                        <a class="nav-link">
-                          <em>2</em><span>Professional Career</span>
-                        </a>
-                      </li>
-                      <li class="nav-item" [routerLink]="['/private/student-career']" routerLinkActive="active">
-                        <a class="nav-link">
-                          <em>3</em><span>Student Career</span>
-                        </a>
-                      </li>
-                </ul>
-                <!-- <ul class="forms-wizard nav nav-tabs step-anchor">
-                  <li class="nav-item" [routerLink]="['/private/home/destination-videos']" routerLinkActive="active">
-                    <a class="nav-link">
-                      <em>1</em><span>Destination Videos</span>
-                    </a>
-                  </li>
-                  <li class="nav-item" [routerLink]="['/private/home/interview']" routerLinkActive="active">
-                    <a class="nav-link">
-                      <em>2</em><span>Interview  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    </a>
-                  </li>
-                  <li class="nav-item" [routerLink]="['/private/home/trending-news']" routerLinkActive="active">
-                    <a class="nav-link">
-                      <em>3</em><span>Trending News</span>
-                    </a>
-                  </li>
-                  <li class="nav-item" [routerLink]="['/private/home/top-destination']" routerLinkActive="active">
-                    <a class="nav-link">
-                      <em>4</em><span>Top Destination</span>
-                    </a>
-                  </li>
-                  <li class="nav-item" [routerLink]="['/private/home/theme']" routerLinkActive="active">
-                    <a class="nav-link">
-                      <em>2</em><span>Theme Based Packages</span>
-                    </a>
-                  </li>
-                  <li class="nav-item" [routerLink]="['/private/home/latest-event']" routerLinkActive="active">
-                    <a class="nav-link">
-                      <em>6</em><span>Latest Event &nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    </a>
-                  </li>
-                </ul> -->
-  
-                <div class="form-wizard-content sw-container tab-content" style="min-height: 0px;">
-                  <div class="tab-pane step-content" style="display: block;">
-                    <div class="card-body">
-                      <form class="form-horizontal" [formGroup]="destinationVideoForm" (ngSubmit)="submitDestinationVideoData()">
-                        <div class="form-group">
-                            <label class="control-label col-sm-2 input-label" for="title">Destination Video Title:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="title"  placeholder="Enter Destination Video Title" formControlName="title">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">Featured Image:</label>
-                            <div class="col-sm-10">
-                                <div class="image-preview mb-3" *ngIf="fileUploaded == true || edit_destinationVideo == true">
-                                    <img [src]="previewUrl" height="100" width="105"  />                 
-                                </div>
-                                <label for="files"  *ngIf="edit_destinationVideo == true ||  (destinationVideoForm.get('featuredImage').value != '' && destinationVideoForm.get('featuredImage').value != null )" class="btn btn-primary">update File</label>
-                                <input type="file" *ngIf="fileUploaded == false || edit_destinationVideo == true ||  destinationVideoForm.get('featuredImage').value != ''" [class.hidden]="edit_destinationVideo == true ||  (destinationVideoForm.get('featuredImage').value != '' && destinationVideoForm.get('featuredImage').value != null )" name="" id="files" #files (change)="preview(files)" formControlName="featuredImage">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label col-sm-2" for="pwd"><img src="../../../../assets/icon/more_info1.jpg" alt="" width="14" height="13"  [tooltip]="tooltipVideoText" [options]="tooltipOptions">Video:</label>
-                          <div class="col-sm-10">
-                              <video  *ngIf="videoName == '' " width="320" height="240" [src] = "videoUrl" controls>
-                              </video>
-                              <video  *ngIf="videoName != '' " width="320" height="240" [src] = "apiendpoint+'Uploads/Home/DestinationVideos/Video/'+videoName" controls>
-                              </video>
-                              <input type="file" name="" id="videofiles" #files1 (change)="changeVideo(files1)" formControlName="video">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card utility-card">
+          <div class="content">
+            <div id="smartwizard3" class="forms-wizard-vertical sw-main sw-theme-default">
+              <ul class="forms-wizard nav nav-tabs step-anchor">
+                <li class="nav-item" [routerLink]="['/private/fresher-career']" routerLinkActive="active">
+                  <a class="nav-link">
+                    <em>1</em><span>Fresher career</span>
+                  </a>
+                </li>
+                <li class="nav-item" [routerLink]="['/private/professional-career']" routerLinkActive="active">
+                  <a class="nav-link">
+                    <em>2</em><span>Professional Career</span>
+                  </a>
+                </li>
+                <li class="nav-item" [routerLink]="['/private/student-career']" routerLinkActive="active">
+                  <a class="nav-link">
+                    <em>3</em><span>Student Career</span>
+                  </a>
+                </li>
+              </ul>
+
+              <div class="form-wizard-content sw-container tab-content" style="min-height: 0px;">
+                <div class="tab-pane step-content" style="display: block;">
+                  <div class="card-body">
+                    <form class="form-horizontal" [formGroup]="professionalForm" (ngSubmit)="submitProfessionalData()">
+                      <div class="form-group">
+                        <label class="control-label col-sm-2 input-label" for="title">Total Years of Experience:</label>
+                        <div class="col-sm-10">
+                          <div class="total-Exp">
+                            <input type="number" class="form-control" min="0" max="50" name="" placeholder="Year" formControlName="expYear">
+                            <input type="number" class="form-control" min="0" max="12" name="" placeholder="month" formControlName="expMonth">
                           </div>
+                          <span class="text-danger "
+                          *ngIf="(professionalForm.get('totalExperience').hasError('required') && submitProfessionalForm == true) ">
+                          Total Years of Experience is required</span>
+                        <div class="text-danger " *ngIf="(professionalForm.get('expMonth').hasError('max')) ">
+                          maximum month can be 12</div>
+                        <div class="text-danger " *ngIf="(professionalForm.get('expMonth').hasError('min')) ">
+                          minimum month can be 0</div>
+                        <div class="text-danger " *ngIf="(professionalForm.get('expYear').hasError('max')) ">
+                          maximum Year can be 50</div>
+                        <div class="text-danger " *ngIf="(professionalForm.get('expYear').hasError('min')) ">
+                          minimum Year can be 0</div>
+                        </div>
+                     
                       </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2 status-lable"> <img src="../../../../assets/icon/more_info1.jpg" alt="" width="14" height="13"  [tooltip]="tooltipText" [options]="tooltipOptions"> Show In Front End:</label>
-                            <div class="col-sm-1">
-                                <ui-switch
-                                labelOn="Yes"
-                                labelOff="No"
-                                checkedTextColor="red"
-                                formControlName="showInFrontEnd"
-                                ></ui-switch>
-                            </div>
-                            <div class="col-sm-7" class="form-control status-border"></div>
+                      <div class="form-group">
+                        <label class="control-label col-sm-2 input-label" for="title">Highest Qualification:</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="title" placeholder="B.E.(graducation)"
+                          formControlName="highestQualification">
+                          <span class="text-danger "
+                          *ngIf="(professionalForm.get('highestQualification').touched && professionalForm.get('highestQualification').hasError('required')) || (professionalForm.get('highestQualification').untouched && submitProfessionalForm == true) ">
+                          Highest Qualification is required</span>
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-1 col-sm-10">
-                                <button type="submit" *ngIf="edit_destinationVideo == false" [disabled]="destinationVideoForm.invalid" class="btn btn-default btn-primary" >Submit</button>
-                                <button type="submit" *ngIf="edit_destinationVideo == true" [disabled]="destinationVideoForm.invalid" class="btn btn-default btn-primary" >Update</button>
-                            </div>
+                       
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-sm-2 input-label" for="title">Current Company:</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="title" placeholder="Current Company"
+                          formControlName="currentCompany">
+                          <span class="text-danger "
+                          *ngIf="(professionalForm.get('currentCompany').touched && professionalForm.get('currentCompany').hasError('required')) || (professionalForm.get('currentCompany').untouched && submitProfessionalForm == true) ">
+                          Current Company is required</span>
                         </div>
+                       
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-sm-2 input-label" for="title">Current location:</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="title" placeholder="Current location"
+                          formControlName="currentLocation">
+                          <span class="text-danger "
+                          *ngIf="(professionalForm.get('currentLocation').touched && professionalForm.get('currentLocation').hasError('required')) || (professionalForm.get('currentLocation').untouched && submitProfessionalForm == true) ">
+                          Current location is required</span>
+                        </div>
+                       
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-sm-2 input-label" for="title">Current CTC:</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="title" placeholder="Current CTC"
+                          formControlName="currentCtc">
+                          <span class="text-danger "
+                          *ngIf="(professionalForm.get('currentCtc').touched && professionalForm.get('currentCtc').hasError('required')) || (professionalForm.get('currentCtc').untouched && submitProfessionalForm == true) ">
+                          Current CTC is required</span>
+                        </div>
+                       
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-sm-2 input-label" for="title">Expected CTC:</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="title" placeholder="Expected CTC"
+                          formControlName="expectedCtc">
+                          <span class="text-danger "
+                          *ngIf="(professionalForm.get('expectedCtc').touched && professionalForm.get('expectedCtc').hasError('required')) || (professionalForm.get('expectedCtc').untouched && submitProfessionalForm == true) ">
+                          Expected CTC is required</span>
+                        </div>
+                       
+                      </div>
+
+
+                      <div class="form-group">
+                        <label class="control-label col-sm-2 input-label" for="title">Skills:</label>
+                        <div class="col-sm-10">
+                          <mat-select formControlName="skillId" multiple class="form-control"
+                            placeholder="Choose Skills">
+                            <mat-option *ngFor="let skill of skills" [value]="skill.id">{{skill.skillName}}</mat-option>
+                          </mat-select>
+                          <span class="text-danger "
+                          *ngIf="(professionalForm.get('skillId').touched && professionalForm.get('skillId').hasError('required')) || (professionalForm.get('skillId').untouched && submitProfessionalForm == true) ">
+                          Skills is required</span>
+                        </div>
+                   
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-sm-2 input-label" for="title">Area of Expertise:</label>
+                        <div class="col-sm-10">
+                          <mat-select formControlName="areaOfExpertise" multiple class="form-control"
+                            placeholder="Choose Area">
+                            <mat-option *ngFor="let area of areaExperties" [value]="area.id">{{area.name}}</mat-option>
+                          </mat-select>
+                          <span class="text-danger "
+                          *ngIf="(professionalForm.get('areaOfExpertise').touched && professionalForm.get('areaOfExpertise').hasError('required')) || (professionalForm.get('areaOfExpertise').untouched && submitProfessionalForm == true) ">
+                          Area of Expertise is required</span>
+                        </div>
+                   
+                      </div>
+                    
+                      <div class="form-group">
+                        <label class="control-label col-sm-2 input-label" for="title">About me:</label>
+                        <div class="col-sm-10">
+                          <textarea placeholder="write here..." formControlName="aboutMe"></textarea>
+                          <span class="text-danger "
+                          *ngIf="(professionalForm.get('aboutMe').touched && professionalForm.get('aboutMe').hasError('required')) || (professionalForm.get('aboutMe').untouched && submitProfessionalForm == true) ">
+                          About me is required</span>
+                        </div>
+                      
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-sm-2 input-label" for="title">Upload Resume:</label>
+                        <div class="col-sm-10">
+                          <input type="file" name="" id="" *ngIf="professionalResumeFileName == ''"  formControlName="uploadResume" #uploadresume
+                          (change)="ProfessionalUploadResumeFile(uploadresume)">
+                          <div class="file-name" *ngIf="professionalResumeUploaded == true || (edit_professional == true && professionalResumeFileName != '') ">
+                            <span class="display-filename">{{professionalResumeFileName}} </span>
+                            <span class="remove-file" (click)="removeProfessionalResume()">x</span>
+                          </div>
+                          <span class="text-danger "
+                          *ngIf="professionalForm.get('uploadResume').hasError('required') && submitProfessionalForm == true">
+                          upload resume is required</span>
+                        </div>
+                     
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-sm-2 input-label" for="title">Upload Project:</label>
+                        <div class="col-sm-10">
+                          <input type="file" name="" id="" *ngIf="professionalProjectFileName == ''" formControlName="uploadProject" #uploadproject
+                          (change)="ProfessionalUploadProjectFile(uploadproject)">
+                          <div class="file-name" *ngIf="professionalProjectUploaded == true || (edit_professional == true && professionalProjectFileName != '')">
+                            <span class="display-filename">{{professionalProjectFileName}} </span>
+                            <span class="remove-file" (click)="removeProfessionalProject()">x</span>
+                          </div>
+                          <span class="text-danger "
+                          *ngIf="professionalForm.get('uploadProject').hasError('required') && submitProfessionalForm == true ">
+                          upload project is required</span>
+                        </div>
+                    
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-offset-1 col-sm-10">
+                          <!-- <button type="submit" *ngIf="edit_professional == true"
+                            [disabled]="professionalForm.invalid"
+                            class="btn btn-default btn-primary">Submit</button> -->
+                          <button type="submit" *ngIf="edit_professional == false"
+                            class="btn btn-default btn-primary">Submit</button>
+                          <button type="submit" *ngIf="edit_professional == true"
+                            class="btn btn-default btn-primary">Update</button>
+                        </div>
+                      </div>
                     </form>
-  
-                    </div>
                   </div>
                 </div>
               </div>
@@ -116,40 +194,54 @@
           </div>
         </div>
       </div>
-      <div class="row" *ngIf="destinationVideos.length != 0">
-        <div class="col-md-12">
-          <div class="card utility-detail-card">
-            <div class="content">
-              <ul class="blog-list" >
-                <li class="blog-body" *ngFor="let destinationVideo of destinationVideos">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <div class="blog-image" (click)="gotoDetailPage(destinationVideo)">
-                        <img [src]="apiendpoint+'Uploads/Home/DestinationVideos/image/'+destinationVideo.featuredImage">
-                      </div>    
-                    </div>
-                    <div class="col-md-9">
-                      <div class="blog-content">
-                        <div class="blog-title">
-                          <a  (click)="gotoDetailPage(destinationVideo)">{{destinationVideo.title.length > 80 ? (destinationVideo.title|slice : 0 :75)+'...' : destinationVideo.title}}</a>
-                        </div>
-                        <div class="blog-details">
-                          <a class="blog-approval" >Show In Front End: {{destinationVideo.showInFrontEnd == true ? 'Yes' : 'No'}}</a>
-                          <span class="blog-publish-date">{{destinationVideo.createdDate| date:'dd-MMM-yyyy' }}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="blog-actions col-md-12">
-                      <button class="btn btn-primary action-btn edit-blog" (click)="editDestinationVideo(destinationVideo)">edit</button>
-                      <button class="btn btn-primary action-btn delete-blog" (click)="openConfirmDialog(destinationVideo.id)">Delete</button>
-                    </div>
-                  </div>
-                </li>
-              </ul>
+    </div>
+    <div class="row" *ngIf="professionalCareers.length != 0">
+      <div class="col-md-12">
+        <div class="card utility-detail-card">
+          <div class="content">
+            <div class="row">
+              <div class="col-sm-10 fresher-table">
+                <table class="table table-hover table-bordered table-striped" *ngIf="professionalCareers.length != 0">
+                  <thead>
+                    <tr>
+                      <th>S.No.</th>
+                      <th>Highest Qualification</th>
+                      <th>Current Company</th>
+                      <th>Total Experience</th>
+                      <th>Current CTC</th>
+                      <th>Expected CTC</th>
+                      <th>Upload Resume</th>
+                      <th>Upload Project</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let professional of professionalCareers; let i = index;">
+                      <td>{{i+1}}</td>
+                      <td>{{professional.highestQualification}}</td>
+                      <td>{{professional.currentCompany}}</td>
+                      <td>{{professional.totalExperience > 12 ? (( (professional.totalExperience/12)| number: '1.0-0') +' Year '+(professional.totalExperience%12) +' Month') : (professional.totalExperience+' Month') }}</td>
+                      <td>{{professional.currentCtc}}</td>
+                      <td>{{professional.expectedCtc}}</td>
+                      <td (click)="downloadImage(professionalResumeFilePath+professional.uploadResume)"> <i class="fa fa-download" aria-hidden="true"></i> </td>
+                      <td (click)="downloadImage(professionalProjectFilePath+professional.uploadProject)"> <i class="fa fa-download" aria-hidden="true"></i></td>
+                      <td>
+                        <span class="edit-category glyphicon glyphicon-pencil" (click)="editProfessional(professional)"></span>
+                        <span class="delete-category glyphicon glyphicon-trash"
+                          (click)="openConfirmDialog(professional.id)"></span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
       </div>
-  
     </div>
+
+
+
+
   </div>
+</div>

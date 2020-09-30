@@ -335,6 +335,7 @@ namespace BusinessRespository.Repositories
                                     UpdatedBy = blog.UpdatedBy,
                                     UpdatedDate = blog.UpdatedDate,
                                     RecUpd = blog.RecUpd,
+                                    CommentCount = Context.BlogComment.Where(z => z.BlogId == blog.Id).Count(),
                                 };
 
                 resultValue = innerJoin.Where(z =>  z.Status == true && z.ApprovalStatus == true).OrderByDescending(x => x.CreatedDate).ToList<VmBlogPriority>();
@@ -357,8 +358,27 @@ namespace BusinessRespository.Repositories
             try
             {
 
-                List<Blog> AllBlog = new List<Blog>();
-                AllBlog = Context.Blog.Where(z => z.Status == true && z.ApprovalStatus == true && z.RecUpd != "D").ToList();
+                List<AllBlog> AllBlog = new List<AllBlog>();
+                AllBlog = Context.Blog.Where(z => z.Status == true && z.ApprovalStatus == true && z.RecUpd != "D").Select(x => new AllBlog
+                {
+
+                    Id = x.Id,
+                    UserId = x.UserId,
+                    Title = x.Title,
+                    FeaturedImage = x.FeaturedImage,
+                    Description = x.Description,
+                    Status = x.Status,
+                    ApprovalStatus = x.ApprovalStatus,
+                    CreatedBy = x.CreatedBy,
+                    CreatedDate = x.CreatedDate,
+                    UpdatedBy = x.UpdatedBy,
+                    UpdatedDate = x.UpdatedDate,
+                    RecUpd = x.RecUpd,
+                    ShortDescription = x.ShortDescription,
+                    Category = x.Category,
+                    CommentCount = Context.BlogComment.Where(z => z.BlogId == x.Id).Count()
+
+                }).ToList();
                
                 var blogList = AllBlog.OrderByDescending(x => x.CreatedDate).Skip(pageNo*4).Take(4);
                 if(AllBlog.Count % 4 == 0)
@@ -433,7 +453,54 @@ namespace BusinessRespository.Repositories
             }
             return result;
         }
-     
+
+
+        public ResponseModel RandomBlogListInDetail()
+        {
+            ResponseModel result = new ResponseModel();
+
+            try
+            {
+                var innerJoin = from blog in Context.Blog
+                                join reg in Context.Registration
+                                on blog.UserId equals reg.Id
+                                select new vmBlogDetail
+                                {
+                                    Id = blog.Id,
+                                    UserId = blog.UserId,
+                                    FirstName = reg.FirstName,
+                                    LastName = reg.LastName,
+                                    Title = blog.Title,
+                                    FeaturedImage = blog.FeaturedImage,
+                                    ShortDescription = blog.ShortDescription,
+                                    Description = blog.Description,
+                                    Category = blog.Category,
+                                    Status = blog.Status,
+                                    ApprovalStatus = blog.ApprovalStatus,
+                                    RecUpd = blog.RecUpd,
+                                    CreatedBy = blog.CreatedBy,
+                                    CreatedDate = blog.CreatedDate,
+                                    UpdatedBy = blog.UpdatedBy,
+                                    UpdatedDate = blog.UpdatedDate,
+
+                                };
+
+                var randomBlogList = innerJoin.Where(z => z.Status == true && z.ApprovalStatus == true && z.RecUpd != "D").OrderBy(x => Guid.NewGuid()).Take(6).ToList();
+                //var randomBlogList = Context.Blog.Where(z => z.Status == true && z.ApprovalStatus == true && z.RecUpd != "D").Take(4).ToList();
+
+                result.data = randomBlogList;
+                result.status = Status.Success;
+                result.message = "List for Blog";
+            }
+            catch (Exception ex)
+            {
+                result.status = Status.Error;
+                result.error = ex.Message;
+
+            }
+            return result;
+        }
+
         public ResponseModel BlogListByCategoryId(vmCategoriesBlog obj)
         {
             ResponseModel result = new ResponseModel();
@@ -441,13 +508,32 @@ namespace BusinessRespository.Repositories
             try
             {
 
-                List<Blog> AllBlog = new List<Blog>();
-                AllBlog = Context.Blog.Where(z => z.Status == true && z.ApprovalStatus == true && z.RecUpd != "D" && z.Category == obj.CategoryId).ToList();
+                List<AllBlog> AllBlog = new List<AllBlog>();
+                AllBlog = Context.Blog.Where(z => z.Status == true && z.ApprovalStatus == true && z.RecUpd != "D" && z.Category == obj.CategoryId).Select(x => new AllBlog
+                {
+
+                    Id = x.Id,
+                    UserId = x.UserId,
+                    Title = x.Title,
+                    FeaturedImage = x.FeaturedImage,
+                    Description = x.Description,
+                    Status = x.Status,
+                    ApprovalStatus = x.ApprovalStatus,
+                    CreatedBy = x.CreatedBy,
+                    CreatedDate = x.CreatedDate,
+                    UpdatedBy = x.UpdatedBy,
+                    UpdatedDate = x.UpdatedDate,
+                    RecUpd = x.RecUpd,
+                    ShortDescription = x.ShortDescription,
+                    Category = x.Category,
+                    CommentCount = Context.BlogComment.Where(z => z.BlogId == x.Id).Count()
+
+                }).ToList();
 
                 var blogList = AllBlog.OrderByDescending(x => x.CreatedDate).Skip(obj.PageNo * 4).Take(4);
                 //if (AllBlog.Count % 4 == 0)
                 //{
-                    blogResponse.totalPage = AllBlog.Count % 4 == 0 ?  AllBlog.Count / 4 : (AllBlog.Count / 4) + 1;
+                blogResponse.totalPage = AllBlog.Count % 4 == 0 ?  AllBlog.Count / 4 : (AllBlog.Count / 4) + 1;
 
                 //}
                 //else
@@ -492,6 +578,7 @@ namespace BusinessRespository.Repositories
                     ShortDescription = x.ShortDescription,
                     Category = x.Category,
                     Likecount = Context.BlogReaction.Where(y => y.BlogId == x.Id && y.ReactionStatus == true).Count(),
+                    Commentcount = Context.BlogComment.Where(y => y.BlogId == x.Id).Count(),
                     ReactionId = Context.BlogReaction.Where(y => y.BlogId == x.Id && y.UserId == obj.UserId).FirstOrDefault().ReactionId,
                     ReactionStatus = Context.BlogReaction.Where(y => y.BlogId == x.Id && y.UserId == obj.UserId).FirstOrDefault().ReactionStatus,
                     RecUpd = x.RecUpd,
@@ -519,6 +606,7 @@ namespace BusinessRespository.Repositories
                                     ShortDescription = blog.ShortDescription,
                                     Category = blog.Category,
                                     Likecount = blog.Likecount,
+                                    Commentcount = blog.Commentcount,
                                     ReactionId = blog.ReactionId,
                                     ReactionStatus = blog.ReactionStatus,
                                     ReactionType = y2.Type,

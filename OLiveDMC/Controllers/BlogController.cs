@@ -103,6 +103,16 @@ namespace OLiveDMC.Controllers
             return await System.Threading.Tasks.Task.FromResult(Data);
         }
 
+        [HttpGet]
+        [Route("RandomBlogListInDetail")]
+        public async Task<ResponseModel> RandomBlogListInDetail()
+        {
+            var Data = _BlogService.RandomBlogListInDetail();
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
+
+        
+
         [HttpPost]
         [Route("BlogListByCategoryId")]
         public async Task<ResponseModel> BlogListByCategoryId(vmCategoriesBlog obj)

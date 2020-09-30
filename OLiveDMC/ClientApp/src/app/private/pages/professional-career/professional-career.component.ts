@@ -4,8 +4,11 @@ import { Status } from 'src/app/model/ResponseModel';
 import { environment } from 'src/environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2'
-import { Router } from '@angular/router';
-import { DestinationVideosService } from 'src/app/providers/DestinationVideos/destination-videos.service';
+import { FresherCareerService } from 'src/app/providers/FresherCareerService/fresher-career.service';
+import { SkillService } from 'src/app/providers/SkillService/skill.service';
+import { ProfessionalCareerService } from 'src/app/providers/ProfessionalCareerService/professional-career.service';
+import { AreaOfExpertiseComponent } from '../area-of-expertise/area-of-expertise.component';
+import { AreaofexpertiseService } from 'src/app/providers/AreaOfExpertiseService/areaofexpertise.service';
 
 @Component({
   selector: 'app-professional-career',
@@ -15,133 +18,90 @@ import { DestinationVideosService } from 'src/app/providers/DestinationVideos/de
 export class ProfessionalCareerComponent implements OnInit {
 
 
-  destinationVideoForm: FormGroup;
-  previewUrl:any = null;
-  fileUploaded:boolean = false;
-  file: any;
-  destinationVideos:any =[];
-  apiendpoint:string = environment.apiendpoint;
-  editfileUploaded: boolean = false;
-  edit_destinationVideo: boolean = false;
-  destinationVideoId: string;
-  tooltipText:string ="this Destination Video is show or hide to the user";
-  tooltipVideoText:string ="only MP4 Video is supported and Video maximum size can be 10MB";
-  tooltipOptions = {
-    'placement': 'top',
-    'show-delay': 500
-  }
-  videoUrl: string = "";
-  videoName: string = "";
+  skills: Array<any> = [];
+  edit_professional: boolean = false;
+  professionalCareers: Array<any> = [];
+  apiendpoint: string =  environment.apiendpoint;
+  professionalResumeFilePath: string  = "";
+  professionalFilePath: string  = "";
+  professionalId: string;
+  professionalForm: FormGroup;
+  professionalResumeFileName: any = "";
+  professionalProjectFileName: any = "";
+  professionalResumeFile: any;
+  professionalProjectFile: any;
+  professionalResumeUploaded: boolean = false;
+  professionalProjectUploaded: boolean = false;
+  submitProfessionalForm: boolean = false;
+  areaExperties: any;
+  professionalProjectFilePath: string = "";
 
+  
   constructor( 
     private formBuilder : FormBuilder,
-    private  destinationVideosService: DestinationVideosService, 
-    private  router: Router, 
+    private  professionalService: ProfessionalCareerService, 
     private spinner: NgxSpinnerService,
+    private skillService: SkillService,
+    private areaExpertiseService: AreaofexpertiseService,
     ) {
 
-    this.destinationVideoForm = this.formBuilder.group({
-      title: ['', Validators.required],
-      showInFrontEnd: [false],
-      featuredImage: [''],
-      video: [''],
-
-    })
+      this.professionalForm = this.formBuilder.group({
+        expYear: ["", [ Validators.min(0) , Validators.max(50)]],
+        expMonth: ["", [ Validators.min(0) , Validators.max(12)]],
+        totalExperience: ["", Validators.required],
+        highestQualification: ["", Validators.required],
+        currentCompany: ["", Validators.required],
+        currentLocation: ["", Validators.required],
+        currentCtc: ["", Validators.required],
+        expectedCtc: ["", Validators.required],
+        skillId: ["", Validators.required],
+        areaOfExpertise: ["", Validators.required],
+        aboutMe: ["", Validators.required],
+        uploadResume: ["", Validators.required],
+        uploadProject: ["", Validators.required],
+      });
+  
+    this.professionalResumeFilePath = this.apiendpoint + "Uploads/Career/ProfessionalCareer/UploadResume/"
+    this.professionalProjectFilePath = this.apiendpoint + "Uploads/Career/ProfessionalCareer/UploadProject/"
     
   }
 
   ngOnInit(): void {
     debugger;
-    var self = this; 
-    this.GetAllDestinationVideo();
+    this.GetAllProfessionalCareer();
+    this.GetAllSkill();
+    this.GetAllAreaExpertise();
   }
 
- 
-  preview(file) {
-    debugger;
-
-    if(this.edit_destinationVideo == true){
-       this.editfileUploaded = true;
-    }
-
-    let files = file.files[0] 
-    var mimeType = files.type;
-    if (mimeType.match(/image\/*/) == null) {
-      return;
-    }
- 
-    var reader = new FileReader();      
-    reader.readAsDataURL(files); 
-    reader.onload = (_event) => { 
-      this.previewUrl = reader.result; 
-    }
-
-    this.file = files;  
-    this.fileUploaded = true;
-  }
-
-  submitDestinationVideoData(){
-    debugger;
-
-    if(this.destinationVideoForm.valid){
-      this.spinner.show();
-
-      let formData = new FormData();
-      this.edit_destinationVideo == true ? formData.append('Id', this.destinationVideoId) : formData.append('Id', '0'); 
-      this.destinationVideoId = '0';
-      if( (this.edit_destinationVideo == false) || (this.edit_destinationVideo == true && this.editfileUploaded == true)){
-        formData.append('FeaturedImage', this.file);
+  GetAllSkill() {
+    this.skillService.GetAllSkills().subscribe((resp) => {
+      if (resp.status == Status.Success) {
+        this.skills = resp.data;
+      } else {
+        Swal.fire("Oops...", resp.message, "error");
       }
-      else{
-        formData.append('FeaturedImage', null);
-      }
-      formData.append('Title', this.destinationVideoForm.get('title').value);
-      formData.append('showInFrontEnd', this.destinationVideoForm.get('showInFrontEnd').value);
-      formData.append('Video', this.videoName);
-
-
-      this.destinationVideosService.AddUpdateDestinationVideos(formData).subscribe(resp=>{
-     
-        if(resp.status == Status.Success){
-         if(this.edit_destinationVideo == true){
-          Swal.fire(
-            'Updated!',
-            'Your Destination Video has been Updated.',
-            'success'
-          )
-         }
-         else{
-          Swal.fire(
-            'Added!',
-            'Your Destination Video has been Added.',
-            'success'
-          )
-         }
-          
-          this.edit_destinationVideo = false;
-          this.editfileUploaded = false;
-          this.fileUploaded = false;
-          this.file = undefined;
-          // this.destinationVideoForm.reset();
-          this.resetDestinationVideoForm();
-          this.videoName = "";
-          this.videoUrl = "";
-          this.GetAllDestinationVideo();
-        } 
-        else{
-          this.spinner.hide();
-          Swal.fire('Oops...' ,resp.message,'warning');
-        } 
-      })    
-    }
+      // this.spinner.hide();
+    });
   }
 
-  GetAllDestinationVideo(){
+  GetAllAreaExpertise() {
+    this.areaExpertiseService.GetAllAreaofexpertise().subscribe((resp) => {
+      if (resp.status == Status.Success) {
+        this.areaExperties = resp.data;
+      } else {
+        Swal.fire("Oops...", resp.message, "error");
+      }
+      // this.spinner.hide();
+    });
+  }
+
+
+  GetAllProfessionalCareer(){
     debugger;
 
-    this.destinationVideosService.GetAllDestinationVideos().subscribe(resp=>{
+    this.professionalService.GetAllProfessionalCareer().subscribe(resp=>{
       if(resp.status == Status.Success){
-          this.destinationVideos = resp.data;
+          this.professionalCareers = resp.data;
       } 
       else{
         Swal.fire('Oops...', resp.message, 'error');
@@ -150,31 +110,48 @@ export class ProfessionalCareerComponent implements OnInit {
     })    
   }
 
-  editDestinationVideo(destinationVideo){
-    debugger;
 
-    if(this.videoName != ""){
-      this.deleteVideoFromPhysicalLocation(this.videoName);
-    }
-    this.destinationVideoForm.get('title').setValue(destinationVideo.title);
-    this.destinationVideoForm.get('showInFrontEnd').setValue(destinationVideo.showInFrontEnd);
-   
-    this.destinationVideoId = ''+destinationVideo.id; 
-    this.videoName = destinationVideo.video;
-    this.previewUrl =  this.apiendpoint+'Uploads/Home/DestinationVideos/image/'+destinationVideo.featuredImage;
-    this.edit_destinationVideo = true;
+
+  
+  editProfessional(professional){
+     debugger;
+     this.professionalResumeFileName = professional.uploadResume;  
+     this.professionalProjectFileName = professional.uploadProject;
+    this.edit_professional = true;
+    let newskillId = professional.skillId.split(',').map(item =>{
+      return Number (item);
+    });
+    let newAreaId = professional.areaOfExpertise.split(',').map(item =>{
+      return Number (item);
+    });
+    let totalExperience = professional.totalExperience;
+    let expYear = Math.floor(totalExperience/12) ;
+    let expMonth = totalExperience%12;
+    
+    this.professionalForm.get('highestQualification').setValue(professional.highestQualification);
+    this.professionalForm.get('currentCompany').setValue(professional.currentCompany);
+    this.professionalForm.get('currentLocation').setValue(professional.currentLocation);
+    this.professionalForm.get('currentCtc').setValue(professional.currentCtc);
+    this.professionalForm.get('expectedCtc').setValue(professional.expectedCtc);
+    this.professionalForm.get('areaOfExpertise').setValue(newAreaId);
+    this.professionalForm.get('aboutMe').setValue(professional.aboutMe);
+    this.professionalForm.get('totalExperience').setValue(professional.totalExperience);
+    this.professionalForm.get('expYear').setValue(expYear);
+    this.professionalForm.get('expMonth').setValue(expMonth);
+    this.professionalForm.get('skillId').setValue(newskillId);
+    
+    this.professionalId =  professional.id;
   }
 
-  deleteDestinationVideo(id){
+  deleteProfessional(id){
     debugger;
-
     this.spinner.show()
-    this.destinationVideosService.deleteDestinationVideos(id).subscribe(resp=>{
+    this.professionalService.deleteProfessionalCareer(id).subscribe(resp=>{
       if(resp.status == Status.Success){
-        this.GetAllDestinationVideo();  
+        this.GetAllProfessionalCareer();  
         Swal.fire(
           'Deleted!',
-          'Your DestinationVideo has been deleted.',
+          'Your Professional Career has been deleted.',
           'success'
         )
       } 
@@ -184,12 +161,11 @@ export class ProfessionalCareerComponent implements OnInit {
     })    
   }
 
-  openConfirmDialog(destinationVideoId){
-    debugger;
+  openConfirmDialog(professionalId){
 
     Swal.fire({
       title: 'Are you sure?',
-      text: "You Want to delete this Destination Video!",
+      text: "You Want to delete this Professional Career!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -197,73 +173,174 @@ export class ProfessionalCareerComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.value) {
-        this.deleteDestinationVideo(destinationVideoId);
+        this.deleteProfessional(professionalId);
       }
 
     })
   }
 
-  changeVideo(file){
-    
+  downloadImage(urlLink:string){
     debugger;
-    let oldVideoName: string = this.videoName;
-    let files = file.files[0];
-    if(files.size <= 10485760 && files.type == "video/mp4"){
-      console.log(`video size is : ${files.size/1048576}MB`)
-      const  formdata = new FormData();
-      formdata.append("fileInfo", files);
-      this.spinner.show();
-      this.destinationVideosService.videoUploadInDestinationVideos(formdata).subscribe(resp=>{
-        this.spinner.hide();
-        if(resp.status == Status.Success){
-          this.videoUrl = this.apiendpoint+"Uploads/Home/DestinationVideos/Video/"+resp.data; 
-          this.videoName = resp.data;
-          if(oldVideoName != ""){
-            this.deleteVideoFromPhysicalLocation(oldVideoName)
+    window.location.href = urlLink;
+
+  }
+
+
+  submitProfessionalData() {
+    debugger;
+    this.submitProfessionalForm = false;
+
+    let year = this.professionalForm.get("expYear").value;
+    let month = this.professionalForm.get("expMonth").value;
+    if((parseInt(year) > 0  && parseInt(year) <= 50)  || (parseInt(month) > 0  && parseInt(year) <= 12)  ){
+      let exp = year*12 + month;
+      this.professionalForm.get("totalExperience").setValue(exp)
+    }
+    if (this.professionalForm.valid || this.edit_professional == true) {
+
+
+       let skillIds: string =  this.professionalForm.get("skillId").value.toString();
+       let areaIds: string =  this.professionalForm.get("areaOfExpertise").value.toString();
+      // this.spinner.show();
+      let formData = new FormData();
+
+      this.edit_professional == true ? formData.append('Id', this.professionalId) : formData.append('Id', '0'); 
+      this.professionalId = '0';
+      if( (this.edit_professional == false) || (this.edit_professional == true && this.professionalResumeUploaded == true)){
+        formData.append("UploadResume", this.professionalResumeFile);
+      }
+      else{
+        formData.append("UploadResume", null);
+      }
+      if( (this.edit_professional == false) || (this.edit_professional == true && this.professionalProjectUploaded == true)){
+        formData.append("UploadProject", this.professionalProjectFile);
+      }
+      else{
+        formData.append("UploadProject", null);
+      }
+
+      formData.append(
+        "TotalExperience",
+        this.professionalForm.get("totalExperience").value
+      );
+      formData.append(
+        "HighestQualification",
+        this.professionalForm.get("highestQualification").value
+      );
+      formData.append(
+        "CurrentCompany",
+        this.professionalForm.get("currentCompany").value
+      );
+      formData.append(
+        "CurrentLocation",
+        this.professionalForm.get("currentLocation").value
+      );
+      formData.append(
+        "CurrentCtc",
+        this.professionalForm.get("currentCtc").value
+      );
+      formData.append(
+        "ExpectedCtc",
+        this.professionalForm.get("expectedCtc").value
+      );
+      formData.append("SkillId", skillIds);
+      formData.append("AreaOfExpertise",areaIds);
+      formData.append("AboutMe", this.professionalForm.get("aboutMe").value);
+     
+      this.professionalService
+        .AddUpdateProfessionalCareer(formData)
+        .subscribe((resp) => {
+          if (resp.status == Status.Success) {
+            this.GetAllProfessionalCareer();
+
+            Swal.fire(
+              "Saved!",
+              "Your Professional Career Record Saved",
+              "success"
+            );
+
+            this.professionalResumeUploaded = false;
+            this.professionalProjectUploaded = false;
+            this.professionalResumeFile = undefined;
+            this.professionalProjectFile = undefined;
+            this.professionalResumeFileName = "";
+            this.professionalProjectFileName = "";
+            this.resetProfessionalForm();
+          } else {
+            // this.spinner.hide();
+            Swal.fire("Oops...", "Something went Wrong", "warning");
           }
-        }
+        });
+    } else {
+      this.submitProfessionalForm = true;
+    }
+  }
 
-      })
-    }
-    else{
-      this.destinationVideoForm.get('video').setValue(null);
-    files.size > 10485760 &&  Swal.fire('Upload Failed',"Video Size Exceed To 10MB",'warning');
-    files.type != "video/mp4" &&  Swal.fire('Upload Failed',"Only MP4 video is supported",'warning');
-    }
+
+  resetProfessionalForm() {
+    this.professionalForm.reset();
+    this.professionalForm.setValue({
+      totalExperience: "",
+      highestQualification: "",
+      currentCompany: "",
+      currentLocation: "",
+      currentCtc: "",
+      expectedCtc: "",
+      skillId: "",
+      areaOfExpertise: "",
+      aboutMe: "",
+      uploadResume: "",
+      uploadProject: "",
+    });
+  }
+
+
+  ProfessionalUploadResumeFile(uploadresume) {
+    debugger;
+    let files = uploadresume.files[0];
+    this.professionalResumeFileName = files.name;
     
-  }
-
-  deleteVideoFromPhysicalLocation(oldVideoName:string){
-    debugger;
-    this.destinationVideosService.deleteVideoInDestinationVideos(oldVideoName).subscribe(resp=>{
-      if(resp.status == Status.Success){
-         console.log("previous Video Delete Successfully ");
-      }
-    })  
-  }
-
-  gotoDetailPage(destinationVideo){
-    debugger;
-
-    if(this.videoName != ""){
-      this.deleteVideoFromPhysicalLocation(this.videoName);
+    let ext = files.name.split('.').pop();
+    if(ext=="pdf" || ext=="docx" || ext=="doc"){
+      this.professionalResumeFile = files;
+      this.professionalResumeUploaded = true;
+    } else{
+      Swal.fire("Warning", "Only pdf and docs file is supported", "warning");
     }
-    this.router.navigate(['/private/destination-videos-detail', destinationVideo.id]);
+
+  
   }
 
-  ngOnDestroy() {
-    if(this.videoName != "" && this.edit_destinationVideo == false){
-      this.deleteVideoFromPhysicalLocation(this.videoName);
+  ProfessionalUploadProjectFile(uploadproject) {
+    debugger;
+    let files = uploadproject.files[0];
+    this.professionalProjectFileName = files.name;
+
+    let ext = files.name.split('.').pop();
+    if(ext=="pdf" || ext=="docx" || ext=="doc"){
+      this.professionalProjectFile = files;
+      this.professionalProjectUploaded = true;
+    } else{
+      Swal.fire("Warning", "Only pdf and docs file is supported", "warning");
     }
+
+  
   }
 
-  resetDestinationVideoForm(){
-    this.destinationVideoForm.setValue({
-      title: '', 
-      showInFrontEnd: false, 
-      featuredImage: '', 
-      video: '', 
-    })
+  removeProfessionalResume() {
+    this.professionalResumeFile =  undefined;
+    this.professionalResumeUploaded = false;
+    this.professionalForm.get('uploadResume').setValue('');
+    this.professionalResumeFileName = "";
+ 
+  }
+
+  removeProfessionalProject() {
+    this.professionalProjectFile =  undefined;
+    this.professionalProjectUploaded = false;
+    this.professionalForm.get('uploadProject').setValue('');
+    this.professionalProjectFileName = "";
+
   }
 
 }

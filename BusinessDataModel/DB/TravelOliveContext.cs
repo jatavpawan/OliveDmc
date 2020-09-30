@@ -22,6 +22,7 @@ namespace BusinessDataModel.DB
         public virtual DbSet<Banner> Banner { get; set; }
         public virtual DbSet<Blog> Blog { get; set; }
         public virtual DbSet<BlogCategory> BlogCategory { get; set; }
+        public virtual DbSet<BlogComment> BlogComment { get; set; }
         public virtual DbSet<BlogPriority> BlogPriority { get; set; }
         public virtual DbSet<BlogReaction> BlogReaction { get; set; }
         public virtual DbSet<City> City { get; set; }
@@ -208,6 +209,27 @@ namespace BusinessDataModel.DB
                     .IsUnicode(false);
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.RecUpd)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<BlogComment>(entity =>
+            {
+                entity.Property(e => e.Comment).IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Email)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.RecUpd)
                     .HasMaxLength(1)

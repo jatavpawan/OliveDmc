@@ -20,6 +20,7 @@ namespace BusinessRespository.IRepositories
         ResponseModel AllBlogPriorityListInUserPanel();
         ResponseModel AllBlogInUserPanel(int pageNo);
         ResponseModel RandomBlogList();
+        ResponseModel RandomBlogListInDetail();
         ResponseModel BlogListByCategoryId(vmCategoriesBlog obj);
 
         ResponseModel userPostBlog(vmUserPostBlog obj);

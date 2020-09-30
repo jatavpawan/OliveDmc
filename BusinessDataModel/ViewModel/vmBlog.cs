@@ -49,6 +49,7 @@ namespace BusinessDataModel.ViewModel
         public string ShortDescription { get; set; }
         public int? Category { get; set; }
         public int? Likecount { get; set; }
+        public int? Commentcount { get; set; }
 
         public int? ReactionId { get; set; }
         public string ReactionType { get; set; }
@@ -70,6 +71,27 @@ namespace BusinessDataModel.ViewModel
         public string CategoryName { get; set; }
        
     }
+
+    public partial class AllBlog
+    {
+        public int Id { get; set; }
+        public int? UserId { get; set; }
+        public string Title { get; set; }
+        public string FeaturedImage { get; set; }
+        public string Description { get; set; }
+        public bool? Status { get; set; }
+        public bool? ApprovalStatus { get; set; }
+        public int? CreatedBy { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public int? UpdatedBy { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public string RecUpd { get; set; }
+        public string ShortDescription { get; set; }
+        public int? Category { get; set; }
+        public int? CommentCount { get; set; }
+    }
+
+
 
 
 

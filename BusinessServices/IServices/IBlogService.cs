@@ -21,6 +21,7 @@ namespace BusinessServices.IServices
 
         ResponseModel AllBlogInUserPanel(int pageNo);
         ResponseModel RandomBlogList();
+        ResponseModel RandomBlogListInDetail();
 
         ResponseModel BlogListByCategoryId(vmCategoriesBlog obj);
         ResponseModel userPostBlog(vmUserPostBlog obj);
