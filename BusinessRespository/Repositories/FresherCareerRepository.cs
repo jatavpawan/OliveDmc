@@ -200,5 +200,40 @@ namespace BusinessRespository.Repositories
             }
             return result;
         }
+
+        public ResponseModel SearchSocialUserProfile(string text)
+        {
+            ResponseModel result = new ResponseModel();
+            try
+            {
+
+              
+
+                //List<Registration> resultValue = new List<Registration>();
+                //resultValue = Context.Registration.Where(z => z.RecUpd != "D" && z.RoleId == 2).ToList();
+                result.data = Context.Registration
+                    .Where(z => z.RecUpd != "D" && z.RoleId == 2 &&    (z.FirstName + ' ' + z.LastName).ToLower().Contains(text.ToLower()))
+                    .Select(x => new vmSocialUserProfile { 
+                
+                     Id = x.Id,
+                     FirstName = x.FirstName,
+                     LastName = x.LastName
+                    });
+
+                result.status = Status.Success;
+                result.message = "List for UserPersonalInfo";
+            }
+            catch (Exception ex)
+            {
+                result.status = Status.Error;
+                result.error = ex.Message;
+
+            }
+            return result;
+        }
+
+
+
+
     }
 }

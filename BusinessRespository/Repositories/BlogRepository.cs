@@ -725,7 +725,65 @@ namespace BusinessRespository.Repositories
             return result;
         }
 
-        
+        public ResponseModel searchBlog(vmSearchBlog obj)
+        {
+            ResponseModel result = new ResponseModel();
+            vmAllBlogInUserPanel blogResponse = new vmAllBlogInUserPanel();
+            try
+            {
+
+                List<AllBlog> AllBlog = new List<AllBlog>();
+                AllBlog = Context.Blog.Where(z => z.Title.ToLower().Contains(obj.text.ToLower()) && z.Status == true && z.ApprovalStatus == true && z.RecUpd != "D" ).Select(x => new AllBlog
+                {
+
+                    Id = x.Id,
+                    UserId = x.UserId,
+                    Title = x.Title,
+                    FeaturedImage = x.FeaturedImage,
+                    Description = x.Description,
+                    Status = x.Status,
+                    ApprovalStatus = x.ApprovalStatus,
+                    CreatedBy = x.CreatedBy,
+                    CreatedDate = x.CreatedDate,
+                    UpdatedBy = x.UpdatedBy,
+                    UpdatedDate = x.UpdatedDate,
+                    RecUpd = x.RecUpd,
+                    ShortDescription = x.ShortDescription,
+                    Category = x.Category,
+                    CommentCount = Context.BlogComment.Where(z => z.BlogId == x.Id).Count()
+
+                }).ToList();
+
+                var blogList = AllBlog.OrderByDescending(x => x.CreatedDate).Skip(obj.PageNo * 6).Take(6);
+                if (AllBlog.Count % 6 == 0)
+                {
+                    blogResponse.totalPage = AllBlog.Count / 6;
+
+                }
+                else
+                {
+                    blogResponse.totalPage = (AllBlog.Count / 6) + 1;
+
+                }
+                blogResponse.perPageRecord = 6;
+                blogResponse.blogList = blogList;
+                blogResponse.totalRecord = AllBlog.Count;
+                result.data = blogResponse;
+                result.status = Status.Success;
+                result.message = "List for Blog";
+            }
+            catch (Exception ex)
+            {
+                result.status = Status.Error;
+                result.error = ex.Message;
+            }
+            return result;
+        }
+
+
+       
+
+
 
     }
 }

@@ -146,5 +146,16 @@ namespace OLiveDMC.Controllers
             return await System.Threading.Tasks.Task.FromResult(Data);
         }
 
+        [HttpPost]
+        [Route("searchBlog")]
+        public async Task<ResponseModel> searchBlog(vmSearchBlog obj)
+        {
+            var Data = _BlogService.searchBlog(obj);
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
+
+
+
+
     }
 }

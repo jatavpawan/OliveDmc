@@ -26,6 +26,10 @@ namespace BusinessRespository.IRepositories
         ResponseModel userPostBlog(vmUserPostBlog obj);
         ResponseModel userReactOnBlog(BlogReaction obj);
         ResponseModel getPopularTag();
+        ResponseModel searchBlog(vmSearchBlog obj);
+
+
+        
 
     }
 }

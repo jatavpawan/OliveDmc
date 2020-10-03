@@ -248,8 +248,28 @@ namespace BusinessServices.Services
             }
             return response;
         }
-        
 
+
+        public ResponseModel sendForgotPasswordMail(string email)
+        {
+            try
+            {
+                var resultValue = new ResponseModel();
+                resultValue = _unitOfWork.LoginRepository.sendForgotPasswordMail(email);
+                response = resultValue;
+
+            }
+            catch (Exception ex)
+            {
+                response.message = ex.Message;
+                response.status = Status.Error;
+            }
+            return response;
+        }
+
+
+
+       
         //public ResponseModel SaveAboutUsDetail(vmAboutUsDetail obj )
         //{
         //    try

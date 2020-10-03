@@ -91,6 +91,14 @@ namespace BusinessDataModel.ViewModel
         public int? CommentCount { get; set; }
     }
 
+    public partial class vmSearchBlog
+    {
+        public int PageNo { get; set; }
+        public string text { get; set; }
+
+    }
+
+
 
 
 

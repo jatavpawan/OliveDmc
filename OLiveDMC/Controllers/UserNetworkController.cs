@@ -123,6 +123,13 @@ namespace OLiveDMC.Controllers
             return await System.Threading.Tasks.Task.FromResult(Data);
         }
 
+        [HttpPost]
+        [Route("SearchUserByText")]
+        public async Task<ResponseModel> SearchUserByText(vmSearchUser obj)
+        {
+            var Data = _UserNetworkService.SearchUserByText(obj);
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
 
     }
 }

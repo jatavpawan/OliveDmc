@@ -8,7 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 namespace BusinessRespository.Utility {
   public  class AuthUtilities
     {
-          public static string GenerateToken(dynamic data, string Username)
+        public static string GenerateToken(dynamic data, string Username)
         {
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             var securityKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF32.GetBytes(Username));

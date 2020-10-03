@@ -22,6 +22,7 @@ namespace BusinessRespository.IRepositories {
 
         ResponseModel ChangePassword(vmUserChangePassword obj);
         ResponseModel UserEmailOTPVerificationBySendMail(int? userId);
+        ResponseModel sendForgotPasswordMail(string email);
         //void SaveAboutUsDetail(vmAboutUsDetail obj);
         //List<vmGetAboutUsDetail> GetAboutUsDetail();
 

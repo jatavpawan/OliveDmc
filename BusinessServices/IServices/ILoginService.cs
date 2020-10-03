@@ -25,6 +25,9 @@ namespace BusinessServices.IServices {
 
         ResponseModel UserEmailOTPVerificationBySendMail(int? userId);
 
+
+        ResponseModel sendForgotPasswordMail(string email);
+
         //ResponseModel SaveAboutUsDetail(vmAboutUsDetail obj);
 
         //ResponseModel GetAboutUsDetail();

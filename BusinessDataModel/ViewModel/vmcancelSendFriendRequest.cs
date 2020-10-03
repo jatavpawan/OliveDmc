@@ -15,4 +15,12 @@ namespace BusinessDataModel.ViewModel
         public int? UserId { get; set; }
         public int? FriendId { get; set; }
     }
+
+    public partial class vmSearchUser
+    {
+        public int PageNo { get; set; }
+        public int UserId { get; set; }
+        public string Text { get; set; }
+
+    }
 }
