@@ -4,12 +4,9 @@
 
 export const environment = {
   production: false,
-<<<<<<< HEAD
-   apiendpoint: 'http://localhost:51306/'  // apiendpoint: 'http://rsmartservices.com/'
-=======
    apiendpoint: 'http://localhost:51306/'
   // apiendpoint: 'http://rsmartservices.com/'
->>>>>>> 234874d789cda86fddc658125b162a4080b3400e
+
   // apiendpoint: 'http://administrator.gmservices.in/'
 };
 
