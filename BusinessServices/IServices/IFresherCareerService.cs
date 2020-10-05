@@ -13,5 +13,6 @@ namespace BusinessServices.IServices
         ResponseModel GetAllFresherCareer();
         ResponseModel deleteFresherCareer(int? Id);
         ResponseModel GetFresherCareerById(int? Id);
+        ResponseModel SearchSocialUserProfile(string text);
     }
 }

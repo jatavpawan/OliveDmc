@@ -129,6 +129,10 @@ namespace BusinessRespository.Utility
                             status = SendEmail("Live Traveller Email Verification OTP", StrB.ToString().Replace("\r", string.Empty).Replace("\n", string.Empty), obj.EmailId);
                             //status = SendEmail("Live Traveller Email Verification OTP", StrB.ToString().Replace("\r", string.Empty).Replace("\n", string.Empty), "sonamrai265@gmail.com");
                             break;
+                        case "SendMailForgotPassword":
+                            StrB += @"<div style='padding:10px;color:red;'>Hi "+ obj.FirstName+" Please Reset Your Password By using This Reset Password Link <a> http:/rsmartservices.com </a> </div>";
+                            status = SendEmail("Live Traveller Reset Password Mail", StrB.ToString().Replace("\r", string.Empty).Replace("\n", string.Empty), obj.EmailId);
+                            break;
 
 
                     }
@@ -158,7 +162,8 @@ namespace BusinessRespository.Utility
         public bool SendEmail(string Subject, string Body, string toEmail)
         {
             //MailMessage msg = new MailMessage();
-            MailMessage mailMessage = new MailMessage("shubhamgmcsco12@gmail.com", toEmail);
+            //MailMessage mailMessage = new MailMessage("shubhamgmcsco12@gmail.com", toEmail);
+            MailMessage mailMessage = new MailMessage("shubhamgmcsco12@gmail.com", "test@mailinator.com");
             try
             {
                 //SmtpClient client = new SmtpClient("smtpout.asia.secureserver.net", int.Parse(ConfigurationManager.AppSettings["mailPort"].ToString()));

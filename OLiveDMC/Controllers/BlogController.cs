@@ -103,6 +103,16 @@ namespace OLiveDMC.Controllers
             return await System.Threading.Tasks.Task.FromResult(Data);
         }
 
+        [HttpGet]
+        [Route("RandomBlogListInDetail")]
+        public async Task<ResponseModel> RandomBlogListInDetail()
+        {
+            var Data = _BlogService.RandomBlogListInDetail();
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
+
+        
+
         [HttpPost]
         [Route("BlogListByCategoryId")]
         public async Task<ResponseModel> BlogListByCategoryId(vmCategoriesBlog obj)
@@ -135,6 +145,17 @@ namespace OLiveDMC.Controllers
             var Data = _BlogService.getPopularTag();
             return await System.Threading.Tasks.Task.FromResult(Data);
         }
+
+        [HttpPost]
+        [Route("searchBlog")]
+        public async Task<ResponseModel> searchBlog(vmSearchBlog obj)
+        {
+            var Data = _BlogService.searchBlog(obj);
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
+
+
+
 
     }
 }

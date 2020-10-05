@@ -499,7 +499,28 @@ namespace BusinessRespository.Repositories
             return result;
         }
 
-      
+
+        public ResponseModel SearchUserByText(vmSearchUser obj)
+        {
+            ResponseModel result = new ResponseModel();
+            try
+            {
+                //List<Registration> resultValue = new List<Registration>();
+                //resultValue = Context.Registration.Where(z => z.RecUpd != "D" && z.RoleId == 2).ToList();
+                result.data = Context.userNetworkConnection(obj.UserId).Where(z => (z.FirstName+' '+ z.LastName).ToLower().Contains(obj.Text.ToLower()) ).Skip(obj.PageNo * 10).Take(10);
+                result.status = Status.Success;
+                result.message = "List for UserPersonalInfo";
+            }
+            catch (Exception ex)
+            {
+                result.status = Status.Error;
+                result.error = ex.Message;
+
+            }
+            return result;
+        }
+
+
 
     }
 }

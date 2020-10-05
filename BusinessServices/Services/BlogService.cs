@@ -228,6 +228,26 @@ namespace BusinessServices.Services
             return response;
         }
 
+        public ResponseModel RandomBlogListInDetail()
+        {
+            try
+            {
+                ResponseModel result = new ResponseModel();
+                result = _unitOfWork.BlogRepository.RandomBlogListInDetail();
+
+                response.data = result.data;
+                response.status = result.status;
+                response.message = result.message;
+
+            }
+            catch (Exception ex)
+            {
+                response.message = ex.Message;
+                response.status = Status.Error;
+            }
+            return response;
+        }
+
 
 
         public ResponseModel BlogListByCategoryId(vmCategoriesBlog obj)
@@ -309,6 +329,29 @@ namespace BusinessServices.Services
             }
             return response;
         }
+
+        public ResponseModel searchBlog(vmSearchBlog obj)
+        {
+            try
+            {
+                ResponseModel result = new ResponseModel();
+                result = _unitOfWork.BlogRepository.searchBlog(obj);
+
+                response.data = result.data;
+                response.status = result.status;
+                response.message = result.message;
+
+            }
+            catch (Exception ex)
+            {
+                response.message = ex.Message;
+                response.status = Status.Error;
+            }
+            return response;
+        }
+
+
+       
 
 
     }

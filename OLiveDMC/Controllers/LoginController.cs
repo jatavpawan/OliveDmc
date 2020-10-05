@@ -105,5 +105,16 @@ namespace CookApp.Controllers
             return await System.Threading.Tasks.Task.FromResult(Data);
         }
 
+
+        [HttpGet]
+        [Route("sendForgotPasswordMail")]
+        public async Task<ResponseModel> sendForgotPasswordMail(string email)
+        {
+            var Data = _loginService.sendForgotPasswordMail(email);
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
+
+       
+
     }
 }

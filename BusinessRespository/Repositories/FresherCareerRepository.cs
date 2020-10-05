@@ -113,10 +113,30 @@ namespace BusinessRespository.Repositories
             ResponseModel result = new ResponseModel();
             try
             {
-                List<FresherCareer> resultValue = new List<FresherCareer>();
-                resultValue = Context.FresherCareer.Where(z => z.RecUpd != "D").ToList();
+                List<FresherCareer> fresherList = new List<FresherCareer>();
+                fresherList = Context.FresherCareer.Where(z => z.RecUpd != "D").ToList();
 
-                result.data = resultValue;
+                               
+                List<Skills> skillList = new List<Skills>();
+                skillList = Context.Skills.ToList();
+
+
+                var newFresherList = fresherList.Select(x => new
+                {
+                    Id = x.Id,
+                    Location = x.Location,
+                    SkillId = x.SkillId,
+                    SocialMediaProfile = x.SocialMediaProfile,
+                    AboutMe = x.AboutMe,
+                    UploadResume = x.UploadResume,
+                    UploadProject = x.UploadProject,
+                    skillList = skillList.Where(t => x.SkillId.Split(',').Contains(t.Id.ToString()))
+                });
+
+
+
+
+                result.data = newFresherList;
                 result.status = Status.Success;
                 result.message = "List for FresherCareer";
             }
@@ -180,5 +200,40 @@ namespace BusinessRespository.Repositories
             }
             return result;
         }
+
+        public ResponseModel SearchSocialUserProfile(string text)
+        {
+            ResponseModel result = new ResponseModel();
+            try
+            {
+
+              
+
+                //List<Registration> resultValue = new List<Registration>();
+                //resultValue = Context.Registration.Where(z => z.RecUpd != "D" && z.RoleId == 2).ToList();
+                result.data = Context.Registration
+                    .Where(z => z.RecUpd != "D" && z.RoleId == 2 &&    (z.FirstName + ' ' + z.LastName).ToLower().Contains(text.ToLower()))
+                    .Select(x => new vmSocialUserProfile { 
+                
+                     Id = x.Id,
+                     FirstName = x.FirstName,
+                     LastName = x.LastName
+                    });
+
+                result.status = Status.Success;
+                result.message = "List for UserPersonalInfo";
+            }
+            catch (Exception ex)
+            {
+                result.status = Status.Error;
+                result.error = ex.Message;
+
+            }
+            return result;
+        }
+
+
+
+
     }
 }

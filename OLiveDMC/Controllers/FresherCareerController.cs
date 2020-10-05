@@ -56,5 +56,17 @@ namespace OLiveDMC.Controllers
             var Data = _FresherCareerService.GetFresherCareerById(Id);
             return await System.Threading.Tasks.Task.FromResult(Data);
         }
+
+        [HttpGet]
+        [Route("SearchSocialUserProfile")]
+        public async Task<ResponseModel> SearchSocialUserProfile(string text)
+        {
+            var Data = _FresherCareerService.SearchSocialUserProfile(text);
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
+
+
+
+       
     }
 }

@@ -24,5 +24,7 @@ namespace BusinessRespository.IRepositories
         ResponseModel cancelSendFriendRequest(vmcancelSendFriendRequest obj);
         ResponseModel unfriend(vmUnFriend obj);
 
+        ResponseModel SearchUserByText(vmSearchUser obj);
+
     }
 }

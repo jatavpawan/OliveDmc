@@ -431,6 +431,47 @@ namespace BusinessRespository.Repositories
         }
 
 
+        public ResponseModel sendForgotPasswordMail(string email)
+        {
+            ResponseModel response = new ResponseModel(); ;
+            Registration result = null;
+
+            result = Context.Registration.Where(z => z.EmailId == email).FirstOrDefault();
+            if (result != null)
+            {
+
+
+                sendemailRepository sendmail = new sendemailRepository();
+                bool status = sendmail.contentBody(result, "SendMailForgotPassword");
+
+                if (status == true)
+                {
+                    response.data = status;
+                    response.status = Status.Success;
+                    response.message = "Reset Password Link Send in Your Registered Mail ";
+                }
+
+                return response;
+            }
+            else
+            {
+                response.data = result;
+                response.status = Status.Warning;
+                response.message = "Your Email Not Exist In Record";
+            }
+
+
+            return response;
+
+
+        }
+
+
+
+
+
+
+
 
         //public void SaveAboutUsDetail( vmAboutUsDetail obj)
         //{

@@ -153,3 +153,15 @@ Log Entry : 9:05:13 PM Wednesday, August 12, 2020
   :
   :Unable to resolve service for type 'BusinessServices.IServices.IFestivalService' while attempting to activate 'OLiveDMC.Controllers.FestivalController'.
 -------------------------------
+
+Log Entry : 11:45:57 PM Monday, September 28, 2020
+  :
+  :Value cannot be null.
+Parameter name: requestUriString
+-------------------------------
+
+Log Entry : 11:49:16 PM Monday, September 28, 2020
+  :
+  :Value cannot be null.
+Parameter name: requestUriString
+-------------------------------

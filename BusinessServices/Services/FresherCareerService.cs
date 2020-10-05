@@ -103,5 +103,27 @@ namespace BusinessServices.Services
             }
             return response;
         }
+
+        public ResponseModel SearchSocialUserProfile(string text)
+        {
+            try
+            {
+                ResponseModel result = new ResponseModel();
+                result = _unitOfWork.FresherCareerRepository.SearchSocialUserProfile(text);
+
+                response.data = result.data;
+                response.status = result.status;
+                response.message = result.message;
+
+            }
+            catch (Exception ex)
+            {
+                response.message = ex.Message;
+                response.status = Status.Error;
+            }
+            return response;
+        }
+
+      
     }
 }

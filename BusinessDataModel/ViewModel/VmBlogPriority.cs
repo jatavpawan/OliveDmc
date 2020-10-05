@@ -28,5 +28,6 @@ namespace BusinessDataModel.ViewModel
         public int? UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public string RecUpd { get; set; }
+        public int  CommentCount { get; set; }
     }
 }

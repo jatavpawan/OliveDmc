@@ -84,6 +84,7 @@ namespace OLiveDMC
             services.AddTransient<IProfessionalCareerService, ProfessionalCareerService>();
             services.AddTransient<IFresherCareerService, FresherCareerService>();
             services.AddTransient<IBookingService, BookingService>();
+            services.AddTransient<IBlogCommentService, BlogCommentService>();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

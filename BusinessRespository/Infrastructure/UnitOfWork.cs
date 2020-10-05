@@ -472,6 +472,17 @@ private IBookingRepository _BookingRepository;
             }
         }
 
+        private IBlogCommentRepository _blogCommentRepository;
+
+        // Public Member ---------------------------------------------------------------------------------
+        public IBlogCommentRepository BlogCommentRepository
+        {
+            get
+            {
+                return _blogCommentRepository = _blogCommentRepository ?? new BlogCommentRepository(db);
+            }
+        }
+
 
         public void Commit() {
             db.SaveChanges();

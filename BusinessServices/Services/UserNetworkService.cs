@@ -268,5 +268,26 @@ namespace BusinessServices.Services
             return response;
         }
 
+        public ResponseModel SearchUserByText(vmSearchUser obj)
+        {
+            try
+            {
+                ResponseModel result = new ResponseModel();
+                result = _unitOfWork.UserNetworkRepository.SearchUserByText(obj);
+
+                response.data = result.data;
+                response.status = result.status;
+                response.message = result.message;
+
+            }
+            catch (Exception ex)
+            {
+                response.message = ex.Message;
+                response.status = Status.Error;
+            }
+            return response;
+        }
+
+
     }
 }

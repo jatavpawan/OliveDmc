@@ -14,5 +14,6 @@ namespace BusinessRespository.IRepositories
 
         ResponseModel deleteFresherCareer(int? Id);
         ResponseModel GetFresherCareerById(int? Id);
+        ResponseModel SearchSocialUserProfile(string text);
     }
 }
