@@ -307,7 +307,7 @@ namespace BusinessRespository.Repositories
                 response = new ResponseModel
                 {
                     status = Status.Success,
-                    message = "Change Password Successfully"
+                    message = "Password Changed Successfully"
                 };
                 return response;
             }
@@ -466,9 +466,7 @@ namespace BusinessRespository.Repositories
 
         }
 
-
-
-
+  
 
 
 

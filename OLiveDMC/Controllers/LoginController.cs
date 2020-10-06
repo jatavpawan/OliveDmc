@@ -115,6 +115,13 @@ namespace CookApp.Controllers
         }
 
        
+    [HttpPost]
+        [Route("ResetPassword")]
+        public async Task<ResponseModel> ResetPassword(vmResetPassword obj)
+        {
+            var Data = _loginService.ResetPassword(obj);
+            return await System.Threading.Tasks.Task.FromResult(Data);
+        }
 
     }
 }

@@ -27,6 +27,7 @@ namespace BusinessServices.IServices {
 
 
         ResponseModel sendForgotPasswordMail(string email);
+        ResponseModel ResetPassword(vmResetPassword obj);
 
         //ResponseModel SaveAboutUsDetail(vmAboutUsDetail obj);
 

@@ -123,14 +123,16 @@ namespace BusinessRespository.Utility
                         case "EmailOTPVerification":
                             //StrB += @"Hi " + obj.FirstName + " Your OTP Is " + obj.Otp + " For Email Verification";
                             //StrB += @"Hi sonam Your OTP Is " + obj.Otp + " For Email Verification";
-                            StrB += @"<div style='padding:10px;color:red;'>Hi " + obj.FirstName + " Your OTP Is " + obj.Otp + " For Email Verification </div>";
+                            StrB += @"<div style='padding:10px;'>Hi " + obj.FirstName + ", <br><br><p>To continue with your email verification, Please enter the following code.<br><br><center> Your One Time Password (OTP) : <b>" + obj.Otp + "</b></center><br> Please enter otp to register at Live Traveller.</p></div>";
 
 
                             status = SendEmail("Live Traveller Email Verification OTP", StrB.ToString().Replace("\r", string.Empty).Replace("\n", string.Empty), obj.EmailId);
                             //status = SendEmail("Live Traveller Email Verification OTP", StrB.ToString().Replace("\r", string.Empty).Replace("\n", string.Empty), "sonamrai265@gmail.com");
                             break;
                         case "SendMailForgotPassword":
-                            StrB += @"<div style='padding:10px;color:red;'>Hi "+ obj.FirstName+" Please Reset Your Password By using This Reset Password Link <a> http:/rsmartservices.com </a> </div>";
+                            var encrypPath = AuthUtilities.Encrypt( obj.EmailId, "sblw-3hn8-F0rg0t");
+                            
+                            StrB += @"<div style='padding:10px;'>Hi "+ obj.FirstName+ ", <br><br> There was recently a request to change the password on your account. <br> If you requested this password change, please click the link below to set a new password within 24 hours: <a href='http:/rsmartservices.com?reset=" + encrypPath+ "'> Click here to change your password</a> <br> <p>if the link above does not work, paste this into your browser <br>http:/rsmartservices.com?reset=" + encrypPath + "</p><br>If you don't what to change your password, Just ignore this message</div>";
                             status = SendEmail("Live Traveller Reset Password Mail", StrB.ToString().Replace("\r", string.Empty).Replace("\n", string.Empty), obj.EmailId);
                             break;
 
@@ -161,9 +163,10 @@ namespace BusinessRespository.Utility
 
         public bool SendEmail(string Subject, string Body, string toEmail)
         {
+            Body += "<br>Thank You.<br>Live Traveller Team";
             //MailMessage msg = new MailMessage();
-            //MailMessage mailMessage = new MailMessage("shubhamgmcsco12@gmail.com", toEmail);
-            MailMessage mailMessage = new MailMessage("shubhamgmcsco12@gmail.com", "test@mailinator.com");
+            MailMessage mailMessage = new MailMessage("shubhamgmcsco12@gmail.com", toEmail);
+           // MailMessage mailMessage = new MailMessage("shubhamgmcsco12@gmail.com", "test@mailinator.com");
             try
             {
                 //SmtpClient client = new SmtpClient("smtpout.asia.secureserver.net", int.Parse(ConfigurationManager.AppSettings["mailPort"].ToString()));
@@ -207,7 +210,7 @@ namespace BusinessRespository.Utility
                 
                 mailMessage.Subject = Subject;
                 mailMessage.Body = Body;
-
+                mailMessage.IsBodyHtml = true;
                 SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
                 smtpClient.Credentials = new System.Net.NetworkCredential()
                 {

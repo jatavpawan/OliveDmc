@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Text;
 
 namespace BusinessDataModel.ViewModel {
@@ -87,6 +88,11 @@ namespace BusinessDataModel.ViewModel {
     //    public string Description { get; set; }
     //    public bool? Status { get; set; }
     //}
+    public partial class vmResetPassword { 
+         public string NewPassword { get; set; }
+        public string encrypPath { get; set; }
+    }
+
 
     public partial class vmUserChangePassword
     {

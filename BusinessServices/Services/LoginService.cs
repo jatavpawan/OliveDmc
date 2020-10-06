@@ -1,6 +1,7 @@
 ﻿using BusinessDataModel.DB;
 using BusinessDataModel.ViewModel;
 using BusinessRespository.Infrastructure;
+using BusinessRespository.Utility;
 using BusinessServices.IServices;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
@@ -267,6 +268,26 @@ namespace BusinessServices.Services
             return response;
         }
 
+   public ResponseModel ResetPassword(vmResetPassword vm)
+        {
+            try
+            {
+                var decrypPath = AuthUtilities.Decrypt(vm.encrypPath, "sblw-3hn8-F0rg0t");
+                vmChangePassword obj = new vmChangePassword { 
+                 Email=decrypPath, Password=vm.NewPassword
+                };
+                var resultValue = new ResponseModel();
+                resultValue = _unitOfWork.LoginRepository.UserChangePassword(obj);
+                response = resultValue;
+
+            }
+            catch (Exception ex)
+            {
+                response.message = ex.Message;
+                response.status = Status.Error;
+            }
+            return response;
+        }
 
 
        
